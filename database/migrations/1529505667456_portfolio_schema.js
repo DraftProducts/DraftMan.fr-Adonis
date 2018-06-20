@@ -10,8 +10,8 @@ class PortfolioSchema extends Schema {
       table.string('url')
       table.string('description')
       table.string('type')
-      table.string('illustation')
-      table.timestamps()
+      table.date('date')
+      table.string('illustration')
     })
   }
 

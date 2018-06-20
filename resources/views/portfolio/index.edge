@@ -1,9 +1,37 @@
 @layout('main')
 
+@section('seo')
+    {{--  Title  --}}
+    <title>Portfolio - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Vous êtes intéressé par mon travail ? Dans ce Portfolio vous pourrez retrouver la plus part de mes créations et mes projets !">
+    <meta property="og:description" content="Vous êtes intéressé par mon travail ? Dans ce Portfolio vous pourrez retrouver la plus part de mes créations et mes projets !">
+    <meta name="twitter:description" content="Vous êtes intéressé par mon travail ? Dans ce Portfolio vous pourrez retrouver la plus part de mes créations et mes projets !">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/portfolio" />
+    <meta property="og:url" content="https://www.draftman.fr/portfolio">
+@endsection
+
 @section('content')
-<ul>
-@each(item in portfolio)
-    <li>{{ item.name }}-{{ item.description}}</li>
-@endeach
-</ul>
+
+<section id="portfolio">
+	<div class="content">
+        @each(item in portfolio)
+        <!-- {{ item.name }} -->
+        <div class="item {{ item.type }}">
+            <figure class="effect">
+                <img src="images/portfolio/{{item.illustration}}" alt="{{ item.name }}" title="{{ item.name }}">
+                <figcaption>
+                    <h2>{{ item.name }}</h2>
+                    <p>{{ item.description }}</p>
+                </figcaption>
+            </figure>
+        </div>
+        @endeach
+	</div>
+</section>
 @endsection

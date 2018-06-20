@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="author" content="DraftMan">
+	<meta name="copyright" content="DraftMan">
+
+    <link rel="shortcut icon" href="https://www.draftman.fr/images/favicon.png" type="image/ico" />
+
+    <meta name="theme-color" content="#CD6E57">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
+    <meta name="msapplication-navbutton-color" content="#CD6E57">
+
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="fr_FR">
+	<meta property="og:site_name" content="DraftMan.fr">
+	<meta property="og:image" content="https://www.draftman.fr/images/avatar.jpg">
+	<meta property="og:image:secure_url" content="https://www.draftman.fr/images/avatar.jpg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@DraftMan_Dev">
+    <meta name="twitter:creator" content="@DraftMan_Dev">
+    <meta name="twitter:image:src" content="https://www.draftman.fr/images/avatar.jpg">
+
+    <meta name="generator" content="VSCode">
+
+    @!section('seo')
+
     {{ style('css/style')}}
-    <title>Blog</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113154397-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113154397-1');
+    </script>
 </head>
 <body>
     @include('inc/header')
@@ -13,6 +49,8 @@
     @!section('content')
 
     @include('inc/footer')
+
+    @!section('js')
     {{ script('js/app') }}
 </body>
 </html>
