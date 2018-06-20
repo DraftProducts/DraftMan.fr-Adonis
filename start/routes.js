@@ -19,6 +19,8 @@ Route.on('/').render('index')
 
 Route.on('/a-propos').render('a-propos')
 
+Route.on('/discord').render('discord')
+
 Route.get('/portfolio', 'PortfolioController.index')
 
 Route.get('/portfolio/:id', 'PortfolioController.details')
