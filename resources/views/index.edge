@@ -1,0 +1,124 @@
+@layout('main')
+
+@section('content')
+<section id="banner">
+	<h1>DraftMan</h1>
+	<h2>Développeur Web & Graphiste</h2>
+	<a href="/contact">Contact</a>
+</section>
+
+<section id="services">
+		<div>
+			<h3>Web</h3>
+			<span class="exemple"><a href="/portfolio">Exemples</a></span>
+			<p>
+				Une production web permet d'afficher différentes informations sur un design sur mesure avec ou sans framework. Nous pouvons retrouver deux types de sites : Un site statique proposant un contenu statique pouvant servir a informer un public sur un élevement fixe. Un site dynamique propose un contenu pouvant varier en fonction de vos envies, il permet aussi de retrouver un pannel d'administation servant à configurer le site ou accéder à un contenu privé. Chaques productions web sera muni des meilleurs éléments SEO permettant à votre page/site le meilleur Référencement possible et une place au sein du carré d'or.
+			</p>
+			<div class="devis-container">
+				<a id="devis" href="/contact">Besoin d'un devis ?
+					<span><i class="material-icons">arrow_forward</i></span>
+				</a>
+			</div>
+		</div>
+		<div>
+			<h3>Graphisme</h3>
+			<span class="exemple"><a href="/portfolio">Exemples</a></span>
+			<p>
+				Une production graphique peut se résumer à un simple logo/illustation dans un format souhaité, mais peut aussi être un dossier contenant le logo original, une version noir et une blanche sous tous les formats souhaités, on l'appellera alors un devices pack.<br>
+				Aujourd'hui le type de fichier le plus utilisé est le SVG, en effet il permet d'avoir une production vectorielle et de pouvoir l'exporter sous toutes les dimensions possibles.
+
+			</p>
+			<div class="devis-container">
+				<a id="devis" href="/contact">Besoin d'un devis ?
+					<span><i class="material-icons">arrow_forward</i></span>
+				</a>
+			</div>
+		</div>
+</section>
+
+<section id="home-blog">
+	<h3>Mes derniers articles</h3>
+	<div class="content">
+	    <div class="article">
+	    	<div class="wapper">
+		        <div class="content">
+		            <p class="image"><a href="/blog/url-id" style="background-image: url(images/blog/posts/1.jpg);"></a></p>
+		            <p class="date">date</p>
+		            <p class="title"><a href="/blog/url-id">C'est sublime</a></p>
+		            <p class="resume">
+		            description...
+		        </p>
+		            <p class="knowmore"><a href="/blog/url-id">En savoir plus</a></p>
+		        </div>
+		    </div>
+	    </div>
+        <div class="article">
+	    	<div class="wapper">
+		        <div class="content">
+		            <p class="image"><a href="/blog/url-id" style="background-image: url(images/blog/posts/2.jpg);"></a></p>
+		            <p class="date">date</p>
+		            <p class="title"><a href="/blog/url-id">Aller vite</a></p>
+		            <p class="resume">
+		            description...
+		        </p>
+		            <p class="knowmore"><a href="/blog/url-id">En savoir plus</a></p>
+		        </div>
+		    </div>
+	    </div>
+        <div class="article">
+	    	<div class="wapper">
+		        <div class="content">
+		            <p class="image"><a href="/blog/url-id" style="background-image: url(images/blog/posts/1.jpg);"></a></p>
+		            <p class="date">date</p>
+		            <p class="title"><a href="/blog/url-id">C'est sublime</a></p>
+		            <p class="resume">
+		            description...
+		        </p>
+		            <p class="knowmore"><a href="/blog/url-id">En savoir plus</a></p>
+		        </div>
+		    </div>
+	    </div>
+    </div>
+</section>
+
+<section id="citations">
+    <div class="icon-container">
+        <div id="citations-button" class="prev"></div>
+    </div> 
+
+    <div class="content">
+        <img src="images/citations.png" alt="Citations">
+
+        <div id="slides">
+            <div>
+                <blockquote>
+                    <p class="testimonial-quote">“J’ai toujours rêvé que mon ordinateur soit aussi simple à utiliser que mon téléphone. Ce rêve est devenu réalité : je ne comprends plus comment utiliser mon téléphone”</p>
+                    <h2>Bjarne Stroustrup</h2>
+                </blockquote>
+            </div>
+            <div>
+                <blockquote>
+                    <p class="testimonial-quote">“Le manuel disait « Nécessite Windows XP ou mieux ». J’ai donc installé Linux.”</p>
+                    <h2>Gerald Weinberg</h2>
+                </blockquote>
+            </div>
+            <div>
+                <blockquote>
+                    <p class="testimonial-quote">“Si debugger, c’est supprimer des bugs, alors programmer ne peut être que les ajouter”</p>
+                    <h2>Edsger Dijkstra</h2>
+                </blockquote>
+            </div>
+            <div>
+                <blockquote>
+                    <p class="testimonial-quote">“Je ne suis pas asocial, je ne suis juste pas orienté utilisateur.”</p>
+                    <h2>Peter Funk</h2>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    
+    <div class="icon-container">
+        <div id="citations-button" class="next"></div>
+    </div>
+</section>
+@endsection

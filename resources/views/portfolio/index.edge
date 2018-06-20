@@ -1,0 +1,9 @@
+@layout('main')
+
+@section('content')
+<ul>
+@each(item in portfolio)
+    <li>{{ item.name }}-{{ item.description}}</li>
+@endeach
+</ul>
+@endsection
