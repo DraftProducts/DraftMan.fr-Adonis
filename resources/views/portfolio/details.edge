@@ -1,0 +1,69 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>{{ item.name }} - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="{{ item.name }} - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="{{ item.name }} - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="{{ item.description }}">
+    <meta property="og:description" content="{{ item.description }}">
+    <meta name="twitter:description" content="{{ item.description }}">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/{{ item.id }}" />
+    <meta property="og:url" content="https://www.draftman.fr/{{ item.id }}">
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{project.typographie1}}|{{project.typographie2}}">
+@endsection
+
+@section('content')
+<section id="blog" class="post project">
+    <div class="content">
+    <div class="corps">
+    	<div class="item-content">
+            <div class="top-content">
+                <h2>{{ item.name }}</h2>
+                <div class="infos">
+                    <li>
+                        <i class="icon-user"></i>
+                        <span>{{ item.type }}</span>
+                    </li>
+                    <li>
+                        <i class="icon-calender"></i>
+                        <span>{{item.date}}</span>
+                    </li>
+                </div>
+            </div>
+            <div class="logo" style="background-image: url(../images/portfolio/{{project.url}}/{{project.logo}});"></div>
+            <section id="post-body" class="portfolio">
+                <p>{{project.presentation}}</p>
+            </section>
+        </div>
+        <div class="item-content">
+            <section id="spe-body" class="portfolio">
+                <h4>Spécificités Graphique</h4>
+                <div class="typographies">
+                    <h5 style="font-family:'{{project.typographie1}}'">Abc</h5>
+                    <h5 style="font-family:'{{project.typographie2}}'">Abc</h5>
+                </div>
+            </section>
+        </div>
+    </div>
+	<div id="sidebar">
+        <div class="item">
+            <h4>Recherche</h4>
+            <hr>
+            <div class="search">
+                <form method="project">
+                    <input type="search" name="q" placeholder="Rechercher">
+                    <button type="submit">Go</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection 

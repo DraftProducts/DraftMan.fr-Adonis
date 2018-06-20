@@ -17,6 +17,8 @@ const Route = use('Route')
 
 Route.on('/').render('index')
 
+Route.on('/a-propos').render('a-propos')
+
 Route.get('/portfolio', 'PortfolioController.index')
 
-//Route.get('/portfolio/:id', ({params}) => `Portfolio id ${params.id}`)
+Route.get('/portfolio/:id', 'PortfolioController.details')

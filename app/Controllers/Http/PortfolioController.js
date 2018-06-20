@@ -11,6 +11,15 @@ class PortfolioController {
             portfolio: portfolio.toJSON()
         })
     }
+
+    async details({params, view}){
+
+        const project = await Portfolio.find(params.id)
+
+        return view.render('portfolio.details', {
+            item: project
+        })
+    }
 }
 
 module.exports = PortfolioController
