@@ -21,6 +21,10 @@ Route.on('/a-propos').render('a-propos')
 
 Route.on('/discord').render('discord')
 
+Route.get('/contact', 'ContactController.index')
+
 Route.get('/portfolio', 'PortfolioController.index')
 
 Route.get('/portfolio/:id', 'PortfolioController.details')
+
+Route.post('contact', 'ContactController.verify')
