@@ -19,20 +19,20 @@ Merci à [ESCommunity](https://discord.gg/dvym9EN) et plus particulièrement à 
 
 ## Features
 Le but a thèrme serait d'obtenir un site similaire a celui que j'ai aujourd'hui avec les features suivantes:
-> Page Accueil
-> Page A Propos
-> Page Portfolio dynamique
-> Page Projet
-> Page Contact
-> Page Discord
-> Infrastructure Blog
-> Page Article
-> Page recherche
-> Système de newsletter
-> Admin: système de gestions de fichiers
-> Admin: création de newsletter
-> Admin: gestion de la boite mail 
-> Admin: gestion des utilisateurs
-> Admin: liste des articles (postés & non postés)
-> Admin: rédaction des articles
-> Admin: édition des articles
+- Page Accueil
+- Page A Propos
+- Page Portfolio dynamique
+- Page Projet
+- Page Contact
+- Page Discord
+- Infrastructure Blog
+- Page Article
+- Page recherche
+- Système de newsletter
+- Admin: système de gestions de fichiers
+- Admin: création de newsletter
+- Admin: gestion de la boite mail 
+- Admin: gestion des utilisateurs
+- Admin: liste des articles (postés & non postés)
+- Admin: rédaction des articles
+- Admin: édition des articles
