@@ -24,9 +24,11 @@ class BlogController {
     async article({params, view}){
 
         const post = await Blog.find(params.id)
+        const blog = await Blog.all();
 
         return view.render('blog.details', {
-            item: post
+            item: post,
+            blog: blog
         })
     }
 }

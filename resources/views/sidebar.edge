@@ -14,7 +14,9 @@
         <hr>
         <ul>
             <li>
-                <a href="/blog/{{post.url}}-{{post.id}}"><span class="hover_span"></span><span class="link_span">{{post.title}}</span></a>
+            @each(item in blog)
+                <a href="/blog/{{item.url}}-{{item.id}}"><span class="hover_span"></span><span class="link_span">{{item.title}}</span></a>
+            @endeach
             </li>
         </ul>
     </div>

@@ -27,7 +27,7 @@
                         <h5>{{item.title}}</h5>
                     </div>
                     <div class="article-text">
-                        <p>{{item.content}}...</p>
+                        <p>{{item.content.substring(0,800)) }}...</p>
                     </div>
                     <div class="article-image">
                         <div class="article-image-container">
@@ -39,7 +39,7 @@
             </div>
         @endeach
         </div>
-	    @!section('sidebar')
+	    @include('sidebar')
     </div>
 </section>
 @endsection

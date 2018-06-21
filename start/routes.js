@@ -31,4 +31,6 @@ Route.get('/blog', 'BlogController.index')
 
 Route.get('/blog/list', 'BlogController.list')
 
+Route.get('/blog/:link-:id', 'BlogController.article')
+
 Route.post('contact', 'ContactController.verify')
