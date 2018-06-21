@@ -1,0 +1,45 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Liste des articles - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Liste des articles - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Liste des articles - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la liste des articles du blog, celà vous permet d'avoir un avant goût du contenue de l'article.">
+    <meta property="og:description" content="Voici la liste des articles du blog, celà vous permet d'avoir un avant goût du contenue de l'article.">
+    <meta name="twitter:description" content="Voici la liste des articles du blog, celà vous permet d'avoir un avant goût du contenue de l'article.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/blog/list" />
+    <meta property="og:url" content="https://www.draftman.fr/blog/list">
+@endsection
+
+@section('content')
+<section id="blog" class="list">
+    <div class="content">
+    	<div class="corps">
+        @each(item in blog)
+            <div class="item">
+                <div class="item-content">
+                    <div class="article-title">
+                        <h5>{{item.title}}</h5>
+                    </div>
+                    <div class="article-text">
+                        <p>{{item.content}}...</p>
+                    </div>
+                    <div class="article-image">
+                        <div class="article-image-container">
+                            <img src="/images/blog/posts/{{item.image}}" alt="{{item.title}}"/>
+                            <a href="/blog/{{item.url}}-{{item.id}}">Afficher l'article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endeach
+        </div>
+	    @!section('sidebar')
+    </div>
+</section>
+@endsection

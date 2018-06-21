@@ -216,7 +216,6 @@ a.link:hover::after {
     font-variant: normal;
     font-weight: 400;
     line-height: 1;
-    speak: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -527,11 +526,12 @@ header nav a {
     text-decoration: none;
     font-size: 18px;
     letter-spacing: 1px;
-    vertical-align: middle;
     color: #999;
     transition-duration: .3s;
 }
-
+header nav a.active{
+color: #cd6e57!important
+}
 #mobile-nav-button {
     display: none;
     width: 27px;

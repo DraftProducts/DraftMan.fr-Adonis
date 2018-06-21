@@ -27,4 +27,8 @@ Route.get('/portfolio', 'PortfolioController.index')
 
 Route.get('/portfolio/:id', 'PortfolioController.details')
 
+Route.get('/blog', 'BlogController.index')
+
+Route.get('/blog/list', 'BlogController.list')
+
 Route.post('contact', 'ContactController.verify')
