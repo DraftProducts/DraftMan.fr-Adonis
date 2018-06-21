@@ -1,0 +1,73 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Contact - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Contact - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Contact - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Tu souhaites me contacter ? Tu pourras y retrouver un formulaire de contact te permettant de m'envoyer un formidable mail !">
+    <meta property="og:description" content="Tu souhaites me contacter ? Tu pourras y retrouver un formulaire de contact te permettant de m'envoyer un formidable mail !">
+    <meta name="twitter:description" content="Tu souhaites me contacter ? Tu pourras y retrouver un formulaire de contact te permettant de m'envoyer un formidable mail !">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/contact" />
+    <meta property="og:url" content="https://www.draftman.fr/contact">
+@endsection
+
+@section('content')
+<section id="contact">
+    <div>
+        <form method="POST" name="form" enctype="multipart/form-data">
+            <span id="titre"></span>
+            
+            <div>
+            <input maxlength="50" name="author" type="text" placeholder="Votre nom ou société" required/>
+            </div>
+            {{ elIf('<span>$self</span>', getErrorFor('author'), hasErrorFor('author')) }}
+            <div>
+            <input maxlength="50" name="email" type="email" placeholder="Votre adresse mail" required/>
+            </div>
+            {{ elIf('<span>$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+            <div>
+            <input maxlength="50" name="objet" type="text" placeholder="Sujet de votre message" required/>
+            </div>
+            {{ elIf('<span>$self</span>', getErrorFor('objet'), hasErrorFor('objet')) }}
+            <div>
+            <input type="text" maxlength="50" name="discord" placeholder="Votre nom discord"/>
+            </div>
+
+            <div>
+            <input type="text"  maxlength="50" name="twitter" placeholder="Votre nom twitter"/>
+            </div>
+
+            <div>
+            <input type="text" name="commentconnu" placeholder="Comment m'avez vous connu ?" required/>
+            </div>
+
+            <section class="file-section">
+                <div class="btn">
+                    <span>Image</span>
+                    <input name="uploaded_file" id="uploaded_file" type="file">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                </div>
+                <div class="file-wrapper">
+                    <input class="file-path" type="text">
+                </div>
+            </section>
+
+            <textarea name="message" placeholder="Message" rows="4" cols="50" class="message"></textarea>
+            {{ elIf('<span>$self</span>', getErrorFor('message'), hasErrorFor('message')) }}
+            <div>
+            <input data-role="submit" type="submit" value="Envoyer" />
+            </div>
+        </form>
+    </div>
+</section>
+@endsection
+
+@section('script')
+    {{script('/js/typed.min')}}
+    {{script('/js/contact')}}
+@endsection

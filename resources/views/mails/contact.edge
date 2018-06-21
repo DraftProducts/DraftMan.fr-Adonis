@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <table style="width:100%;">
+            <tr>
+                <td colspan="2">
+                    Vous avez reçu un message le ' . date( 'd/m/Y' ) . ' à  ' . date( 'H:i:s' ) . '<br>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">{{message}}</td><br>
+            </tr>
+            <tr>
+                <td colspan="2">{{commentconnu}}</td><br>
+            </tr>
+            <tr>
+                <td colspan="2">Mail : {{email}}</td>
+            </tr><br>
+            <tr>
+                <td colspan="2" class="discord">Discord : {{discord}}.</td>
+            </tr>
+            <tr>
+                <td colspan="2"class="twitter">Twitter : {{twitter}}.</td>
+            </tr><br>
+            <tr>
+                <td colspan="2">Cordialement {{author}} '.</td>
+            </tr>
+        </table>
+    </body>
+</html>
