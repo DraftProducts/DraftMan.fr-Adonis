@@ -1,0 +1,33 @@
+<div id="sidebar">
+    <div class="item">
+        <h4>Recherche</h4>
+        <hr>
+        <div class="search">
+            <form method="post">
+                <input type="search" name="q" placeholder="Rechercher">
+                <button type="submit">Go</button>
+            </form>
+        </div>
+    </div>
+    <div class="item">
+        <a href="/blog/list"><h4>Les derniers articles</h4></a>
+        <hr>
+        <ul>
+            <li>
+                <a href="/blog/{{post.url}}-{{post.id}}"><span class="hover_span"></span><span class="link_span">{{post.title}}</span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="item" id="newsletter">
+        <h4>Newsletter</h4>
+        <hr>
+        <p>
+            Abonne toi a ma newsletter pour être au courant des dernières nouveautés !<br>
+            Tu peux d'ailleurs la retrouver sur <a href="/discord" class="link">mon discord</a> dans un channel prévu a cet effet !
+        </p>
+        <form method="post" class="newsletter">
+            <input type="email" name="email" placeholder="Adresse mail">
+            <input type="submit" name="newsletter" value="S'inscrire">
+        </form>
+    </div>
+</div>
