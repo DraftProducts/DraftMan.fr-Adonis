@@ -14,11 +14,9 @@ class PostController {
 
     async index({ view }){
 
-        const blog = await Post.all();
+        const blog = await Post.all().toJSON();
 
-        return view.render('blog.index', {
-            blog: blog.toJSON()
-        })
+        return view.render('blog.index', {blog})
     }
 
     async list({ view }){
@@ -32,15 +30,21 @@ class PostController {
 
     async article({params, view}){
 
-        const post = await Post.find(params.id)
-        const blog = await Post.all();
-        const comments = await Comments.all();
+     
 
-        return view.render('blog.details', {
-            item: post,
-            blog: blog,
-            comments: comments
-        })
+        return Promise.all([
+            Post.find(params.id),
+            Post.all(),
+            Comments.all()
+        ]).then(res => {
+            return view.render('blog.details', {
+                item: res[0],
+                blog: res[1],
+                comments: res[2]
+            })
+        });
+
+        
     }
 }
 
