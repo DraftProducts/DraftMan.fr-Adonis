@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>{{item.title}} | DraftMan.fr</title>
+
+    <meta name="description" content="{{item.description}}">
+
+    <meta name="author" content="DraftMan">
+    <meta name="copyright" content="DraftMan">
+
+    <link rel="shortcut icon" href="https://www.draftman.fr/images/favicon.png" type="image/ico" />
+
+    <link rel="canonical" href="https://www.draftman.fr/blog/<?= $post->url ?>-<?= $post->id ?>" />
+
+    <meta property="og:title" content="{{item.title}} - DraftMan.fr">
+    <meta property="og:description" content="{{item.description}}">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:url" content="https://www.draftman.fr/blog/<?= $post->url ?>-<?= $post->id ?>">
+    <meta property="og:site_name" content="DraftMan.fr">
+    <meta property="og:image" content="https://www.draftman.fr/images/blog/posts/{{item.image}}">
+    <meta property="og:image:secure_url" content="https://www.draftman.fr/images/blog/posts/{{item.image}}">
+    <meta property="og:updated_time" content="<?=$post->last_update?>">
+    <meta property="article:publisher" content="https://www.facebook.com/profile.php?id=100009450744702">
+    <meta property="article:published_time" content="<?=$post->date?>">
+    <meta property="article:modified_time" content="<?=$post->last_update?>">
+
+    <?php
+    $tags_expl = explode(",", $post->tags);
+    foreach($tags_expl as $key=>$tag){
+        echo '<meta property="article:tag" content="'.$tag.'">';
+    }
+     ?>
+
+    <meta name="theme-color" content="#CD6E57">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
+    <meta name="msapplication-navbutton-color" content="#CD6E57">
+
+    <meta name="twitter:site" content="@DraftMan_Dev">
+    <meta name="twitter:creator" content="@DraftMan_Dev">
+    <meta name="twitter:title" content="{{item.title}} - DraftMan.fr">
+    <meta name="twitter:description" content="{{item.description}}">
+    <meta name="twitter:image:src" content="https://www.draftman.fr/images/blog/posts/{{item.image}}">
+
+    <meta name="generator" content="Sublime Text">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Material+Icons|Open+Sans:300,400,600,700">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/code.css">
+</head>
+
+<body id="page">
+    <header>
+        <div>
+            <a class="logo" href="" title="DraftMan"><img alt="DraftMan" src="/images/headerlogo.png"></a>
+            <div id="mobile-nav-button"></div>
+            <nav id="nav">
+                <a class="accueil" href="/" title="Accueil">Accueil</a>
+                <a class="a-propos" href="/a-propos" title="À Propos">À Propos</a>
+                <a class="portfolio" href="/portfolio" title="Portfolio">Portfolio</a>
+                <a class="blog active" href="/blog" title="Blog">Blog</a>
+                <a class="contact" href="/contact" title="Contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cache"></div>
+    <section class="parallax" style="background-image: url(/images/blog/posts/{{item.image}});">
+        <h1>
+            {{item.title}}
+        </h1>
+    </section>
+    <section id="blog" class="post">
+        <div class="content">
+            <div class="corps">
+                <div class="item-content">
+                    <div class="top-content">
+                        <h2>
+                            {{item.title}}
+                        </h2>
+                        <div class="infos">
+                            <li>
+                                <i class="icon-user"></i>
+                                <span>{{item.name}}</span>
+                            </li>
+                            <li>
+                                <i class="icon-calender"></i>
+                                <span><?= date("d/m/Y à H:i", strtotime($post->date)) ?></span>
+                            </li>
+                            <li>
+                                <i class="icon-bookmark"></i>
+                                <span>
+                            {{item.tags}}
+                        </span>
+                            </li>
+                        </div>
+                    </div>
+                    <section id="post-body">
+                        {{ markdown(item.content) }}
+                    </section>
+                    <section id="commentaires">
+                        <h4>Commenter</h4>
+                                    <form method="post">
+                                        <div class="compact">
+                                            <div class="required">
+                                                <input type="text" name="name" placeholder="Pseudo" required/>
+                                            </div>
+                                            <div class="required">
+                                                <input type="text" name="email" placeholder="Email" required/>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="website" placeholder="Votre site" />
+                                            </div>
+                                        </div>
+                                        <div class="compact">
+                                            <div>
+                                                <input type="text" name="twitter" placeholder="Twitter" />
+                                            </div>
+                                            <div>
+                                                <input type="text" name="github" placeholder="GitHub" />
+                                            </div>
+                                            <div>
+                                                <input type="text" name="linkedin" placeholder="Linkedin" />
+                                            </div>
+                                        </div>
+                                        <textarea name="content" cols="30" rows="10" placeholder="Commentaire" required></textarea>
+                                        <div>
+                                            <input type="submit" name="comment" value="Commenter ce post">
+                                        </div>
+                                    </form>
+                                    <h4>Commentaires</h4>
+                    </section>
+                    <section id="comments">
+                        <?php
+                $comments = get_comments();
+
+                if($comments != false){
+                    foreach($comments as $comment){
+                        $responses = get_responses($comment->id);
+                        ?>
+                            <div class="comment-section" id="<?=$comment->id;?>">
+                                <div class="comment <?php if($responses != false){echo 'has-replies';} ?>">
+                                    <div class="comment-avatar">
+                                        <div class="avatar">
+                                            <img src="https://www.gravatar.com/avatar/<?=md5($comment->email)?>" width="100%">
+                                        </div>
+                                        <div class="links">
+                                            <?php if($comment->website != ""){?>
+                                            <a href="<?=$comment->website;?>" target="_blank" class="website"><i class="icon-cursor"></i></a>
+                                            <?php
+                          } if($comment->twitter != ""){?>
+                                                <a href="https://twitter.com/<?=$comment->twitter;?>" target="_blank" class="twitter"><i class="icon-twitter"></i></a>
+                                                <?php
+                          } if($comment->github != ""){?>
+                                                    <a href="https://github.com/<?=$comment->github;?>" target="_blank" class="github"><i class="icon-github"></i></a>
+                                                    <?php
+                          }
+                           if(comment.linkedin != ""){?>
+                                                        <a href="https://www.linkedin.com/in/<?=$comment->linkedin;?>" target="_blank" class="linkedin"><i class="icon-linkedin"></i></a>
+                                                        <?php
+                          } ?>
+                                        </div>
+                                        <div class="name">
+                                            <a href="<?=$comment->website;?>"><?= $comment->name ?></a>
+                                        </div>
+                                    </div>
+                                    <div class="comment-content">
+                                        <a class="name" href="<?=$comment->website;?>"><?=$comment->name;?></a>
+                                        <time datetime="<?= $comment->date; ?>"><?=  date("d/m/Y à H:i",strtotime($comment->date)); ?></time>
+                                        <div class="comment-body">
+                                            <p>
+                                                <?= htmlentities($comment->content); ?>
+                                            </p>
+                                        </div>
+                                        <a class="reply" replyto="<?=$comment->id;?>" href="#">Répondre</a>
+                                    </div>
+                                </div>
+                                <div></div>
+
+                                <?php
+                    if($responses != false){
+                        foreach($responses as $response){
+                            ?>
+                                    <div class="comment-reply">
+                                        <div class="comment-avatar">
+                                            <div class="avatar">
+                                                <img src="https://www.gravatar.com/avatar/<?=md5($response->email)?>" width="100%">
+                                            </div>
+                                            <div class="links">
+                                                <?php if($response->website != ""){?>
+                                                <a href="<?=$response->website;?>" target="_blank" class="website"><i class="icon-cursor"></i></a>
+                                                <?php
+                          } if($response->twitter != ""){?>
+                                                    <a href="https://twitter.com/<?=$response->twitter;?>" target="_blank" class="twitter"><i class="icon-twitter"></i></a>
+                                                    <?php
+                          } if($response->github != ""){?>
+                                                        <a href="https://github.com/<?=$response->github;?>" target="_blank" class="github"><i class="icon-github"></i></a>
+                                                        <?php
+                          }
+                           if($response->linkedin != ""){?>
+                                                            <a href="https://www.linkedin.com/in/<?=$response->linkedin;?>" target="_blank" class="linkedin"><i class="icon-linkedin"></i></a>
+                                                            <?php
+                          } ?>
+                                            </div>
+                                            <div class="name">
+                                                <a href="<?=$response->website;?>"><?= $response->name ?></a>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <a class="name" href="<?=$response->website;?>"><?= $response->name ?></a>
+                                            <time title="<?= $response->date; ?>"><?=  date("d/m/Y à H:i",strtotime($response->date)); ?></time>
+                                            <div class="comment-body">
+                                                <p>
+                                                    <?= htmlentities($response->content); ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                    }
+                }
+            ?>
+                            </div>
+                            <?php
+                    }
+                }
+            ?>
+                    </section>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="item">
+                    <h4>Recherche</h4>
+                    <hr>
+                    <div class="search">
+                        <?php include ($_SERVER['DOCUMENT_ROOT']."/functions/search.func.php"); ?>
+                        <form method="post">
+                            <input type="search" name="q" placeholder="Rechercher">
+                            <button type="submit">Go</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="/blog/list">
+                        <h4>Les derniers articles</h4>
+                    </a>
+                    <hr>
+                    <ul>
+                        <?php
+
+                $posts = get_posts_limited(10);
+                foreach($posts as $post){
+
+                ?>
+                            <li>
+                                <a href="/blog/<?= $post->url ?>-<?= $post->id ?>"><span class="hover_span"></span><span class="link_span"><?= $post->title ?></span></a>
+                            </li>
+                            <?php
+                }
+
+                ?>
+                    </ul>
+                </div>
+                <div class="item">
+                    <h4>Newsletter</h4>
+                    <hr>
+                    <p>
+                        Abonne toi a ma newsletter pour être au courant des dernières nouveautés !<br> Tu peux d'ailleurs la retrouver sur <a href="/discord" class="link">mon discord</a> dans un channel prévu a cet effet !
+                    </p>
+                    <?php
+                if (isset($_POST['newsletter']) && isset($_POST['email']) && !empty($_POST['email'])) {
+                    $email = $_POST['email'];
+                    $errors = [];
+
+                    if(empty($email)){
+                        $errors['empty'] = "Tous les champs requis n'ont pas été remplis";
+                    }else if(checkEmail($email)){
+                        $errors['exist'] = "Votre email figure deja dans notre liste";
+                    }else{
+                        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                            $errors['email'] = "L'adresse email n'est pas valide";
+                        }
+                    }
+
+                    if(!empty($errors)){
+                        ?>
+                        <div class="error-card">
+                            <?php
+                                        foreach($errors as $error){
+                                            echo $error."<br/>";
+                                        }
+                                    ?>
+                        </div>
+                        <?php
+                    }else{
+                        sendEmail($email);
+                        ?>
+                            <script>
+                                window.location.replace("/blog/<?= $_POST['url']?>-<?= $_POST['id']?>#newsletter");
+
+                            </script>
+                            <div class="success-card">
+                                Félicitation ! Vous êtes inscrits à la newsletter.
+                            </div>
+                            <?php
+                    }
+                }
+            ?>
+                                <form method="post" class="newsletter">
+                                    <input type="email" name="email" placeholder="Adresse mail">
+                                    <input type="submit" name="newsletter" value="S'inscrire">
+                                </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <?php include ($_SERVER['DOCUMENT_ROOT']."/includes/footer.php");  ?>
+    <script src="/js/post.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/code.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113154397-1"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-113154397-1');
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9648987678244722",
+            enable_page_level_ads: true
+          });
+
+    </script>
+
+</body>
+
+</html>

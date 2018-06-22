@@ -12,4 +12,8 @@ hooks.after.providersRegistered(() => {
   View.global('markdown', (text) => {
     return markdown.render(text)
   })
+
+  View.global('date', (date) => {
+    return `${date.getDate()}/${date.getMonth()}/${date.getYear()}`
+  })
 })
