@@ -31,6 +31,15 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+  /**
+   * Defines the relationship an author has with many posts.
+   *
+   * @see https://adonisjs.com/docs/4.0/relationships#_has_many
+   */
+  posts () {
+    return this.hasMany('App/Models/Blog', 'id', 'author_id')
+  }
 }
 
 module.exports = User
