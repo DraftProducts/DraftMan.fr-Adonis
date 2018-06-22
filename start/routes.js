@@ -27,10 +27,10 @@ Route.get('/portfolio', 'PortfolioController.index')
 
 Route.get('/portfolio/:id', 'PortfolioController.details')
 
-Route.get('/blog', 'BlogController.index')
+Route.get('/blog', 'PostController.index')
 
-Route.get('/blog/list', 'BlogController.list')
+Route.get('/blog/list', 'PostController.list')
 
-Route.get('/blog/:link-:id', 'BlogController.article')
+Route.get('/blog/:link-:id', 'PostController.article')
 
 Route.post('contact', 'ContactController.verify')
