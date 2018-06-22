@@ -11,12 +11,31 @@
 |
 */
 
-// const Factory = use('Factory')
+const Factory = use('Factory')
 
-/**
-  Factory.blueprint('App/Models/User', (faker) => {
-    return {
-      username: faker.username()
-    }
-  })
-*/
+Factory.blueprint('App/Models/User', (faker) => {
+  return {
+    username: faker.username(),
+    email: faker.email(),
+    password: 'secret',
+  }
+})
+
+Factory.blueprint('App/Models/Blog', (faker) => {
+  return {
+    title: faker.sentence(),
+    description: faker.paragraph(),
+    tags: `${faker.word()}, ${faker.word()}`,
+    content: faker.paragraph(3),
+  }
+})
+
+Factory.blueprint('App/Models/Portfolio', (faker) => {
+  return {
+    name: faker.sentence(),
+    description: faker.paragraph(),
+    type: `${faker.word()}, ${faker.word()}`,
+    illustration: faker.image()
+  }
+})
+
