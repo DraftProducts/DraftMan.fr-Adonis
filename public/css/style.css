@@ -1324,6 +1324,7 @@ footer #copyright section {
 #competences div {
     display: flex;
     justify-content: center;
+    flex-flow: row wrap;
     -webkit-flex-flow: row wrap;
 }
 
@@ -1598,7 +1599,6 @@ footer #copyright section {
     display: block;
     z-index: 1;
     overflow: hidden;
-    vertical-align: middle;
     -webkit-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
     -ms-transition: all .3s ease-out;
