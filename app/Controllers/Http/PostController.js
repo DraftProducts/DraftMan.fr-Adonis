@@ -14,9 +14,11 @@ class PostController {
 
     async index({ view }){
 
-        const blog = await Post.all().toJSON();
+        const blog = await Post.all();
 
-        return view.render('blog.index', {blog})
+        return view.render('blog.index', {
+            blog: blog.toJSON()
+        })
     }
 
     async list({ view }){
