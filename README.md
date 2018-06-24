@@ -17,6 +17,15 @@ DraftMan.fr est un site deja en ligne [draftman.fr](https://www.draftman.fr) qui
 ## Remerciements
 Merci à [ESCommunity](https://discord.gg/dvym9EN) et plus particulièrement à [Romain Lanz](https://github.com/RomainLanz) qui m'a suivis durant la réalisation de ce site et m'a été d'une grande aide !
 
+## Installation
+- Executer `git clone https://github.com/DraftProducts/DraftMan.fr.git` pour télécharger le projet
+- Executez `cd DraftMan.fr/` pour vous rendre dans le dossier du projet
+- Executer `npm install` pour installer toutes les dependances
+- Dupliquer le fichier `.env.exemple` en `.env`
+- Executer `adonis key:generate` pour ajouter la clé dans le fichier `.env`
+- Executer `adonis migration:run` pour mettre en place la base de donnée
+- Executer `adonis serve --dev` ou `node server.js` pour lancer l'application
+
 ## Features
 Le but a thèrme serait d'obtenir un site similaire a celui que j'ai aujourd'hui avec les features suivantes:
 - Page Accueil
