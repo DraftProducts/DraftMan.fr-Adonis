@@ -4,7 +4,11 @@ const Mail = use('Mail')
 const { validate } = use('Validator')
 
 class ContactController {
-    async store ({ request, session, response }) {
+    async index({ view }){
+        return view.render('contact')
+    }
+
+    async verify ({ request, session, response }) {
 
         const messages = {
             'email.required': 'Veuillez entrer une adresse email valide.',
@@ -28,7 +32,7 @@ class ContactController {
     
         return 'Validation passed'
     }
-    async send ({ request }) {
+    async sendMail ({ request }) {
         const email_to = 'contact@draftman.fr';
         const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
         const user = await User.create(data)
@@ -40,7 +44,7 @@ class ContactController {
             .subject('<objet>')
         })
     
-        return 'Registered successfully'
+        return 'Mail send'
     }
 }
 
