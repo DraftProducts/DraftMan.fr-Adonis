@@ -13,11 +13,11 @@
         <a href="/blog/list"><h4>Les derniers articles</h4></a>
         <hr>
         <ul>
-            <li>
             @each(item in blog)
+            <li>
                 <a href="/blog/{{item.url}}-{{item.id}}"><span class="hover_span"></span><span class="link_span">{{item.title}}</span></a>
-            @endeach
             </li>
+            @endeach
         </ul>
     </div>
     <div class="item" id="newsletter">

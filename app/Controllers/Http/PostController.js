@@ -31,22 +31,23 @@ class PostController {
     }
 
     async article({params, view}){
-
-     
-
         return Promise.all([
             Post.find(params.id),
             Post.all(),
             Comments.all()
         ]).then(res => {
-            return view.render('blog.details', {
+            return view.render('blog.post', {
                 item: res[0],
                 blog: res[1],
                 comments: res[2]
             })
         });
+    }
 
-        
+    async search({params, view}){
+        return view.render('search', {
+            blog: blog.toJSON()
+        })
     }
 }
 
