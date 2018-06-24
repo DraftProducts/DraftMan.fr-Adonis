@@ -1989,7 +1989,7 @@ footer #copyright section {
 #commentaires form textarea,
 #comments form div div,
 #comments form textarea {
-    margin-bottom: 15px;
+    margin: 7.5px 0;
     font-family: 'Open Sans';
     box-shadow: 0 1px 10px -1px rgba(0, 0, 0, .3);
 }
@@ -3024,7 +3024,7 @@ input[type="text"]::required:after {
 
 #titre {
     height: 24px;
-    margin: 30px 0 40px 0;
+    margin: 30px 0;
     text-align: center;
     text-transform: uppercase;
     font-family: Open Sans;

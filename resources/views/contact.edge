@@ -23,29 +23,29 @@
             <span id="titre"></span>
             
             <div>
-            <input maxlength="50" name="author" type="text" placeholder="Votre nom ou société" required/>
+            <input maxlength="50" name="author" type="text" placeholder="Votre nom ou société" value="{{ old('author', '') }}" autofocus/>
             </div>
-            {{ elIf('<span>$self</span>', getErrorFor('author'), hasErrorFor('author')) }}
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('author'), hasErrorFor('author')) }}
             <div>
-            <input maxlength="50" name="email" type="email" placeholder="Votre adresse mail" required/>
+            <input maxlength="50" name="email" type="email" placeholder="Votre adresse mail" value="{{ old('email', '') }}"/>
             </div>
-            {{ elIf('<span>$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
             <div>
-            <input maxlength="50" name="objet" type="text" placeholder="Sujet de votre message" required/>
+            <input maxlength="50" name="objet" type="text" placeholder="Sujet de votre message" value="{{ old('objet', '') }}"/>
             </div>
-            {{ elIf('<span>$self</span>', getErrorFor('objet'), hasErrorFor('objet')) }}
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('objet'), hasErrorFor('objet')) }}
             <div>
-            <input type="text" maxlength="50" name="discord" placeholder="Votre nom discord"/>
+            <input type="text" maxlength="50" name="discord" placeholder="Votre nom discord"  value="{{ old('discord', '') }}" />
             </div>
 
             <div>
-            <input type="text"  maxlength="50" name="twitter" placeholder="Votre nom twitter"/>
+            <input type="text"  maxlength="50" name="twitter" placeholder="Votre nom twitter"  value="{{ old('twitter', '') }}" />
             </div>
 
             <div>
-            <input type="text" name="commentconnu" placeholder="Comment m'avez vous connu ?" required/>
+            <input type="text" name="commentconnu" placeholder="Comment m'avez vous connu ?" value="{{ old('commentconnu', '') }}"/>
             </div>
-
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('commentconnu'), hasErrorFor('commentconnu')) }}
             <section class="file-section">
                 <div class="btn">
                     <span>Image</span>
@@ -57,9 +57,11 @@
                 </div>
             </section>
 
-            <textarea name="message" placeholder="Message" rows="4" cols="50" class="message"></textarea>
-            {{ elIf('<span>$self</span>', getErrorFor('message'), hasErrorFor('message')) }}
+            <textarea name="message" placeholder="Message" rows="4" cols="50" class="message" value="{{ old('message', '') }}"></textarea>
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('message'), hasErrorFor('message')) }}
             <div>
+
+            {{ csrfField() }}
             <input data-role="submit" type="submit" value="Envoyer" />
             </div>
         </form>
@@ -67,7 +69,7 @@
 </section>
 @endsection
 
-@section('script')
+@section('js')
     {{script('/js/typed.min')}}
     {{script('/js/contact')}}
 @endsection
