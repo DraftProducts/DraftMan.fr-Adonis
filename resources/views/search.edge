@@ -1,0 +1,54 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Recherche - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Recherche - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Recherche - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page de recherche, elle te permettra de faire une recherche générale sur le site afin de trouver ce que tu cherche !">
+    <meta property="og:description" content="Voici la page de recherche, elle te permettra de faire une recherche générale sur le site afin de trouver ce que tu cherche !">
+    <meta name="twitter:description" content="Voici la page de recherche, elle te permettra de faire une recherche générale sur le site afin de trouver ce que tu cherche !">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/search" />
+    <meta property="og:url" content="https://www.draftman.fr/search">
+@endsection
+
+@section('content')
+<section id="blog" class="search dashboard">
+    <div class="content">
+        <div class="corps">
+            <form method="post" action="{{ route('SearchController.search') }}">
+                <div class="search">
+                    <input type="text" name="q" placeholder="Rechercher">
+                </div>
+                {{ csrfField() }}
+                <button type='submit'>Go !</button>
+            </form>
+
+            @if(posts->rowCount() > 0)
+                @each(item in posts)
+                <div class="item">
+                    <div class="article-title">
+                        <h5>{{item.title}}</h5>
+                    </div>
+                    <div class="article-image">
+                        <img src="/images/blog/posts/{{item.image}}" alt="{{item.title}}"/>
+                    </div>
+                    <div class="article-content">
+                        <span class="card-title"><i class="material-icons">slideshow</i></span>
+                        <p><a class="link" href="/blog/{{item.url}}-{{item.id}}">Voir l'article</a></p>
+                    </div>
+                </div>
+                @endeach
+            @else
+                <div class="no-results">
+                    <h4>Aucun résultats pour nom</h4>
+                </div>
+            @endif
+        </div>
+    </div>
+</section>
+@endsection

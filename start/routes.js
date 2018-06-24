@@ -21,16 +21,24 @@ Route.on('/a-propos').render('a-propos')
 
 Route.on('/discord').render('discord')
 
-Route.get('/contact', 'ContactController.index')
 
-Route.get('/portfolio', 'PortfolioController.index')
+Route.get('/search', 'SearchController.index')
 
-Route.get('/portfolio/:id', 'PortfolioController.details')
+Route.post('search', 'SearchController.search')
+
 
 Route.get('/blog', 'PostController.index')
 
 Route.get('/blog/list', 'PostController.list')
 
 Route.get('/blog/:link-:id', 'PostController.article')
+
+
+Route.get('/portfolio', 'PortfolioController.index')
+
+Route.get('/portfolio/:id', 'PortfolioController.details')
+
+
+Route.get('/contact', 'ContactController.index')
 
 Route.post('contact', 'ContactController.verify')
