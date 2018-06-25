@@ -75,6 +75,10 @@ Route.post('/contact', 'ContactController.verify')
  |--------------------------------------------------------------------------
  */ 
 
-Route.get('/login', 'SessionController.create')
+Route.get('/login', 'SessionController.login')
 
-Route.post('/login', 'SessionController.store')
+Route.post('/login', 'SessionController.check')
+
+Route.get('/register', 'SessionController.register')
+
+Route.post('/register', 'SessionController.store')

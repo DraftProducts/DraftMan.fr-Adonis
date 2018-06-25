@@ -3058,7 +3058,6 @@ input[type="text"]::required:after {
 #login img {
     width: 80%;
     margin: 0 auto;
-    border-radius: 100%;
 }
 
 #login h3 {
