@@ -7,11 +7,9 @@ class PostController {
 
     async index({ view }){
 
-        const posts = await Post.all();
+        const posts = await (Post.all()).toJSON();
 
-        return view.render('search', {
-            posts: posts.toJSON()
-        })
+        return view.render('search',  {posts})
     }
 
     async search({ request, session, response }){
