@@ -23,9 +23,9 @@ const Route = use('Route')
 
 Route.on('/').render('index')
 
-Route.on('/a-propos').render('a-propos')
+Route.on('a-propos').render('a-propos')
 
-Route.on('/discord').render('discord')
+Route.on('discord').render('discord')
 
 /**
  |--------------------------------------------------------------------------
@@ -33,9 +33,9 @@ Route.on('/discord').render('discord')
  |--------------------------------------------------------------------------
  */
 
-Route.get('/search', 'SearchController.index')
+Route.get('search', 'SearchController.index')
 
-Route.post('/search/:name', 'SearchController.search')
+Route.post('search/:name', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------
@@ -43,11 +43,11 @@ Route.post('/search/:name', 'SearchController.search')
  |--------------------------------------------------------------------------
  */
 
-Route.get('/blog', 'PostController.index')
+Route.get('blog', 'PostController.index')
 
-Route.get('/blog/list', 'PostController.list')
+Route.get('blog/list', 'PostController.list')
 
-Route.get('/blog/:link-:id', 'PostController.article')
+Route.get('blog/:link-:id', 'PostController.article')
 
 /**
  |--------------------------------------------------------------------------
@@ -55,9 +55,9 @@ Route.get('/blog/:link-:id', 'PostController.article')
  |--------------------------------------------------------------------------
  */
 
-Route.get('/portfolio', 'PortfolioController.index')
+Route.get('portfolio', 'PortfolioController.index')
 
-Route.get('/portfolio/:id', 'PortfolioController.details')
+Route.get('portfolio/:id', 'PortfolioController.details')
 
 /**
  |--------------------------------------------------------------------------
@@ -65,9 +65,9 @@ Route.get('/portfolio/:id', 'PortfolioController.details')
  |--------------------------------------------------------------------------
  */
 
-Route.get('/contact', 'ContactController.index')
+Route.get('contact', 'ContactController.index')
 
-Route.post('/contact', 'ContactController.verify')
+Route.post('contact', 'ContactController.verify')
 
 /**
  |--------------------------------------------------------------------------
@@ -75,10 +75,13 @@ Route.post('/contact', 'ContactController.verify')
  |--------------------------------------------------------------------------
  */
 
-Route.get('/login', 'SessionController.login')
+Route.group(() => {
+    Route.get('login', 'SessionController.login')
+    Route.post('login', 'SessionController.check')
+    Route.get('register', 'SessionController.register')
+    Route.post('register', 'SessionController.store')
+}).middleware(['verif']);
 
-Route.post('/login', 'SessionController.check')
-
-Route.get('/register', 'SessionController.register')
-
-Route.post('/register', 'SessionController.store')
+Route.group(() => {
+    Route.get('/me/', 'BackofficeController.index')
+});

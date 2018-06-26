@@ -2,6 +2,7 @@
 
 const { validate } = use('Validator')
 const User = use('App/Models/User')
+const Mail = use('Mail')
 
 class SessionController {
   login({view}) {
