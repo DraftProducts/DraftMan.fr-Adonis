@@ -19,7 +19,7 @@ const Route = use('Route')
  |--------------------------------------------------------------------------
  | Static pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.on('/').render('index')
 
@@ -31,17 +31,17 @@ Route.on('/discord').render('discord')
  |--------------------------------------------------------------------------
  | Search
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/search', 'SearchController.index')
 
-Route.post('/search', 'SearchController.search')
+Route.post('/search/:name', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------
  | Blog pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/blog', 'PostController.index')
 
@@ -53,7 +53,7 @@ Route.get('/blog/:link-:id', 'PostController.article')
  |--------------------------------------------------------------------------
  | Portfolio pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/portfolio', 'PortfolioController.index')
 
@@ -63,7 +63,7 @@ Route.get('/portfolio/:id', 'PortfolioController.details')
  |--------------------------------------------------------------------------
  | Contact pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/contact', 'ContactController.index')
 
@@ -73,7 +73,7 @@ Route.post('/contact', 'ContactController.verify')
  |--------------------------------------------------------------------------
  | Admin pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/login', 'SessionController.login')
 
