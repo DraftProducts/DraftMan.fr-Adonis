@@ -82,6 +82,8 @@ class SessionController {
       return response.redirect('back')
     }
 
+    console.log('mdp '+password)
+
     try {
       await auth.attempt(username, password)
     } catch (e) {
