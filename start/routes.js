@@ -27,6 +27,8 @@ Route.on('a-propos').render('a-propos')
 
 Route.on('discord').render('discord')
 
+Route.on('draftbot').render('draftbot')
+
 /**
  |--------------------------------------------------------------------------
  | Search
