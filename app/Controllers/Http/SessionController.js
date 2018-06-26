@@ -46,6 +46,14 @@ class SessionController {
     delete data.password_confirmation
 
     await User.create(data)
+    
+    await Mail.send('mails/inscription', data, (message) => {
+      message
+        .to('<email>')
+        .from('no-reply@draftman.fr', 'draftman.fr')
+        .subject('Inscription sur DraftMan.fr')
+        .replyTo('contact@draftman.fr', 'DraftMan')
+    })
 
     return response.redirect('/')
   }
