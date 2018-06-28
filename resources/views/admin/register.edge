@@ -35,11 +35,11 @@
 			</div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
             <div>
-				<input name="password" type="password" placeholder="Mot de passe"/>
+				<input name="password" type="text" placeholder="Mot de passe"/>
 			</div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
 			<div>
-				<input name="password_conf" type="password" placeholder="Mot de passe confirmation"/>
+				<input name="password_conf" type="text" placeholder="Mot de passe confirmation"/>
 			</div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('password_conf'), hasErrorFor('password_conf')) }}
 

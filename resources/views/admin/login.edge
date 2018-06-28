@@ -30,7 +30,7 @@
 				<input name="username" type="text" placeholder="Pseudo" value="{{ old('username', '') }}" autofocus/>
 			</div>
 			<div>
-				<input name="password" type="password" placeholder="Mot de passe"/>
+				<input name="password" type="text" placeholder="Mot de passe"/>
 			</div>
 
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('username'), hasErrorFor('username')) }}

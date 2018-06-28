@@ -36,7 +36,6 @@ Route.on('draftbot').render('draftbot')
  */
 
 Route.get('/search', 'SearchController.index')
-
 Route.get('/search/:name', 'SearchController.search')
 
 /**
@@ -46,9 +45,7 @@ Route.get('/search/:name', 'SearchController.search')
  */
 
 Route.get('blog', 'PostController.index')
-
 Route.get('blog/list', 'PostController.list')
-
 Route.get('blog/:link-:id', 'PostController.article')
 
 /**
@@ -58,7 +55,6 @@ Route.get('blog/:link-:id', 'PostController.article')
  */
 
 Route.get('portfolio', 'PortfolioController.index')
-
 Route.get('portfolio/:id', 'PortfolioController.details')
 
 /**
@@ -68,7 +64,6 @@ Route.get('portfolio/:id', 'PortfolioController.details')
  */
 
 Route.get('contact', 'ContactController.index')
-
 Route.post('contact', 'ContactController.verify')
 
 /**
@@ -78,10 +73,10 @@ Route.post('contact', 'ContactController.verify')
  */
 
 Route.group(() => {
-    Route.get('login', 'SessionController.login')
-    Route.post('login', 'SessionController.check')
-    Route.get('register', 'SessionController.register')
-    Route.post('register', 'SessionController.store')
+    Route.get('login', 'LoginController.create')
+    Route.post('login', 'LoginController.store')
+    Route.get('register', 'RegisterController.create')
+    Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
 Route.group(() => {

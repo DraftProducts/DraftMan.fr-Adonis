@@ -2,7 +2,7 @@
 
 class SessionController {
   index({view}) {
-    return view.render('admin.dashboad')
+    return view.render('admin.dashboard')
   }
 }
 
