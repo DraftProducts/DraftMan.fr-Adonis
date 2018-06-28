@@ -4,7 +4,7 @@ const { validate } = use('Validator')
 const User = use('App/Models/User')
 const Mail = use('Mail')
 
-class SessionController {
+class LoginController {
   create({view}) {
     return view.render('admin.login')
   }
@@ -49,4 +49,4 @@ class SessionController {
     return response.redirect('/me/')
   }
 }
-module.exports = SessionController
+module.exports = LoginController

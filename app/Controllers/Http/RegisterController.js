@@ -4,7 +4,7 @@ const { validate } = use('Validator')
 const User = use('App/Models/User')
 const Mail = use('Mail')
 
-class SessionController {
+class RegisterController {
   create({view}) {
     return view.render('admin.register')
   }
@@ -66,4 +66,4 @@ class SessionController {
     }).catch(err => console.log(err));
   }
 }
-module.exports = SessionController
+module.exports = RegisterController
