@@ -79,6 +79,5 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
-Route.group(() => {
-    Route.get('/me/', 'BackofficeController.index')
-});
+
+Route.get('/me/', 'BackofficeController.index')
