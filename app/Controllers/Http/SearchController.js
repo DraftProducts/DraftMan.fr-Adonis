@@ -1,20 +1,20 @@
 'use strict'
 
 const Post = use('App/Models/Post')
-const { validate } = use('Validator')
 
 class PostController {
 
     async index({ view }){
 
-        const posts = await (Post.all()).toJSON();
+        const posts = (await Post.all()).toJSON();
 
         return view.render('search',  {posts})
     }
 
-    async search({ request, session, response }){
+    async search({params, view}){
 
-        return response.redirect('back')
+        const posts = (await Post.find(params.name)).toJSON();
+        return view.render('search', {posts})
     }
 }
 
