@@ -5,10 +5,7 @@ const User = use('App/Models/User')
 const Mail = use('Mail')
 
 class SessionController {
-  login({view}, session, response) {
-    if (session.get("username") !== null) {
-      return response.redirect('back');
-    }
+  login({view}) {
     return view.render('admin.login')
   }
 

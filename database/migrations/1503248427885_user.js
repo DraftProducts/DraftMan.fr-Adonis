@@ -14,7 +14,7 @@ class UserSchema extends Schema {
       table.string('twitter', 60)
       table.string('linkedin', 60)
       table.string('profil')
-      table.integger('role')
+      table.integer('role')
       table.timestamps()
     })
   }
