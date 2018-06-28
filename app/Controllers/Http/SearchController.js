@@ -4,16 +4,13 @@ const Post = use('App/Models/Post')
 
 class PostController {
 
-    async index({ view }){
-
+    async create({ view }){
         const posts = (await Post.all()).toJSON();
-
         return view.render('search',  {posts})
     }
 
-    async search({params, view}){
-
-        const posts = (await Post.find(params.name)).toJSON();
+    async search({request, view}) {
+        const posts = (await Post.query().where("title", "like", `%${request.name}%`).fetch()).toJSON();
         return view.render('search', {posts})
     }
 }
