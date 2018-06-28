@@ -1,0 +1,26 @@
+#dashboard #menu{
+    width: 260px;
+    height: 100%;
+    position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0;
+    z-index: 128;
+    background: #fff;
+    box-shadow: 1px 0 20px rgba(0,0,0,.08);
+    -moz-box-shadow: 1px 0 20px rgba(0,0,0,.08);
+    -webkit-box-shadow: 1px 0 20px rgba(0,0,0,.08);
+    -webkit-transition: width .6s cubic-bezier(.15,.99,.18,1.01);
+    transition: width .6s cubic-bezier(.15,.99,.18,1.01);
+}
+#dashboard .corps{
+    display: table-cell;
+    width: calc(100vw - 260px);
+    height: 600px;
+    background-color: #dedede;
+}
+#dashboard .corps #bar{
+    background-color: #2E3133;
+    height: 60px;
+}
