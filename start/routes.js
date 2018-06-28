@@ -35,9 +35,9 @@ Route.on('draftbot').render('draftbot')
  |--------------------------------------------------------------------------
  */
 
-Route.get('search', 'SearchController.index')
+Route.get('/search', 'SearchController.index')
 
-Route.post('search/:name', 'SearchController.search')
+Route.get('/search/:name', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------

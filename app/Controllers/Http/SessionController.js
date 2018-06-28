@@ -5,7 +5,10 @@ const User = use('App/Models/User')
 const Mail = use('Mail')
 
 class SessionController {
-  login({view}) {
+  login({view}, session, response) {
+    if (session.get("username") !== null) {
+      return response.redirect('back');
+    }
     return view.render('admin.login')
   }
 
@@ -14,7 +17,6 @@ class SessionController {
   }
 
   async store({ session, request, response }) {
-    const data = request.only(['username', 'email', 'password', 'password_confirmation'])
 
     const messages = {
       'username.required': 'Veuillez indiquer votre pseudo.',
@@ -23,16 +25,19 @@ class SessionController {
       'username.unique': 'Ce pseudo est déjà utilisé.',
       'email.unique': 'Cette adresse email est déjà utilisé.',
       'password.required': 'Veuillez indiquer votre mot de passe.',
-      'password_confirmation.required_if': 'Veuillez répéter votre mot de passe.',
-      'password_confirmation.same': 'Veuillez mettre le même mot de passe.'
+      'password_conf.required_if': 'Veuillez répéter votre mot de passe.',
+      'password_conf.same': 'Veuillez mettre le même mot de passe.'
     }
 
     const rules = {
       username: 'required|unique:users',
       email: 'required|email|unique:users',
       password: 'required',
-      password_confirmation: 'required_if:password|same:password',
+      password_conf: 'required_if:password|same:password',
     }
+
+    const data = request.only(['username', 'email', 'password', 'password_conf'])
+    data.role = 0;
 
     const validation = await validate(request.all(), rules, messages)
 
@@ -44,7 +49,7 @@ class SessionController {
       return response.redirect('back')
     }
 
-    delete data.password_confirmation
+    delete data.password_conf
 
     await User.create(data)
     
@@ -60,7 +65,7 @@ class SessionController {
   }
 
   async check({ auth, request, response, session }) {
-    const {username, password} = request.only(['username','password'])
+    const {username, password,role} = request.only(['username','password','role'])
 
     const messages = {
       'username.required': 'Veuillez indiquer votre pseudo.',
@@ -82,12 +87,11 @@ class SessionController {
       return response.redirect('back')
     }
 
-    console.log('mdp '+password)
-
     try {
       await auth.attempt(username, password)
+      session.put("username", username);
+      session.put("role", role);
     } catch (e) {
-
       session.flashExcept(['password'])
 
       session.flash({
@@ -97,8 +101,16 @@ class SessionController {
       return response.redirect('back')
     }
 
-    return response.redirect('/')
+    return response.redirect('/me/')
+  }
+  
+  logout({auth, session, response}) {
+    return Promise.all([
+      session.clear(),
+      auth.logout()
+    ]).then(() => {
+      return response.redirect("/login");
+    }).catch(err => console.log(err));
   }
 }
-
 module.exports = SessionController

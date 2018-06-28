@@ -39,9 +39,9 @@
 			</div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
 			<div>
-				<input name="password_confirmation" type="password" placeholder="Mot de passe confirmation"/>
+				<input name="password_conf" type="password" placeholder="Mot de passe confirmation"/>
 			</div>
-            {{ elIf('<div class="error-card">$self</div>', getErrorFor('password_confirmation'), hasErrorFor('password_confirmation')) }}
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('password_conf'), hasErrorFor('password_conf')) }}
 
             {{ csrfField() }}
 
