@@ -494,6 +494,7 @@ a.link:hover::after {
 
 header {
     z-index: 1000;
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
