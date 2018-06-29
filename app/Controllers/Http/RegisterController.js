@@ -6,7 +6,7 @@ const Mail = use('Mail')
 
 class RegisterController {
   create({view}) {
-    return view.render('admin.register')
+    return view.render('dashboard.register')
   }
 
   async store({ session, request, response }) {
