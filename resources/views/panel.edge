@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html"/>
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="author" content="DraftMan">
+	<meta name="copyright" content="DraftMan">
+
+    <link rel="shortcut icon" href="images/favicon.png" type="image/ico" />
+
+    <meta name="theme-color" content="#CD6E57">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
+    <meta name="msapplication-navbutton-color" content="#CD6E57">
+
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="fr_FR">
+	<meta property="og:site_name" content="DraftMan.fr">
+	<meta property="og:image" content="https://www.draftman.fr/images/avatar.jpg">
+	<meta property="og:image:secure_url" content="https://www.draftman.fr/images/avatar.jpg">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@DraftMan_Dev">
+    <meta name="twitter:creator" content="@DraftMan_Dev">
+    <meta name="twitter:image:src" content="https://www.draftman.fr/images/avatar.jpg">
+
+    <meta name="generator" content="VSCode">
+
+    @!section('seo')
+
+    @!section('css')
+
+    {{ style('css/style')}}
+    {{ style('css/dashboard')}}
+</head>
+<body>
+    @include('inc/header')
+
+    <section id="dashboard" :class="{md: open,xs: !open}">
+        <nav id="menu" ref="menu">
+            <div class="content" ref="content">
+                <img class="user" src="/images/avatar.jpg" alt="User">
+                <span class="username" v-if="open">DraftMan</span>
+                <ul>
+                    <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i></i><span v-if="open">Accueil</span></a>
+                    <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i></i><span v-if="open">Modification du profil</span></a>
+                    <a class="{{request.url() === '/me/article' ? 'active': ''}}" href="/me/article"><i></i><span v-if="open">Proposer un article</span></a>
+                    <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Devenir Client</span></a>
+                </ul>
+            </div>
+        </nav>
+        <div class="corps">
+        
+            <div id="bar">
+            @raw
+                <div id="burger" @click="toggleMenu()"><span class="inner"></span></div>
+            @endraw
+            </div>
+            
+            <div class="content">
+                @!section('content')
+            </div>
+        </div>
+    </section>
+
+    @include('inc/footer')
+
+    @!section('js')
+    {{ script('js/app') }}
+    {{ script('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js') }}
+    {{ script('/js/dashboard') }}
+    
+</body>
+</html>
