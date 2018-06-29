@@ -27,6 +27,8 @@ Route.on('a-propos').render('a-propos')
 
 Route.on('discord').render('discord')
 
+Route.get('/discord/login', 'BackofficeProfilController.discordLogin')
+
 Route.on('draftbot').render('draftbot')
 
 /**
@@ -79,5 +81,5 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
-
-Route.get('/me/', 'BackofficeController.index')
+Route.get('/me/', 'BackofficeAccueilController.index')
+Route.get('/me/profil', 'BackofficeProfilController.index')
