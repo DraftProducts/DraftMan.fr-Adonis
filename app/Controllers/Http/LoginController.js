@@ -6,7 +6,7 @@ const Mail = use('Mail')
 
 class LoginController {
   create({view}) {
-    return view.render('admin.login')
+    return view.render('dashboard.login')
   }
 
   async store({ auth, request, response, session }) {
