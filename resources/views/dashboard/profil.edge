@@ -18,6 +18,37 @@
 
 @section('content')
 <div class="profil">
-    
+    <div class="compte">
+        <div class="profil_file">
+            <input type="file" name="image" id="profil_file">
+            <div class="profil_image">
+                <div class="text">
+                    Charger
+                </div>
+            </div>
+        </div>
+        <input type="text" name="pseudo" placeholder="Pseudo">
+        <input type="email" name="email" placeholder="Adresse email">
+        <input type="password" name="password" placeholder="Mot de passe">
+        <input type="password" name="password_conf" placeholder="Répéter le mot de passe">
+        <button type="submit">Charger les informations</button>
+    </div>
+    <div class="infos_supp">
+        <div id="discord">
+            <div class="image" style="background-image: url('https://www.draftman.fr/images/avatar.jpg')"></div>
+            <div class="content">
+                <div class="infos">
+                    <h5 class="pseudo">DraftMan<span class="code">#6284</span></h5>
+                    <span class="email">nicovanaarsen@gmail.com</span>
+                </div>
+                <a href="/discord/login">Connecter discord</a>
+            </div>
+        </div>
+        <input type="text" name="website" placeholder="Site Web">
+        <input type="text" name="twitter" placeholder="Twitter">
+        <input type="text" name="github" placeholder="GitHub">
+        <input type="text" name="linkedin" placeholder="Linkedin">
+        <button type="submit">Charger les informations</button>
+    </div>
 </div>
 @endsection
