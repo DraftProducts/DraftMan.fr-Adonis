@@ -10,11 +10,10 @@ class RedirectIfAuthenticated {
     try {
       await auth.check()
 
-      return response.redirect('/')
+      return response.redirect('/me/')
     } catch (e) {}
 
     await next()
-
   }
 }
 
