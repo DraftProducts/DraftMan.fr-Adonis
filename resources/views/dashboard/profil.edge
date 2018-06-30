@@ -27,8 +27,8 @@
                 </div>
             </div>
         </div>
-        <input type="text" name="pseudo" placeholder="Pseudo">
-        <input type="email" name="email" placeholder="Adresse email">
+        <input type="text" name="pseudo" placeholder="Pseudo" value="{{user.username}}">
+        <input type="email" name="email" placeholder="Adresse email" value="{{user.email}}">
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="password" name="password_conf" placeholder="Répéter le mot de passe">
         <button type="submit">Charger les informations</button>
@@ -44,10 +44,10 @@
                 <a href="/discord/login">Connecter discord</a>
             </div>
         </div>
-        <input type="text" name="website" placeholder="Site Web">
-        <input type="text" name="twitter" placeholder="Twitter">
-        <input type="text" name="github" placeholder="GitHub">
-        <input type="text" name="linkedin" placeholder="Linkedin">
+        <input type="text" name="website" placeholder="Site Web"value="{{user.website}}">
+        <input type="text" name="twitter" placeholder="Twitter" value="{{user.twitter}}">
+        <input type="text" name="github" placeholder="GitHub" value="{{user.github}}">
+        <input type="text" name="linkedin" placeholder="Linkedin" value="{{user.linkedin}}">
         <button type="submit">Charger les informations</button>
     </div>
 </div>

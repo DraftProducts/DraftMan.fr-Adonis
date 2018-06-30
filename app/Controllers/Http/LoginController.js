@@ -10,7 +10,7 @@ class LoginController {
   }
 
   async store({ auth, request, response, session }) {
-    const {username, password,role} = request.only(['username','password','role'])
+    const {username, password} = request.only(['username','password'])
 
     const messages = {
       'username.required': 'Veuillez indiquer votre pseudo.',
@@ -35,7 +35,6 @@ class LoginController {
     try {
       await auth.attempt(username, password)
       session.put("username", username);
-      session.put("role", role);
     } catch (e) {
       session.flashExcept(['password'])
 
