@@ -25,7 +25,7 @@
 
             <h3>Se connecter</h3> 
 
-            <form method="post" action="{{ route('SessionController.check') }}">
+            <form method="post" action="/login">
             <div>
 				<input name="username" type="text" placeholder="Pseudo" value="{{ old('username', '') }}" autofocus/>
 			</div>
