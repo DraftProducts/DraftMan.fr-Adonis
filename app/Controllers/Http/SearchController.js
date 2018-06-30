@@ -4,7 +4,7 @@ const Post = use('App/Models/Post')
 
 class PostController {
 
-    async create({ view }){
+    async index({ view }){
         const posts = (await Post.all()).toJSON();
         return view.render('search',  {posts})
     }
