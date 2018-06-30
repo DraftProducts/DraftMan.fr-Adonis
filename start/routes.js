@@ -27,7 +27,7 @@ Route.on('a-propos').render('a-propos')
 
 Route.on('discord').render('discord')
 
-Route.get('/discord/login', 'BackofficeProfilController.discordLogin')
+Route.get('discord/login', 'BackofficeProfilController.discordLogin')
 
 Route.on('draftbot').render('draftbot')
 
@@ -38,7 +38,7 @@ Route.on('draftbot').render('draftbot')
  */
 
 Route.get('/search', 'SearchController.index')
-Route.get('/search/:name', 'SearchController.search')
+Route.post('/search', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------
@@ -81,5 +81,7 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
-Route.get('/me/', 'BackofficeAccueilController.index')
-Route.get('/me/profil', 'BackofficeProfilController.index')
+Route.group(() => {
+    Route.get('/me/', 'BackofficeAccueilController.index')
+    Route.get('/me/profil', 'BackofficeProfilController.index')
+}).middleware(['auth']);
