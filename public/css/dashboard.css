@@ -36,7 +36,7 @@
     height: 60px;
 }
 
-#dashboard .corps .content{
+#dashboard .corps>.content{
     height: calc(100% - 60px);
 }
 
@@ -126,4 +126,125 @@
 
 #dashboard .accueil h1{
     margin-bottom: 10px;
+}
+
+#dashboard .profil{
+    display: flex;
+}
+
+#dashboard .profil .compte,#dashboard .profil .infos_supp{
+    padding: 50px;
+    flex: 1
+}
+
+#dashboard .profil .compte{
+    padding: 50px 0px 50px 50px;
+}
+
+#dashboard .profil .profil_file{
+    height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+#dashboard .profil #profil_file{
+    position: absolute;
+    width: 150px;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+#dashboard .profil .profil_image{
+    height: 147px;
+    width: 147px;
+    border: 3px solid #cd6e57;
+    border-radius: 100%;
+}
+#dashboard .profil .profil_image .text{
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #B7B7B7;
+    font-weight: 600;
+    background-color: #404040a6;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s background-color;
+}
+
+#dashboard .profil #profil_file:hover + .profil_image .text{
+    background-color: #404040bf;
+}
+
+#dashboard input[type="text"],#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord{
+    width: 100%;
+    height: 40px;
+    border: none;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    outline: 0;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#dashboard button{
+    color: #fff;
+    background-color: #cd6e57;
+    padding: 12px;
+    cursor: pointer;
+}
+
+#dashboard #discord{
+    background-color: #2C2F33;
+    height: auto;
+    display: flex;
+    padding: 22px;
+    margin-bottom: 30px;
+}
+
+#dashboard #discord .image{
+    background-size: cover;
+    height: 106px;
+    width: 106px;
+    border-radius: 100%;
+}
+
+#dashboard #discord .content{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    padding-left: 22px;
+}
+
+#dashboard #discord .pseudo{
+    color: #D6D6D6;
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+#dashboard #discord .pseudo .code{
+    font-size: 14px;
+    color: #8A8A8A;
+}
+
+#dashboard #discord .email{
+    font-size: 14px;
+    color: #656565;
+}
+
+#dashboard #discord a{
+    background-color: #7289DA;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 30px;
+    margin-top: auto;
 }
