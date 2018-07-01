@@ -1,8 +1,11 @@
 'use strict'
 
+const User = use('App/Models/User')
+
 class BackofficeAccueilController {
-  index({view}) {
-    return view.render('dashboard.accueil')
+  async index({view, session}) {
+    const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
+    return view.render('dashboard.accueil',{user: profil})
   }
 }
 
