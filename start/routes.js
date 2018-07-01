@@ -15,6 +15,8 @@
 
 const Route = use('Route')
 
+const Helpers = use('Helpers')
+
 /**
  |--------------------------------------------------------------------------
  | Static pages
@@ -28,6 +30,8 @@ Route.on('a-propos').render('a-propos')
 Route.on('discord').render('discord')
 
 Route.get('discord/login', 'BackofficeProfilController.discordLogin')
+
+Route.get('discord/callback', 'BackofficeProfilController.discordCallback')
 
 Route.on('draftbot').render('draftbot')
 
@@ -84,4 +88,7 @@ Route.group(() => {
 Route.group(() => {
     Route.get('/me/', 'BackofficeAccueilController.index')
     Route.get('/me/profil', 'BackofficeProfilController.index')
+
+    Route.post('/me/profil', 'BackofficeProfilController.storeBasic')
+    Route.post('/me/profil', 'BackofficeProfilController.storeInfos')
 }).middleware(['auth']);
