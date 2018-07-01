@@ -37,7 +37,7 @@ class RegisterController {
     if (validation.fails()) {
       session
         .withErrors(validation.messages())
-        .flashExcept(['password_confirmation'])
+        .flashExcept(['password_conf'])
 
       return response.redirect('back')
     }
