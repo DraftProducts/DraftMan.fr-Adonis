@@ -43,11 +43,10 @@
         <nav id="menu" ref="menu">
             <div class="content" ref="content">
                 <img class="user" src="/images/avatar.jpg" alt="User">
-                <span class="username" v-if="open">DraftMan</span>
+                <span class="username" v-if="open">{{user.username}}</span>
                 <ul>
                     <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i></i><span v-if="open">Accueil</span></a>
                     <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i></i><span v-if="open">Modification du profil</span></a>
-                    <a class="{{request.url() === '/me/article' ? 'active': ''}}" href="/me/article"><i></i><span v-if="open">Proposer un article</span></a>
                     <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Devenir Client</span></a>
                 </ul>
             </div>
