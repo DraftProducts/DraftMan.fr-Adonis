@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="profil">
-    <div class="compte">
+    <form class="compte" method="POST" action="{{ route('BackofficeProfilController.storeBasic') }}" enctype="multipart/form-data">
         <div class="profil_file">
             <input type="file" name="image" id="profil_file">
             <div class="profil_image">
@@ -31,9 +31,13 @@
         <input type="email" name="email" placeholder="Adresse email" value="{{user.email}}">
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="password" name="password_conf" placeholder="Répéter le mot de passe">
+        {{ csrfField() }}
+        @if(flashMessage('valid_basic'))
+            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
+        @endif
         <button type="submit">Charger les informations</button>
-    </div>
-    <div class="infos_supp">
+    </form>
+    <form class="infos_supp" method="POST" action="{{ route('BackofficeProfilController.storeInfos') }}">
         <div id="discord">
             <div class="image" style="background-image: url('https://www.draftman.fr/images/avatar.jpg')"></div>
             <div class="content">
@@ -48,7 +52,11 @@
         <input type="text" name="twitter" placeholder="Twitter" value="{{user.twitter}}">
         <input type="text" name="github" placeholder="GitHub" value="{{user.github}}">
         <input type="text" name="linkedin" placeholder="Linkedin" value="{{user.linkedin}}">
+        {{ csrfField() }}
+        @if(flashMessage('valid_infos'))
+            <div class="success-card">{{ flashMessage('valid_infos') }}</div>
+        @endif
         <button type="submit">Charger les informations</button>
-    </div>
+    </form>
 </div>
 @endsection
