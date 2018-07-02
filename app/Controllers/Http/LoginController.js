@@ -33,7 +33,7 @@ class LoginController {
     }
 
     try {
-      await auth.attempt(username, password)
+      await auth.remember(true).attempt(username, password)
       session.put("username", username);
     } catch (e) {
       session.flashExcept(['password'])
