@@ -3,12 +3,14 @@
 const { validate } = use('Validator')
 const User = use('App/Models/User')
 const Mail = use('Mail')
+const Helpers = use('Helpers')
 
-const fetch = use('node-fetch')
+const { get, post } = require('snekfetch');
+const btoa = require('btoa');
 
 const CLIENT_ID = `462290683630452778`;
 const CLIENT_SECRET = `MRxxifIkSVkt9pDVZaU_eV_aGKZFa8KC`;
-const creds = `${CLIENT_ID}:${CLIENT_SECRET}`;
+const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
 
 class BackofficeProfilController {
@@ -22,31 +24,22 @@ class BackofficeProfilController {
 
   async discordCallback({request,response}) {
     const code = request.get().code;
-    const options = {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${creds}`,
-      },
-    }
-    const res = await fetch(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`,options);
-
-    const json = await res.json();
-    response.redirect(`/me/profile?token=${json.access_token}`);
+    post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}`)
+    .set('Authorization', `Basic ${cred}`)
+    .then(res => console.log(res.body.access_token))
+    .catch(console.error);
   }
+
+  //     .then(res => response.redirect(`/me/profile?token=${res.body.access_token}`))
 
   async storeBasic({session, request, response}){
     const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
-    const profilePic = request.file('image', {
+    const data = request.only(['username', 'email', 'password', 'password_conf'])
+
+    const image = request.file('image', {
       types: ['image'],
       size: '2mb'
     })
-    await profilePic.move(Helpers.tmpPath('uploads/users'), (file) => {
-      name: `${profil.id}.${file.subtype}`
-    })
-  
-    if (!profilePic.moved()) {
-      return profilePic.error()
-    }
 
     const messages = {
       'email.email': 'Veuillez entrer une adresse email valide.',
@@ -61,8 +54,6 @@ class BackofficeProfilController {
       email: 'email|unique:users',
       password_conf: 'required_if:password|same:password',
     }
-
-    const data = request.only(['username', 'email', 'password', 'password_conf'])
 
     const validation = await validate(request.all(), rules, messages)
 
@@ -82,6 +73,12 @@ class BackofficeProfilController {
     session.put("username", data.username);
 
     if(!data.password.isEmpty()) await User.query().where('id', profil.id).update({password: data.password})
+
+    if(image){
+      data.image = `${profil.id}.${profilePic.subtype}`;
+      await image.move(Helpers.tmpPath('uploads/users'), {name: data.image})
+      await User.query().where('id', profil.id).update({profil: data.image})
+    }
     
     session.flash({
       valid_basic: 'Informations modifiés'
@@ -99,8 +96,6 @@ class BackofficeProfilController {
   async storeInfos({session, request, response}){
     const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
 
-    console.log('1')
-
     const data = request.only(['website', 'twitter', 'github', 'linkedin'])
 
     await User.query().where('id', profil.id).update({ 
@@ -110,13 +105,9 @@ class BackofficeProfilController {
       linkedin: data.linkedin
     })
 
-    console.log('1')
-
     session.flash({
       valid_infos: 'Informations modifiés'
     })
-
-    console.log('2')
     
     /*await Mail.send('mails/profil_modif', data, (message) => {
       message
