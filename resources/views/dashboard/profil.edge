@@ -21,16 +21,28 @@
     <form class="compte" method="POST" action="{{ route('BackofficeProfilController.storeBasic') }}" enctype="multipart/form-data">
         <div class="profil_file">
             <input type="file" name="image" id="profil_file">
-            <div class="profil_image">
+            <div class="profil_image" style="background-image: url(uploads/users/{{user.profil}})">
                 <div class="text">
                     Charger
                 </div>
             </div>
         </div>
-        <input type="text" name="pseudo" placeholder="Pseudo" value="{{user.username}}">
-        <input type="email" name="email" placeholder="Adresse email" value="{{user.email}}">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <input type="password" name="password_conf" placeholder="Répéter le mot de passe">
+        <div>
+            <input type="text" name="pseudo" id="pseudo" value="{{user.username}}">
+            <label for="pseudo">Pseudo</label>
+        </div>
+        <div>
+            <input type="email" name="email" id="email" value="{{user.email}}">
+            <label for="email">Adresse email</label>
+        </div>
+        <div>
+            <input type="password" name="password" id="password">
+            <label for="password">Mot de passe</label>
+        </div>
+        <div>
+            <input type="password" name="password_conf" id="password_conf">
+            <label for="password_conf">Répéter le mot de passe</label>
+        </div>
         {{ csrfField() }}
         @if(flashMessage('valid_basic'))
             <div class="success-card">{{ flashMessage('valid_basic') }}</div>
@@ -48,10 +60,22 @@
                 <a href="/discord/login">Connecter discord</a>
             </div>
         </div>
-        <input type="text" name="website" placeholder="Site Web"value="{{user.website}}">
-        <input type="text" name="twitter" placeholder="Twitter" value="{{user.twitter}}">
-        <input type="text" name="github" placeholder="GitHub" value="{{user.github}}">
-        <input type="text" name="linkedin" placeholder="Linkedin" value="{{user.linkedin}}">
+        <div>
+            <input type="text" name="website" id="website" value="{{user.website}}">
+            <label for="website">Site Web</label>
+        </div>
+        <div>
+            <input type="text" name="twitter" id="twitter" value="{{user.twitter}}">
+            <label for="twitter">Twitter</label>
+        </div>
+        <div>
+            <input type="text" name="github" id="github" value="{{user.github}}">
+            <label for="github">GitHub</label>
+        </div>
+        <div>
+            <input type="text" name="linkedin" id="linkedin" value="{{user.linkedin}}">
+            <label for="linkedin">Linkedin</label>
+        </div>
         {{ csrfField() }}
         @if(flashMessage('valid_infos'))
             <div class="success-card">{{ flashMessage('valid_infos') }}</div>
