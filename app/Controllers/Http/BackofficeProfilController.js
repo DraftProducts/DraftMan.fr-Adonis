@@ -12,7 +12,6 @@ const CLIENT_ID = `462290683630452778`;
 const CLIENT_SECRET = `MRxxifIkSVkt9pDVZaU_eV_aGKZFa8KC`;
 const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
-const test = encodeURIComponent('http://127.0.0.1:3333/me/profile');
 
 class BackofficeProfilController {
   async index({view, session}) {
@@ -25,9 +24,9 @@ class BackofficeProfilController {
 
   async discordCallback({request,response}) {
     const code = request.get().code;
-    post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`)
+    await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`)
     .set('Authorization', `Basic ${cred}`)
-    .then(res => response.redirect(`/me/profil?token=${res.body.access_token}`))
+    .then(res => response.redirect(`/login?token=${res.body.access_token}`))
     .catch(console.error);
   }
 
