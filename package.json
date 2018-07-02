@@ -28,10 +28,11 @@
     "@adonisjs/session": "^1.0.25",
     "@adonisjs/shield": "^1.0.6",
     "@adonisjs/validator": "^5.0.3",
+    "btoa": "^1.2.1",
     "mysql": "^2.15.0",
-    "node-fetch": "^2.1.2",
     "npm": "^6.1.0",
-    "remarkable": "^1.7.1"
+    "remarkable": "^1.7.1",
+    "snekfetch": "^4.0.4"
   },
   "devDependencies": {},
   "autoload": {
