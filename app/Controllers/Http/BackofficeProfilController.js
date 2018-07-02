@@ -24,15 +24,14 @@ class BackofficeProfilController {
 
   async discordCallback({request,response}) {
     const code = request.get().code;
-    console.log(code)
-    post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}`)
+    post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`)
     .set('Authorization', `Basic ${cred}`)
     .then(res => response.redirect(`/me/profile?token=${res.body.access_token}`))
     .catch(console.error);
   }
 
   async storeBasic({session, request, response}){
-    const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
+    const profil = auth.user.toJSON();
     const data = request.only(['username', 'email', 'password', 'password_conf'])
 
     const image = request.file('image', {
