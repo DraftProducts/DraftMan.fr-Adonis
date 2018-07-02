@@ -15,8 +15,6 @@
 
 const Route = use('Route')
 
-const Helpers = use('Helpers')
-
 /**
  |--------------------------------------------------------------------------
  | Static pages
@@ -89,6 +87,6 @@ Route.group(() => {
     Route.get('/me/', 'BackofficeAccueilController.index')
     Route.get('/me/profil', 'BackofficeProfilController.index')
 
-    Route.post('/me/profil', 'BackofficeProfilController.storeBasic')
-    Route.post('/me/profil', 'BackofficeProfilController.storeInfos')
+    Route.post('/me/profil/compte', 'BackofficeProfilController.storeBasic')
+    Route.post('/me/profil/infos', 'BackofficeProfilController.storeInfos')
 }).middleware(['auth']);
