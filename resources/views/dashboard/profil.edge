@@ -20,8 +20,8 @@
 <div class="profil">
     <form class="compte" method="POST" action="{{ route('BackofficeProfilController.storeBasic') }}" enctype="multipart/form-data">
         <div class="profil_file">
-            <input type="file" name="image" id="profil_file">
-            <div class="profil_image" style="background-image: url(uploads/users/{{user.profil}})">
+            <input type="file" name="image" id="profil_file" ref="file">
+            <div class="profil_image" ref="preview" style="background-image: url('{{user.profil}}')">
                 <div class="text">
                     Charger
                 </div>
@@ -51,14 +51,18 @@
     </form>
     <form class="infos_supp" method="POST" action="{{ route('BackofficeProfilController.storeInfos') }}">
         <div id="discord">
-            <div class="image" style="background-image: url('https://www.draftman.fr/images/avatar.jpg')"></div>
+            @if(user.discord_username === "")
+            <a href="/discord/login">Connecter discord</a>
+            @else
+            <div class="image" style="background-image: url('{{user.profil}}')"></div>
             <div class="content">
                 <div class="infos">
-                    <h5 class="pseudo">DraftMan<span class="code">#6284</span></h5>
-                    <span class="email">nicovanaarsen@gmail.com</span>
+                    <h5 class="pseudo">{{user.discord_username}}<span class="code">#{{user.discord_discriminator}}</span></h5>
+                    <span class="email">{{user.discord_email}}</span>
                 </div>
                 <a href="/discord/login">Connecter discord</a>
             </div>
+            @endif
         </div>
         <div>
             <input type="text" name="website" id="website" value="{{user.website}}">

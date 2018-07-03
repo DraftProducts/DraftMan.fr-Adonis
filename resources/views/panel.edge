@@ -42,7 +42,7 @@
     <section id="dashboard" :class="{md: open,xs: !open}">
         <nav id="menu" ref="menu">
             <div class="content" ref="content">
-                <img class="user" src="/images/avatar.jpg" alt="User">
+                <img class="user" src="{{user.profil}}" alt="User">
                 <span class="username" v-if="open">{{user.username}}</span>
                 <ul>
                     <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i></i><span v-if="open">Accueil</span></a>
