@@ -27,13 +27,13 @@
 
             <form method="post" action="/login">
             <div>
-				<input name="username" type="text" placeholder="Pseudo" value="{{ old('username', '') }}" autofocus/>
+				<input name="email" type="email" placeholder="Adresse email" value="{{ old('email', '') }}" autofocus/>
 			</div>
 			<div>
 				<input name="password" type="text" placeholder="Mot de passe"/>
 			</div>
 
-            {{ elIf('<div class="error-card">$self</div>', getErrorFor('username'), hasErrorFor('username')) }}
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
 
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
 

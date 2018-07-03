@@ -10,15 +10,16 @@ class LoginController {
   }
 
   async store({ auth, request, response, session }) {
-    const {username, password} = request.only(['username','password'])
+    const {email, password} = request.only(['email','password'])
 
     const messages = {
-      'username.required': 'Veuillez indiquer votre pseudo.',
+      'email.required': 'Veuillez entrer une adresse email valide.',
+      'email.email': 'Veuillez entrer une adresse email valide.',
       'password.required': 'Veuillez indiquer votre mot de passe.',
     }
 
     const rules = {
-      username: 'required',
+      email: 'required|email',
       password: 'required',
     }
 
@@ -33,11 +34,10 @@ class LoginController {
     }
 
     try {
-      await auth.remember(true).attempt(username, password)
-      session.put("username", username);
+      await auth.remember(true).attempt(email, password)
+      session.put("email", email);
     } catch (e) {
       session.flashExcept(['password'])
-
       session.flash({
         error: 'Identifiant ou mot de passe incorect'
       })
