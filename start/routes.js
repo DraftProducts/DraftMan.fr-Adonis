@@ -29,8 +29,6 @@ Route.on('discord').render('discord')
 
 Route.get('discord/login', 'BackofficeProfilController.discordLogin')
 
-Route.get('discord/callback', 'BackofficeProfilController.discordCallback')
-
 Route.on('draftbot').render('draftbot')
 
 /**
@@ -86,6 +84,9 @@ Route.group(() => {
 Route.group(() => {
     Route.get('/me/', 'BackofficeAccueilController.index')
     Route.get('/me/profil', 'BackofficeProfilController.index')
+    Route.get('/me/client', 'BackofficeClientController.index')
+
+    Route.get('discord/callback', 'BackofficeProfilController.discordCallback')
 
     Route.post('/me/profil/compte', 'BackofficeProfilController.storeBasic')
     Route.post('/me/profil/infos', 'BackofficeProfilController.storeInfos')
