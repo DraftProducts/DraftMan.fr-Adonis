@@ -14,23 +14,34 @@ const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
 
 class BackofficeProfilController {
-  async index({view, session}) {
-    const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
+  async index({view,auth}) {
+    const profil = auth.user.toJSON();
     return view.render('dashboard.profil',{user: profil})
   }
   discordLogin({response}) {
-    return response.redirect(`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify+email+guilds&response_type=code&redirect_uri=${redirect}`);
+    return response.redirect(`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify+email&response_type=code&redirect_uri=${redirect}`);
   }
 
-  async discordCallback({request,response}) {
+  async discordCallback({request,response,auth}) {
     const code = request.get().code;
     await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`)
     .set('Authorization', `Basic ${cred}`)
-    .then(res => response.redirect(`/login?token=${res.body.access_token}`))
-    .catch(console.error);
+    .then(res => {
+      get('https://discordapp.com/api/v6/users/@me')
+      .set('Authorization', `Bearer ${res.body.access_token}`)
+      .then(response => 
+        User.query().where('id', (auth.user.toJSON()).id).update({
+          discord_username: response.body.username,
+          discord_discriminator: response.body.discriminator,
+          discord_email: response.body.email, 
+          profil: `https://cdn.discordapp.com/avatars/${response.body.id}/${response.body.avatar}?size=256`}
+        )
+      )
+    })
+    response.redirect('/me/profil')
   }
 
-  async storeBasic({session, request, response}){
+  async storeBasic({session, request, response,auth}){
     const profil = auth.user.toJSON();
     const data = request.only(['username', 'email', 'password', 'password_conf'])
 
@@ -75,7 +86,7 @@ class BackofficeProfilController {
     if(image){
       data.image = `${profil.id}.${profilePic.subtype}`;
       await image.move(Helpers.tmpPath('uploads/users'), {name: data.image})
-      await User.query().where('id', profil.id).update({profil: data.image})
+      await User.query().where('id', profil.id).update({profil: `/uploads/users/${data.image}`})
     }
     
     session.flash({
@@ -92,7 +103,7 @@ class BackofficeProfilController {
   }
 
   async storeInfos({session, request, response}){
-    const profil = (await User.query().where('username','=',session.get('username')).fetch()).first().toJSON();
+    const profil = (await User.query().where('email','=',session.get('email')).fetch()).first().toJSON();
 
     const data = request.only(['website', 'twitter', 'github', 'linkedin'])
 
