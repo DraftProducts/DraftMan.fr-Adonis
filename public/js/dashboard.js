@@ -13,13 +13,13 @@ const dashboard = new Vue({
                 const margin = vm.$refs.corps.offsetHeight - vm.$refs.content.offsetHeight;
                 const scrollTop = window.scrollY;
                 if (scrollTop > 98) {
-                    if (scrollTop > ((bottom - vm.$refs.content.clientHeight) - 60)) {
+                    if (scrollTop > ((bottom - vm.$refs.content.clientHeight))) {
                         vm.$refs.content.style.marginTop = margin + "px";
                         vm.$refs.content.style.position = 'static';
                         return;
                     }
                     vm.$refs.content.style.position = 'fixed';
-                    vm.$refs.content.style.top = '60px';
+                    vm.$refs.content.style.top = '0';
                     vm.$refs.content.style.marginTop = 'auto';
                     return;
                 }
@@ -37,6 +37,16 @@ const dashboard = new Vue({
                         input.classList.add("filled")
                     }
                 })
+            });
+            
+            vm.$refs.file.addEventListener('change', () => {
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    console.log(reader.result)
+                    vm.$refs.preview.style.backgroundImage = `url('${reader.result}')`
+                }, false);
+    
+                if (vm.$refs.file.files[0]) reader.readAsDataURL(vm.$refs.file.files[0]);
             });
         },
         toggleMenu: function(){
