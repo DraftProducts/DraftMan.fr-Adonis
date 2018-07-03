@@ -24,6 +24,10 @@
 #dashboard #menu .content{
     display: flex;
     flex-direction: column;
+    width: 296px;
+}
+#dashboard.xs #menu .content{
+    width: 89px;
 }
 #dashboard .corps{
     display: table-cell;
@@ -58,6 +62,7 @@
 #dashboard #menu ul{
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
 }
 #dashboard #menu ul a{
     padding: 20px 20px 20px 80px;
@@ -169,9 +174,9 @@
 #dashboard .profil .profil_image .text{
     text-transform: uppercase;
     font-size: 15px;
-    color: #B7B7B7;
+    color: #dedede;
     font-weight: 600;
-    background-color: #404040a6;
+    background-color: #40404080;
     width: 100%;
     height: 100%;
     border-radius: 100%;
@@ -182,7 +187,7 @@
 }
 
 #dashboard .profil #profil_file:hover + .profil_image .text{
-    background-color: #404040bf;
+    background-color: #404040a6
 }
 #dashboard form>div{
     position: relative;
@@ -212,7 +217,6 @@
     right: 14px;
     opacity: .3;
 }
-
 #dashboard button{
     color: #fff;
     background-color: #cd6e57;
