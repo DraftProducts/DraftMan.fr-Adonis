@@ -21,7 +21,7 @@ Factory.blueprint('App/Models/User', (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Blog', (faker) => {
+Factory.blueprint('App/Models/Post', (faker) => {
   return {
     title: faker.sentence(),
     description: faker.paragraph(),
@@ -36,6 +36,36 @@ Factory.blueprint('App/Models/Portfolio', (faker) => {
     description: faker.paragraph(),
     type: `${faker.word()}, ${faker.word()}`,
     illustration: faker.image()
+  }
+})
+
+Factory.blueprint('App/Models/Comment', (faker) => {
+  return {
+    name: faker.username(),
+    email: faker.email(),
+    website: faker.url(),
+    twitter: faker.username(),
+    github: faker.username(),
+    linkedin: faker.username(),
+    content: faker.paragraph(3),
+    post_id: 1,
+    seen: 0,
+    parent_id: 0
+  }
+})
+
+Factory.blueprint('App/Models/Comment', (faker) => {
+  return {
+    name: faker.username(),
+    email: faker.email(),
+    website: faker.url(),
+    twitter: faker.username(),
+    github: faker.username(),
+    linkedin: faker.username(),
+    content: faker.paragraph(3),
+    post_id: 1,
+    seen: 0,
+    parent_id: 1
   }
 })
 
