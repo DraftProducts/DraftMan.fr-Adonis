@@ -27,13 +27,13 @@ class BackofficeProfilController {
     await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`)
     .set('Authorization', `Basic ${cred}`)
     .then(res => {
-      get('https://discordapp.com/api/v6/users/@me')
+      return get('https://discordapp.com/api/v6/users/@me')
       .set('Authorization', `Bearer ${res.body.access_token}`)
       .then(response => 
         User.query().where('id', (auth.user.toJSON()).id).update({
           discord_username: response.body.username,
           discord_discriminator: response.body.discriminator,
-          discord_email: response.body.email, 
+          discord_email: response.body.email,
           profil: `https://cdn.discordapp.com/avatars/${response.body.id}/${response.body.avatar}?size=256`}
         )
       )
