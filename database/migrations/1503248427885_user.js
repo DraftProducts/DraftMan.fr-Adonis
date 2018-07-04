@@ -18,6 +18,7 @@ class UserSchema extends Schema {
       table.string('discord_email', 60).notNullable()
       table.string('profil')
       table.integer('role')
+      table.integer('client')
       table.timestamps()
     })
   }
