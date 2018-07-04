@@ -17,8 +17,73 @@
 @endsection
 
 @section('content')
-<div class="accueil">
-    <h1>Client</h1>
-    <p>Ici c'est le client</p>
+<div id="client">
+    <div class="write">
+        <div class="hiddenInfos">
+            <input type="hidden" name="pseudo" value="{{user.username}}" v-model="pseudo">
+            <input type="hidden" name="email" value="{{user.email}}" v-model="email">
+        </div>
+        <div id="discord">
+            @if(user.discord_username === "")
+            <a href="/discord/login">Connecter discord</a>
+            @else
+            <div class="image" style="background-image: url('{{user.profil}}')"></div>
+            <div class="content">
+                <div class="infos">
+                    <h5 class="pseudo">{{user.discord_username}}<span class="code">#{{user.discord_discriminator}}</span></h5>
+                    <span class="email">{{user.discord_email}}</span>
+                </div>
+                <a href="/discord/login">Connecter discord</a>
+            </div>
+            @endif
+        </div>
+        <div class="arrow">
+            arrow
+        </div>
+        <div id="descriptif">
+            <form action="">
+                <div>
+                    <input type="text" id="name" v-model="name">
+                    <label for="name">Nom du projet</label>
+                </div>
+                <div>
+                    <input type="text" id="type" v-model="type">
+                    <label for="type">Type de projet</label>
+                </div>
+                <div>
+                    <textarea name="description" id="description" v-model="description"></textarea>
+                    <label for="description">Courte description</label>
+                </div>
+            </form>
+        </div>
+        <div class="arrow">
+            arrow
+        </div>
+        <div id="cgv">
+            <div id="checkbox">
+                <div>
+                    <input id="confirm" type="checkbox">
+                    <label for="confirm"></label>
+                </div>
+                <label for="confirm">Je confirme avoir lu et accepté les <a href="" class="link">CGV</a>. </label>
+            </div>
+        </div>
+        <div class="arrow">
+            arrow
+        </div>
+        <button type="submit">Envoyer</button>
+    </div>
+    <div class="preview">
+        <p>Bonjour DraftMan</p>
+        <p>Je vous contacte pour un travail de {{type}}</p>
+        <p>Le projet se nomme {{name}}</p>
+        <p>Voici donc une courte description</p>
+        <p>{{description}}</p>
+        <p>Je pourrais biensûr vous détailler le projet en conversation oral ou écrite dans les channels discord prévu à cet effet sur le serveur <a class="link" href="/discord">discord</a></p>
+        <p>En cas de quelconque problème vous pouvez me contacter par mail ou par discord :</p>
+        <p>Discord : {{pseudoDiscord}}</p>
+        <p>Email : {{email}}</p>
+        <p>Cordialement {{pseudo}}</p>
+    </div>
 </div>
 @endsection

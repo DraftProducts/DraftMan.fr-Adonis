@@ -133,7 +133,7 @@
     margin-bottom: 10px;
 }
 
-#dashboard .profil{
+#dashboard .profil,#dashboard #client{
     display: flex;
 }
 
@@ -202,7 +202,7 @@
     left: 14px;
     animation-direction: alternate;
 }
-#dashboard input[type="text"],#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord{
+#dashboard input[type="text"],#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord,#dashboard textarea{
     width: 100%;
     height: 40px;
     border: none;
@@ -212,7 +212,7 @@
     margin-bottom: 20px;
     position: relative;
 }
-#dashboard form>div>input:focus~label, #dashboard form>div>input.filled~label{
+#dashboard form>div>input:focus~label, #dashboard form>div>input.filled~label,#dashboard form>div>textarea:focus~label, #dashboard form>div>textarea.filled~label{
     left: auto;
     right: 14px;
     opacity: .3;
@@ -230,8 +230,15 @@
     display: flex;
     padding: 22px;
     margin-bottom: 30px;
+    min-width: 380px;
 }
-
+#dashboard textarea{
+    height: auto;
+    min-height: 200px;
+    min-width: 100%;
+    max-width: 100%;
+    font-family: Open Sans;
+}
 #dashboard #discord .image{
     background-size: cover;
     height: 106px;
@@ -270,4 +277,63 @@
     text-decoration: none;
     padding: 12px 30px;
     margin-top: auto;
+}
+
+#dashboard #client>.write{
+    margin: 50px;
+    max-width: 450px;
+    min-width: 380px;
+    width: 100%;
+}
+
+#dashboard #client #discord,#dashboard #client textarea{
+    margin: 0
+}
+
+#dashboard #client #cgv{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#dashboard #client #checkbox{
+    margin: 0;
+}
+
+#dashboard #client .arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+}
+
+#dashboard #client .preview{
+    flex: 1;
+    margin: 50px 50px 50px 0;
+    padding: 100px 70px;
+    background-image: url(../images/shattered.png);
+    position: relative;
+}
+
+
+#dashboard #client .preview:after{
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 0;
+    border-color: #F7F7F7 #F7F7F7 #dedede #d6d6d6;
+    border-style: solid;
+    border-width: 0px 50px 50px 0px;
+    height: 0px;
+    width: 0px;
+    display: block;
+    -moz-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+#dashboard #client .preview p{
+    margin-bottom: 1em;
+    line-height: 20px;
 }
