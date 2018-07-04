@@ -1,7 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
-const Comments = use('App/Models/Comment')
+const Comment = use('App/Models/Comment')
 
 class PostController {
     // index = Liste tes posts
@@ -14,39 +14,27 @@ class PostController {
 
     async index({ view }){
 
-        const blog = (await Post.all()).toJSON();
+        const posts = (await Post.all()).toJSON();
 
-        return view.render('blog.index', {blog})
+        return view.render('blog.index', {posts})
     }
 
     async list({ view }){
 
-        const blog = (await Post.all()).toJSON();
+        const posts = (await Post.all()).toJSON();
 
-        return view.render('blog.list', {blog})
+        return view.render('blog.list', {posts})
     }
 
-    article({params, view}){
-        return Promise.all([
-            Post.find(params.id),
-            Post.all(),
-            Comments.all()
-        ]).then(res => {
-            return view.render('blog.post', {
-                item: res[0],
-                blog: res[1],
-                comments: res[2]
-            })
-        });
-    }
-
-    /*
-    async search({params, view}){
-        return view.render('search', {
-            blog: blog.toJSON()
-        })
-    }
-    */
+    async article ({ params, view }){
+        const [post, posts, comments] = await Promise.all([
+          Post.find(params.id),
+          Post.all(),
+          Comment.query().with('replies').where('post_id', params.id).fetch(),
+        ])
+      
+         return view.render('blog.post', { post, posts, comments })
+      }
 }
 
 module.exports = PostController
