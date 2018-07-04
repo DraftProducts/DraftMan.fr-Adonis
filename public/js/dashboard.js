@@ -27,7 +27,7 @@ const dashboard = new Vue({
                 vm.$refs.content.style.top = '0px';
                 vm.$refs.content.style.marginTop = 'auto';
             });
-            const inputs = document.querySelectorAll("form div input")
+            const inputs = document.querySelectorAll("form div input,form div textarea")
             inputs.forEach(input => {
                 if(input.value !== "")input.classList.add("filled")
                 input.addEventListener('change', () => {
@@ -38,7 +38,7 @@ const dashboard = new Vue({
                     }
                 })
             });
-            
+            if(vm.$refs.file){
             vm.$refs.file.addEventListener('change', () => {
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
@@ -48,9 +48,29 @@ const dashboard = new Vue({
     
                 if (vm.$refs.file.files[0]) reader.readAsDataURL(vm.$refs.file.files[0]);
             });
+        }
         },
         toggleMenu: function(){
             this.open = !this.open
         }
     }
 });
+
+const client = new Vue({
+    el: '#client',
+    data: {
+        name: 'test',
+        type: 'test',
+        description: 'test',
+        pseudoDiscord: 'test',
+        email: 'test',
+        pseudo: 'test',
+    }
+});
+
+client.name = 'Hello!'
+client.type = 'Hello!'
+client.description = 'Hello!'
+client.pseudoDiscord = 'Hello!'
+client.email = 'Hello!'
+client.pseudo = 'Hello!'
