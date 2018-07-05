@@ -39,7 +39,7 @@ Factory.blueprint('App/Models/Portfolio', (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Comment', (faker) => {
+Factory.blueprint('App/Models/Comment', (faker, parent_id) => {
   return {
     name: faker.username(),
     email: faker.email(),
@@ -50,22 +50,6 @@ Factory.blueprint('App/Models/Comment', (faker) => {
     content: faker.paragraph(3),
     post_id: 1,
     seen: 0,
-    parent_id: 0
+    parent_id: parent_id
   }
 })
-
-Factory.blueprint('App/Models/Comment', (faker) => {
-  return {
-    name: faker.username(),
-    email: faker.email(),
-    website: faker.url(),
-    twitter: faker.username(),
-    github: faker.username(),
-    linkedin: faker.username(),
-    content: faker.paragraph(3),
-    post_id: 1,
-    seen: 0,
-    parent_id: 1
-  }
-})
-
