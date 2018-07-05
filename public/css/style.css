@@ -1498,6 +1498,7 @@ footer #copyright section {
     display: flex;
     margin: 50px 20px;
     max-width: 1200px;
+    width: 100%;
 }
 
 #blog .corps {
