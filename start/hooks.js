@@ -15,6 +15,6 @@ hooks.after.providersRegistered(() => {
 
   View.global('date', (date) => {
     const newDate = new Date(date)
-    return `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getYear()}`
+    return `${('0' + newDate.getDate()).slice(-2)}/${("0"+(newDate.getMonth()+1)).slice(-2)}/${newDate.getFullYear()}`
   })
 })
