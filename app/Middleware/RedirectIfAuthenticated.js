@@ -1,7 +1,7 @@
 'use strict'
 
 class RedirectIfAuthenticated {
-  async handle ({ auth, request, response }, next) {
+  async handle ({ auth, response }, next) {
     /**
      * Verify if we are logged in.
      *
