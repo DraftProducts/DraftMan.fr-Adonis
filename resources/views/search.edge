@@ -22,13 +22,13 @@
         <div class="corps">
             <form method="post" action="{{ route('SearchController.search') }}">
                 <div class="search">
-                    <input type="text" name="q" placeholder="Rechercher">
+                    <input type="text" name="q" placeholder="Rechercher" value="{{search}}">
                 </div>
                 {{ csrfField() }}
                 <button type='submit'>Go !</button>
             </form>
 
-            @if(posts.getCount() > 0)
+            @if(posts.length > 0)
                 @each(item in posts)
                 <div class="item">
                     <div class="article-title">
@@ -45,7 +45,7 @@
                 @endeach
             @else
                 <div class="no-results">
-                    <h4>Aucun résultats pour nom</h4>
+                    <h4>Aucun résultats pour {{search}}</h4>
                 </div>
             @endif
         </div>
