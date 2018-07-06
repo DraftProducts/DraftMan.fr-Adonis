@@ -85,9 +85,15 @@ Route.group(() => {
     Route.get('/me/', 'BackofficeAccueilController.index')
     Route.get('/me/profil', 'BackofficeProfilController.index')
     Route.get('/me/client', 'BackofficeClientController.index')
+    Route.get('/me/comments', 'BackofficeCommentsController.index')
 
     Route.get('discord/callback', 'BackofficeProfilController.discordCallback')
 
     Route.post('/me/profil/compte', 'BackofficeProfilController.storeBasic')
     Route.post('/me/profil/infos', 'BackofficeProfilController.storeInfos')
+    
 }).middleware(['auth']);
+
+Route.group(() => {
+    Route.get('/me/comments', 'BackofficeCommentsController.index')
+}).middleware(['auth','modo']);
