@@ -1,11 +1,11 @@
 'use strict'
 
-const User = use('App/Models/User')
+const Post = use('App/Models/Post')
 
 class BackofficeCommentsController {
   async index({view,auth}) {
-    const profil = auth.user.toJSON();
-    return view.render('dashboard.comments',{user: profil})
+    const user = auth.user.toJSON();
+    return view.render('dashboard.comments',{user})
   }
 }
 
