@@ -5,7 +5,8 @@ class ModoAccess {
     /**
      * Verify if we are a moderator
      */
-    if(auth.user.toJSON().role < 1){
+    const user = auth.user.toJSON()
+    if(user.role < 1){
       return response.redirect('back')
     }
     next()
