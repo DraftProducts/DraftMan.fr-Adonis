@@ -16,7 +16,6 @@ const Database = use('Database')
 class PostSeeder {
   async run () {
     // Deletes all data in those tables
-    await Database.truncate('users')
     await Database.truncate('posts')
 
     // Generates & Stores a user
@@ -26,10 +25,7 @@ class PostSeeder {
     const replies = await Factory.model('App/Models/Comment').create({ parent_id: comment.id })
 
     // Generates 10 posts
-    const posts = await Factory.model('App/Models/Blog').makeMany(10)
-
-    // Assigns those posts to the user
-    await user.posts().saveMany(posts)
+    const posts = await Factory.model('App/Models/Post').makeMany(10)
   }
 }
 
