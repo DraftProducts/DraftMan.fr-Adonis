@@ -33,7 +33,7 @@ class PostController {
           Comment.query().with('replies').where('post_id', params.id).fetch(),
         ])
       
-         return view.render('blog.post', { post, posts, comments })
+         return view.render('blog.post', { post: post, posts: posts.toJSON(), comments: comments.toJSON() })
       }
 }
 
