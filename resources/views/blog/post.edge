@@ -159,7 +159,7 @@
                                 </div>
                                 <div> {{-- formulaire --}} </div> 
                                 
-                                @each(reply in comment.getRelated('replies'))
+                                @each(reply in comment.replies)
                                     <div class="comment-reply">
                                         <div class="comment-avatar">
                                             <div class="avatar">
