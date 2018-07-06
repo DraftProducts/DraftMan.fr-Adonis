@@ -73,11 +73,11 @@
                         <div class="infos">
                             <li>
                                 <i class="icon-user"></i>
-                                <span>{{post.name}}</span>
+                                <span>{{post.author_id}}</span>
                             </li>
                             <li>
                                 <i class="icon-calender"></i>
-                                <span><?= date(post.created_at) ?></span>
+                                <span>{{date(post.created_at) }}</span>
                             </li>
                             <li>
                                 <i class="icon-bookmark"></i>
