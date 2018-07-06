@@ -2,7 +2,7 @@
 
 const Post = use('App/Models/Post')
 
-class PostController {
+class SearchController {
 
     async index({ view }){
         const posts = (await Post.all()).toJSON();
@@ -10,9 +10,9 @@ class PostController {
     }
 
     async search({request, view}) {
-        const posts = (await Post.query().where("title", "like", `%${request.name}%`).fetch()).toJSON();
-        return view.render('search', {posts})
+        const posts = (await Post.query().where("title", "like", `%${request.body.q}%`).fetch()).toJSON();
+        return view.render('search', {posts, search: request.body.q})
     }
 }
 
-module.exports = PostController
+module.exports = SearchController
