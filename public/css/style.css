@@ -1504,6 +1504,7 @@ footer #copyright section {
 #blog .corps {
     float: left;
     width: calc(100% - 320px);
+    padding-right: 20px;
 }
 
 #blog.dashboard .corps .item {
@@ -2085,7 +2086,7 @@ input[type="text"]::required:after {
 
 .file-section {
     position: relative;
-    margin-bottom: 15px;
+    margin: 7.5px 0;
 }
 
 .file-section .file-wrapper {
