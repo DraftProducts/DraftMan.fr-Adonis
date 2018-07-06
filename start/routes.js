@@ -21,7 +21,7 @@ const Route = use('Route')
  |--------------------------------------------------------------------------
  */
 
-Route.on('/').render('index')
+Route.get('/', 'HomeController.index')
 
 Route.on('a-propos').render('a-propos')
 
