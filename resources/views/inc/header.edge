@@ -3,11 +3,17 @@
 		<a class="logo" href="/" title="DraftMan"><img alt="Logo DraftMan" src="/images/headerlogo.png"></a>
 		<div id="mobile-nav-button"></div>
 		<nav id="nav">
-			<a class="accueil {{request.url() === '/' ? 'active': ''}}" href="/" title="Accueil">Accueil</a>
-			<a class="a-propos {{request.url() === '/a-propos' ? 'active': ''}}" href="/a-propos" title="À Propos">À Propos</a>
-			<a class="portfolio {{request.url() === '/portfolio' ? 'active': ''}}" href="/portfolio" title="Portfolio">Portfolio</a>
-			<a class="blog {{request.url() === '/blog' ? 'active': ''}}" href="/blog" title="Blog">Blog</a>
-			<a class="contact {{request.url() === '/contact' ? 'active': ''}}" href="/contact" title="Contact">Contact</a>
+			<div class="content">
+				<a class="accueil {{request.url() === '/' ? 'active': ''}}" href="/" title="Accueil">Accueil</a>
+				<a class="a-propos {{request.url() === '/a-propos' ? 'active': ''}}" href="/a-propos" title="À Propos">À Propos</a>
+				<a class="portfolio {{request.url() === '/portfolio' ? 'active': ''}}" href="/portfolio" title="Portfolio">Portfolio</a>
+				<a class="blog {{request.url() === '/blog' ? 'active': ''}}" href="/blog" title="Blog">Blog</a>
+				<a class="contact {{request.url() === '/contact' ? 'active': ''}}" href="/contact" title="Contact">Contact</a>
+			</div>
+			<div class="connect">
+				<a class="accueil {{request.url() === '/register' ? 'active': ''}}" href="/register" title="Register">Register</a>
+				<a class="accueil {{request.url() === '/login' ? 'active': ''}}" href="/login" title="Login">Login</a>
+			</div>
 		</nav>
 	</div>
 </header>
