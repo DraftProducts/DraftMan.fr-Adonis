@@ -523,12 +523,13 @@ header nav {
 
 header nav a {
     display: block;
-    padding: 40px 24px;
+    padding: 40px 15px;
     text-decoration: none;
     font-size: 18px;
     letter-spacing: 1px;
     color: #999;
     transition-duration: .3s;
+    white-space:nowrap;
 }
 header nav a.active{
 color: #cd6e57!important
