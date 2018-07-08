@@ -18,19 +18,21 @@
 
 @section('content')
 <div class="comments">
+    @each(comment in comments)
     <div class="comment">
-        <div class="image" style="background-image: url(/images/blog/posts/1.jpg)"></div>
+        <div class="image" style="background-image: url(/images/blog/posts/{{comment.post.image}})"></div>
         <div class="content">
             <div class="top">
-                <h3>Sublime</h3>
-                <a class="link" href="">voir</a>
+                <h3>{{comment.post.title}}</h3>
+                <a class="link" href="/blog/{{comment.post.url}}-{{comment.post.id}}#{{comment.id}}">voir</a>
             </div>
-            <p>C'est un super article</p>
+            <p>{{comment.content}}</p>
         </div>
         <div class="buttons">
             <div class="valid"></div>
             <div class="remove"></div>
         </div>
     </div>
+    @endeach
 </div>
 @endsection
