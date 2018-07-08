@@ -2,6 +2,7 @@
 
 const { validate } = use('Validator')
 const User = use('App/Models/User')
+const Emails = use('App/Models/Emails')
 const Mail = use('Mail')
 
 class RegisterController {
@@ -45,6 +46,7 @@ class RegisterController {
     delete data.password_conf
 
     await User.create(data)
+    await Emails.create(data.email)
     
     /*await Mail.send('mails/inscription', data, (message) => {
       message
