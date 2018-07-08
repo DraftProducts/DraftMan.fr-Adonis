@@ -504,7 +504,7 @@ header {
     transition-duration: .3s;
 }
 
-header div {
+header>div {
     width: 100%;
     max-width: 1150px;
     display: flex;
@@ -516,11 +516,12 @@ header img {
     display: block;
     width: 250px;
 }
-
 header nav {
     display: flex;
 }
-
+header nav a.register{
+    margin-left: 30px
+}
 header nav a {
     display: block;
     padding: 40px 15px;
@@ -3474,7 +3475,7 @@ input[type="text"]::required:after {
 }
 
 @media only screen and (max-width:1200px) {
-    header div {
+    header>div {
         width: 94%;
         padding: 0 3%;
     }
@@ -3535,7 +3536,7 @@ input[type="text"]::required:after {
 }
 
 @media only screen and (max-width:920px) {
-    header div {
+    header>div {
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
@@ -3686,7 +3687,7 @@ input[type="text"]::required:after {
         text-align: center;
     }
 
-    header div {
+    header>div {
         justify-content: space-between;
     }
 
