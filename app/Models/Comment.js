@@ -7,7 +7,7 @@ class Comment extends Model {
         return this.hasMany('App/Models/Comment', 'id', 'parent_id')
     }
     post () {
-        return this.belongsTo('App/Models/Post', 'id', 'post_id')
+        return this.belongsTo('App/Models/Post', 'post_id', 'id')
     }
 }
 
