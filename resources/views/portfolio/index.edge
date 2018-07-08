@@ -27,6 +27,11 @@
                 <figcaption>
                     <h2>{{ item.name }}</h2>
                     <p>{{ item.description }}</p>
+                    @if(item.url !== '' && item.url !== null)
+                    <div class="link">
+	                    <a href="{{item.url}}">En savoir plus</a>
+                    </div>
+	                @endif
                 </figcaption>
             </figure>
         </div>
