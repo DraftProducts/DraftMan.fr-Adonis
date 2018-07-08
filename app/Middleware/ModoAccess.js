@@ -1,7 +1,7 @@
 'use strict'
 
 class ModoAccess {
-  handle ({ auth, response }, next) {
+  async handle ({ auth, response }, next) {
     /**
      * Verify if we are a moderator
      */
@@ -11,9 +11,11 @@ class ModoAccess {
       if(user.role < 1){
         return response.redirect('back')
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
     
-    next()
+    await next()
   }
 }
 module.exports = ModoAccess
