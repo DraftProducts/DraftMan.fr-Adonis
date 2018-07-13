@@ -48,7 +48,7 @@ Route.post('/search', 'SearchController.search')
 
 Route.get('blog', 'PostController.index')
 Route.get('blog/list', 'PostController.list')
-Route.get('blog/:link-:id', 'PostController.article')
+Route.get('blog/:link-:id', 'PostController.show')
 
 /**
  |--------------------------------------------------------------------------
@@ -81,18 +81,28 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
+
+Route.get('/me/client', 'ClientController.client').middleware(['auth','client']);
+
+Route.get('/me/client/dashboard', 'ClientController.dashboard').middleware(['auth','client_d']);
+
 Route.group(() => {
-    Route.get('/me/', 'BackofficeAccueilController.index')
-    Route.get('/me/profil', 'BackofficeProfilController.index')
-    Route.get('/me/client', 'BackofficeClientController.index')
+    Route.get('/me/', 'BackofficeController.index')
+    Route.get('/me/profil', 'ProfilController.index')
 
-    Route.get('discord/callback', 'BackofficeProfilController.discordCallback')
+    Route.get('discord/callback', 'ProfilController.discordCallback')
 
-    Route.post('/me/profil/compte', 'BackofficeProfilController.storeBasic')
-    Route.post('/me/profil/infos', 'BackofficeProfilController.storeInfos')
+    Route.post('/me/profil/compte', 'ProfilController.storeBasic')
+    Route.post('/me/profil/infos', 'ProfilController.storeInfos')
     
 }).middleware(['auth']);
 
 Route.group(() => {
-    Route.get('/me/comments', 'BackofficeCommentsController.index')
+    Route.get('/me/comments', 'BackofficeController.comments')
+    Route.get('/me/comments/:id/delete', 'BackofficeController.destroy_comment')
+    Route.get('/me/comments/:id/valide', 'BackofficeController.valide_comment')
 }).middleware(['auth','modo']);
+
+Route.group(() => {
+    Route.get('/me/write', 'PostController.create')
+}).middleware(['auth','writer']);
