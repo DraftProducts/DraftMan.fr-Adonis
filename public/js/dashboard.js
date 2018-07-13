@@ -55,22 +55,3 @@ const dashboard = new Vue({
         }
     }
 });
-
-const client = new Vue({
-    el: '#client',
-    data: {
-        name: 'test',
-        type: 'test',
-        description: 'test',
-        pseudoDiscord: 'test',
-        email: 'test',
-        pseudo: 'test',
-    }
-});
-
-client.name = 'Hello!'
-client.type = 'Hello!'
-client.description = 'Hello!'
-client.pseudoDiscord = 'Hello!'
-client.email = 'Hello!'
-client.pseudo = 'Hello!'
