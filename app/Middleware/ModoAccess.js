@@ -5,15 +5,12 @@ class ModoAccess {
     /**
      * Verify if we are a moderator
      */
-    
     try {
       const user = auth.user.toJSON()
       if(user.role < 1){
         return response.redirect('back')
       }
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
     
     await next()
   }
