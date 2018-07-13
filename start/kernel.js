@@ -38,7 +38,10 @@ const globalMiddleware = [
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   verif: 'App/Middleware/RedirectIfAuthenticated',
-  modo: 'App/Middleware/ModoAccess'
+  modo: 'App/Middleware/ModoAccess',
+  writer: 'App/Middleware/WriterAccess',
+  client: 'App/Middleware/ClientAccess',
+  client_d: 'App/Middleware/ClientDAccess'
 }
 
 /*
