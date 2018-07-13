@@ -137,7 +137,7 @@
     display: flex;
 }
 
-#dashboard .profil .compte,#dashboard .profil .infos_supp{
+#dashboard .profil .compte,#dashboard .profil .infos_supp,#dashboard .write{
     padding: 50px;
     flex: 1
 }
@@ -202,7 +202,7 @@
     left: 14px;
     animation-direction: alternate;
 }
-#dashboard input[type="text"],#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord,#dashboard textarea{
+#dashboard input[type="text"]:not(.tag-input),#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord,#dashboard textarea,#dashboard .tags-section{
     width: 100%;
     height: 40px;
     border: none;
@@ -211,6 +211,9 @@
     padding: 15px;
     margin-bottom: 20px;
     position: relative;
+}
+#dashboard .tags-section{
+    padding: 0
 }
 #dashboard form>div>input:focus~label, #dashboard form>div>input.filled~label,#dashboard form>div>textarea:focus~label, #dashboard form>div>textarea.filled~label{
     left: auto;
@@ -373,9 +376,14 @@
     width: 50px;
 }
 
-#dashboard .comments .comment .buttons>div{
+#dashboard .comments .comment .buttons>a{
     width: 50px;
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
 }
 
 #dashboard .comments .comment .buttons>.valid{
@@ -383,5 +391,49 @@
 }
 
 #dashboard .comments .comment .buttons>.remove{
-    background-color: #F44336;;
+    background-color: #F44336;
+}
+
+#dashboard .write .article_file{
+    height: 108px;
+    width: 192px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+#dashboard .write #article_file{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+#dashboard .write .article_image{
+    height: 108px;
+    width: 192px;
+    border: 3px solid #cd6e57;
+    background-size: cover;
+    background-position: center
+}
+#dashboard .write .article_image .text{
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #dedede;
+    font-weight: 600;
+    background-color: #40404080;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s background-color;
+}
+
+#dashboard .write #article_file:hover + .article_image .text{
+    background-color: #404040a6
 }
