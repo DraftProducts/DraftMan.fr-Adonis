@@ -14,9 +14,15 @@ class PostController {
 
     async index({ view }){
 
-        const posts = (await Post.all()).toJSON();
+        const posts = (await Post.query().where('posted', 1).fetch()).toJSON();
 
         return view.render('blog.index', {posts})
+    }
+
+    async create({ view, auth }){
+        const posts = (await Post.query().where('posted', 1).fetch()).toJSON();
+        const user = await auth.user.toJSON();
+        return view.render('dashboard.write', {posts,user})
     }
 
     async list({ view }){
@@ -26,15 +32,14 @@ class PostController {
         return view.render('blog.list', {posts})
     }
 
-    async article ({ params, view }){
+    async show ({ params, view }){
         const [post, posts, comments] = await Promise.all([
           Post.find(params.id),
           Post.all(),
           Comment.query().with('replies').where('post_id', params.id).fetch(),
         ])
-      
-         return view.render('blog.post', { post: post, posts: posts.toJSON(), comments: comments.toJSON() })
-      }
+        return view.render('blog.post', { post: post, posts: posts.toJSON(), comments: comments.toJSON() })
+    }
 }
 
 module.exports = PostController
