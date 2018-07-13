@@ -15,6 +15,7 @@ class PostsSchema extends Schema {
       table.date('published_at') // -> Si rempli = publié et ta la date en plus
       table.timestamps() // created_at - updated_at
       table.integer('author_id').notNullable() // -> ID de l'auteur
+      table.integer('posted')
     })
   }
 
