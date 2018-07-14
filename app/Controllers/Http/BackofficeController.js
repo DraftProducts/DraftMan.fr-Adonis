@@ -9,11 +9,6 @@ class BackofficeController {
     return view.render('dashboard.accueil',{user: profil})
   }
 
-  async client({view,auth}) {
-    const profil = auth.user.toJSON();
-    return view.render('dashboard.client',{user: profil})
-  }
-
   async comments({view,auth}) {
     const user = await auth.user.toJSON();
     const comments = (await Comment.query().with('post').where('seen','=',0).fetch()).toJSON()
