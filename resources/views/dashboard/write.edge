@@ -1,0 +1,79 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Write - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Write - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Write - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de rédiger des articles qui seront visibles sur la page blog du site.">
+    <meta property="og:description" content="Voici la page permettant de rédiger des articles qui seront visibles sur la page blog du site.">
+    <meta name="twitter:description" content="Voici la page permettant de rédiger des articles qui seront visibles sur la page blog du site.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/me/write" />
+    <meta property="og:url" content="https://www.draftman.fr/me/write">
+@endsection
+
+@section('css')
+{{css('https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css')}}
+@endsection
+
+@section('content')
+<div class="write">
+    <form class="writer" method="POST" action="{{ route('PostController.store') }}" enctype="multipart/form-data">
+        <div>
+            <input type="text" name="title" id="title">
+            <label for="title">Titre</label>
+        </div>
+        <div>
+            <input type="text" name="url" id="url">
+            <label for="url">Url de l'article</label>
+        </div>
+        <div>
+            <textarea name="description" id="description" class="h-100"></textarea>
+            <label for="description">Description de l'article</label>
+        </div>
+        <div class="tags-section">
+            <input type="hidden" id="hidden-input" name="tags">
+            <input type="text" class="tag-input" id="main-input" placeholder="Ajouter un tag"/>
+        </div>
+
+        <textarea name="content" id="markdown" placeholder="Contenu de l'article"></textarea>
+
+        <div class="article_file">
+            <input type="file" name="image" id="article_file" ref="file">
+            <div class="article_image" ref="preview">
+                <div class="text">
+                    Charger
+                </div>
+            </div>
+        </div>
+
+        <section id="switch-section">
+            <p>Public</p>
+            <div class="switch">
+                <label>
+                    Non
+                    <input type="checkbox" name="public"/>
+                    <span class="lever"></span>
+                    Oui
+                </label>
+            </div>
+        </section>
+
+        {{ csrfField() }}
+        @if(flashMessage('valid_basic'))
+            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
+        @endif
+        <button type="submit">Charger les informations</button>
+    </form>
+</div>
+@endsection
+
+@section('js')
+{{script('https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js')}}
+{{script('js/write')}}
+@endsection
+
