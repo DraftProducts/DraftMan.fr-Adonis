@@ -48,9 +48,7 @@
                     <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i></i><span v-if="open">Accueil</span></a>
                     <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i></i><span v-if="open">Modification du profil</span></a>
                     @if(user.client === 1)
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Espace Client</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Commandes</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Formulaire</span></a>
+                        <a class="{{request.url() === '/me/client/dashboard' ? 'active': ''}}" href="/me/client/dashboard"><i></i><span v-if="open">Espace Client</span></a>
                     @else
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Devenir Client</span></a>
                     @endif
@@ -60,7 +58,7 @@
                     @endif
                     @if(user.role >= 2)
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Upload</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Ecrire un article</span></a>
+                        <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i></i><span v-if="open">Ecrire un article</span></a>
                     @endif
                     @if(user.role === 3)
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Roles</span></a>
