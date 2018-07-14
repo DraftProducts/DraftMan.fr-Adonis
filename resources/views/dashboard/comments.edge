@@ -17,7 +17,8 @@
 @endsection
 
 @section('content')
-<div class="comments">
+<div class="comments"> 
+    @if(comments.length > 0)
     @each(comment in comments)
     <div class="comment">
         <div class="image" style="background-image: url(/images/blog/posts/{{comment.post.image}})"></div>
@@ -29,10 +30,15 @@
             <p>{{comment.content}}</p>
         </div>
         <div class="buttons">
-            <div class="valid"></div>
-            <div class="remove"></div>
+            <a class="valid" href="/me/comments/{{comment.id}}/valide">1</a>
+            <a class="remove" href="/me/comments/{{comment.id}}/delete">2</a>
         </div>
     </div>
     @endeach
+    @else
+        <div class="no-results">
+            <h4>Aucun commentqires non lus</h4>
+        </div>
+    @endif
 </div>
 @endsection
