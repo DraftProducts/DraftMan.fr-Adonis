@@ -31,6 +31,7 @@
     "btoa": "^1.2.1",
     "mysql": "^2.15.0",
     "npm": "^6.1.0",
+    "paypal-rest-sdk": "^1.8.1",
     "remarkable": "^1.7.1",
     "simplemde": "^1.11.2",
     "snekfetch": "^4.0.4"
