@@ -4,12 +4,12 @@ const { validate } = use('Validator')
 const User = use('App/Models/User')
 const Mail = use('Mail')
 const Helpers = use('Helpers')
-
+const config = require('../../../config.json');
 const { get, post } = require('snekfetch');
 const btoa = require('btoa');
 
-const CLIENT_ID = `462290683630452778`;
-const CLIENT_SECRET = `MRxxifIkSVkt9pDVZaU_eV_aGKZFa8KC`;
+const CLIENT_ID = config.DISCORD_ID
+const CLIENT_SECRET = config.DISCORD_SECRET
 const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
 
