@@ -40,6 +40,14 @@ class User extends Model {
   posts () {
     return this.hasMany('App/Models/Blog', 'id', 'author_id')
   }
+  /**
+   * Defines the relationship an author has with a project.
+   *
+   * @see https://adonisjs.com/docs/4.0/relationships#_belongs_to
+   */
+  project () {
+    return this.belongsTo('App/Models/Project', 'project_id', 'id')
+  }
 }
 
 module.exports = User
