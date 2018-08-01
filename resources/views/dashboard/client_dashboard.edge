@@ -20,18 +20,37 @@
 <div id="dclient">
     <div class="corps">
         <div class="timeline">
+            <div class="payment">
+                @each(payment in project.total_payments)
+                    <div class="item">
+                        <div class="icon valid"></div>
+                    </div>
+                @endeach
+            </div>
             <div class="progress">
-                <div class="bar">
-                </div>
+                <div class="bar" style='width: {{pourcentage(project.completed_payments,project.total_payments)}}%' title='{{pourcentage(project.completed_payments,project.total_payments)}}%'></div>
             </div>
         </div>
     </div>
     <div class="infos">
+        <form class="payment_button" action="/me/client/pay" method="post">
+            {{ csrfField() }}
+            <input type="submit" value="Procéder au payment">
+        </form>
         <div class="speed_contact">
-        
+            <h3>Contact</h3>
+            <p>Téléphone : +33 7 67 55 95 31</p>
+            <p>Email : contact@gmail.com</p>
+            <p>Discord : DraftMan#6284</p>
         </div>
         <div class="devblog">
-        
+            <h3>DEVBLOG - Project</h3>
+            @each(item in project.devblog)
+            <div class="item">
+                <div class="title">{{item.name}}</div>
+                <p>{{item.description}}</p>
+            </div>
+            @endeach
         </div>
     </div>
 </div>
