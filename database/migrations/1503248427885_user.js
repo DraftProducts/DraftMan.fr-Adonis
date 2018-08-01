@@ -19,6 +19,7 @@ class UserSchema extends Schema {
       table.string('profil')
       table.integer('role')
       table.integer('client')
+      table.integer('project_id')
       table.timestamps()
     })
   }
