@@ -58,7 +58,7 @@ class ProfilController {
       password_conf: 'required_if:password|same:password',
     }
 
-    const validation = await validate(request.all(), rules, messages)
+    const validation = await validate(data, rules, messages)
 
     if (validation.fails()) {
       session
