@@ -14,24 +14,15 @@
     -webkit-transition: width .6s cubic-bezier(.15,.99,.18,1.01);
     transition: width .6s cubic-bezier(.15,.99,.18,1.01);
 }
-
 #dashboard.xs #menu{
-    width: 90px;
-}
-#dashboard.xs .corps{
-    width: calc(100vw - 90px);
+    width: 90px
 }
 #dashboard #menu .content{
     display: flex;
     flex-direction: column;
-    width: 296px;
-}
-#dashboard.xs #menu .content{
-    width: 89px;
 }
 #dashboard .corps{
-    display: table-cell;
-    width: calc(100vw - 300px);
+    flex: 1;
     min-height: 600px;
     background-color: #F7F7F7;
 }
@@ -133,11 +124,11 @@
     margin-bottom: 10px;
 }
 
-#dashboard .profil,#dashboard #client{
+#dashboard .profil,#dashboard #client,#dashboard #dclient{
     display: flex;
 }
 
-#dashboard .profil .compte,#dashboard .profil .infos_supp,#dashboard .write{
+#dashboard .profil .compte,#dashboard .profil .infos_supp,#dashboard .write,#dashboard #dclient .corps{
     padding: 50px;
     flex: 1
 }
@@ -441,11 +432,17 @@
     background-color: #404040a6
 }
 
+#dashboard #dclient .infos{
+    width: 350px;
+}
+#dashboard #dclient .corps{
+    padding: 50px 0px 50px 50px;
+}
 #dashboard .progress{
-    height: 20px;
+    height: 16px;
     overflow: hidden;
-    background-color: #f5f5f5;
-    border-radius: 4px;
+    background-color: #fff;
+    border-radius: 5px;
     -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
     box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
@@ -460,4 +457,99 @@
     -webkit-transition: width .6s ease;
     -o-transition: width .6s ease;
     transition: width .6s ease;
+    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+}
+
+#dashboard .timeline .payment{
+    height: 40px;
+    display: flex;
+}
+
+#dashboard .timeline .payment .item{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dashboard .timeline .payment .item .icon{
+    height: 40px;
+    width: 40px;
+}
+
+#dashboard .timeline .payment .item .icon.valid{
+    background: green
+}
+#dashboard .timeline .payment .item .icon.pay{
+    background: red
+}
+#dashboard .infos{
+    margin: 50px
+}
+#dashboard .infos .payment_button{
+    padding: 0 25px 25px 25px;
+}
+#dashboard .infos .payment_button input{
+    color: #fff;
+    background-color: #cd6e57;
+    padding: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    outline: 0;
+    width: 100%
+}
+#dashboard .infos .speed_contact{
+    background-color: #fff;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    margin: 0 25px 25px 25px;
+    padding: 20px
+}
+
+#dashboard .infos .speed_contact h3{
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+#dashboard .infos .speed_contact p{
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+#dashboard .infos .devblog{
+    padding: 16px;
+    background-color: #141510;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    margin: 0 25px 25px 25px;
+}
+
+#dashboard .infos .devblog h3{
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+#dashboard .infos .devblog .item{
+    margin-bottom: 16px;
+    background-color: #282921;
+    padding: 10px;
+}
+
+#dashboard .infos .devblog .item:last-child{
+    margin-bottom: 0;
+}
+
+#dashboard .infos .devblog .item .title{
+    color: #F92672;
+    margin-bottom: 3px;
+    font-size: 15px;
+}
+
+#dashboard .infos .devblog .item p{
+    color: #fff;
+    font-size: 13px;
 }
