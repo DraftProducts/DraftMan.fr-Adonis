@@ -2,7 +2,7 @@
 
 const Model = use('Model')
 
-class Blog extends Model {
+class Post extends Model {
     static get table () {
         return 'posts'
     }
@@ -18,4 +18,4 @@ class Blog extends Model {
     }
 }
 
-module.exports = Blog
+module.exports = Post
