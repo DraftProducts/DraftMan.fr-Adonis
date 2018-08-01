@@ -17,4 +17,8 @@ hooks.after.providersRegistered(() => {
     const newDate = new Date(date)
     return `${('0' + newDate.getDate()).slice(-2)}/${("0"+(newDate.getMonth()+1)).slice(-2)}/${newDate.getFullYear()}`
   })
+
+  View.global('pourcentage', (nbr,total) => {
+    return Math.round(100 * nbr / total)
+  })
 })
