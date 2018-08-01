@@ -81,10 +81,13 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
-
 Route.get('/me/client', 'ClientController.client').middleware(['auth','client']);
 
-Route.get('/me/client/dashboard', 'ClientController.dashboard').middleware(['auth','client_d']);
+Route.group(() => {
+    Route.get('/me/client/dashboard', 'ClientController.dashboard')
+    Route.post('/me/client/pay', 'ClientController.pay')
+    Route.get('/me/client/success', 'ClientController.paySuccess')
+}).middleware(['auth','client_d']);
 
 Route.group(() => {
     Route.get('/me/', 'BackofficeController.index')
@@ -94,7 +97,6 @@ Route.group(() => {
 
     Route.post('/me/profil/compte', 'ProfilController.storeBasic')
     Route.post('/me/profil/infos', 'ProfilController.storeInfos')
-    
 }).middleware(['auth']);
 
 Route.group(() => {
