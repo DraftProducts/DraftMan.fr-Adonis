@@ -9,3 +9,6 @@ tmp
 
 # The development sqlite file
 database/development.sqlite
+
+# Config app with tokens
+config.json
