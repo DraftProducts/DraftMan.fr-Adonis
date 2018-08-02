@@ -9,10 +9,11 @@ class ClientProjectsSchema extends Schema {
       table.string('name')
       table.integer('total_payments')
       table.integer('completed_payments')
+      table.integer('progress')
       table.string('folder')
       table.integer('price')
       table.integer('devblog_id')
-      table.string('user_id')
+      table.integer('user_id')
       table.timestamps()
     })
   }
