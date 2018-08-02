@@ -18,21 +18,21 @@
 
 @section('content')
 <div class="profil">
-    <form class="compte" method="POST" action="{{ route('BackofficeProfilController.storeBasic') }}" enctype="multipart/form-data">
+    <form class="compte" method="POST" action="{{ route('ProfilController.storeBasic') }}" enctype="multipart/form-data">
         <div class="profil_file">
             <input type="file" name="image" id="profil_file" ref="file">
-            <div class="profil_image" ref="preview" style="background-image: url('{{user.profil}}')">
+            <div class="profil_image" ref="preview" style="background-image: url('{{getProfilImage(auth.user)}}')">
                 <div class="text">
                     Charger
                 </div>
             </div>
         </div>
         <div>
-            <input type="text" name="pseudo" id="pseudo" value="{{user.username}}">
+            <input type="text" name="pseudo" id="pseudo" value="{{auth.user.username}}">
             <label for="pseudo">Pseudo</label>
         </div>
         <div>
-            <input type="email" name="email" id="email" value="{{user.email}}">
+            <input type="email" name="email" id="email" value="{{auth.user.email}}">
             <label for="email">Adresse email</label>
         </div>
         <div>
@@ -49,35 +49,35 @@
         @endif
         <button type="submit">Charger les informations</button>
     </form>
-    <form class="infos_supp" method="POST" action="{{ route('BackofficeProfilController.storeInfos') }}">
+    <form class="infos_supp" method="POST" action="{{ route('ProfilController.storeInfos') }}">
         <div id="discord">
-            @if(user.discord_username === "")
+            @if(auth.user.discord_username === "")
             <a href="/discord/login">Connecter discord</a>
             @else
-            <div class="image" style="background-image: url('{{user.profil}}')"></div>
+            <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
             <div class="content">
                 <div>
-                    <h5 class="pseudo">{{user.discord_username}}<span class="code">#{{user.discord_discriminator}}</span></h5>
-                    <span class="email">{{user.discord_email}}</span>
+                    <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
+                    <span class="email">{{auth.user.discord_email}}</span>
                 </div>
                 <a href="/discord/login">Connecter discord</a>
             </div>
             @endif
         </div>
         <div>
-            <input type="text" name="website" id="website" value="{{user.website}}">
+            <input type="text" name="website" id="website" value="{{auth.user.website}}">
             <label for="website">Site Web</label>
         </div>
         <div>
-            <input type="text" name="twitter" id="twitter" value="{{user.twitter}}">
+            <input type="text" name="twitter" id="twitter" value="{{auth.user.twitter}}">
             <label for="twitter">Twitter</label>
         </div>
         <div>
-            <input type="text" name="github" id="github" value="{{user.github}}">
+            <input type="text" name="github" id="github" value="{{auth.user.github}}">
             <label for="github">GitHub</label>
         </div>
         <div>
-            <input type="text" name="linkedin" id="linkedin" value="{{user.linkedin}}">
+            <input type="text" name="linkedin" id="linkedin" value="{{auth.user.linkedin}}">
             <label for="linkedin">Linkedin</label>
         </div>
         {{ csrfField() }}
