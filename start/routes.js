@@ -27,7 +27,7 @@ Route.on('a-propos').render('a-propos')
 
 Route.on('discord').render('discord')
 
-Route.get('discord/login', 'BackofficeProfilController.discordLogin')
+Route.get('discord/login', 'ProfilController.discordLogin')
 
 Route.on('draftbot').render('draftbot')
 
