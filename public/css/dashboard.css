@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 #dashboard #menu{
     width: 300px;
     min-height: 600px;
@@ -14,7 +15,10 @@
     -webkit-transition: width .6s cubic-bezier(.15,.99,.18,1.01);
     transition: width .6s cubic-bezier(.15,.99,.18,1.01);
 }
-#dashboard.xs #menu{
+#dashboard #menu>.content{
+    width: 300px;
+}
+#dashboard.xs #menu,#dashboard.xs #menu>.content{
     width: 90px
 }
 #dashboard #menu .content{
@@ -433,13 +437,20 @@
 }
 
 #dashboard #dclient .infos{
-    width: 350px;
+    width: 300px;
 }
 #dashboard #dclient .corps{
-    padding: 50px 0px 50px 50px;
+    padding: 40px 0px 40px 40px;
+}
+#dashboard #dclient .corps .name{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 40px;
+    text-align: center;
+    color: #7E7E7E;
 }
 #dashboard .progress{
-    height: 16px;
+    height: 20px;
     overflow: hidden;
     background-color: #fff;
     border-radius: 5px;
@@ -487,11 +498,39 @@
 #dashboard .timeline .payment .item .icon.pay{
     background: red
 }
+
+#dashboard .images{
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+#dashboard .images .item{
+    position: relative;
+    width: 180px;
+    height: 130px;
+    padding: 10px
+}
+#dashboard .images .item img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+#dashboard .images .item>.content{
+    background-color: #7E7E7E;
+    width: 100%; height: 100%;
+    background-position: center;
+    background-size: cover
+}
 #dashboard .infos{
-    margin: 50px
+    margin: 40px 40px 20px 20px;
 }
 #dashboard .infos .payment_button{
-    padding: 0 25px 25px 25px;
+    padding-bottom: 20px;
 }
 #dashboard .infos .payment_button input{
     color: #fff;
@@ -507,8 +546,8 @@
 #dashboard .infos .speed_contact{
     background-color: #fff;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    margin: 0 25px 25px 25px;
-    padding: 20px
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 #dashboard .infos .speed_contact h3{
@@ -525,7 +564,6 @@
     padding: 16px;
     background-color: #141510;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    margin: 0 25px 25px 25px;
 }
 
 #dashboard .infos .devblog h3{
