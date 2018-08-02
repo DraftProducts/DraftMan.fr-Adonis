@@ -4,15 +4,13 @@ const User = use('App/Models/User')
 const Comment = use('App/Models/Comment')
 
 class BackofficeController {
-  async index({view,auth}) {
-    const profil = auth.user.toJSON();
-    return view.render('dashboard.accueil',{user: profil})
+  async index({view}) {
+    return view.render('dashboard.accueil')
   }
 
-  async comments({view,auth}) {
-    const user = await auth.user.toJSON();
+  async comments({view}) {
     const comments = (await Comment.query().with('post').where('seen','=',0).fetch()).toJSON()
-    return view.render('dashboard.comments',{user,comments})
+    return view.render('dashboard.comments',{comments})
   }
 
   async valide_comment({params,response}) {

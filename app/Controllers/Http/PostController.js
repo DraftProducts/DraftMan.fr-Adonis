@@ -19,10 +19,9 @@ class PostController {
         return view.render('blog.index', {posts})
     }
 
-    async create({ view, auth }){
+    async create({ view }){
         const posts = (await Post.query().where('posted', 1).fetch()).toJSON();
-        const user = await auth.user.toJSON();
-        return view.render('dashboard.write', {posts,user})
+        return view.render('dashboard.write', {posts})
     }
 
     async list({ view }){

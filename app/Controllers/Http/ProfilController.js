@@ -14,9 +14,8 @@ const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
 
 class ProfilController {
-  async index({view,auth}) {
-    const profil = auth.user.toJSON();
-    return view.render('dashboard.profil',{user: profil})
+  async index({view}) {
+    return view.render('dashboard.profil')
   }
   discordLogin({response}) {
     return response.redirect(`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify+email&response_type=code&redirect_uri=${redirect}`);
@@ -25,18 +24,17 @@ class ProfilController {
   async discordCallback({request,response,auth}) {
     const code = await request.get().code;
     const res = await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`).set('Authorization', `Basic ${cred}`)
-    const response = await get('https://discordapp.com/api/v6/users/@me').set('Authorization', `Bearer ${res.body.access_token}`)
-    await User.query().where('id', (auth.user.toJSON()).id).update({
-      discord_username: response.body.username,
-      discord_discriminator: response.body.discriminator,
-      discord_email: response.body.email,
-      profil: `https://cdn.discordapp.com/avatars/${response.body.id}/${response.body.avatar}?size=256`
+    const resp = await get('https://discordapp.com/api/v6/users/@me').set('Authorization', `Bearer ${res.body.access_token}`)
+    await User.query().where('id', auth.user.id).update({
+      discord_username: resp.body.username,
+      discord_discriminator: resp.body.discriminator,
+      discord_email: resp.body.email,
+      profil: `https://cdn.discordapp.com/avatars/${resp.body.id}/${resp.body.avatar}?size=256`
     })
     response.redirect('/me/profil')
   }
 
   async storeBasic({session, request, response,auth}){
-    const profil = auth.user.toJSON();
     const data = request.only(['username', 'email', 'password', 'password_conf'])
 
     const image = request.file('image', {
@@ -73,17 +71,17 @@ class ProfilController {
       email: data.email
     }
 
-    session.put("username", data.username);
-
     if(!data.password.isEmpty()) infos.password = data.password
 
     if(image){
-      const img = `${profil.id}.${profilePic.subtype}`;
+      const img = `${auth.user.id}.${image.subtype}`;
       await image.move(Helpers.tmpPath('uploads/users'), {name: img})
       data.profil =  `/uploads/users/${img}`
     }
 
-    await User.query().where('id', profil.id).update(infos)
+    await User.query().where('id', auth.user.id).update(infos)
+
+    session.put("username", data.username);
     
     session.flash({
       valid_basic: 'Informations modifiés'
@@ -98,12 +96,10 @@ class ProfilController {
     return response.redirect('back')
   }
 
-  async storeInfos({session, request, response}){
-    const profil = (await User.query().where('email','=',session.get('email')).fetch()).first().toJSON();
-
+  async storeInfos({session, request, response, auth}){
     const data = request.only(['website', 'twitter', 'github', 'linkedin'])
 
-    await User.query().where('id', profil.id).update({ 
+    await User.query().where('id', auth.user.id).update({ 
       website: data.website,
       twitter: data.twitter,
       github: data.github,
