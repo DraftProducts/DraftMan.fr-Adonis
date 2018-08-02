@@ -88,7 +88,7 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: Open Sans;
+    font-family: 'Open Sans';
     vertical-align: baseline;
 }
 
@@ -2194,7 +2194,6 @@ footer #copyright section {
 #comments form div div,
 #comments form textarea {
     margin: 7.5px 0;
-    font-family: 'Open Sans';
     box-shadow: 0 1px 10px -1px rgba(0, 0, 0, .3);
 }
 
@@ -2509,7 +2508,6 @@ input[type="text"]::required:after {
 
 #post-body p {
     padding: 5px 0 10px;
-    font-family: Open Sans;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.6;
@@ -2532,7 +2530,6 @@ input[type="text"]::required:after {
     margin: 26px 0;
     padding: 5px 15px;
     border-left: 4px solid #d7d7d7;
-    font-family: Open Sans;
     font-size: 18px;
     font-style: italic;
     font-weight: 300;
@@ -2587,7 +2584,6 @@ input[type="text"]::required:after {
     position: relative;
     margin: 26px 0;
     padding: 40px 130px 40px 50px;
-    font-family: Open Sans;
     font-size: 18px;
     font-weight: 300;
     line-height: 30px;
@@ -2618,7 +2614,6 @@ input[type="text"]::required:after {
     position: relative;
     margin: 26px 0;
     padding: 40px 130px 40px 50px;
-    font-family: Open Sans;
     font-size: 18px;
     font-weight: 300;
     line-height: 30px;
@@ -2648,7 +2643,6 @@ input[type="text"]::required:after {
 #post-body .demo {
     float: left;
     padding: 20px 70px;
-    font-family: Open Sans;
     font-size: 21px;
     font-weight: 700;
     color: white;
@@ -2670,7 +2664,6 @@ input[type="text"]::required:after {
 }
 
 #commentaires h4 {
-    font-family: Open Sans;
     font-size: 40px;
     color: #404040;
 }
@@ -2728,7 +2721,6 @@ input[type="text"]::required:after {
 #checkbox input[type="checkbox"]+label {
     position: relative;
     padding: 5px 5px 5px 25px;
-    font-family: Open Sans;
     vertical-align: middle;
     color: #cd6e57;
     cursor: pointer;
@@ -2833,7 +2825,6 @@ input[type="text"]::required:after {
 #comments .comment-section {
     margin-bottom: 40px;
     margin-left: 10px;
-    font-family: Open Sans;
 }
 
 #comments .comment {
@@ -3246,7 +3237,6 @@ input[type="text"]::required:after {
     margin: 30px 0;
     text-align: center;
     text-transform: uppercase;
-    font-family: Open Sans;
     font-size: 24px;
     font-weight: 700;
 }
