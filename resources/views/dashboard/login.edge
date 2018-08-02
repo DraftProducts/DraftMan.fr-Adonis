@@ -42,6 +42,9 @@
             @endif
 
             {{ csrfField() }}
+            @if(flashMessage('account_created'))
+                <div class="success-card">{{ flashMessage('account_created') }}</div>
+            @endif
 
             <button type="submit" name="submit">
                 Se connecter
