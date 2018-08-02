@@ -11,7 +11,7 @@ class PostsSchema extends Schema {
       table.text('description')
       table.string('tags')
       table.text('content')
-      table.sring('image')
+      table.string('image')
       table.date('published_at') // -> Si rempli = publié et ta la date en plus
       table.timestamps() // created_at - updated_at
       table.integer('author_id').notNullable() // -> ID de l'auteur
