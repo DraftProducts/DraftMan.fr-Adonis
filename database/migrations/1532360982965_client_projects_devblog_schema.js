@@ -14,7 +14,7 @@ class ClientProjectsDevblogSchema extends Schema {
   }
 
   down () {
-    this.drop('client_projects_devblogs')
+    this.drop('client_projects_devblog')
   }
 }
 
