@@ -2,6 +2,7 @@
 
 const paypal = require('paypal-rest-sdk');
 const config = require('../../../config.json');
+const Project = use('App/Models/Project');
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -11,14 +12,14 @@ paypal.configure({
 
 class ClientController {
 
-  async client({view,auth}) {
-    const profil = auth.user.toJSON();
-    return view.render('dashboard.client',{user: profil})
+  async client({view}) {
+    return view.render('dashboard.client')
   }
+
   async dashboard({view,auth}) {
-    const profil = auth.user.toJSON();
-    const project = auth.user.toJSON();
-    return view.render('dashboard.client_dashboard',{user: profil,project})
+    const proj = await Project.query().with('devblog').where('id', auth.user.project_id).first()
+    console.log(proj.toJSON())
+    return view.render('dashboard.client_dashboard',{project: proj.toJSON()})
   }
 
   async pay({response}) {
