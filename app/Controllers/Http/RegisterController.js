@@ -2,7 +2,7 @@
 
 const { validate } = use('Validator')
 const User = use('App/Models/User')
-const Emails = use('App/Models/Emails')
+const Emails = use('App/Models/Email')
 const Mail = use('Mail')
 
 class RegisterController {
@@ -46,7 +46,14 @@ class RegisterController {
     delete data.password_conf
 
     await User.create(data)
-    await Emails.create(data.email)
+    delete data.password
+    delete data.username
+    delete data.role
+    await Emails.create(data)
+
+    session.flash({
+      account_created: 'Compte crée avec succès'
+    })
     
     /*await Mail.send('mails/inscription', data, (message) => {
       message
