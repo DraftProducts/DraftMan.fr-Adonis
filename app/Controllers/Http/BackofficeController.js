@@ -15,14 +15,14 @@ class BackofficeController {
     return view.render('dashboard.comments',{user,comments})
   }
 
-  async destroy_comment({params,response}) {
+  async valide_comment({params,response}) {
     const comment = await Comment.find(params.id)
     comment.seen = 1
     await comment.save()
     response.redirect('back')
   }
   
-  async valide_comment({params,response}) {
+  async destroy_comment({params,response}) {
     const comment = await Comment.find(params.id)
     await comment.delete()
     response.redirect('back')
