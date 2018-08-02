@@ -68,20 +68,22 @@ class ProfilController {
       return response.redirect('back')
     }
 
-    await User.query().where('id', profil.id).update({ 
+    const infos = { 
       username: data.username,
       email: data.email
-    })
+    }
 
     session.put("username", data.username);
 
-    if(!data.password.isEmpty()) await User.query().where('id', profil.id).update({password: data.password})
+    if(!data.password.isEmpty()) infos.password = data.password
 
     if(image){
-      data.image = `${profil.id}.${profilePic.subtype}`;
-      await image.move(Helpers.tmpPath('uploads/users'), {name: data.image})
-      await User.query().where('id', profil.id).update({profil: `/uploads/users/${data.image}`})
+      const img = `${profil.id}.${profilePic.subtype}`;
+      await image.move(Helpers.tmpPath('uploads/users'), {name: img})
+      data.profil =  `/uploads/users/${img}`
     }
+
+    await User.query().where('id', profil.id).update(infos)
     
     session.flash({
       valid_basic: 'Informations modifiés'
