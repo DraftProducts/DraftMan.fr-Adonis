@@ -1,5 +1,6 @@
 const { hooks } = require('@adonisjs/ignitor')
 const Remarkable = require('remarkable');
+const gravatar = require('gravatar');
 markdown = new Remarkable();
 
 hooks.after.providersRegistered(() => {
@@ -20,5 +21,12 @@ hooks.after.providersRegistered(() => {
 
   View.global('pourcentage', (nbr,total) => {
     return Math.round(100 * nbr / total)
+  })
+
+  View.global('getProfilImage', (user) => {
+    if(user.profil === '' || user.profil === null){
+      return gravatar.url(user.email, {protocol: 'https', s: 170});
+    }
+    return user.profil;
   })
 })
