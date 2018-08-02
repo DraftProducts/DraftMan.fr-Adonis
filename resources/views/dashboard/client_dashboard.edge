@@ -19,6 +19,9 @@
 @section('content')
 <div id="dclient">
     <div class="corps">
+        <div class="name">
+            {{project.name}}
+        </div>
         <div class="timeline">
             <div class="payment">
                 @each(payment in project.total_payments)
@@ -28,7 +31,45 @@
                 @endeach
             </div>
             <div class="progress">
-                <div class="bar" style='width: {{pourcentage(project.completed_payments,project.total_payments)}}%' title='{{pourcentage(project.completed_payments,project.total_payments)}}%'></div>
+            <div class="bar" style='width: {{progress}}%' title='Projet effectué à {{progress}}%'></div>
+            </div>
+        </div>
+        <div class="images">
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
+            </div>
+            <div class="item">
+                <img src="" alt="">
+                <div class="content" style="background-image: url()">
+
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +85,7 @@
             <p>Discord : DraftMan#6284</p>
         </div>
         <div class="devblog">
-            <h3>DEVBLOG - Project</h3>
+            <h3>DEVBLOG - {{project.name}}</h3>
             @each(item in project.devblog)
             <div class="item">
                 <div class="title">{{item.name}}</div>
