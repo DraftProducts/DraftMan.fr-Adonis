@@ -97,14 +97,19 @@ Route.group(() => {
 
     Route.post('/me/profil/compte', 'ProfilController.storeBasic')
     Route.post('/me/profil/infos', 'ProfilController.storeInfos')
+
+    Route.get('/legout', 'RegisterController.legout')
 }).middleware(['auth']);
 
 Route.group(() => {
     Route.get('/me/comments', 'BackofficeController.comments')
     Route.get('/me/comments/:id/delete', 'BackofficeController.destroy_comment')
     Route.get('/me/comments/:id/valide', 'BackofficeController.valide_comment')
+
+    Route.get('/me/articles', 'BackofficeController.articles')
 }).middleware(['auth','modo']);
 
 Route.group(() => {
     Route.get('/me/write', 'PostController.create')
+    Route.get('/me/upload', 'BackofficeController.upload')
 }).middleware(['auth','writer']);
