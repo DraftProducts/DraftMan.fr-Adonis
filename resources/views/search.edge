@@ -27,9 +27,7 @@
                 {{ csrfField() }}
                 <button type='submit'>Go !</button>
             </form>
-
-            @if(posts.length > 0)
-                @each(item in posts)
+            @each(item in posts)
                 <div class="item">
                     <div class="article-title">
                         <h5>{{item.title}}</h5>
@@ -42,12 +40,12 @@
                         <p><a class="link" href="/blog/{{item.url}}-{{item.id}}">Voir l'article</a></p>
                     </div>
                 </div>
-                @endeach
+                
             @else
                 <div class="no-results">
                     <h4>Aucun résultats pour {{search}}</h4>
                 </div>
-            @endif
+            @endeach
         </div>
     </div>
 </section>
