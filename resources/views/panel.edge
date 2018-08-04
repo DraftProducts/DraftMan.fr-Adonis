@@ -56,17 +56,18 @@
                     @endif
                     @if(auth.user.role >= 1)
                         <a class="{{request.url() === '/me/comments' ? 'active': ''}}" href="/me/comments"><i></i><span v-if="open">Commentaires</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Articles</span></a>
+                        <a class="{{request.url() === '/me/articles' ? 'active': ''}}" href="/me/articles"><i></i><span v-if="open">Articles</span></a>
                     @endif
                     @if(auth.user.role >= 2)
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Upload</span></a>
                         <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i></i><span v-if="open">Ecrire un article</span></a>
+                        <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i></i><span v-if="open">Upload</span></a>
                     @endif
                     @if(auth.user.role === 3)
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Roles</span></a>
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Fichiers</span></a>
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Mail</span></a>
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">NewsLetter</span></a>
+                        <a class="{{request.url() === '/me/clients' ? 'active': ''}}" href="/me/clients"><i></i><span v-if="open">Clients</span></a>
                     @endif
                 </ul>
             </div>
@@ -74,9 +75,16 @@
         <div class="corps" ref="corps">
         
             <div id="bar">
-            @raw
                 <div id="burger" @click="toggleMenu()"><span class="inner"></span></div>
-            @endraw
+            
+                <div @click="toggleProfil()" id="user">
+                    <div class="profil" style="background-image: url({{getProfilImage(auth.user)}})"></div>
+                    <span>{{auth.user.username}}</span>
+                    <ul :class="{active: profil}">
+                        <a href="/legout"><i></i><span>Legout</span></a>
+                    </ul>
+                </div>
+            
             </div>
             
             <div class="content">
