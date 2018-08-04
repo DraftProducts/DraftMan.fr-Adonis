@@ -2,6 +2,7 @@ const dashboard = new Vue({
     el: '#dashboard',
     data: {
         open: true,
+        profil: false
     },
     mounted(){
         this.addEvents(this);
@@ -52,6 +53,9 @@ const dashboard = new Vue({
         },
         toggleMenu: function(){
             this.open = !this.open
+        },
+        toggleProfil: function(){
+            this.profil = !this.profil
         }
     }
 });
