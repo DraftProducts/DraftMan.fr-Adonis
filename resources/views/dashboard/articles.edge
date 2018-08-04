@@ -1,0 +1,43 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Commentaires - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Commentaires - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Commentaires - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
+    <meta property="og:description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
+    <meta name="twitter:description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/me/comments" />
+    <meta property="og:url" content="https://www.draftman.fr/me/comments">
+@endsection
+
+@section('content')
+<div class="articles"> 
+    @each(article in articles)
+    <div class="article">
+        <div class="title">
+            <h5>{{article.title}}</h5>
+        </div>
+        <div class="content">
+            <div class="text">{{article.description}}</div>
+            <div class="image">
+                <div class="img" style="background-image: url(/images/blog/posts/{{article.image}})"></div>
+                <a href="/admin/view/{{article.url}}-{{article.id}}">Voir l'article</a>
+                @if(auth.user.role === 3)
+                    <a href="/admin/{{article.url}}-{{article.id}}">Modifier l'article</a>
+                @endif
+            </div>
+        </div>
+    </div> 
+    @else
+        <div class="no-results">
+            <h4>Aucun articles</h4>
+        </div>
+    @endeach
+</div>
+@endsection
