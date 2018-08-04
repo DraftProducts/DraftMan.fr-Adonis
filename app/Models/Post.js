@@ -14,7 +14,7 @@ class Post extends Model {
      * @see https://adonisjs.com/docs/4.0/relationships#_belongs_to
      */
     author () {
-        return this.belongsTo('App/Models/User', 'id', 'author_id')
+        return this.belongsTo('App/Models/User', 'author_id', 'id')
     }
 }
 
