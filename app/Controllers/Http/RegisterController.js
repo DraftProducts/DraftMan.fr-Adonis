@@ -66,11 +66,14 @@ class RegisterController {
     return response.redirect('/login')
   }
 
-  destroy({auth, session, response}) {
+  legout({auth, session, response}) {
     return Promise.all([
       session.clear(),
       auth.logout()
     ]).then(() => {
+      session.flash({
+        account_legout: 'Vous vous êtes déconnecté avec succès'
+      })
       return response.redirect("/login");
     }).catch(err => console.log(err));
   }
