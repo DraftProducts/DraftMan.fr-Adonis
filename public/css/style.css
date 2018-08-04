@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'drafticons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/drafticons.eot?b20h2n);
+    src: url('../fonts/drafticons.eot?b20h2n#iefix') format('embedded-opentype'), url(../fonts/drafticons.ttf?b20h2n) format('truetype'), url(../fonts/drafticons.woff?b20h2n) format('woff'), url('../fonts/drafticons.svg?b20h2n#drafticons') format('svg');
+}
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -198,14 +206,6 @@ a.link:hover::after {
     background-color: #4CAF50;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     transition: box-shadow .25s;
-}
-
-@font-face {
-    font-family: 'drafticons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(../fonts/drafticons.eot?b20h2n);
-    src: url('../fonts/drafticons.eot?b20h2n#iefix') format('embedded-opentype'), url(../fonts/drafticons.ttf?b20h2n) format('truetype'), url(../fonts/drafticons.woff?b20h2n) format('woff'), url('../fonts/drafticons.svg?b20h2n#drafticons') format('svg');
 }
 
 [class^="icon-"],
