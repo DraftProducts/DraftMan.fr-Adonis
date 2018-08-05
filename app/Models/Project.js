@@ -10,7 +10,7 @@ class Project extends Model {
         return this.belongsTo('App/Models/User', 'id', 'user_id')
     }
     devblog () {
-        return this.hasMany('App/Models/DevPost', 'client_project_id', 'id')
+        return this.hasMany('App/Models/DevPost', 'id', 'client_project_id')
     }
 }
 
