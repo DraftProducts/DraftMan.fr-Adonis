@@ -2,6 +2,7 @@
 
 const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
+const { validate } = use('Validator')
 
 class PostController {
     // index = Liste tes posts
@@ -33,11 +34,58 @@ class PostController {
 
     async show ({ params, view }){
         const [post, posts, comments] = await Promise.all([
-          Post.find(params.id),
+          Post.query().with('author').where('id', params.id).first(),
           Post.all(),
-          Comment.query().with('replies').where('post_id', params.id).fetch(),
+          Comment.query().with('replies').where('post_id', params.id).where('parent_id', '=', 0).fetch(),
         ])
-        return view.render('blog.post', { post: post, posts: posts.toJSON(), comments: comments.toJSON() })
+        return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
+    }
+
+    async comment ({ request,session, params,response, auth}){
+
+        const data = request.only(['name', 'email', 'website','twitter','github','linkedin','content','parent_id'])
+        data.post_id = params.id
+        data.seen = 0
+        if(data.parent_id === ""){
+            data.parent_id = 0
+        }
+
+        if(/*ici*/){
+            data.name = auth.username
+            data.email = auth.email
+            data.website = auth.website
+            data.twitter = auth.twitter
+            data.github = auth.github
+            data.linkedin = auth.linkedin
+        }
+
+        const messages = {
+            'name.required': 'Veuillez indiquer votre pseudo.',
+            'email.required.email': 'Veuillez entrer une adresse email valide.',
+            'content.required': 'Veuillez entrer votre message.'
+        }
+
+        const rules = {
+          name: 'required',
+          email: 'required|email',
+          content: 'required'
+        }
+
+        const validation = await validate(data, rules, messages)
+
+        if (validation.fails()) {
+            session
+            .withErrors(validation.messages())
+            .flashExcept()
+
+            return response.redirect('back')
+        }
+
+        console.log(data)
+
+        await Comment.create(data)
+
+        return response.redirect('back')
     }
 }
 
