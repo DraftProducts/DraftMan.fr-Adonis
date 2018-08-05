@@ -15,15 +15,15 @@
     <meta name="author" content="DraftMan">
     <meta name="copyright" content="DraftMan">
 
-    <link rel="shortcut icon" href="https://www.draftman.fr/images/favicon.png" type="image/ico" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/ico" />
 
-    <link rel="canonical" href="https://www.draftman.fr/blog/{{post.url}}-{{post.id}}" />
+    <link rel="canonical" href="https://www.draftman.fr/blog/{{post.id}}-{{post.url}}" />
 
     <meta property="og:title" content="{{post.title}} - DraftMan.fr">
     <meta property="og:description" content="{{post.description}}">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:url" content="https://www.draftman.fr/blog/{{post.url}}-{{post.id}}">
+    <meta property="og:url" content="https://www.draftman.fr/blog/{{post.id}}-{{post.url}}">
     <meta property="og:site_name" content="DraftMan.fr">
     <meta property="og:image" content="https://www.draftman.fr/images/blog/posts/{{post.image}}">
     <meta property="og:image:secure_url" content="https://www.draftman.fr/images/blog/posts/{{post.image}}">
@@ -32,9 +32,9 @@
     <meta property="article:published_time" content="{{post.created_at}}">
     <meta property="article:modified_time" content="{{post.updated_at}}">
 
-    {{--  @each(tag in post.tags.split(', '))
+    @each(tag in tags)
         <meta property="article:tag" content="{{tag}}">
-    @endeach  --}}
+    @endeach
 
     <meta name="theme-color" content="#CD6E57">
     <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
@@ -73,7 +73,7 @@
                         <div class="infos">
                             <li>
                                 <i class="icon-user"></i>
-                                <span>{{post.author_id}}</span>
+                                <span>{{post.author.username}}</span>
                             </li>
                             <li>
                                 <i class="icon-calender"></i>
@@ -92,7 +92,9 @@
                     </section>
                     <section id="commentaires">
                         <h4>Commenter</h4>
-                        <form method="post">
+                        <form method="post" action="/blog/{{post.id}}/comment">
+                            @loggedIn
+                            @else
                             <div class="compact">
                                 <div class="required">
                                     <input type="text" name="name" placeholder="Pseudo" required/>
@@ -104,6 +106,8 @@
                                     <input type="text" name="website" placeholder="Votre site" />
                                 </div>
                             </div>
+                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
+                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
                             <div class="compact">
                                 <div>
                                     <input type="text" name="twitter" placeholder="Twitter" />
@@ -115,7 +119,10 @@
                                     <input type="text" name="linkedin" placeholder="Linkedin" />
                                 </div>
                             </div>
+                            @endloggedIn
                             <textarea name="content" cols="30" rows="10" placeholder="Commentaire" required></textarea>
+                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('content'), hasErrorFor('content')) }}
+                            {{ csrfField() }}
                             <div>
                                 <input type="submit" name="comment" value="Commenter ce post">
                             </div>
@@ -125,10 +132,14 @@
                     <section id="comments">
                         @each(comment in comments)
                             <div class="comment-section" id="{{comment.id}}">
-                                <div class="comment <?php if($responses != false){echo 'has-replies';} ?>">
+                                @if(comment.replies.length > 0)
+                                <div class="comment has-replies">
+                                @else
+                                <div class="comment">
+                                @endif
                                     <div class="comment-avatar">
                                         <div class="avatar">
-                                            <img src="https://www.gravatar.com/avatar/<?=md5($comment->email)?>" width="100%">
+                                            <img src="{{getImageUser(comment.email,comment.image)}}" width="100%">
                                         </div>
                                         <div class="links">
                                             @if(comment.website !== '')
@@ -154,7 +165,11 @@
                                         <div class="comment-body">
                                             <p>{{comment.content}}</p>
                                         </div>
-                                        <a class="reply" replyto="{{comment.id}}" href="#">Répondre</a>
+                                        @loggedIn
+                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="1" href="#">Répondre</a>
+                                        @else
+                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="0" href="#">Répondre</a>
+                                        @endloggedIn
                                     </div>
                                 </div>
                                 <div> {{-- formulaire --}} </div> 
@@ -163,7 +178,7 @@
                                     <div class="comment-reply">
                                         <div class="comment-avatar">
                                             <div class="avatar">
-                                                <img src="https://www.gravatar.com/avatar/<?=md5(reply.email)?>" width="100%">
+                                                <img src="{{getImageUser(reply.email,reply.image)}}" width="100%">
                                             </div>
                                             <div class="links">
                                                 @if(reply.website !== '')
