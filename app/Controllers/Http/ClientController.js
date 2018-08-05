@@ -1,6 +1,10 @@
 'use strict'
 
 const paypal = require('paypal-rest-sdk');
+const { promisify } = require('util')
+const fs = require('fs');
+const readdir = promisify(fs.readdir)
+
 const config = require('../../../config.json');
 const Project = use('App/Models/Project');
 
@@ -17,9 +21,9 @@ class ClientController {
   }
 
   async dashboard({view,auth}) {
-    const proj = await Project.query().with('devblog').where('id', auth.user.project_id).first()
-    console.log(proj.toJSON())
-    return view.render('dashboard.client_dashboard',{project: proj.toJSON()})
+    const proj = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
+    const items = await readdir(`public/uploads/projects/${proj.folder}/`)
+    return view.render('dashboard.client_dashboard',{project: proj,items})
   }
 
   async pay({response}) {
