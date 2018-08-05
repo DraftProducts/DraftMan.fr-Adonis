@@ -549,7 +549,7 @@
     background: red
 }
 
-#dashboard .images{
+#dashboard #images{
     margin-top: 40px;
     padding: 10px;
     background-color: #fff;
@@ -558,23 +558,39 @@
     flex-flow: row wrap;
     justify-content: center;
 }
-#dashboard .images .item{
+#dashboard #images .item{
     position: relative;
     width: 180px;
     height: 130px;
     padding: 10px
 }
-#dashboard .images .item img{
+#dashboard #images .item img{
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
     opacity: 0;
+    z-index: 3;
+    cursor: pointer
 }
-#dashboard .images .item>.content{
+#dashboard #images .item .hover{
+    background-color: #40404026;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    transition: 0.3s background-color;
+    z-index: 2;
+}
+#dashboard #images .item img:hover + .hover{
+    background-color: #40404046
+}
+#dashboard #images .item>.content{
     background-color: #7E7E7E;
     width: 100%; height: 100%;
     background-position: center;
-    background-size: cover
+    background-size: cover;
+    z-index: 1;
 }
 #dashboard .infos{
     margin: 40px 40px 20px 20px;
@@ -622,7 +638,7 @@
 }
 
 #dashboard .infos .devblog .item{
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     background-color: #282921;
     padding: 10px;
 }
@@ -639,7 +655,7 @@
 
 #dashboard .infos .devblog .item p{
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 #dashboard .articles{
