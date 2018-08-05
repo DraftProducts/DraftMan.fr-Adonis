@@ -48,7 +48,8 @@ Route.post('/search', 'SearchController.search')
 
 Route.get('blog', 'PostController.index')
 Route.get('blog/list', 'PostController.list')
-Route.get('blog/:link-:id', 'PostController.show')
+Route.get('blog/:id-:link', 'PostController.show')
+Route.post('blog/:id/comment', 'PostController.comment')
 
 /**
  |--------------------------------------------------------------------------
