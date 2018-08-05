@@ -1,6 +1,5 @@
 'use strict'
 
-const User = use('App/Models/User')
 const Comment = use('App/Models/Comment')
 const Post = use('App/Models/Post')
 
