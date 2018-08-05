@@ -10,6 +10,8 @@ class ContactController {
 
     async verify ({ request, session, response }) {
 
+        const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
+
         const messages = {
             'author.required': 'Veuillez indiquer votre identité.',
             'email.required': 'Veuillez entrer une adresse email valide.',
@@ -26,7 +28,7 @@ class ContactController {
           commentconnu: 'required',
         }
     
-        const validation = await validate(request.all(), rules, messages)
+        const validation = await validate(data, rules, messages)
 
         if (validation.fails()) {
             session
@@ -37,7 +39,6 @@ class ContactController {
         }
     
         const email_to = 'contact@draftman.fr';
-        const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
     
         await Mail.send('mails/contact', data, (message) => {
           message
