@@ -2943,7 +2943,7 @@ input[type="text"]::required:after {
 }
 
 #comments .comment .name a {
-    background-color: #ffffff;
+    background-color: #f7f7f7;;
 }
 
 #comments .comment-avatar .name a {
