@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@adonisjs/ace": "^5.0.2",
+    "@adonisjs/ace": "^5.0.4",
     "@adonisjs/auth": "^3.0.5",
     "@adonisjs/bodyparser": "^2.0.3",
     "@adonisjs/cors": "^1.0.6",
@@ -30,6 +30,7 @@
     "@adonisjs/shield": "^1.0.6",
     "@adonisjs/validator": "^5.0.3",
     "btoa": "^1.2.1",
+    "fs": "0.0.1-security",
     "gravatar": "^1.6.0",
     "mysql": "^2.15.0",
     "paypal-rest-sdk": "^1.8.1",
