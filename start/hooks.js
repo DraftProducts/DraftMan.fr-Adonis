@@ -29,4 +29,11 @@ hooks.after.providersRegistered(() => {
     }
     return user.profil;
   })
+
+  View.global('getImageUser', (email,image) => {
+    if(image === '' || image === null){
+      return gravatar.url(email, {protocol: 'https', s: 170});
+    }
+    return image;
+  })
 })
