@@ -8,6 +8,7 @@ class CommentsSchema extends Schema {
       table.increments()
       table.string('name')
       table.string('email')
+      table.string('image')
       table.string('website')
       table.string('twitter')
       table.string('github')
