@@ -16,6 +16,10 @@
     <meta property="og:url" content="https://www.draftman.fr/me/client/1545/name">
 @endsection
 
+@section('css')
+    {{style('css/viewer.min')}}
+@endsection
+
 @section('content')
 <div id="dclient">
     <div class="corps">
@@ -34,43 +38,14 @@
             <div class="bar" style='width: {{progress}}%' title='Projet effectué à {{progress}}%'></div>
             </div>
         </div>
-        <div class="images">
+        <div id="images">
+            @each(image in items)
             <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
+                <img data-viewer="/uploads/projects/{{project.folder}}/{{image}}" src="/uploads/projects/{{project.folder}}/{{image}}" alt="{{image}}">
+                <div class="hover"></div>
+                <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/{{image}}")'></div>
             </div>
-            <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
-            </div>
-            <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
-            </div>
-            <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
-            </div>
-            <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
-            </div>
-            <div class="item">
-                <img src="" alt="">
-                <div class="content" style="background-image: url()">
-
-                </div>
-            </div>
+            @endeach
         </div>
     </div>
     <div class="infos">
@@ -88,11 +63,28 @@
             <h3>DEVBLOG - {{project.name}}</h3>
             @each(item in project.devblog)
             <div class="item">
-                <div class="title">{{item.name}}</div>
+                <div class="title">{{item.title}}</div>
                 <p>{{item.description}}</p>
             </div>
             @endeach
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+{{script('js/viewer.min')}}
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const images = document.getElementById('images')
+        const viewer = new Viewer(images,{
+            url: 'data-viewer',
+            title: false,
+            toolbar: false,
+            rotatable: false,
+            button: false,
+            scalable: false
+        });
+    })
+</script>
 @endsection
