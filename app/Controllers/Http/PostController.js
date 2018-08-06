@@ -46,17 +46,17 @@ class PostController {
         const data = request.only(['name', 'email', 'website','twitter','github','linkedin','content','parent_id'])
         data.post_id = params.id
         data.seen = 0
-        if(data.parent_id === ""){
-            data.parent_id = 0
-        }
+        
+        if(!data.parent_id) data.parent_id = 0
 
-        if(/*ici*/){
-            data.name = auth.username
-            data.email = auth.email
-            data.website = auth.website
-            data.twitter = auth.twitter
-            data.github = auth.github
-            data.linkedin = auth.linkedin
+        if(auth.user){
+            console.log('connecté')
+            data.name = auth.user.username
+            data.email = auth.user.email
+            data.website = auth.user.website
+            data.twitter = auth.user.twitter
+            data.github = auth.user.github
+            data.linkedin = auth.user.linkedin
         }
 
         const messages = {
@@ -81,9 +81,9 @@ class PostController {
             return response.redirect('back')
         }
 
-        console.log(data)
+        const comment = await Comment.create(data)
 
-        await Comment.create(data)
+        console.log(comment)
 
         return response.redirect('back')
     }
