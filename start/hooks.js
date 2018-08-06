@@ -32,8 +32,4 @@ hooks.after.providersRegistered(() => {
     }
     return image;
   })
-
-  View.global('getNameByFile', (file) => {
-    return file.substr(0, -4);
-  })
 })
