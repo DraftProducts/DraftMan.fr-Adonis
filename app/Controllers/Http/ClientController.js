@@ -22,8 +22,9 @@ class ClientController {
 
   async dashboard({view,auth}) {
     const proj = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
-    const items = await readdir(`public/uploads/projects/${proj.folder}/`)
-    return view.render('dashboard.client_dashboard',{project: proj,items})
+    const images = await readdir(`public/uploads/projects/${proj.folder}/images`)
+    const fichiers = await readdir(`public/uploads/projects/${proj.folder}/fichiers`)
+    return view.render('dashboard.client_dashboard',{project: proj,images,fichiers})
   }
 
   async pay({response}) {
