@@ -19,10 +19,6 @@ hooks.after.providersRegistered(() => {
     return `${('0' + newDate.getDate()).slice(-2)}/${("0"+(newDate.getMonth()+1)).slice(-2)}/${newDate.getFullYear()}`
   })
 
-  View.global('pourcentage', (nbr,total) => {
-    return Math.round(100 * nbr / total)
-  })
-
   View.global('getProfilImage', (user) => {
     if(user.profil === '' || user.profil === null){
       return gravatar.url(user.email, {protocol: 'https', s: 170});
@@ -35,5 +31,9 @@ hooks.after.providersRegistered(() => {
       return gravatar.url(email, {protocol: 'https', s: 170});
     }
     return image;
+  })
+
+  View.global('getNameByFile', (file) => {
+    return file.substr(0, -4);
   })
 })
