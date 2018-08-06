@@ -599,26 +599,61 @@
     padding-bottom: 20px;
 }
 #dashboard .infos .payment_button input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
     color: #fff;
     background-color: #cd6e57;
-    padding: 12px;
     font-size: 20px;
     cursor: pointer;
     border: none;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
     outline: 0;
-    width: 100%
 }
-#dashboard .infos .speed_contact{
+#dashboard .infos .files{
     background-color: #fff;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
     padding: 20px;
     margin-bottom: 20px;
 }
 
-#dashboard .infos .speed_contact h3{
+#dashboard .infos .speed_contact h3,#dashboard .infos .files h3{
     font-weight: 500;
     margin-bottom: 10px;
+}
+
+#dashboard .infos .files .download-button{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    background-color: #cd6e57d4;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
+}
+
+#dashboard .infos .files .download-button:last-child{
+    margin-bottom: 0
+}
+
+#dashboard .infos .files .download-button span{
+    width: 40px;
+    height: 40px;
+    background-color: #cd6e57;
+    margin-right: 20px
+}
+
+#dashboard .infos .speed_contact{
+    background-color: #fff;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 #dashboard .infos .speed_contact p{
