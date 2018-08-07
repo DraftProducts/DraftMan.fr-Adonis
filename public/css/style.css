@@ -2351,12 +2351,13 @@ input[type="text"]::required:after {
     padding: 5px 10px 5px 15px;
     height: 100%;
     margin: 0;
+    flex: 1
 }
 
 .tags-section .tag {
     font-size: 85%;
     padding: 6px;
-    margin-right: 10px;
+    margin-left: 10px;
     display: inline-block;
     background-color: #ddd;
     transition: all 0.1s linear;
