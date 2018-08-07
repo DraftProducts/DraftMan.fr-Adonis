@@ -21,8 +21,125 @@ class PostController {
     }
 
     async create({ view }){
-        const posts = (await Post.query().where('posted', 1).fetch()).toJSON();
-        return view.render('dashboard.write', {posts})
+        return view.render('dashboard.write')
+    }
+
+    async edit({ view, params }){
+        const post = await Post.find(params.id)
+        console.log(post.toJSON())
+        return view.render('dashboard.edit', {post: post.toJSON()})
+    }
+
+    async store({ request, session, response }){
+        const data = request.only(['title', 'url', 'description', 'tags','content','image','published_at']);
+
+        const image = request.file('image', {
+          types: ['image'],
+          size: '2mb'
+        })
+    
+        const messages = {
+          'title.required': 'Veuillez ajouter un titre à votre article.',
+          'title.unique': 'Ce titre est déjà utilisé.',
+          'url.required': 'Veuillez ajouter une url à votre article pour le SEO.',
+          'url.unique': 'Cette url est déjà utilisé.',
+          'description.required': 'Veuillez ajouter une descrption de votre article pour le SEO.',
+          'tags.required': 'Veuillez ajouter les mots clés pour article pour le SEO.',
+          'content.required': 'Veuillez ajouter un contenu à votre article.',
+          'image.required': 'Veuillez ajouter une image à votre article.'
+        }
+    
+        const rules = {
+          title: 'required|unique:posts',
+          url: 'required|unique:posts',
+          description: 'required',
+          tags: 'required',
+          content: 'required',
+          image: 'required',
+        }
+    
+        const validation = await validate(data, rules, messages)
+    
+        if (validation.fails()) {
+          session
+            .withErrors(validation.messages())
+            .flashExcept()
+    
+          return response.redirect('back')
+        }
+
+        if(!data.published_at) data.published_at === new Date()
+        
+        data.author_id = auth.user.id
+
+        data.image = `${data.url}.${image.subtype}`;
+        await image.move(Helpers.tmpPath('/uploads/posts/'), {name: data.image})
+
+        await Post.create(data)
+        
+        session.flash({
+          article_posted: 'Article sauvegardé'
+        })
+
+        return response.redirect('back')
+    }
+
+    async update({ request, session, response }){
+        const data = request.only(['title', 'url', 'description', 'tags','content','image','published_at']);
+
+        const image = request.file('image', {
+          types: ['image'],
+          size: '2mb'
+        })
+    
+        const messages = {
+          'title.required': 'Veuillez ajouter un titre à votre article.',
+          'title.unique': 'Ce titre est déjà utilisé.',
+          'url.required': 'Veuillez ajouter une url à votre article pour le SEO.',
+          'url.unique': 'Cette url est déjà utilisé.',
+          'description.required': 'Veuillez ajouter une descrption de votre article pour le SEO.',
+          'tags.required': 'Veuillez ajouter les mots clés pour article pour le SEO.',
+          'content.required': 'Veuillez ajouter un contenu à votre article.',
+          'image.required': 'Veuillez ajouter une image à votre article.'
+        }
+    
+        const rules = {
+          title: 'required|unique:posts',
+          url: 'required|unique:posts',
+          description: 'required',
+          tags: 'required',
+          content: 'required',
+          image: 'required',
+        }
+    
+        const validation = await validate(data, rules, messages)
+    
+        if (validation.fails()) {
+          session
+            .withErrors(validation.messages())
+            .flashExcept()
+    
+          return response.redirect('back')
+        }
+
+        if(!data.published_at) data.published_at === new Date()
+        
+        data.author_id = auth.user.id
+
+        if(image){
+            data.image = `${data.url}.${image.subtype}`;
+            await image.move(Helpers.tmpPath('/uploads/posts/'), {name: data.image})
+        }else if(data.url){
+
+        }
+
+        await Post.create(data)
+        
+        session.flash({
+          article_posted: 'Article sauvegardé'
+        })
+
+        return response.redirect('back')
     }
 
     async list({ view }){
@@ -39,6 +156,14 @@ class PostController {
           Comment.query().with('replies').where('post_id', params.id).where('parent_id', '=', 0).fetch(),
         ])
         return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
+    }
+
+    async delete ({ params,auth,response }){
+        const post = (await Post.find(params.id))
+        if(post.author.email === auth.user.email){
+            post.update({ delete: 1 })
+        }
+        response.redirect('/me/articles')
     }
 
     async comment ({ request,session, params,response, auth}){
