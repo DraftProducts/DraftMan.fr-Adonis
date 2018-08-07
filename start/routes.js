@@ -112,5 +112,12 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get('/me/write', 'PostController.create')
+    Route.post('/me/write', 'PostController.store')
+
+    Route.get('/me/write/:id-:url', 'PostController.edit')
+    Route.post('/me/write/:id-:url', 'PostController.update')
+
+    Route.get('/blog/delete/:id-:url', 'PostController.delete')
+    
     Route.get('/me/upload', 'BackofficeController.upload')
 }).middleware(['auth','writer']);
