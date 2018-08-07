@@ -27,20 +27,28 @@
             <input type="text" name="title" id="title">
             <label for="title">Titre</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
+
         <div>
             <input type="text" name="url" id="url">
             <label for="url">Url de l'article</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('url'), hasErrorFor('url')) }}
+
         <div>
             <textarea name="description" id="description" class="h-100"></textarea>
             <label for="description">Description de l'article</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+
         <div class="tags-section">
             <input type="hidden" id="hidden-input" name="tags">
             <input type="text" class="tag-input" id="main-input" placeholder="Ajouter un tag"/>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('tags'), hasErrorFor('tags')) }}
 
         <textarea name="content" id="markdown" placeholder="Contenu de l'article"></textarea>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('content'), hasErrorFor('content')) }}
 
         <div class="article_file">
             <input type="file" name="image" id="article_file" ref="file">
@@ -50,20 +58,23 @@
                 </div>
             </div>
         </div>
-
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('image'), hasErrorFor('image')) }}
+        
         <section id="switch-section">
             <p>Public</p>
             <div class="switch">
                 <label>
                     Non
-                    <input type="checkbox" name="public"/>
+                    <input type="checkbox" name="published_at"/>
                     <span class="lever"></span>
                     Oui
                 </label>
             </div>
         </section>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('published_at'), hasErrorFor('published_at')) }}
 
         {{ csrfField() }}
+        
         @if(flashMessage('valid_basic'))
             <div class="success-card">{{ flashMessage('valid_basic') }}</div>
         @endif
