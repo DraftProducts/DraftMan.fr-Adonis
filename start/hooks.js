@@ -11,7 +11,7 @@ hooks.after.providersRegistered(() => {
   })
 
   View.global('markdown', (text) => {
-    return markdown.render(text);
+    return markdown.render(text)
   })
 
   View.global('date', (date) => {
@@ -31,5 +31,9 @@ hooks.after.providersRegistered(() => {
       return gravatar.url(email, {protocol: 'https', s: 170});
     }
     return image;
+  })
+
+  View.global('getNameByFile', (file) => {
+    return file.match(/(.*)*\..*/);
   })
 })
