@@ -86,7 +86,6 @@ class ProfilController {
     if(image){
       const img = `${auth.user.id}.${new Date().getTime()}.${image.subtype}`;
       await image.move(Helpers.publicPath('/uploads/users'), {name: img})
-      
       data.profil =  `/uploads/users/${img}`
     }
 
