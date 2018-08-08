@@ -1,8 +1,14 @@
 const dashboard = new Vue({
     el: '#dashboard',
+    delimiters: ['@{', '}'],
     data: {
         open: true,
-        profil: false
+        profil: false,
+        name: '',
+        type: '',
+        description: '',
+        message: '',
+        message: ''
     },
     mounted(){
         this.addEvents(this);
