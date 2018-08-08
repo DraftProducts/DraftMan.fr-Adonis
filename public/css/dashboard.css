@@ -61,6 +61,8 @@
 #dashboard .corps #bar #user>span{
     color: #fff;
     font-size: 19px;
+    display: flex;
+    align-items: center
 }
 
 #dashboard .corps #bar #user ul{
@@ -84,8 +86,12 @@
     transition: 0.3s background-color;
     text-decoration: none;
     color: #7E7E7E;
+    display: flex;
+    align-items: center;
 }
-
+#dashboard .corps #bar #user ul a i{
+    margin-right: 5px;
+}
 #dashboard .corps #bar #user ul a:hover{
     background-color: #f7f7f7;
 }
@@ -115,11 +121,19 @@
     padding-bottom: 30px;
 }
 #dashboard #menu ul a{
-    padding: 20px 20px 20px 80px;
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 20px 60px;
     text-decoration: none;
     font-size: 18px;
     color: #7E7E7E;
     transition: 0.5s;
+}
+#dashboard.xs #menu ul a{
+    justify-content: center
+}
+#dashboard.md #menu ul a i{
+    margin-right: 10px;
 }
 #dashboard.xs #menu ul a{
     padding: 20px 0;
@@ -300,9 +314,10 @@
 }
 
 #dashboard #discord{
+    display: flex;
+    justify-content: center;
     background-color: #2C2F33;
     height: auto;
-    display: flex;
     padding: 22px;
     margin-bottom: 30px;
     min-width: 380px;
@@ -358,9 +373,9 @@
 }
 
 #dashboard #client>.write{
-    margin: 50px;
-    max-width: 450px;
-    min-width: 380px;
+    padding: 50px;
+    max-width: 480px;
+    min-width: 430px;
     width: 100%;
 }
 
@@ -376,6 +391,12 @@
 
 #dashboard #client #checkbox{
     margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+#dashboard #client #checkbox>label{
+    font-size: 13px
 }
 
 #dashboard #client .arrow{
@@ -386,10 +407,15 @@
     height: 100px;
 }
 
+#dashboard #client .arrow i{
+    font-size: 50px;
+    color: #7E7E7E
+}
+
 #dashboard #client .preview{
     flex: 1;
     margin: 50px 50px 50px 0;
-    padding: 100px 70px;
+    padding: 50px;
     background-image: url(../images/shattered.png);
     position: relative;
 }
@@ -619,13 +645,13 @@
     background-size: cover;
     z-index: 1;
 }
-#dashboard .infos{
+#dashboard #dclient .infos{
     margin: 40px 40px 20px 20px;
 }
-#dashboard .infos .payment_button{
+#dashboard #dclient .infos .payment_button{
     padding-bottom: 20px;
 }
-#dashboard .infos .payment_button input{
+#dashboard #dclient .infos .payment_button input{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -639,19 +665,19 @@
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
     outline: 0;
 }
-#dashboard .infos .files{
+#dashboard #dclient .infos .files{
     background-color: #fff;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
     padding: 20px;
     margin-bottom: 20px;
 }
 
-#dashboard .infos .speed_contact h3,#dashboard .infos .files h3{
+#dashboard #dclient .infos .speed_contact h3,#dashboard #dclient .infos .files h3{
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-#dashboard .infos .files .download-button{
+#dashboard #dclient .infos .files .download-button{
     display: flex;
     align-items: center;
     height: 40px;
@@ -665,57 +691,57 @@
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
 }
 
-#dashboard .infos .files .download-button:last-child{
+#dashboard #dclient .infos .files .download-button:last-child{
     margin-bottom: 0
 }
 
-#dashboard .infos .files .download-button span{
+#dashboard #dclient .infos .files .download-button span{
     width: 40px;
     height: 40px;
     background-color: #cd6e57;
     margin-right: 20px
 }
 
-#dashboard .infos .speed_contact{
+#dashboard #dclient .infos .speed_contact{
     background-color: #fff;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
     padding: 20px;
     margin-bottom: 20px;
 }
 
-#dashboard .infos .speed_contact p{
+#dashboard #dclient .infos .speed_contact p{
     font-size: 15px;
     margin-bottom: 7px;
 }
 
-#dashboard .infos .devblog{
+#dashboard #dclient .infos .devblog{
     padding: 16px;
     background-color: #141510;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
 }
 
-#dashboard .infos .devblog h3{
+#dashboard #dclient .infos .devblog h3{
     color: #fff;
     margin-bottom: 16px;
 }
 
-#dashboard .infos .devblog .item{
+#dashboard #dclient .infos .devblog .item{
     margin-bottom: 10px;
     background-color: #282921;
     padding: 10px;
 }
 
-#dashboard .infos .devblog .item:last-child{
+#dashboard #dclient .infos .devblog .item:last-child{
     margin-bottom: 0;
 }
 
-#dashboard .infos .devblog .item .title{
+#dashboard #dclient .infos .devblog .item .title{
     color: #F92672;
     margin-bottom: 3px;
     font-size: 15px;
 }
 
-#dashboard .infos .devblog .item p{
+#dashboard #dclient .infos .devblog .item p{
     color: #fff;
     font-size: 12px;
 }
