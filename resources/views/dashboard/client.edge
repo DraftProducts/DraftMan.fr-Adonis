@@ -19,26 +19,22 @@
 @section('content')
 <div id="client">
     <div class="write">
-        <div class="hiddenInfos">
-            <input type="hidden" name="pseudo" value="{{user.username}}" v-model="pseudo">
-            <input type="hidden" name="email" value="{{user.email}}" v-model="email">
-        </div>
         <div id="discord">
             @if(user.discord_username === "")
             <a href="/discord/login">Connecter discord</a>
             @else
-            <div class="image" style="background-image: url('{{user.profil}}')"></div>
+            <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
             <div class="content">
-                <div class="infos">
-                    <h5 class="pseudo">{{user.discord_username}}<span class="code">#{{user.discord_discriminator}}</span></h5>
-                    <span class="email">{{user.discord_email}}</span>
+                <div>
+                    <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
+                    <span class="email">{{auth.user.discord_email}}</span>
                 </div>
                 <a href="/discord/login">Connecter discord</a>
             </div>
             @endif
         </div>
         <div class="arrow">
-            arrow
+            <i class="icon-arrow-down"></i>
         </div>
         <div id="descriptif">
             <form action="">
@@ -57,7 +53,7 @@
             </form>
         </div>
         <div class="arrow">
-            arrow
+            <i class="icon-arrow-down"></i>
         </div>
         <div id="cgv">
             <div id="checkbox">
@@ -65,25 +61,25 @@
                     <input id="confirm" type="checkbox">
                     <label for="confirm"></label>
                 </div>
-                <label for="confirm">Je confirme avoir lu et accepté les <a href="" class="link">CGV</a>. </label>
+                <label for="confirm">Je renonce expressément à exercer mon droit de rétractation conformément aux dispositions de l'article L.221-28 1° du code de la consommation.</label>
             </div>
         </div>
         <div class="arrow">
-            arrow
+            <i class="icon-arrow-down"></i>
         </div>
         <button type="submit">Envoyer</button>
     </div>
     <div class="preview">
         <p>Bonjour DraftMan</p>
-        <p>Je vous contacte pour un travail de {{type}}</p>
-        <p>Le projet se nomme {{name}}</p>
+        <p>Je vous contacte pour un travail de <strong>@{type}</strong></p>
+        <p>Le projet se nomme <strong>@{name}</strong></p>
         <p>Voici donc une courte description</p>
-        <p>{{description}}</p>
+        <p>@{description}</p>
         <p>Je pourrais biensûr vous détailler le projet en conversation oral ou écrite dans les channels discord prévu à cet effet sur le serveur <a class="link" href="/discord">discord</a></p>
         <p>En cas de quelconque problème vous pouvez me contacter par mail ou par discord :</p>
-        <p>Discord : {{pseudoDiscord}}</p>
-        <p>Email : {{email}}</p>
-        <p>Cordialement {{pseudo}}</p>
+        <p>Discord : <strong>{{auth.user.discord_username}}#{{auth.user.discord_discriminator}}</strong></p>
+        <p>Email : <strong>{{auth.user.email}}</strong></p>
+        <p>Cordialement <strong>{{auth.user.username}}</strong></p>
     </div>
 </div>
 @endsection
