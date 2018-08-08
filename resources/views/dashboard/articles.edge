@@ -29,7 +29,7 @@
                 <div class="img" style="background-image: url(/images/blog/posts/{{article.image}})"></div>
                 <a href="/admin/view/{{article.id}}-{{article.url}}">Voir l'article</a>
                 @if(auth.user.email === article.author.email)
-                    <a href="/me/edit/{{article.id}}-{{article.url}}">Modifier l'article</a>
+                    <a href="/me/write/{{article.id}}-{{article.url}}">Modifier l'article</a>
                 @endif
             </div>
         </div>
