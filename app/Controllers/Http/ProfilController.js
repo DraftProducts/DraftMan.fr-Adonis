@@ -35,7 +35,7 @@ class ProfilController {
   }
 
   async storeBasic({session, request, response,auth}){
-    const data = request.only(['username', 'email', 'password', 'password_conf'])
+    const data = request.only(['username', 'email', 'password', 'password_confirmation'])
 
     const image = request.file('image', {
       types: ['image'],
@@ -46,26 +46,36 @@ class ProfilController {
       'email.email': 'Veuillez entrer une adresse email valide.',
       'username.unique': 'Ce pseudo est déjà utilisé.',
       'email.unique': 'Cette adresse email est déjà utilisé.',
-      'password_conf.required_if': 'Veuillez répéter votre mot de passe.',
-      'password_conf.same': 'Veuillez mettre le même mot de passe.'
+      'password.confirmed': 'Veuillez répéter votre mot de passe.',
     }
 
     const rules = {
-      username: 'unique:users',
-      email: 'email|unique:users',
-      password_conf: 'required_if:password|same:password',
+      email: 'email',
+      password: 'confirmed'
     }
 
     const validation = await validate(data, rules, messages)
 
     if (validation.fails()) {
-      session
+      await session
         .withErrors(validation.messages())
-        .flashExcept(['password_conf'])
+        .flashAll()
 
       return response.redirect('back')
     }
 
+    if(await User.query().where('username', data.username).getCount() > 0 && auth.user.username != data.username){
+      await session
+        .withErrors([{ field: 'username', message: 'Ce pseudo est déjà utilisé.' }])
+        .flashAll()
+        return response.redirect('back')
+    }else if(await User.query().where('email', data.email).getCount() > 0 && auth.user.email != data.email){
+      await session
+        .withErrors([{ field: 'email', message: 'Cette adresse email est déjà utilisé.' }])
+        .flashAll()
+        return response.redirect('back')
+    }
+   
     const infos = { 
       username: data.username,
       email: data.email
@@ -74,15 +84,14 @@ class ProfilController {
     if(!data.password.isEmpty()) infos.password = data.password
 
     if(image){
-      const img = `${auth.user.id}.${image.subtype}`;
-      await image.move(Helpers.tmpPath('uploads/users'), {name: img})
+      const img = `${auth.user.id}.${new Date().getTime()}.${image.subtype}`;
+      await image.move(Helpers.publicPath('/uploads/users'), {name: img})
+      
       data.profil =  `/uploads/users/${img}`
     }
 
     await User.query().where('id', auth.user.id).update(infos)
 
-    session.put("username", data.username);
-    
     session.flash({
       valid_basic: 'Informations modifiés'
     })
