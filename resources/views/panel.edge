@@ -47,20 +47,20 @@
                 <img class="user" src="{{getProfilImage(auth.user)}}" alt="User">
                 <span class="username" v-if="open">{{auth.user.username}}</span>
                 <ul>
-                    <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i></i><span v-if="open">Accueil</span></a>
-                    <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i></i><span v-if="open">Modification du profil</span></a>
+                    <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i class="icon-home"></i><span v-if="open">Accueil</span></a>
+                    <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i class="icon-user"></i><span v-if="open">Modification du profil</span></a>
                     @if(auth.user.client === 1)
-                        <a class="{{request.url() === '/me/client/dashboard' ? 'active': ''}}" href="/me/client/dashboard"><i></i><span v-if="open">Espace Client</span></a>
+                        <a class="{{request.url() === '/me/client/dashboard' ? 'active': ''}}" href="/me/client/dashboard"><i class="icon-client"></i><span v-if="open">Espace Client</span></a>
                     @else
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Devenir Client</span></a>
+                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i class="icon-client"></i><span v-if="open">Devenir Client</span></a>
                     @endif
                     @if(auth.user.role >= 1)
-                        <a class="{{request.url() === '/me/comments' ? 'active': ''}}" href="/me/comments"><i></i><span v-if="open">Commentaires</span></a>
-                        <a class="{{request.url() === '/me/articles' ? 'active': ''}}" href="/me/articles"><i></i><span v-if="open">Articles</span></a>
+                        <a class="{{request.url() === '/me/comments' ? 'active': ''}}" href="/me/comments"><i class="icon-comment"></i><span v-if="open">Commentaires</span></a>
+                        <a class="{{request.url() === '/me/articles' ? 'active': ''}}" href="/me/articles"><i class="icon-articles"></i><span v-if="open">Articles</span></a>
                     @endif
                     @if(auth.user.role >= 2)
-                        <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i></i><span v-if="open">Ecrire un article</span></a>
-                        <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i></i><span v-if="open">Upload</span></a>
+                        <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open">Ecrire un article</span></a>
+                        <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open">Upload</span></a>
                     @endif
                     @if(auth.user.role === 3)
                         <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Roles</span></a>
@@ -78,9 +78,10 @@
             
                 <div @click="toggleProfil()" id="user">
                     <div class="profil" style="background-image: url({{getProfilImage(auth.user)}})"></div>
-                    <span>{{auth.user.username}}</span>
+                    <span>{{auth.user.username}}<i class="icon-arrow-down"></i></span>
+
                     <ul :class="{active: profil}">
-                        <a href="/legout"><i></i><span>Legout</span></a>
+                        <a href="/legout"><i class="icon-slideshow"></i><span>Legout</span></a>
                     </ul>
                 </div>
             </div>
