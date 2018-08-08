@@ -31,18 +31,21 @@
             <input type="text" name="pseudo" id="pseudo" value="{{auth.user.username}}">
             <label for="pseudo">Pseudo</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('pseudo'), hasErrorFor('pseudo')) }}
         <div>
             <input type="email" name="email" id="email" value="{{auth.user.email}}">
             <label for="email">Adresse email</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
         <div>
             <input type="password" name="password" id="password">
             <label for="password">Mot de passe</label>
         </div>
         <div>
-            <input type="password" name="password_conf" id="password_conf">
-            <label for="password_conf">Répéter le mot de passe</label>
+            <input type="password" name="password_confirmation" id="password_confirmation">
+            <label for="password_confirmation">Répéter le mot de passe</label>
         </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
         {{ csrfField() }}
         @if(flashMessage('valid_basic'))
             <div class="success-card">{{ flashMessage('valid_basic') }}</div>
