@@ -7,22 +7,16 @@ class PortfolioSchema extends Schema {
     this.create('portfolio', (table) => {
       table.increments()
       table.string('name')
-      table.string('url')
       table.string('description')
       table.string('type')
       table.string('illustration')
+      table.integer('portfolio_details_id')
       table.date('published_at')
       table.timestamps()
     })
-    this.create('projects', (table) => {
+    this.create('portfolio_details', (table) => {
       table.increments()
-      table.string('url')
-      table.integer('ref')
-      table.string('color1')
-      table.string('color2')
-      table.string('color3')
-      table.string('color4')
-      table.string('color5')
+      table.json('colors')
       table.string('typographie1')
       table.string('typographie2')
       table.text('problematique')
@@ -30,6 +24,7 @@ class PortfolioSchema extends Schema {
       table.text('technique')
       table.string('logo')
       table.string('folder')
+      table.integer('portfolio_id')
       table.timestamps()
     })
   }
