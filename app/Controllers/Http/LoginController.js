@@ -35,7 +35,6 @@ class LoginController {
 
     try {
       await auth.remember(true).attempt(email, password);
-      session.put("email", email);
     } catch (e) {
       session.flashExcept(['password'])
       session.flash({error: 'Identifiant ou mot de passe incorect'})
