@@ -55,7 +55,7 @@ class ClientController {
       }]
     };
     
-    paypal.payment.create(create_payment_json, function (error, payment) {
+    await paypal.payment.create(create_payment_json, function (error, payment) {
       if (error) {
           throw error;
       } else {
