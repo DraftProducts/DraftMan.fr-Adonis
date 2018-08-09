@@ -3,6 +3,7 @@
 const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 const { validate } = use('Validator')
+const Helpers = use('Helpers')
 
 class PostController {
     // index = Liste tes posts
@@ -30,7 +31,7 @@ class PostController {
         return view.render('dashboard.edit', {post: post.toJSON()})
     }
 
-    async store({ request, session, response }){
+    async store({ request, session, response, auth }){
         const data = request.only(['title', 'url', 'description', 'tags','content','image','published_at']);
 
         const image = request.file('image', {
@@ -45,8 +46,7 @@ class PostController {
           'url.unique': 'Cette url est déjà utilisé.',
           'description.required': 'Veuillez ajouter une descrption de votre article pour le SEO.',
           'tags.required': 'Veuillez ajouter les mots clés pour article pour le SEO.',
-          'content.required': 'Veuillez ajouter un contenu à votre article.',
-          'image.required': 'Veuillez ajouter une image à votre article.'
+          'content.required': 'Veuillez ajouter un contenu à votre article.'
         }
     
         const rules = {
@@ -54,8 +54,7 @@ class PostController {
           url: 'required|unique:posts',
           description: 'required',
           tags: 'required',
-          content: 'required',
-          image: 'required',
+          content: 'required'
         }
     
         const validation = await validate(data, rules, messages)
@@ -72,8 +71,8 @@ class PostController {
         
         data.author_id = auth.user.id
 
-        data.image = `${data.url}.${image.subtype}`;
-        await image.move(Helpers.tmpPath('/uploads/posts/'), {name: data.image})
+        data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
+        await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
 
         await Post.create(data)
         
@@ -81,7 +80,11 @@ class PostController {
           article_posted: 'Article sauvegardé'
         })
 
-        return response.redirect('back')
+        if(data.published_at){
+            return response.redirect('/blog')
+        }else{
+            return response.redirect('/me/articles')
+        }
     }
 
     async update({ request, session, response }){
