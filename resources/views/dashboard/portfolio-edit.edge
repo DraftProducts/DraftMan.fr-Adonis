@@ -1,0 +1,94 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Portfolio - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta property="og:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta name="twitter:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/admin/portfolio" />
+    <meta property="og:url" content="https://www.draftman.fr/admin/portfolio">
+@endsection
+
+@section('content')
+<div class="portfolio double">
+<form class="compte" method="POST" action="/admin/portfolio/{{creation.id}}" enctype="multipart/form-data">
+
+        <div class="input-container">
+            <input type="text" name="name" id="name" class="input" value="{{creation.name}}">
+            <label for="name">Nom du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
+
+        <div class="select-section">
+            <select name="type">
+                <option value="" {{creation.type === '' ? 'selected': ''}}>Type de projet</option>
+                <option value="web" {{creation.type === 'web' ? 'selected': ''}}>Web</option>
+                <option value="projets" {{creation.type === 'projets' ? 'selected': ''}}>Projets</option>
+                <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
+            </select>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
+
+        <div class="input-container">
+            <textarea name="description" id="description" class="input textarea">{{creation.description}}</textarea>
+            <label for="description">Description de la création</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+        <div class="compact">
+            <div class="item">
+                <div class="article_file">
+                    <input type="file" name="illustration" id="article_file" ref="file">
+                    <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
+                        <div class="text">
+                            Charger
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <section class="switch-section">
+                    <p>Public</p>
+                    <div class="switch">
+                        <label>
+                            Non
+                            <input type="checkbox" name="published_at"
+                            @if(creation.published_at != null)
+                            checked
+                            @endif
+                            />
+                            <span class="lever"></span>
+                            Oui
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('image'), hasErrorFor('image')) }}
+
+        {{ csrfField() }}
+        
+        @if(flashMessage('valid_basic'))
+            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
+        @endif
+        <div class="buttons">
+            <button class="input submit" type="submit">Sauvegarder</button>
+            <a class="input evolut" href="/admin/portfolio/{{creation.id}}/upgrade"><i class="icon-list"></i> Evoluer</a>
+        </div>
+    </form>
+    <div class="elements">
+            @each(item in portfolio)
+            <div class="element">
+                <h4>{{item.name}} - {{item.type}}</h4>
+                <a href="/admin/portfolio/{{item.id}}" class="edit"><i class="icon-create"></i>Editer</a>
+            </div>
+        @endeach
+    </div>
+</div>
+@endsection
