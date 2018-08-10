@@ -16,8 +16,7 @@ class PostController {
 
     async index({ view }){
 
-        const posts = (await Post.query().where('posted', 1).fetch()).toJSON();
-
+        const posts = (await Post.query().whereNotNull('published_at').fetch()).toJSON();
         return view.render('blog.index', {posts})
     }
 
@@ -26,9 +25,8 @@ class PostController {
     }
 
     async edit({ view, params }){
-        const post = await Post.find(params.id)
-        console.log(post.toJSON())
-        return view.render('dashboard.edit', {post: post.toJSON()})
+        const post = (await Post.find(params.id)).toJSON()
+        return view.render('dashboard.edit', {post})
     }
 
     async store({ request, session, response, auth }){
@@ -80,7 +78,7 @@ class PostController {
           article_posted: 'Article sauvegardé'
         })
 
-        if(data.published_at){
+        if(data.published_at != null){
             return response.redirect('/blog')
         }else{
             return response.redirect('/me/articles')
