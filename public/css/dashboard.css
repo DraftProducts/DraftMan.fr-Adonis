@@ -1,809 +1,1187 @@
-#dashboard{
-    display: flex;
-    justify-content: space-between;
+/**
+ |--------------------------------------------------------------------------
+ | Dashboard
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard {
+  display: flex;
+  justify-content: space-between;
 }
 
-#dashboard #menu{
-    width: 300px;
-    min-width: 300px;
-    min-height: 600px;
-    padding: 0;
-    z-index: 128;
-    background-color: #fff;
-    box-shadow: 1px 0 20px rgba(0,0,0,.08);
-    -moz-box-shadow: 1px 0 20px rgba(0,0,0,.08);
-    -webkit-box-shadow: 1px 0 20px rgba(0,0,0,.08);
-    -webkit-transition: width .6s cubic-bezier(.15,.99,.18,1.01);
-    transition: width .6s cubic-bezier(.15,.99,.18,1.01);
+#dashboard #menu {
+  width: 300px;
+  min-width: 300px;
+  min-height: 600px;
+  padding: 0;
+  z-index: 128;
+  background-color: #fff;
+  box-shadow: 1px 0 20px rgba(0, 0, 0, .08);
+  -moz-box-shadow: 1px 0 20px rgba(0, 0, 0, .08);
+  -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, .08);
+  -webkit-transition: width .6s cubic-bezier(.15, .99, .18, 1.01);
+  transition: width .6s cubic-bezier(.15, .99, .18, 1.01);
 }
-#dashboard #menu>.content{
-    width: 300px;
+
+#dashboard #menu>.content {
+  width: 300px;
 }
-#dashboard.xs #menu,#dashboard.xs #menu>.content{
-    width: 90px;
-    min-width: 90px;
+
+#dashboard.xs #menu,
+#dashboard.xs #menu>.content {
+  width: 90px;
+  min-width: 90px;
 }
-#dashboard #menu .content{
-    display: flex;
-    flex-direction: column;
+
+#dashboard #menu .content {
+  display: flex;
+  flex-direction: column;
 }
-#dashboard .corps{
-    width: calc(100% - 300px);
-    min-height: 600px;
-    background-color: #F7F7F7;
+
+#dashboard>.corps {
+  width: calc(100% - 300px);
+  min-height: 600px;
+  background-color: #F7F7F7;
 }
-#dashboard.xs .corps{
-    width: calc(100% - 90px)
+
+#dashboard.xs>.corps {
+  width: calc(100% - 90px)
 }
-#dashboard .corps #bar{
-    display: flex;
-    justify-content: space-between;
-    background-color: #2E3133;
-    height: 60px;
+
+#dashboard>.corps #bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2E3133;
+  height: 60px;
 }
-#dashboard .corps #bar #user{
+
+#dashboard>.corps #bar #user {
+  display: flex;
+  align-items: center;
+  padding: 0 30px 0 20px;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer
+}
+
+#dashboard>.corps #bar #user .profil {
+  background-position: center;
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  border: 2px solid #cd6e57;
+  border-radius: 100%;
+  margin-right: 8px;
+}
+
+#dashboard>.corps #bar #user>span {
+  color: #fff;
+  font-size: 19px;
+  display: flex;
+  align-items: center
+}
+
+#dashboard>.corps #bar #user ul {
+  width: 100%;
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  transform: translate3d(0, 60px, 0);
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, .26);
+  border-radius: 0 0 2px 2px;
+  display: none;
+}
+
+#dashboard>.corps #bar #user ul.active {
+  display: flex;
+}
+
+#dashboard>.corps #bar #user ul a {
+  padding: 15px 15px 15px 20px;
+  position: relative;
+  transition: 0.3s background-color;
+  text-decoration: none;
+  color: #7E7E7E;
+  display: flex;
+  align-items: center;
+}
+
+#dashboard>.corps #bar #user ul a i {
+  margin-right: 5px;
+}
+
+#dashboard>.corps #bar #user ul a:hover {
+  background-color: #f7f7f7;
+}
+
+#dashboard>.corps>.content {
+  height: calc(100% - 60px);
+  padding: 40px;
+}
+
+#dashboard #menu .user {
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  border: 3px solid #cd6e57;
+  margin: 30px auto 0;
+  transition: 0.3s;
+}
+
+#dashboard #menu .username {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: #404346;
+  padding: 10px 0 30px;
+}
+
+#dashboard #menu ul {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+#dashboard #menu ul a {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 20px 60px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #7E7E7E;
+  transition: 0.5s;
+}
+
+#dashboard.xs #menu ul a {
+  justify-content: center
+}
+
+#dashboard.md #menu ul a i {
+  margin-right: 10px;
+}
+
+#dashboard.xs #menu ul a {
+  padding: 20px 0;
+}
+
+#dashboard.xs #menu .user {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 30px;
+}
+
+#dashboard #menu ul a.active,
+#dashboard #menu ul a:hover {
+  color: #CD6E57;
+  background-color: #F7F7F7;
+}
+
+#burger {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+}
+
+#burger .inner,
+#burger .inner:before,
+#burger .inner:after {
+  background-color: #fff;
+  position: absolute;
+  width: 35px;
+  height: 4px;
+  border-radius: 4px;
+  z-index: 5
+}
+
+#burger .inner:before {
+  left: 0;
+  top: -10px;
+  transition: transform .125s cubic-bezier(.6, .04, .98, .335), top .05s linear .125s, left .125s ease-in .175s;
+  display: block;
+  content: "";
+}
+
+#burger .inner:after {
+  top: 10px;
+  bottom: -10px;
+  right: 0;
+  transition: transform .125s cubic-bezier(.6, .04, .98, .335), top .05s linear .125s, right .125s ease-in .175s;
+  display: block;
+  content: "";
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Compenents
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .double {
+  display: flex
+}
+
+#dashboard .double>form,
+#dashboard .double>div {
+  flex: 1 0
+}
+
+#dashboard .double>form:first-child,
+#dashboard .double>div:first-child {
+  padding-right: 40px;
+}
+
+#dashboard .buttons {
+  display: flex;
+}
+
+#dashboard .buttons button:first-child,
+#dashboard .buttons a:first-child {
+  flex: 1 0
+}
+
+#dashboard form .input-container {
+  position: relative;
+}
+
+#dashboard form .input-container>label {
+  position: absolute;
+  opacity: .5;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  top: 13px;
+  font-size: 14px;
+  left: 14px;
+  animation-direction: alternate;
+}
+
+#dashboard form .input-container>.tag~label,
+#dashboard form .input-container>input:focus~label,
+#dashboard form .input-container>input.filled~label,
+#dashboard form .input-container>textarea:focus~label,
+#dashboard form .input-container>textarea.filled~label {
+  left: auto;
+  right: 14px;
+  opacity: .3;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  outline: 0;
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+textarea.textarea {
+  height: auto;
+  min-height: 200px;
+  resize: vertical;
+  font-family: Open Sans;
+}
+
+#dashboard .submit {
+  color: #fff;
+  background-color: #cd6e57;
+  padding: 12px;
+  cursor: pointer;
+  margin: 0
+}
+
+
+#dashboard .evolut {
+    color: #fff;
+    background-color: #8c00ff;
+    padding: 12px;
+    cursor: pointer;
+    margin: 0;
+    font-size: 13.333px;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 0 30px 0 20px;
-    position: relative;
-    text-decoration: none;
-    cursor: pointer
+    justify-content: center;
+    margin-left: 10px;
+    width: 150px
+  }
+
+  #dashboard .evolut i{
+      font-size: 16px;
+      margin-right: 5px
+  }
+
+#dashboard a.delete {
+  color: #fff;
+  background-color: #F44336;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 13.3333px;
+  text-decoration: none;
+  display: flex;
 }
-#dashboard .corps #bar #user .profil{
-    background-position: center;
-    background-size: cover;
-    height: 40px;
-    width: 40px;
-    border: 2px solid #cd6e57;
-    border-radius: 100%;
-    margin-right: 8px;
+
+#dashboard .compact{
+    display: flex
 }
-#dashboard .corps #bar #user>span{
-    color: #fff;
-    font-size: 19px;
+
+#dashboard .compact .item{
+    flex: 1 0;
     display: flex;
     align-items: center
 }
 
-#dashboard .corps #bar #user ul{
-    width: 100%;
-    position: absolute;
+#dashboard .last-child{
+    margin-bottom: 0!important;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Message page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .message {
+  width: 100%;
+  height: 100%;
+  text-align: center
+}
+
+#dashboard .message h1 {
+    margin-bottom: 10px;
+    margin-top: 30vh;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Profil page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .profil .profil_file {
+  height: 150px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+#dashboard .profil #profil_file {
+  position: absolute;
+  width: 150px;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#dashboard .profil .profil_image {
+  height: 147px;
+  width: 147px;
+  border: 3px solid #cd6e57;
+  border-radius: 100%;
+  background-size: cover;
+}
+
+#dashboard .profil .profil_image .text {
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #dedede;
+  font-weight: 600;
+  background-color: #40404080;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s background-color;
+}
+
+#dashboard .profil #profil_file:hover+.profil_image .text {
+  background-color: #404040a6
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Client page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .client .write {
+  max-width: 480px;
+  min-width: 430px;
+  width: 100%;
+}
+
+#dashboard .client #discord,
+#dashboard .client textarea {
+  margin: 0
+}
+
+#dashboard .client #cgv {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+#dashboard .client #checkbox {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+#dashboard .client #checkbox>label {
+  font-size: 13px
+}
+
+#dashboard .client .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+}
+
+#dashboard .client .arrow i {
+  font-size: 50px;
+  color: #7E7E7E
+}
+
+#dashboard .client .preview {
+  padding: 50px;
+  background-image: url(../images/shattered.png);
+  position: relative;
+}
+
+#dashboard .client .preview:after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 0;
+  border-color: #F7F7F7 #F7F7F7 #dedede #d6d6d6;
+  border-style: solid;
+  border-width: 0px 50px 50px 0px;
+  height: 0px;
+  width: 0px;
+  display: block;
+  -moz-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+#dashboard .client .preview p {
+  margin-bottom: 1em;
+  line-height: 20px;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Comments page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .comments {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#dashboard .comments .comment {
+  display: flex;
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  margin: 10px;
+}
+
+#dashboard .comments .comment .image {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
+
+#dashboard .comments .comment>.content {
+  padding: 15px;
+  flex: 1;
+}
+
+#dashboard .comments .comment>.content .top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px
+}
+
+#dashboard .comments .comment .buttons {
+  width: 50px;
+}
+
+#dashboard .comments .comment .buttons>a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+#dashboard .comments .comment .buttons>.valid {
+  background-color: #4CAF50;
+}
+
+#dashboard .comments .comment .buttons>.remove {
+  background-color: #F44336;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Article file
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .article_file {
+  height: 108px;
+  width: 192px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+#dashboard #article_file {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#dashboard .article_image {
+  height: 108px;
+  width: 192px;
+  border: 3px solid #cd6e57;
+  background-size: cover;
+  background-position: center
+}
+
+#dashboard .article_image .text {
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #dedede;
+  font-weight: 600;
+  background-color: #40404080;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s background-color;
+}
+
+#dashboard #article_file:hover+.article_image .text {
+  background-color: #404040a6
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Dashboard client page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .dclient .infos {
+  width: 300px;
+  max-width: 300px;
+}
+
+#dashboard .dclient .corps {
+  padding-right: 20px !important;
+}
+
+#dashboard .dclient .corps .name {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-align: center;
+  color: #7E7E7E;
+}
+
+#dashboard .dclient .progress {
+  height: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+#dashboard .dclient .progress .bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  background-color: #cd6e57;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+  background-size: 40px 40px;
+}
+
+#dashboard .timeline .payment {
+  height: 40px;
+  display: flex;
+}
+
+#dashboard .timeline .payment .item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dashboard .timeline .payment .item .icon {
+  height: 40px;
+  width: 40px;
+}
+
+#dashboard .timeline .payment .item .icon.valid {
+  background: green
+}
+
+#dashboard .timeline .payment .item .icon.pay {
+  background: red
+}
+
+#dashboard #images {
+  margin-top: 40px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+#dashboard #images .item {
+  position: relative;
+  width: 180px;
+  height: 130px;
+  padding: 10px
+}
+
+#dashboard #images .item img {
+  position: absolute;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
+  opacity: 0;
+  z-index: 3;
+  cursor: pointer
+}
+
+#dashboard #images .item .hover {
+  background-color: #40404026;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  transition: 0.3s background-color;
+  z-index: 2;
+}
+
+#dashboard #images .item img:hover+.hover {
+  background-color: #40404046
+}
+
+#dashboard #images .item>.content {
+  background-color: #7E7E7E;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  z-index: 1;
+}
+
+#dashboard .dclient .infos .payment_button {
+  padding-bottom: 20px;
+}
+
+#dashboard .dclient .infos .payment_button input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  color: #fff;
+  background-color: #cd6e57;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  outline: 0;
+}
+
+#dashboard .dclient .infos .files {
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#dashboard .dclient .infos .speed_contact h3,
+#dashboard .dclient .infos .files h3 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+#dashboard .dclient .infos .files .download-button {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  background-color: #cd6e57d4;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
+}
+
+#dashboard .dclient .infos .files .download-button:last-child,
+#dashboard .dclient .infos .devblog .item:last-child {
+  margin-bottom: 0
+}
+
+#dashboard .dclient .infos .files .download-button span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #cd6e57;
+  margin-right: 20px;
+}
+
+#dashboard .dclient .infos .files .download-button span i {
+  font-size: 20px
+}
+
+#dashboard .dclient .infos .speed_contact {
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#dashboard .dclient .infos .speed_contact p {
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+#dashboard .dclient .infos .devblog {
+  padding: 20px;
+  background-color: #141510;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+#dashboard .dclient .infos .devblog h3 {
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+#dashboard .dclient .infos .devblog .item {
+  margin-bottom: 10px;
+  background-color: #282921;
+  padding: 10px;
+}
+
+#dashboard .dclient .infos .devblog .item .title {
+  color: #F92672;
+  margin-bottom: 3px;
+  font-size: 15px;
+}
+
+#dashboard .dclient .infos .devblog .item p {
+  color: #fff;
+  font-size: 12px;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Articles page
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .article {
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  padding: 20px;
+  display: flex;
+}
+
+#dashboard .article .title h5 {
+  margin: 12px 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: #616161;
+}
+
+#dashboard .article .text {
+  flex: 1;
+  padding-right: 40px
+}
+
+#dashboard .article .text p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, .87);
+}
+
+#dashboard .article .image {
+  width: 300px;
+}
+
+#dashboard .article .img {
+  height: 170px;
+  background-position: center;
+  background-size: cover;
+}
+
+#dashboard .article .image a {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  margin-top: 12px;
+  padding: 2px 0;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 36px;
+  letter-spacing: .5px;
+  vertical-align: middle;
+  color: #fff;
+  background-color: #cd6e57;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+  transition: all .3s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+#dashboard .article .image a:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+}
+/**
+ |--------------------------------------------------------------------------
+ | Portfolio page
+ |--------------------------------------------------------------------------
+ */
+ #dashboard .portfolio form {
+    padding-right: 20px !important;
+}
+#dashboard .portfolio .elements {
+    width: 300px;
+    max-width: 300px;
+}
+#dashboard .portfolio .element {
+    display: flex;
     flex-direction: column;
-    top: 0;
-    right: 0;
-    transform: translate3d(0, 60px,0);
     background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0,0,0,.26);
-    border-radius: 0 0 2px 2px;
-    display: none;
-}
-#dashboard .corps #bar #user ul.active{
-    display: flex;
-}
-#dashboard .corps #bar #user ul a{
-    padding: 15px 15px 15px 50px;
-    position: relative;
-    transition: 0.3s background-color;
-    text-decoration: none;
-    color: #7E7E7E;
-    display: flex;
-    align-items: center;
-}
-#dashboard .corps #bar #user ul a i{
-    margin-right: 5px;
-}
-#dashboard .corps #bar #user ul a:hover{
-    background-color: #f7f7f7;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-#dashboard .corps>.content{
-    height: calc(100% - 60px);
-}
-
-#dashboard #menu .user{
-    width: 130px;
-    height: 130px;
-    border-radius: 100%;
-    border: 3px solid #cd6e57;
-    margin: 30px auto 0;
-    transition: 0.3s;
-}
-#dashboard #menu .username{
-    font-size: 22px;
-    font-weight: 600;
-    text-align: center;
+#dashboard .portfolio .element h4{
+    margin-bottom: 10px;
+    text-transform: capitalize;
     color: #404346;
-    padding: 10px 0 30px;
 }
-#dashboard #menu ul{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 30px;
-}
-#dashboard #menu ul a{
-    display: flex;
-    align-items: center;
-    padding: 20px 20px 20px 60px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #7E7E7E;
-    transition: 0.5s;
-}
-#dashboard.xs #menu ul a{
-    justify-content: center
-}
-#dashboard.md #menu ul a i{
-    margin-right: 10px;
-}
-#dashboard.xs #menu ul a{
-    padding: 20px 0;
-}
-#dashboard.xs #menu .user{
-    width: 60px;
-    height: 60px;
-    margin-bottom: 30px;
-}
-
-#dashboard #menu ul a.active,#dashboard #menu ul a:hover{
-    color: #CD6E57;
-    background-color: #F7F7F7;
-}
-#burger {
-    cursor: pointer;
-    position: relative;
+#dashboard .portfolio .element a{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
-}
-#burger .inner,
-#burger .inner:before,
-#burger .inner:after {
-    background-color: #fff;
-    position: absolute;
-    width: 35px;
-    height: 4px;
-    border-radius: 4px;
-    z-index: 5
-}
-#burger .inner:before {
-    left: 0;
-    top: -10px;
-    transition: transform .125s cubic-bezier(.6, .04, .98, .335), top .05s linear .125s, left .125s ease-in .175s;
-    display: block;
-    content: "";
-}
-#burger .inner:after {
-    top: 10px;
-    bottom: -10px;
-    right: 0;
-    transition: transform .125s cubic-bezier(.6, .04, .98, .335), top .05s linear .125s, right .125s ease-in .175s;
-    display: block;
-    content: "";
-}
-
-
-#dashboard .accueil{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#dashboard .accueil h1{
-    margin-bottom: 10px;
-}
-
-#dashboard .profil,#dashboard #client,#dashboard #dclient{
-    display: flex;
-}
-
-#dashboard .profil .compte,#dashboard .profil .infos_supp,#dashboard .write,#dashboard #dclient .corps{
-    padding: 50px;
-    flex: 1
-}
-
-#dashboard .profil .compte{
-    padding: 50px 0px 50px 50px;
-}
-
-#dashboard .profil .profil_file{
-    height: 150px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-#dashboard .profil #profil_file{
-    position: absolute;
-    width: 150px;
-    top: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-#dashboard .profil .profil_image{
-    height: 147px;
-    width: 147px;
-    border: 3px solid #cd6e57;
-    border-radius: 100%;
-    background-size: cover;
-}
-#dashboard .profil .profil_image .text{
-    text-transform: uppercase;
-    font-size: 15px;
-    color: #dedede;
-    font-weight: 600;
-    background-color: #40404080;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.4s background-color;
-}
-
-#dashboard .profil #profil_file:hover + .profil_image .text{
-    background-color: #404040a6
-}
-#dashboard form>div{
-    position: relative;
-}
-#dashboard form>div>label{
-    position: absolute;
-    opacity: .5;
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    top: 13px;
-    font-size: 14px;
-    left: 14px;
-    animation-direction: alternate;
-}
-#dashboard input[type="text"]:not(.tag-input),#dashboard input[type="email"],#dashboard input[type="password"],#dashboard button,#dashboard #discord,#dashboard textarea,#dashboard .tags-section,#dashboard a.delete{
-    width: 100%;
-    height: 40px;
-    border: none;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    outline: 0;
-    padding: 15px;
-    margin-bottom: 20px;
-    position: relative;
-}
-#dashboard .tags-section{
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-#dashboard form>div>input:focus~label, #dashboard form>div>input.filled~label,#dashboard form>div>textarea:focus~label, #dashboard form>div>textarea.filled~label{
-    left: auto;
-    right: 14px;
-    opacity: .3;
-}
-#dashboard button{
-    color: #fff;
-    background-color: #cd6e57;
-    padding: 12px;
-    cursor: pointer;
-}
-#dashboard a.delete{
-    color: #fff;
-    background-color: #F44336;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 13.3333px;
-    text-decoration: none;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-
-#dashboard .buttons{
-    display: flex;
-    justify-content: space-between
-}
-
-#dashboard .buttons button,#dashboard .buttons a{
-    width: 49%;
-}
-
-#dashboard #discord{
-    display: flex;
-    justify-content: center;
-    background-color: #2C2F33;
-    height: auto;
-    padding: 22px;
-    margin-bottom: 30px;
-    min-width: 380px;
-}
-#dashboard textarea{
-    height: auto;
-    min-height: 200px;
-    min-width: 100%;
-    max-width: 100%;
-    font-family: Open Sans;
-}
-#dashboard textarea.h-100{
-    min-height: 100px;
-}
-#dashboard #discord .image{
-    background-size: cover;
-    height: 106px;
-    width: 106px;
-    border-radius: 100%;
-}
-
-#dashboard #discord .content{
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    padding-left: 22px;
-}
-
-#dashboard #discord .pseudo{
-    color: #D6D6D6;
-    font-size: 22px;
-    margin-bottom: 4px;
-}
-
-#dashboard #discord .pseudo .code{
-    font-size: 14px;
-    color: #8A8A8A;
-}
-
-#dashboard #discord .email{
-    font-size: 14px;
-    color: #656565;
-}
-
-#dashboard #discord a{
-    background-color: #7289DA;
-    border-radius: 3px;
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 30px;
-    margin-top: auto;
-}
-
-#dashboard #client>.write{
-    padding: 50px;
-    max-width: 480px;
-    min-width: 430px;
-    width: 100%;
-}
-
-#dashboard #client #discord,#dashboard #client textarea{
-    margin: 0
-}
-
-#dashboard #client #cgv{
-    display: flex;
-    align-items: center;
-    justify-content: center
-}
-
-#dashboard #client #checkbox{
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-#dashboard #client #checkbox>label{
-    font-size: 13px
-}
-
-#dashboard #client .arrow{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100px;
-}
-
-#dashboard #client .arrow i{
-    font-size: 50px;
-    color: #7E7E7E
-}
-
-#dashboard #client .preview{
-    flex: 1;
-    margin: 50px 50px 50px 0;
-    padding: 50px;
-    background-image: url(../images/shattered.png);
-    position: relative;
-}
-
-
-#dashboard #client .preview:after{
-    content: "";
-    position: absolute;
-    right: 0px;
-    top: 0;
-    border-color: #F7F7F7 #F7F7F7 #dedede #d6d6d6;
-    border-style: solid;
-    border-width: 0px 50px 50px 0px;
-    height: 0px;
-    width: 0px;
-    display: block;
-    -moz-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-#dashboard #client .preview p{
-    margin-bottom: 1em;
-    line-height: 20px;
-}
-
-#dashboard .comments{
-    display: flex;
-    padding: 50px;
-    flex-flow: row wrap;
-}
-
-#dashboard .comments .comment{
-    display: flex;
-    max-width: 600px;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    margin: 10px;
-}
-
-#dashboard .comments .comment .image{
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    background-position: center;
-}
-
-#dashboard .comments .comment>.content{
-    padding: 15px;
-    flex: 1;
-}
-#dashboard .comments .comment>.content .top{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px
-}
-#dashboard .comments .comment .buttons{
-    width: 50px;
-}
-
-#dashboard .comments .comment .buttons>a{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-}
-
-#dashboard .comments .comment .buttons>.valid{
-    background-color: #4CAF50;
-}
-
-#dashboard .comments .comment .buttons>.remove{
-    background-color: #F44336;
-}
-
-#dashboard .write .article_file{
-    height: 108px;
-    width: 192px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-#dashboard .write #article_file{
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-#dashboard .write .article_image{
-    height: 108px;
-    width: 192px;
-    border: 3px solid #cd6e57;
-    background-size: cover;
-    background-position: center
-}
-#dashboard .write .article_image .text{
-    text-transform: uppercase;
-    font-size: 15px;
-    color: #dedede;
-    font-weight: 600;
-    background-color: #40404080;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.4s background-color;
-}
-
-#dashboard .write #article_file:hover + .article_image .text{
-    background-color: #404040a6
-}
-
-#dashboard #dclient .infos{
-    width: 300px;
-}
-#dashboard #dclient .corps{
-    padding: 40px 0px 40px 40px;
-}
-#dashboard #dclient .corps .name{
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 40px;
-    text-align: center;
-    color: #7E7E7E;
-}
-#dashboard .progress{
-    height: 20px;
-    overflow: hidden;
-    background-color: #fff;
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
-}
-
-#dashboard .progress .bar{
-    float: left;
-    width: 0;
-    height: 100%;
-    background-color: #cd6e57;
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-    -webkit-transition: width .6s ease;
-    -o-transition: width .6s ease;
-    transition: width .6s ease;
-    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
-    background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
-    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
-    -webkit-background-size: 40px 40px;
-    background-size: 40px 40px;
-}
-
-#dashboard .timeline .payment{
-    height: 40px;
-    display: flex;
-}
-
-#dashboard .timeline .payment .item{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#dashboard .timeline .payment .item .icon{
-    height: 40px;
-    width: 40px;
-}
-
-#dashboard .timeline .payment .item .icon.valid{
-    background: green
-}
-#dashboard .timeline .payment .item .icon.pay{
-    background: red
-}
-
-#dashboard #images{
-    margin-top: 40px;
     padding: 10px;
-    background-color: #fff;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    color: #fff;
+    background-color: #cd6e57;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px
 }
-#dashboard #images .item{
+#dashboard .portfolio .element a i{
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+
+
+/**
+ |--------------------------------------------------------------------------
+ | Tags section
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .tags-section {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0;
+}
+
+#dashboard .tags-section #main-input {
+  border: none;
+  outline: none;
+  width: auto;
+  padding: 5px 10px 5px 15px;
+  height: 100%;
+  margin: 0;
+  flex: 1;
+  box-shadow: none;
+}
+
+#dashboard .tags-section .tag {
+  font-size: 85%;
+  padding: 6px;
+  margin-left: 10px;
+  display: inline-block;
+  background-color: #ddd;
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
+
+#dashboard .tags-section .tag:hover {
+  background-color: #3af;
+  color: white;
+}
+
+#dashboard .tags-section .tag .close::after {
+  content: '×';
+  font-weight: bold;
+  display: inline-block;
+  transform: scale(1.4);
+  margin-left: 0.75em;
+}
+
+#dashboard .tags-section .tag .close:hover::after {
+  color: red;
+}
+
+#dashboard .tags-section .main-input {
+  border: 0;
+  outline: 0;
+  padding: 0.5em 0.1em;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Discord section
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard #discord {
+  display: flex;
+  justify-content: center;
+  background-color: #2C2F33;
+  height: auto;
+  padding: 22px;
+  margin-bottom: 30px;
+  min-width: 380px;
+}
+
+#dashboard #discord .image {
+  background-size: cover;
+  height: 106px;
+  width: 106px;
+  border-radius: 100%;
+}
+
+#dashboard #discord .content {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding-left: 22px;
+}
+
+#dashboard #discord .pseudo {
+  color: #D6D6D6;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+#dashboard #discord .pseudo .code {
+  font-size: 14px;
+  color: #8A8A8A;
+}
+
+#dashboard #discord .email {
+  font-size: 14px;
+  color: #656565;
+}
+
+#dashboard #discord a {
+  background-color: #7289DA;
+  border-radius: 3px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 30px;
+  margin-top: auto;
+}
+
+
+#dashboard .select-section {
     position: relative;
-    width: 180px;
-    height: 130px;
-    padding: 10px
-}
-#dashboard #images .item img{
-    position: absolute;
-    height: calc(100% - 20px);
-    width: calc(100% - 20px);
-    opacity: 0;
-    z-index: 3;
-    cursor: pointer
-}
-#dashboard #images .item .hover{
-    background-color: #40404026;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    transition: 0.3s background-color;
-    z-index: 2;
-}
-#dashboard #images .item img:hover + .hover{
-    background-color: #40404046
-}
-#dashboard #images .item>.content{
-    background-color: #7E7E7E;
-    width: 100%; height: 100%;
-    background-position: center;
-    background-size: cover;
-    z-index: 1;
-}
-#dashboard #dclient .infos{
-    margin: 40px 40px 20px 20px;
-}
-#dashboard #dclient .infos .payment_button{
-    padding-bottom: 20px;
-}
-#dashboard #dclient .infos .payment_button input{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 100%;
-    color: #fff;
-    background-color: #cd6e57;
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
+    margin-bottom: 15px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    outline: 0;
-}
-#dashboard #dclient .infos .files{
-    background-color: #fff;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-#dashboard #dclient .infos .speed_contact h3,#dashboard #dclient .infos .files h3{
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-#dashboard #dclient .infos .files .download-button{
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    background-color: #cd6e57d4;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
-}
-
-#dashboard #dclient .infos .files .download-button:last-child{
-    margin-bottom: 0
-}
-
-#dashboard #dclient .infos .files .download-button span{
-    width: 40px;
-    height: 40px;
-    background-color: #cd6e57;
-    margin-right: 20px
-}
-
-#dashboard #dclient .infos .speed_contact{
-    background-color: #fff;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-#dashboard #dclient .infos .speed_contact p{
-    font-size: 15px;
-    margin-bottom: 7px;
-}
-
-#dashboard #dclient .infos .devblog{
-    padding: 16px;
-    background-color: #141510;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-}
-
-#dashboard #dclient .infos .devblog h3{
-    color: #fff;
-    margin-bottom: 16px;
-}
-
-#dashboard #dclient .infos .devblog .item{
-    margin-bottom: 10px;
-    background-color: #282921;
-    padding: 10px;
-}
-
-#dashboard #dclient .infos .devblog .item:last-child{
-    margin-bottom: 0;
-}
-
-#dashboard #dclient .infos .devblog .item .title{
-    color: #F92672;
-    margin-bottom: 3px;
-    font-size: 15px;
-}
-
-#dashboard #dclient .infos .devblog .item p{
-    color: #fff;
-    font-size: 12px;
-}
-
-#dashboard .articles{
-    margin: 40px;
-    background-color: #fff;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-    padding: 20px;
-}
-#dashboard .articles .content{
-    display: flex;
-}
-
-#dashboard .articles .title h5 {
-    margin: 12px 0;
-    font-size: 24px;
-    font-weight: 400;
-    color: #616161;
-}
-#dashboard .articles .text {
-    flex: 1;
-    padding-right: 40px
-}
-
-#dashboard .articles .text p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, .87);
-}
-
-#dashboard .articles .image {
-    width: 300px;
-}
-#dashboard .articles .img {
-    height: 170px;
-    background-position: center;
-    background-size: cover;
-}
-
-#dashboard .articles .image a {
-    display: inline-block;
-    width: 100%;
-    height: 40px;
-    margin-top: 12px;
-    padding: 2px 0;
-    border-radius: 2px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 36px;
-    letter-spacing: .5px;
-    vertical-align: middle;
-    color: #fff;
-    background-color: #cd6e57;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-    transition: all .3s ease-out;
-    cursor: pointer;
     user-select: none;
 }
 
-#dashboard .articles .image a:hover {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+#dashboard .select-section select {
+    display: none;
+}
+
+#dashboard .select-section .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 18px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #9e9e9e transparent transparent transparent;
+}
+
+#dashboard .select-section .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #9e9e9e transparent;
+    top: 11px;
+}
+
+#dashboard .select-section .select-items div,
+#dashboard .select-section .select-selected {
+    padding: 13px 18px;
+    cursor: pointer;
+    color: #757575;
+    font-size: 13.3333px;
+}
+
+#dashboard .select-section .select-items div{
+    border-left: 1px solid #cbcbcb;
+    border-right: 1px solid #cbcbcb;
+}
+#dashboard .select-section .select-items div:first-child{
+    border-top: 1px solid #cbcbcb;
+}
+#dashboard .select-section .select-items div:last-child{
+    border-bottom: 1px solid #cbcbcb;
+}
+
+#dashboard .select-section .select-selected {
+    background-color: #fff
+}
+
+#dashboard .select-section .select-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #fff;
+}
+
+#dashboard .select-section .select-hide {
+    display: none;
+}
+
+#dashboard .select-section .select-items div:hover,
+#dashboard .select-section .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#dashboard .switch-section {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+#dashboard .switch-section p {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#dashboard .switch-section label {
+    font-size: .8rem;
+    color: #9e9e9e;
+    cursor: pointer;
+}
+
+#dashboard .switch-section input[type=checkbox] {
+    box-sizing: border-box;
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+#dashboard .switch-section input[type="checkbox"]:not(:checked),
+#dashboard .switch-section input[type="checkbox"]:checked {
+    visibility: hidden;
+    position: absolute;
+    left: -9999px;
+}
+
+#dashboard .switch-section input[type=checkbox]:checked + .lever {
+    background-color: #e09e8f;
+}
+
+#dashboard .switch-section input[type=checkbox]:checked + .lever:after {
+    left: 24px;
+    background-color: #cd6e57;
+}
+
+#dashboard .switch-section .lever {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 15px;
+    margin: 0 16px;
+    margin-right: 10px;
+    border-radius: 15px;
+    vertical-align: middle;
+    background-color: #818181;
+    transition: background-color 0.3s ease;
+}
+#dashboard .switch-section .lever:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -3px;
+    left: -5px;
+    width: 21px;
+    height: 21px;
+    border-radius: 21px;
+    background-color: #F1F1F1;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4);
+    transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
 }
