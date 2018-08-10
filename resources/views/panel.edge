@@ -62,12 +62,11 @@
                         <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open">Ecrire un article</span></a>
                         <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open">Upload</span></a>
                     @endif
-                    @if(auth.user.role === 3)
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Roles</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Fichiers</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">Mail</span></a>
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i></i><span v-if="open">NewsLetter</span></a>
-                        <a class="{{request.url() === '/me/clients' ? 'active': ''}}" href="/me/clients"><i></i><span v-if="open">Clients</span></a>
+                    @if(auth.user.role === 1000)
+                        <a class="{{request.url() === '/admin/clients' ? 'active': ''}}" href="/admin/clients"><i class="icon-group"></i><span v-if="open">Clients</span></a>
+                        <a class="{{request.url() === '/admin/users' ? 'active': ''}}" href="/adminme/users"><i class="icon-face"></i><span v-if="open">Roles</span></a>
+                        <a class="{{request.url() === '/admin/portfolio' ? 'active': ''}}" href="/admin/portfolio"><i class="icon-developer-board"></i><span v-if="open">Portfolio</span></a>
+                        <a class="{{request.url() === '/admin/newsletter' ? 'active': ''}}" href="/admin/newsletter"><i class="icon-fiber-new"></i><span v-if="open">NewsLetter</span></a>
                     @endif
                 </ul>
             </div>
