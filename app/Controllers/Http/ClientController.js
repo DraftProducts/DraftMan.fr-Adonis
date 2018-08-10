@@ -1,5 +1,8 @@
 'use strict'
 
+const { validate } = use('Validator')
+const Mail = use('Mail')
+
 const paypal = require('paypal-rest-sdk');
 const { promisify } = require('util')
 const fs = require('fs');
@@ -18,6 +21,51 @@ class ClientController {
 
   async client({view}) {
     return view.render('dashboard.client')
+  }
+
+  async send({request, session, response,auth}) {
+
+    const data = request.only(['name', 'type', 'description','validation','discord'])
+
+    const messages = {
+        'name.required': 'Veuillez indiquer le nom du projet.',
+        'type.required': 'Veuillez indiquer le type de projet.',
+        'description.required': 'Veuillez entrer une courte description du projet et/ou le travail à faire',
+        'validation.required': 'Pour devenir client vous devez accepter cette condition.',
+        'discord.required': 'Pour devenir client vous devez accepter cette condition.'
+    }
+
+    const rules = {
+      name: 'required',
+      type: 'required',
+      description: 'required',
+      validation: 'required',
+      discord: 'required',
+    }
+
+    const validation = await validate(data, rules, messages)
+
+    if (validation.fails()) {
+        session
+        .withErrors(validation.messages())
+        .flashExcept()
+
+        return response.redirect('back')
+    }
+
+    data.username = auth.user.username
+    data.email = auth.user.email
+    data.discord = `${auth.user.discord_username}#${auth.user.discord_discriminator}`
+
+    const email_to = 'contact@draftman.fr';
+
+    await Mail.send('mails/contact', data, (message) => {
+      message
+        .to(email_to)
+        .from('<email>', '<author>')
+        .subject('<objet>')
+        .replyTo('<email>', '<author>')
+    })
   }
 
   async dashboard({view,auth}) {
