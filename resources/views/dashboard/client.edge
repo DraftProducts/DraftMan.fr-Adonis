@@ -17,57 +17,72 @@
 @endsection
 
 @section('content')
-<div id="client">
+<div class="client double">
     <div class="write">
-        <div id="discord">
-            @if(user.discord_username === "")
-            <a href="/discord/login">Connecter discord</a>
-            @else
-            <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
-            <div class="content">
-                <div>
-                    <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
-                    <span class="email">{{auth.user.discord_email}}</span>
+        <form method="POST" name="form" action="{{ route('ClientController.send') }}">
+            <div id="discord">
+                @if(auth.user.discord_username === "")
+                <div class="image" style="background-image: url('/images/default_user.png')"></div>
+                <div class="content">
+                    <div>
+                        <h5 class="pseudo">Username<span class="code">#0000</span></h5>
+                        <span class="email">exemple@exemple.com</span>
+                    </div>
+                    <a href="/discord/login">Connecter discord</a>
                 </div>
-                <a href="/discord/login">Connecter discord</a>
+                <input type="hidden" name="discord">
+                @else
+                <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
+                <div class="content">
+                    <div>
+                        <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
+                        <span class="email">{{auth.user.discord_email}}</span>
+                    </div>
+                    <a href="/discord/login">Changer de discord</a>
+                </div>
+                <input type="hidden" name="discord" value="{{auth.user.discord_username}}">
+                @endif
+                {{ elIf('<div class="error-card">$self</div>', getErrorFor('discord'), hasErrorFor('discord')) }}
             </div>
-            @endif
-        </div>
-        <div class="arrow">
-            <i class="icon-arrow-down"></i>
-        </div>
-        <div id="descriptif">
-            <form action="">
-                <div>
-                    <input type="text" id="name" v-model="name">
+            <div class="arrow">
+                <i class="icon-arrow-down"></i>
+            </div>
+            <div id="descriptif">
+                <div class="input-container">
+                    <input type="text" id="name" name="name" class="input" v-model="name" value="{{ old('name', '') }}">
                     <label for="name">Nom du projet</label>
                 </div>
-                <div>
-                    <input type="text" id="type" v-model="type">
+                {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
+                <div class="input-container">
+                    <input type="text" id="type" name="type" class="input" v-model="type" value="{{ old('type', '') }}">
                     <label for="type">Type de projet</label>
                 </div>
-                <div>
-                    <textarea name="description" id="description" v-model="description"></textarea>
+                {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
+                <div class="input-container">
+                    <textarea name="description" id="description" name="description" class="input textarea" v-model="description">{{ old('description', '') }}</textarea>
                     <label for="description">Courte description</label>
                 </div>
-            </form>
-        </div>
-        <div class="arrow">
-            <i class="icon-arrow-down"></i>
-        </div>
-        <div id="cgv">
-            <div id="checkbox">
-                <div>
-                    <input id="confirm" type="checkbox">
-                    <label for="confirm"></label>
-                </div>
-                <label for="confirm">Je renonce expressément à exercer mon droit de rétractation conformément aux dispositions de l'article L.221-28 1° du code de la consommation.</label>
+                {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
             </div>
-        </div>
-        <div class="arrow">
-            <i class="icon-arrow-down"></i>
-        </div>
-        <button type="submit">Envoyer</button>
+            <div class="arrow">
+                <i class="icon-arrow-down"></i>
+            </div>
+            <div id="cgv">
+                <div id="checkbox">
+                    <div>
+                        <input id="confirm" name="validation" type="checkbox">
+                        <label for="confirm"></label>
+                    </div>
+                    <label for="confirm">Je renonce expressément à exercer mon droit de rétractation conformément aux dispositions de l'article L.221-28 1° du code de la consommation.</label>
+                </div>
+            </div>
+            {{ elIf('<div class="error-card">$self</div>', getErrorFor('validation'), hasErrorFor('validation')) }}
+            <div class="arrow">
+                <i class="icon-arrow-down"></i>
+            </div>
+            {{ csrfField() }}
+            <button class="input submit" type="submit">Envoyer</button>
+        </form>
     </div>
     <div class="preview">
         <p>Bonjour DraftMan</p>
