@@ -2,37 +2,37 @@
 
 @section('seo')
     {{--  Title  --}}
-    <title>Commentaires - DraftMan Développeur Web & Graphiste</title>
-    <meta property="og:title" content="Commentaires - DraftMan Développeur Web & Graphiste">
-    <meta name="twitter:title" content="Commentaires - DraftMan Développeur Web & Graphiste">
+    <title>Articles - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Articles - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Articles - DraftMan Développeur Web & Graphiste">
 
     {{--  Description  --}}
-    <meta name="description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
-    <meta property="og:description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
-    <meta name="twitter:description" content="Voici la page permettant de modérer les commentaires publiés sur les articles du blog.">
+    <meta name="description" content="Voici la page permettant de voir toute la liste des articles du blog qu'ils soient en rédaction ou privé.">
+    <meta property="og:description" content="Voici la page permettant de voir toute la liste des articles du blog qu'ils soient en rédaction ou privé.">
+    <meta name="twitter:description" content="Voici la page permettant de voir toute la liste des articles du blog qu'ils soient en rédaction ou privé.">
 
     {{--  Link  --}}
-    <link rel="canonical" href="https://www.draftman.fr/me/comments" />
-    <meta property="og:url" content="https://www.draftman.fr/me/comments">
+    <link rel="canonical" href="https://www.draftman.fr/me/articles" />
+    <meta property="og:url" content="https://www.draftman.fr/me/articles">
 @endsection
 
 @section('content')
 <div class="articles"> 
     @each(article in articles)
     <div class="article">
-        <div class="title">
-            <h5>{{article.title}}</h5>
-        </div>
-        <div class="content">
-            <div class="text">{{article.description}}</div>
+            <div class="text">
+                <div class="title">
+                    <h5>{{article.title}}</h5>
+                </div>
+                {{article.description}}
+            </div>
             <div class="image">
-                <div class="img" style="background-image: url(/images/blog/posts/{{article.image}})"></div>
+                <div class="img" style="background-image: url(/uploads/posts/{{article.image}})"></div>
                 <a href="/admin/view/{{article.id}}-{{article.url}}">Voir l'article</a>
                 @if(auth.user.email === article.author.email)
                     <a href="/me/write/{{article.id}}-{{article.url}}">Modifier l'article</a>
                 @endif
             </div>
-        </div>
     </div> 
     @else
         <div class="no-results">
