@@ -6,13 +6,6 @@ const { validate } = use('Validator')
 const Helpers = use('Helpers')
 
 class PortfolioController {
-    // index = Liste tes posts
-    // create = Afficher le formulaire de création
-    // store = Stocker ton post
-    // show = Afficher un post
-    // edit = Afficher le formulaire de modificaton
-    // update = Met à jour ton post
-    // destroy = Détruire ton post
     async index({ view }){
 
         const portfolio = (await Portfolio.all()).toJSON();
@@ -87,10 +80,10 @@ class PortfolioController {
     async edit({view,params}){
         const creation = (await Portfolio.find(params.id)).toJSON();
         const portfolio = (await Portfolio.all()).toJSON();
-        // if(creation.portfolio_details_id != null){
-        //     creation = (await Portfolio.query().with('details').where('id', params.id).fetch()).toJSON();
-        //     return view.render('dashboard.portfolio-edit-details', {portfolio,creation})
-        // }
+        if(creation.portfolio_details_id != null){
+            creation = (await Portfolio.query().with('details').where('id', params.id).fetch()).toJSON();
+            return view.render('dashboard.portfolio-edit-details', {portfolio,creation})
+        }
         return view.render('dashboard.portfolio-edit', {portfolio,creation})
     }
     async update({request, session, response}){
@@ -145,8 +138,9 @@ class PortfolioController {
         const details = new PortfolioDetails()
         details.portfolio_id = params.id
         await details.save()
-        const res = await (PortfolioDetails.query().where('portfolio_id',params.id).first()).toJSON()
-        await (Portfolio.find(params.id).update('portfolio_details_id',res.id)).toJSON()
+        const d = (await PortfolioDetails.query().where('portfolio_id',params.id).first()).toJSON()
+        const res = await Portfolio.find(d.portfolio_id)
+        await res.merge({'portfolio_details_id':res.id})
         return response.redirect('back')
     }
 }
