@@ -1,0 +1,24 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Newsletter - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Newsletter - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Newsletter - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de s'occuper de la newsletter.">
+    <meta property="og:description" content="Voici la page permettant de s'occuper de la newsletter.">
+    <meta name="twitter:description" content="Voici la page permettant de s'occuper de la newsletter.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/admin/newsletter" />
+    <meta property="og:url" content="https://www.draftman.fr/admin/newsletter">
+@endsection
+
+@section('content')
+<div class="message">
+    <h1>Bienvenue {{auth.user.username}} sur votre panel admin de DraftMan.fr !</h1>
+    <p>Cette page est encore en développement.</p>
+</div>
+@endsection
