@@ -1,0 +1,92 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Portfolio - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta property="og:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta name="twitter:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/admin/portfolio" />
+    <meta property="og:url" content="https://www.draftman.fr/admin/portfolio">
+@endsection
+
+@section('content')
+<div class="portfolio double">
+    <form method="POST" action="{{ route('PortfolioController.store') }}" enctype="multipart/form-data">
+        <div class="input-container">
+            <input type="text" name="name" id="name" class="input">
+            <label for="name">Nom du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
+
+        <div class="select-section">
+            <select name="type" required>
+                <option value="">Type de projet</option>
+                <option value="web">Web</option>
+                <option value="projets">Projets</option>
+                <option value="graphisme">Graphisme</option>
+            </select>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
+
+        <div class="input-container">
+            <textarea name="description" id="description" class="input textarea"></textarea>
+            <label for="description">Description de la création</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+        <div class="compact">
+            <div class="item">
+                <div class="article_file">
+                    <input type="file" name="illustration" id="article_file" ref="file">
+                    <div class="article_image" ref="preview">
+                        <div class="text">
+                            Charger
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <section class="switch-section">
+                    <p>Public</p>
+                    <div class="switch">
+                        <label>
+                            Non
+                            <input type="checkbox" name="published_at"/>
+                            <span class="lever"></span>
+                            Oui
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('image'), hasErrorFor('image')) }}
+
+        {{ csrfField() }}
+        
+        @if(flashMessage('valid_basic'))
+            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
+        @endif
+        <button class="input submit" type="submit">Sauvegarder</button>
+    </form>
+    <div class="elements">
+        @each(item in portfolio)
+            <div class="element">
+                <h4>{{item.name}} - {{item.type}}</h4>
+                <a href="/admin/portfolio/{{item.id}}" class="edit"><i class="icon-create"></i>Editer</a>
+            </div>
+        @else
+        <div class="no-results">
+            <div class="element">
+                <h4 class="last-child">Aucune créations pour l'instant</h4>
+            </div>
+        </div>
+        @endeach
+    </div>
+</div>
+@endsection
