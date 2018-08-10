@@ -25,12 +25,12 @@ class ProfilController {
     const code = await request.get().code;
     const res = await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`).set('Authorization', `Basic ${cred}`)
     const resp = await get('https://discordapp.com/api/v6/users/@me').set('Authorization', `Bearer ${res.body.access_token}`)
-    await User.query().where('id', auth.user.id).update({
-      discord_username: resp.body.username,
-      discord_discriminator: resp.body.discriminator,
-      discord_email: resp.body.email,
-      profil: `https://cdn.discordapp.com/avatars/${resp.body.id}/${resp.body.avatar}?size=256`
-    })
+      
+    auth.user.discord_username = resp.body.username,
+    auth.user.discord_discriminator = resp.body.discriminator,
+    auth.user.discord_email = resp.body.email,
+    auth.user.profil = `https://cdn.discordapp.com/avatars/${resp.body.id}/${resp.body.avatar}?size=256`
+    await auth.user.save()
     response.redirect('/me/profil')
   }
 
@@ -43,15 +43,18 @@ class ProfilController {
     })
 
     const messages = {
-      'email.email': 'Veuillez entrer une adresse email valide.',
+      'username.required': 'Veuillez indiquer un pseudo',
       'username.unique': 'Ce pseudo est déjà utilisé.',
+      'email.required': 'Veuillez indiquer une adresse email',
+      'email.email': 'Veuillez entrer une adresse email valide.',
       'email.unique': 'Cette adresse email est déjà utilisé.',
       'password.confirmed': 'Veuillez répéter votre mot de passe.',
     }
 
     const rules = {
-      email: 'email',
-      password: 'confirmed'
+      username: `required|unique:users,username,id,${auth.user.id}`,
+      email: `required|email|unique:users,email,id,${auth.user.id}`,
+      password: 'confirmed',
     }
 
     const validation = await validate(data, rules, messages)
@@ -63,25 +66,13 @@ class ProfilController {
 
       return response.redirect('back')
     }
-
-    if(await User.query().where('username', data.username).getCount() > 0 && auth.user.username != data.username){
-      await session
-        .withErrors([{ field: 'username', message: 'Ce pseudo est déjà utilisé.' }])
-        .flashAll()
-        return response.redirect('back')
-    }else if(await User.query().where('email', data.email).getCount() > 0 && auth.user.email != data.email){
-      await session
-        .withErrors([{ field: 'email', message: 'Cette adresse email est déjà utilisé.' }])
-        .flashAll()
-        return response.redirect('back')
-    }
    
     const infos = { 
       username: data.username,
       email: data.email
     }
 
-    if(!data.password.isEmpty()) infos.password = data.password
+    if(data.password !== '') infos.password = data.password
 
     if(image){
       const img = `${auth.user.id}.${new Date().getTime()}.${image.subtype}`;
