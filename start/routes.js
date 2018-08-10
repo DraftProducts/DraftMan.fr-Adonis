@@ -58,7 +58,7 @@ Route.post('blog/:id/comment', 'PostController.comment')
  */
 
 Route.get('portfolio', 'PortfolioController.index')
-Route.get('portfolio/:id', 'PortfolioController.details')
+Route.get('portfolio/:id', 'PortfolioController.show')
 
 /**
  |--------------------------------------------------------------------------
@@ -82,8 +82,10 @@ Route.group(() => {
     Route.post('register', 'RegisterController.store')
 }).middleware(['verif']);
 
-Route.get('/me/client', 'ClientController.client').middleware(['auth','client']);
-
+Route.group(() => {
+    Route.get('/me/client', 'ClientController.client')
+    Route.post('/me/client', 'ClientController.send')
+}).middleware(['auth','client']);
 Route.group(() => {
     Route.get('/me/client/dashboard', 'ClientController.dashboard')
     Route.post('/me/client/pay', 'ClientController.pay')
@@ -121,3 +123,18 @@ Route.group(() => {
     
     Route.get('/me/upload', 'BackofficeController.upload')
 }).middleware(['auth','writer']);
+
+Route.group(() => {
+    Route.get('/admin/clients', 'AdminController.clients')
+    Route.get('/admin/users', 'AdminController.users')
+    Route.get('/admin/newsletter', 'AdminController.newsletter')
+
+    Route.get('/admin/portfolio', 'PortfolioController.create')
+    Route.post('/admin/portfolio', 'PortfolioController.store')
+
+    Route.get('/admin/portfolio/:id', 'PortfolioController.edit')
+    Route.post('/admin/portfolio/:id', 'PortfolioController.update')
+    Route.post('/admin/portfolio/:id/details', 'PortfolioController.updateDetails')
+
+    Route.get('/admin/portfolio/:id/upgrade', 'PortfolioController.upgrade')
+}).middleware(['auth','admin']);
