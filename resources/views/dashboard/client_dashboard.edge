@@ -2,18 +2,18 @@
 
 @section('seo')
     {{--  Title  --}}
-    <title>Projet - DraftMan Développeur Web & Graphiste</title>
+    <title>Projet {{project.name}} - DraftMan Développeur Web & Graphiste</title>
     <meta property="og:title" content="Projet - DraftMan Développeur Web & Graphiste">
     <meta name="twitter:title" content="Projet - DraftMan Développeur Web & Graphiste">
 
     {{--  Description  --}}
-    <meta name="description" content="Voici la page permettant de suivre l ávancement du projet en cours.">
-    <meta property="og:description" content="Voici la page permettant de suivre l ávancement du projet en cours.">
-    <meta name="twitter:description" content="Voici la page permettant de suivre l ávancement du projet en cours.">
+    <meta name="description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta property="og:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta name="twitter:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
 
     {{--  Link  --}}
-    <link rel="canonical" href="https://www.draftman.fr/me/client/1545/name" />
-    <meta property="og:url" content="https://www.draftman.fr/me/client/1545/name">
+    <link rel="canonical" href="https://www.draftman.fr/me/client/dashboard" />
+    <meta property="og:url" content="https://www.draftman.fr/me/client/dashboard">
 @endsection
 
 @section('css')
@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-<div id="dclient">
+<div class="dclient double">
     <div class="corps">
         <div class="name">
             {{project.name}}
@@ -56,7 +56,7 @@
         <div class="files">
             <h3>Fichiers</h3>
             @each(fichier in fichiers)
-                <a class="download-button" href="/uploads/projects/{{project.folder}}/fichiers/{{fichier}}"><span></span>{{getNameByFile(fichier)}}</a>
+                <a class="download-button" href="/uploads/projects/{{project.folder}}/fichiers/{{fichier}}"><span><i class="icon-download"></i></span>{{getNameByFile(fichier)}}</a>
             @endeach
         </div>
         <div class="speed_contact">
