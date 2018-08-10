@@ -1,0 +1,31 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Clients - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Clients - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Clients - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant d'administrer tous les projets des clients.">
+    <meta property="og:description" content="Voici la page permettant d'administrer tous les projets des clients.">
+    <meta name="twitter:description" content="Voici la page permettant d'administrer tous les projets des clients.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/admin/clients" />
+    <meta property="og:url" content="https://www.draftman.fr/admin/clients">
+@endsection
+
+@section('content')
+<div class="comments"> 
+    @each(client in clients)
+    <div class="client">
+        
+    </div>
+    @else
+        <div class="no-results">
+            <h4>Aucun clients pour l'instant</h4>
+        </div>
+    @endeach
+</div>
+@endsection
