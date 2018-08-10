@@ -40,6 +40,7 @@ const namedMiddleware = {
   verif: 'App/Middleware/RedirectIfAuthenticated',
   modo: 'App/Middleware/ModoAccess',
   writer: 'App/Middleware/WriterAccess',
+  admin: 'App/Middleware/AdminAccess',
   client: 'App/Middleware/ClientAccess',
   client_d: 'App/Middleware/ClientDAccess'
 }
