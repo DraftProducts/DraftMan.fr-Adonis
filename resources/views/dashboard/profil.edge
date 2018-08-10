@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-<div class="profil">
+<div class="profil double">
     <form class="compte" method="POST" action="{{ route('ProfilController.storeBasic') }}" enctype="multipart/form-data">
         <div class="profil_file">
             <input type="file" name="image" id="profil_file" ref="file">
@@ -27,35 +27,42 @@
                 </div>
             </div>
         </div>
-        <div>
-            <input type="text" name="pseudo" id="pseudo" value="{{auth.user.username}}">
-            <label for="pseudo">Pseudo</label>
+        <div class="input-container">
+            <input type="text" name="username" id="username" class="input" value="{{auth.user.username}}">
+            <label for="username">Pseudo</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('pseudo'), hasErrorFor('pseudo')) }}
-        <div>
-            <input type="email" name="email" id="email" value="{{auth.user.email}}">
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('username'), hasErrorFor('username')) }}
+        <div class="input-container">
+            <input type="email" name="email" id="email" class="input" value="{{auth.user.email}}">
             <label for="email">Adresse email</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
-        <div>
-            <input type="password" name="password" id="password">
+        <div class="input-container">
+            <input type="password" name="password" id="password" class="input">
             <label for="password">Mot de passe</label>
         </div>
-        <div>
-            <input type="password" name="password_confirmation" id="password_confirmation">
+        <div class="input-container">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="input">
             <label for="password_confirmation">Répéter le mot de passe</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
         {{ csrfField() }}
+        <button class="input submit" type="submit">Charger les informations</button>
         @if(flashMessage('valid_basic'))
             <div class="success-card">{{ flashMessage('valid_basic') }}</div>
         @endif
-        <button type="submit">Charger les informations</button>
     </form>
     <form class="infos_supp" method="POST" action="{{ route('ProfilController.storeInfos') }}">
         <div id="discord">
             @if(auth.user.discord_username === "")
-            <a href="/discord/login">Connecter discord</a>
+            <div class="image" style="background-image: url('/images/default_user.png')"></div>
+            <div class="content">
+                <div>
+                    <h5 class="pseudo">Username<span class="code">#0000</span></h5>
+                    <span class="email">exemple@exemple.com</span>
+                </div>
+                <a href="/discord/login">Connecter discord</a>
+            </div>
             @else
             <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
             <div class="content">
@@ -63,31 +70,31 @@
                     <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
                     <span class="email">{{auth.user.discord_email}}</span>
                 </div>
-                <a href="/discord/login">Connecter discord</a>
+                <a href="/discord/login">Changer de discord</a>
             </div>
             @endif
         </div>
-        <div>
-            <input type="text" name="website" id="website" value="{{auth.user.website}}">
+        <div class="input-container">
+            <input type="text" name="website" id="website" class="input" value="{{auth.user.website}}">
             <label for="website">Site Web</label>
         </div>
-        <div>
-            <input type="text" name="twitter" id="twitter" value="{{auth.user.twitter}}">
+        <div class="input-container">
+            <input type="text" name="twitter" id="twitter" class="input" value="{{auth.user.twitter}}">
             <label for="twitter">Twitter</label>
         </div>
-        <div>
-            <input type="text" name="github" id="github" value="{{auth.user.github}}">
+        <div class="input-container">
+            <input type="text" name="github" id="github" class="input" value="{{auth.user.github}}">
             <label for="github">GitHub</label>
         </div>
-        <div>
-            <input type="text" name="linkedin" id="linkedin" value="{{auth.user.linkedin}}">
+        <div class="input-container">
+            <input type="text" name="linkedin" id="linkedin" class="input" value="{{auth.user.linkedin}}">
             <label for="linkedin">Linkedin</label>
         </div>
         {{ csrfField() }}
+        <button class="input submit" type="submit">Charger les informations</button>
         @if(flashMessage('valid_infos'))
             <div class="success-card">{{ flashMessage('valid_infos') }}</div>
         @endif
-        <button type="submit">Charger les informations</button>
     </form>
 </div>
 @endsection
