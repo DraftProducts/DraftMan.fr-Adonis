@@ -7,7 +7,7 @@ class Portfolio extends Model {
         return 'portfolio'
     }
     details () {
-        return this.belongsTo('App/Models/PortfolioDetails', 'id', 'portfolio_details_id')
+        return this.belongsTo('App/Models/PortfolioDetails', 'portfolio_details_id', 'id')
     }
 }
 
