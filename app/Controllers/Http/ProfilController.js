@@ -29,6 +29,7 @@ class ProfilController {
     auth.user.discord_username = resp.body.username,
     auth.user.discord_discriminator = resp.body.discriminator,
     auth.user.discord_email = resp.body.email,
+    auth.user.discord_image = `https://cdn.discordapp.com/avatars/${resp.body.id}/${resp.body.avatar}?size=256`
     auth.user.profil = `https://cdn.discordapp.com/avatars/${resp.body.id}/${resp.body.avatar}?size=256`
     await auth.user.save()
     response.redirect('/me/profil')
@@ -77,7 +78,7 @@ class ProfilController {
     if(image){
       const img = `${auth.user.id}.${new Date().getTime()}.${image.subtype}`;
       await image.move(Helpers.publicPath('/uploads/users'), {name: img})
-      data.profil =  `/uploads/users/${img}`
+      infos.profil =  `/uploads/users/${img}`
     }
 
     await User.query().where('id', auth.user.id).update(infos)
