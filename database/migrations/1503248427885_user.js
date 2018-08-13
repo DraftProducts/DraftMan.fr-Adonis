@@ -16,6 +16,7 @@ class UserSchema extends Schema {
       table.string('discord_username', 60).notNullable()
       table.string('discord_discriminator', 60).notNullable()
       table.string('discord_email', 60).notNullable()
+      table.string('discord_image').notNullable()
       table.string('profil')
       table.integer('role')
       table.integer('client')
