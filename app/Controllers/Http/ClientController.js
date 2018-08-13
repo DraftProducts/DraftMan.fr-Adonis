@@ -1,32 +1,39 @@
 'use strict'
-
-const { validate } = use('Validator')
+const Env = use('Env')
 const Mail = use('Mail')
-
-const paypal = require('paypal-rest-sdk');
+const paypal = require('paypal-rest-sdk')
 const { promisify } = require('util')
 const fs = require('fs');
 const readdir = promisify(fs.readdir)
-
-const config = require('../../../config.json');
 const Project = use('App/Models/Project');
-
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': config.PAYPAL_ID,
-  'client_secret': config.PAYPAL_SECRET
-});
+const Client = use('App/Models/Client');
+const { validate } = use('Validator')
+const config = require('../../../config.json');
 
 class ClientController {
+  constructor () {
+    paypal.configure({
+      mode: 'sandbox',
+      client_id: config.PAYPAL_ID,
+      client_secret: config.PAYPAL_SECRET
+    })
+  }
 
-  async client({view}) {
-    return view.render('dashboard.client')
+  async dashboard ({session, view,auth}) {
+    try {
+      const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
+      const images = await readdir(`public/uploads/projects/${project.folder}/images`)
+      const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
+      const paypalResponse = await this.createPayment(project)
+      session.put('paymentId', paypalResponse.paymentId)
+      return view.render('dashboard.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl})
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async send({request, session, response,auth}) {
-
     const data = request.only(['name', 'type', 'description','validation','discord'])
-
     const messages = {
         'name.required': 'Veuillez indiquer le nom du projet.',
         'type.required': 'Veuillez indiquer le type de projet.',
@@ -34,7 +41,6 @@ class ClientController {
         'validation.required': 'Pour devenir client vous devez accepter cette condition.',
         'discord.required': 'Pour devenir client vous devez accepter cette condition.'
     }
-
     const rules = {
       name: 'required',
       type: 'required',
@@ -42,16 +48,22 @@ class ClientController {
       validation: 'required',
       discord: 'required',
     }
-
+    
     const validation = await validate(data, rules, messages)
 
     if (validation.fails()) {
         session
         .withErrors(validation.messages())
-        .flashExcept()
-
         return response.redirect('back')
     }
+
+    await Client.create({
+      name: data.name,
+      type: data.type,
+      description: data.description,
+      status: 0,
+      user_id: auth.user.id
+    })
 
     data.username = auth.user.username
     data.email = auth.user.email
@@ -59,7 +71,7 @@ class ClientController {
 
     const email_to = 'contact@draftman.fr';
 
-    await Mail.send('mails/contact', data, (message) => {
+    await Mail.send('mails/request', data, (message) => {
       message
         .to(email_to)
         .from('<email>', '<author>')
@@ -68,78 +80,84 @@ class ClientController {
     })
   }
 
-  async dashboard({view,auth}) {
-    const proj = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
-    const images = await readdir(`public/uploads/projects/${proj.folder}/images`)
-    const fichiers = await readdir(`public/uploads/projects/${proj.folder}/fichiers`)
-    return view.render('dashboard.client_dashboard',{project: proj,images,fichiers})
+  async paypalSuccess ({request, session, view}) {
+    const paymentId = session.get('paymentId')
+    const paymentDetails = { payer_id: request.input('PayerID') }
+    try {
+      await this.paypalSuccessDetails(paymentId, paymentDetails)
+      const project = await Project.find(auth.user.project_id)
+      project.completed_payments = completed_payments + 1
+      await project.save()
+      return view.render('success')
+    } catch (e) {
+      console.log('error', e.message)
+      session.flash({error: 'Une erreur est survenue veuillez nous excusez'})
+    }
   }
 
-  async pay({response}) {
-    const create_payment_json = {
-      "intent": "sale",
-      "payer": {
-          "payment_method": "paypal"
+  async paypalCancel ({session, response}) {
+    session.forget('paymentId')
+    session.flash({success: 'Vous avez bien annulé le paiement'})
+    return response.redirect('/me/client/dashboard')
+  }
+
+  paypalSuccessDetails(paymentId, paymentDetails){
+    return new Promise((resolve, reject) => {
+      paypal.payment.execute(paymentId, paymentDetails, (err) => {
+        if (err) {
+          return reject(err)
+        }
+        return resolve({success: true})
+      })
+    })
+  }
+
+  paypalDetails(project) {
+    return {
+      intent: 'sale',
+      payer: {
+        payment_method: 'paypal'
       },
-      "redirect_urls": {
-          "return_url": "http://127.0.0.1:3333/me/client/pay/success",
-          "cancel_url": "http://127.0.0.1:3333/me/client/pay/cancel"
+      redirect_urls: {
+        return_url: 'http://127.0.0.1:3333/success',
+        cancel_url: 'http://127.0.0.1:3333/cancel'
       },
-      "transactions": [{
-          "item_list": {
-              "items": [{
-                  "name": "Red Sox Hat",
-                  "sku": "001",
-                  "price": "25.00",
-                  "currency": "EUR",
-                  "quantity": 1
-              }]
-          },
-          "amount": {
-              "currency": "EUR",
-              "total": "25.00"
-          },
-          "description": "Hat for the best team ever"
+      transactions: [{
+        description: `Paiement n°${project.payments.count()+1} du projet ${project.name}`,
+        amount: {
+          currency: 'EUR',
+          total: (project.price/project.total_payments).toFixed(2)
+        }
       }]
-    };
-    
-    await paypal.payment.create(create_payment_json, function (error, payment) {
-      if (error) {
-          throw error;
-      } else {
-        for(let i = 0;i < payment.links.length;i++){
-          if(payment.links[i].rel === 'approval_url'){
-            console.log(`${payment.links[i].href}`);
-            return response.redirect(`${payment.links[i].href}`);
+    }
+  }
+
+  createPayment (project) {
+    return new Promise((resolve, reject) => {
+      paypal.payment.create(this.paypalDetails(project), (err, payment) => {
+        if (err) {
+          return reject(err)
+        }
+        const links = payment.links
+        for (let i = 0; i < links.length; i++) {
+          if (links[i].rel === 'approval_url') {
+            return resolve({
+              approvalUrl: links[i].href,
+              paymentId: payment.id
+            })
           }
         }
-      }
-    });
+      })
+    })
   }
 
-  async paySuccess({view,auth,response}) {
-    const payerId = req.query.PayerID;
-    const paymentId = req.query.paymentId;
-  
-    const execute_payment_json = {
-      "payer_id": payerId,
-      "transactions": [{
-          "amount": {
-              "currency": "EUR",
-              "total": "25.00"
-          }
-      }]
-    };
-  
-    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-      if (error) {
-        console.log(error.response);
-        throw error;
-      } else {
-        console.log(JSON.stringify(payment));
-        return response.send('Success');
-      }
-    })
+  async clients({view}) {
+    const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
+    return view.render('dashboard.clients',{clients})
+  }
+  async show({view,params}) {
+    const client = (await Client.find(params.id)).toJSON()
+    return view.render('dashboard.clients',{client})
   }
 }
 
