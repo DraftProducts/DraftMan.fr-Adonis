@@ -4,16 +4,8 @@ const Comment = use('App/Models/Comment')
 const Post = use('App/Models/Post')
 
 class BackofficeController {
-  async index({view}) {
-    return view.render('dashboard.accueil')
-  }
-
-  async upload({view}) {
-    return view.render('dashboard.upload')
-  }
-
   async comments({view}) {
-    const comments = (await Comment.query().with('post').where('seen','=',0).fetch()).toJSON()
+    const comments = (await Comment.query().with('post').where('seen',0).fetch()).toJSON()
     return view.render('dashboard.comments',{comments})
   }
 
