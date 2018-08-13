@@ -1,9 +1,9 @@
 {
-  "name": "adonis-fullstack-app",
-  "version": "4.1.0",
+  "name": "DraftMan.fr",
+  "version": "4.0.0",
   "adonis-version": "4.1.0",
-  "description": "The fullstack application boilerplate for Adonisjs",
-  "main": "index.js",
+  "description": "Site du développeur DraftMan",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test"
@@ -30,12 +30,11 @@
     "@adonisjs/shield": "^1.0.6",
     "@adonisjs/validator": "^5.0.3",
     "btoa": "^1.2.1",
-    "fs": "0.0.1-security",
     "gravatar": "^1.6.0",
+    "moment": "^2.22.2",
     "mysql": "^2.15.0",
     "paypal-rest-sdk": "^1.8.1",
     "remarkable": "^1.7.1",
-    "simplemde": "^1.11.2",
     "snekfetch": "^4.0.4"
   },
   "devDependencies": {},
