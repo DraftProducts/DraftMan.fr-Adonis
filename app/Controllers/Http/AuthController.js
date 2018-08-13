@@ -5,12 +5,8 @@ const User = use('App/Models/User')
 const Emails = use('App/Models/Email')
 const Mail = use('Mail')
 
-class RegisterController {
-  create({view}) {
-    return view.render('dashboard.register')
-  }
-
-  async store({ session, request, response }) {
+class AuthController {
+  async register({ session, request, response }) {
 
     const messages = {
       'username.required': 'Veuillez indiquer votre pseudo.',
@@ -45,37 +41,70 @@ class RegisterController {
 
     delete data.password_conf
 
+    
     await User.create(data)
-    delete data.password
-    delete data.username
-    delete data.role
-    await Emails.create(data)
-
+    await Emails.findOrCreate({ email: data.email },{ email: data.email })
+    
     session.flash({
       account_created: 'Compte crée avec succès'
     })
     
-    /*await Mail.send('mails/inscription', data, (message) => {
+    await Mail.send('mails/inscription', data, (message) => {
       message
         .to('<email>')
         .from('no-reply@draftman.fr', 'draftman.fr')
         .subject('Inscription sur DraftMan.fr')
         .replyTo('contact@draftman.fr', 'DraftMan')
-    })*/
+    })
 
     return response.redirect('/login')
   }
 
-  legout({auth, session, response}) {
+  async login({ auth, request, response, session }) {
+    const {email, password} = request.only(['email','password'])
+
+    const messages = {
+      'email.required': 'Veuillez entrer une adresse email valide.',
+      'email.email': 'Veuillez entrer une adresse email valide.',
+      'password.required': 'Veuillez indiquer votre mot de passe.',
+    }
+
+    const rules = {
+      email: 'required|email',
+      password: 'required',
+    }
+
+    const validation = await validate(request.all(), rules, messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        .flashExcept(['password'])
+
+      return response.redirect('back')
+    }
+
+    try {
+      await auth.remember(true).attempt(email, password);
+    } catch (e) {
+      session.flashExcept(['password'])
+      session.flash({error: 'Identifiant ou mot de passe incorect'})
+      return response.redirect('back')
+    }
+
+    return response.redirect('/me/')
+  }
+
+  logout({auth, session, response}) {
     return Promise.all([
       session.clear(),
       auth.logout()
     ]).then(() => {
       session.flash({
-        account_legout: 'Vous vous êtes déconnecté avec succès'
+        account_logout: 'Vous vous êtes déconnecté avec succès'
       })
       return response.redirect("/login");
     }).catch(err => console.log(err));
   }
 }
-module.exports = RegisterController
+module.exports = AuthController
