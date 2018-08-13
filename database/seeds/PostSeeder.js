@@ -22,7 +22,7 @@ class PostSeeder {
     const user = await Factory.model('App/Models/User').create()
 
     const comment = await Factory.model('App/Models/Comment').create()
-    const replies = await Factory.model('App/Models/Comment').create({ parent_id: comment.id })
+    await Factory.model('App/Models/Comment').create({ parent_id: comment.id })
 
     // Generates 10 posts
     const posts = await Factory.model('App/Models/Post').makeMany(10)
