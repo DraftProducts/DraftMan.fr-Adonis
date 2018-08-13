@@ -92,6 +92,7 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, .26);
   border-radius: 0 0 2px 2px;
   display: none;
+  z-index: 1;
 }
 
 #dashboard>.corps #bar #user ul.active {
@@ -286,6 +287,10 @@ textarea.textarea {
   min-height: 200px;
   resize: vertical;
   font-family: Open Sans;
+}
+
+.portfolio .textarea{
+  min-height: 105px;
 }
 
 #dashboard .submit {
@@ -522,11 +527,11 @@ textarea.textarea {
   margin-bottom: 10px
 }
 
-#dashboard .comments .comment .buttons {
+#dashboard .comments .comment .controls {
   width: 50px;
 }
 
-#dashboard .comments .comment .buttons>a {
+#dashboard .comments .comment .controls>a {
   width: 50px;
   height: 50px;
   display: flex;
@@ -536,11 +541,71 @@ textarea.textarea {
   text-decoration: none;
 }
 
-#dashboard .comments .comment .buttons>.valid {
+#dashboard .comments .comment .controls>.valid {
   background-color: #4CAF50;
 }
 
-#dashboard .comments .comment .buttons>.remove {
+#dashboard .comments .comment .controls>.remove {
+  background-color: #F44336;
+}
+
+/**
+ |--------------------------------------------------------------------------
+ | Clients validate page
+ |--------------------------------------------------------------------------
+ */
+
+ #dashboard .dclients {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#dashboard .dclients .client {
+  display: flex;
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  margin: 10px;
+}
+
+#dashboard .dclients .client .image {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
+
+#dashboard .dclients .client>.content {
+  padding: 15px;
+  flex: 1;
+}
+
+#dashboard .dclients .client>.content .top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px
+}
+
+#dashboard .dclients .client .controls {
+  width: 50px;
+}
+
+#dashboard .dclients .client .controls>a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+#dashboard .dclients .client .controls>.valid {
+  background-color: #4CAF50;
+}
+
+#dashboard .dclients .client .controls>.remove {
   background-color: #F44336;
 }
 
@@ -558,6 +623,11 @@ textarea.textarea {
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+  margin-right: 20px
+}
+
+#dashboard .article_file.logo{
+  width: 108px;
 }
 
 #dashboard #article_file {
@@ -722,10 +792,6 @@ textarea.textarea {
 }
 
 #dashboard .dclient .infos .payment_button {
-  padding-bottom: 20px;
-}
-
-#dashboard .dclient .infos .payment_button input {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -734,10 +800,9 @@ textarea.textarea {
   color: #fff;
   background-color: #cd6e57;
   font-size: 20px;
-  cursor: pointer;
-  border: none;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
-  outline: 0;
+  text-decoration: none;
+  margin-bottom: 20px;
 }
 
 #dashboard .dclient .infos .files {
@@ -934,6 +999,47 @@ textarea.textarea {
     font-size: 16px;
     margin-right: 2px;
 }
+#dashboard .portfolio .colors{
+  margin-bottom: 10px
+}
+#dashboard .portfolio .colors .pickers,#dashboard .portfolio .colors .hex{
+  display: flex;
+  justify-content: space-between;
+}
+#dashboard .portfolio .colors .pickers button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 0;
+    outline: 0;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+}
+#dashboard .portfolio .colors .pickers i{
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out
+}
+#dashboard .portfolio .colors .pickers button:hover i{
+  transform: scale(1.2)
+}
+#dashboard .portfolio .colors .hex input{
+  width: 100px;
+  height: 30px;
+  border: 1px solid transparent;
+  outline: 0;
+  text-align: center;
+  background-color: transparent;
+  transition: border 0.6s;
+}
+#dashboard .portfolio .colors .hex input:focus{
+  border: 1px solid #575757
+}
+
+
+
+
 
 
 
