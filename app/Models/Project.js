@@ -12,6 +12,9 @@ class Project extends Model {
     devblog () {
         return this.hasMany('App/Models/DevPost', 'id', 'client_project_id')
     }
+    payments () {
+        return this.hasMany('App/Models/Payment', 'id', 'client_project_id')
+    }
 }
 
 module.exports = Project
