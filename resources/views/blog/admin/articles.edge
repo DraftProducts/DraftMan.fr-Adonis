@@ -20,19 +20,19 @@
 <div class="articles"> 
     @each(article in articles)
     <div class="article">
-            <div class="text">
-                <div class="title">
-                    <h5>{{article.title}}</h5>
-                </div>
-                {{article.description}}
+        <div class="text">
+            <div class="title">
+                <h5>{{article.title}}</h5>
             </div>
-            <div class="image">
-                <div class="img" style="background-image: url(/uploads/posts/{{article.image}})"></div>
-                <a href="/admin/view/{{article.id}}-{{article.url}}">Voir l'article</a>
-                @if(auth.user.email === article.author.email)
-                    <a href="/me/write/{{article.id}}-{{article.url}}">Modifier l'article</a>
-                @endif
-            </div>
+            {{article.description}}
+        </div>
+        <div class="image">
+            <div class="img" style="background-image: url(/uploads/posts/{{article.image}})"></div>
+            <a href="/admin/view/{{article.id}}-{{article.url}}">Voir l'article</a>
+            @if(auth.user.email === article.author.email)
+                <a href="/me/write/{{article.id}}-{{article.url}}">Modifier l'article</a>
+            @endif
+        </div>
     </div> 
     @else
         <div class="no-results">
