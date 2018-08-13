@@ -4,8 +4,9 @@ const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 const { validate } = use('Validator')
 const Helpers = use('Helpers')
+const moment = require('moment')
 
-class PostController {
+class BlogController {
     // index = Liste tes posts
     // create = Afficher le formulaire de création
     // store = Stocker ton post
@@ -14,9 +15,13 @@ class PostController {
     // update = Met à jour ton post
     // destroy = Détruire ton post
 
-    async index({ view }){
+    async accueil({ view }){
+        const posts = (await Post.query().limit(3).fetch()).toJSON();
+        return view.render('index', {posts})
+    }
 
-        const posts = (await Post.query().whereNotNull('published_at').fetch()).toJSON();
+    async index({ view }){
+        const posts = (await Post.query().with('author').whereNotNull('published_at').fetch()).toJSON();
         return view.render('blog.index', {posts})
     }
 
@@ -26,7 +31,7 @@ class PostController {
 
     async edit({ view, params }){
         const post = (await Post.find(params.id)).toJSON()
-        return view.render('dashboard.edit', {post})
+        return view.render('dashboard.post-edit', {post})
     }
 
     async store({ request, session, response, auth }){
@@ -60,12 +65,12 @@ class PostController {
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
     
           return response.redirect('back')
         }
-
-        if(!data.published_at) data.published_at === new Date()
+console.log(moment.format())
+        if(data.published_at) data.published_at === moment.format()
         
         data.author_id = auth.user.id
 
@@ -118,12 +123,12 @@ class PostController {
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
     
           return response.redirect('back')
         }
 
-        if(!data.published_at) data.published_at === new Date()
+        if(data.published_at) data.published_at === Date().now()
         
         data.author_id = auth.user.id
 
@@ -202,7 +207,7 @@ class PostController {
         if (validation.fails()) {
             session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
 
             return response.redirect('back')
         }
@@ -215,4 +220,4 @@ class PostController {
     }
 }
 
-module.exports = PostController
+module.exports = BlogController
