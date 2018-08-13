@@ -30,12 +30,12 @@
             <div class="payment">
                 @each(payment in project.total_payments)
                     <div class="item">
-                        <div class="icon valid"></div>
+                        <div class="iconvalid"></div>
                     </div>
                 @endeach
             </div>
             <div class="progress">
-            <div class="bar" style='width: {{progress}}%' title='Projet effectué à {{progress}}%'></div>
+            <div class="bar" style='width: {{project.progress}}%' title='Projet effectué à {{project.progress}}%'></div>
             </div>
         </div>
         <div id="images">
@@ -49,9 +49,13 @@
         </div>
     </div>
     <div class="infos">
-        <form class="payment_button" action="/me/client/pay" method="post">
-            {{ csrfField() }}
-            <input type="submit" value="Procéder au payment">
+        <a class="payment_button" href="{{link}}">Procéder au payment</a>
+        @if(flashMessage('success'))
+            <div class="success-card">{{ flashMessage('success') }}</div>
+        @endif
+        @if(flashMessage('error'))
+            <div class="error-card">{{ flashMessage('error') }}</div>
+        @endif
         </form>
         <div class="files">
             <h3>Fichiers</h3>
@@ -93,4 +97,4 @@
         });
     })
 </script>
-@endsection
+@endsection 
