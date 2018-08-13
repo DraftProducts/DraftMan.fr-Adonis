@@ -33,7 +33,7 @@ class ContactController {
         if (validation.fails()) {
             session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
 
             return response.redirect('back')
         }
