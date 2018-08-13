@@ -16,12 +16,13 @@ class PortfolioSchema extends Schema {
     })
     this.create('portfolio_details', (table) => {
       table.increments()
+      table.string('url')
       table.json('colors')
-      table.string('typographie1')
-      table.string('typographie2')
-      table.text('problematique')
-      table.text('presentation')
-      table.text('technique')
+      table.string('typographie1').notNullable()
+      table.string('typographie2').notNullable()
+      table.text('problematique').notNullable()
+      table.text('presentation').notNullable()
+      table.text('technique').notNullable()
       table.string('logo')
       table.string('folder')
       table.integer('portfolio_id')
@@ -31,6 +32,7 @@ class PortfolioSchema extends Schema {
 
   down () {
     this.drop('portfolio')
+    this.drop('portfolio_details')
   }
 }
 
