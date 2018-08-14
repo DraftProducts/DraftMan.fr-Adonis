@@ -32,7 +32,7 @@ class ClientController {
     }
   }
 
-  async send({request, session, response,auth}) {
+  async request({request, session, response,auth}) {
     const data = request.only(['name', 'type', 'description','validation','discord'])
     const messages = {
         'name.required': 'Veuillez indiquer le nom du projet.',
@@ -153,11 +153,11 @@ class ClientController {
 
   async clients({view}) {
     const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
-    return view.render('dashboard.clients',{clients})
+    return view.render('clients.admin.clients',{clients})
   }
   async show({view,params}) {
     const client = (await Client.find(params.id)).toJSON()
-    return view.render('dashboard.clients',{client})
+    return view.render('clients.admin.client',{client})
   }
 }
 
