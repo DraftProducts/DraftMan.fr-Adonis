@@ -7,25 +7,18 @@ const Helpers = use('Helpers')
 
 class PortfolioController {
     async index({ view }){
-
         const portfolio = (await Portfolio.all()).toJSON();
-
         return view.render('portfolio.index', {portfolio: portfolio})
     }
 
     async show({params, view}){
-
-        const project = (await Portfolio.find(params.id)).toJSON();
-
+        const project = (await Portfolio.findOrFail(params.id)).toJSON();
         return view.render('portfolio.details', {project})
     }
 
     async create({view}){
         const portfolio = (await Portfolio.all()).toJSON();
-        const details = new PortfolioDetails()
-        const res = await details.save()
-        console.log(res)
-        return view.render('dashboard.portfolio', {portfolio})
+        return view.render('portfolio.admin.create', {portfolio})
     }
 
     async store({request, session, response}){
@@ -54,12 +47,12 @@ class PortfolioController {
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
     
           return response.redirect('back')
         }
-
-        if(!data.published_at) data.published_at === new Date()
+        console.log(new Date().format('YYYY-MM-DD'))
+        if(data.published_at) data.published_at === new Date().format('YYYY-MM-DD')
 
         data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
         await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
@@ -78,15 +71,15 @@ class PortfolioController {
     }
 
     async edit({view,params}){
-        const creation = (await Portfolio.find(params.id)).toJSON();
+        let creation = (await Portfolio.findOrFail(params.id)).toJSON();
         const portfolio = (await Portfolio.all()).toJSON();
-        if(creation.portfolio_details_id != null){
-            creation = (await Portfolio.query().with('details').where('id', params.id).fetch()).toJSON();
-            return view.render('dashboard.portfolio-edit-details', {portfolio,creation})
+        if(creation.portfolio_details_id !== null){
+            creation = (await Portfolio.query().with('details').where('id','=', params.id).first()).toJSON();
+            return view.render('portfolio.admin.edit-details', {portfolio,creation})
         }
-        return view.render('dashboard.portfolio-edit', {portfolio,creation})
+        return view.render('portfolio.admin.edit', {portfolio,creation})
     }
-    async update({request, session, response}){
+    async update({request, session, response,params}){
         const data = request.only(['name', 'description', 'type','published_at']);
 
         const illustration = request.file('illustration', {
@@ -102,7 +95,7 @@ class PortfolioController {
         }
     
         const rules = {
-          name: 'required|unique:portfolio',
+          name: `required|unique:portfolio,name,id,${params.id}`,
           description: 'required',
           type: 'required'
         }
@@ -112,17 +105,106 @@ class PortfolioController {
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
-            .flashExcept()
+            .flashAll()
     
           return response.redirect('back')
         }
 
-        if(!data.published_at) data.published_at === new Date()
+        if(data.published_at) data.published_at === Date().now()
 
         data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
         await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
 
-        await Portfolio.create(data)
+        const portfolio = await Portfolio.find(params.id)
+        portfolio.merge(data)
+        await portfolio.save()
+        
+        session.flash({
+          article_posted: 'Création sauvegardé'
+        })
+
+        if(data.published_at){
+            return response.redirect('/portfolio')
+        }else{
+            return response.redirect('/admin/portfolio')
+        }
+    }
+    async updateDetails({request, session, response,params}){
+        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
+
+        const illustration = request.file('illustration', {
+          types: ['image'],
+          size: '2mb'
+        })
+        
+        const logo = request.file('logo', {
+          types: ['image'],
+          size: '2mb'
+        })
+    
+        const messages = {
+          'name.unique': 'Ce nom est déjà utilisé.',
+          'name.required': 'Veuillez donner un nom à cette création',
+          'description.required': 'Veuillez donner une description à cette création',
+          'type.required': 'Veuillez préciser le type de projet.',
+          'typographie1.required': 'Veuillez indiquer la typographie n°1.',
+          'typographie2.required': 'Veuillez indiquer la typographie n°2.',
+        }
+    
+        const rules = {
+          name: `required|unique:portfolio,name,id,${params.id}`,
+          description: 'required',
+          type: 'required',
+          typographie1: 'required',
+          typographie2: 'required',
+          url: 'required',
+        }
+    
+        const validation = await validate(data, rules, messages)
+    
+        if (validation.fails()) {
+          session
+            .withErrors(validation.messages())
+            .flashAll()
+    
+          return response.redirect('back')
+        }
+
+        const basics = {
+            name: data.name,
+            description: data.description,
+            type: data.type
+        }
+
+        if(data.published_at) basics.published_at === new Date().now()
+
+        if(illustration){
+            basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
+            await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: basics.illustration})
+        }
+
+        const details = {
+            colors: {color1: data.color1,color2: data.color2,color3: data.color3,color4: data.color4,color5: data.color5},
+            typographie1: data.typographie1,
+            typographie2: data.typographie2,
+            problematique: data.problematique,
+            presentation: data.presentation,
+            technique: data.technique,
+            folder: data.name,
+            url: data.url,
+        }
+        if(logo){
+            details.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
+            await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: data.logo})
+        }
+
+        const portfolio = await Portfolio.find(params.id)
+        portfolio.merge(basics)
+        await portfolio.save()
+
+        const portfolioDetails = await PortfolioDetails.findBy('portfolio_id',params.id)
+        portfolioDetails.merge(details)
+        await portfolioDetails.save()
         
         session.flash({
           article_posted: 'Création sauvegardé'
@@ -135,12 +217,21 @@ class PortfolioController {
         }
     }
     async upgrade({params, response}){
+        const portfolio = await Portfolio.findOrFail(params.id)
+        if(portfolio.portfolio_details_id !== null) return response.redirect('back')
         const details = new PortfolioDetails()
         details.portfolio_id = params.id
         await details.save()
         const d = (await PortfolioDetails.query().where('portfolio_id',params.id).first()).toJSON()
-        const res = await Portfolio.find(d.portfolio_id)
-        await res.merge({'portfolio_details_id':res.id})
+        await Portfolio.query().where('id',d.portfolio_id).update({'portfolio_details_id':d.id})
+        return response.redirect('back')
+    }
+    async decline({params, response}){
+        const portfolio = await Portfolio.findOrFail(params.id)
+        const details = await PortfolioDetails.findOrFail(portfolio.portfolio_details_id)
+        portfolio.portfolio_details_id = null
+        await details.delete()
+        await portfolio.save()
         return response.redirect('back')
     }
 }
