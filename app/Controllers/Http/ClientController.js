@@ -19,6 +19,15 @@ class ClientController {
     })
   }
 
+  async client_request ({view,auth,session}) {
+    let request = await Client.findBy('user_id', auth.user.id)
+    if(request) {
+      return view.render('clients.client_request',{request: request.toJSON()})
+    }else{
+      return view.render('clients.client_request')
+    }
+  }
+  
   async dashboard ({session, view,auth}) {
     try {
       const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
