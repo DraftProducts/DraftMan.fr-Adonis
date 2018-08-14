@@ -4,15 +4,16 @@ const Portfolio = use('App/Models/Portfolio')
 const PortfolioDetails = use('App/Models/PortfolioDetails')
 const { validate } = use('Validator')
 const Helpers = use('Helpers')
+const moment = require('moment')
 
 class PortfolioController {
     async index({ view }){
-        const portfolio = (await Portfolio.all()).toJSON();
+        const portfolio = (await Portfolio.query().whereNotNull('published_at').fetch()).toJSON();
         return view.render('portfolio.index', {portfolio: portfolio})
     }
 
     async show({params, view}){
-        const project = (await Portfolio.findOrFail(params.id)).toJSON();
+        const project = (await Portfolio.query().where('id',params.id).whereNotNull('published_at').fetch()).toJSON();
         return view.render('portfolio.details', {project})
     }
 
@@ -51,8 +52,7 @@ class PortfolioController {
     
           return response.redirect('back')
         }
-        console.log(new Date().format('YYYY-MM-DD'))
-        if(data.published_at) data.published_at === new Date().format('YYYY-MM-DD')
+        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
         data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
         await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
@@ -110,7 +110,7 @@ class PortfolioController {
           return response.redirect('back')
         }
 
-        if(data.published_at) data.published_at === Date().now()
+        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
         data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
         await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
@@ -173,10 +173,11 @@ class PortfolioController {
         const basics = {
             name: data.name,
             description: data.description,
-            type: data.type
+            type: data.type,
+            url: data.url
         }
 
-        if(data.published_at) basics.published_at === new Date().now()
+        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
         if(illustration){
             basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
@@ -190,8 +191,7 @@ class PortfolioController {
             problematique: data.problematique,
             presentation: data.presentation,
             technique: data.technique,
-            folder: data.name,
-            url: data.url,
+            folder: data.name
         }
         if(logo){
             details.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
