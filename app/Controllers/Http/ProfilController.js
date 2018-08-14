@@ -14,9 +14,6 @@ const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
 const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
 
 class ProfilController {
-  async index({view}) {
-    return view.render('dashboard.profil')
-  }
   discordLogin({response}) {
     return response.redirect(`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify+email&response_type=code&redirect_uri=${redirect}`);
   }
@@ -86,13 +83,6 @@ class ProfilController {
     session.flash({
       valid_basic: 'Informations modifiés'
     })
-    /*await Mail.send('mails/profil_modif', data, (message) => {
-      message
-        .to('<email>')
-        .from('no-reply@draftman.fr', 'draftman.fr')
-        .subject('Modification du profil sur DraftMan.fr')
-        .replyTo('contact@draftman.fr', 'DraftMan')
-    })*/
     return response.redirect('back')
   }
 
@@ -109,14 +99,6 @@ class ProfilController {
     session.flash({
       valid_infos: 'Informations modifiés'
     })
-    
-    /*await Mail.send('mails/profil_modif', data, (message) => {
-      message
-        .to('<email>')
-        .from('no-reply@draftman.fr', 'draftman.fr')
-        .subject('Modification du profil sur DraftMan.fr')
-        .replyTo('contact@draftman.fr', 'DraftMan')
-    })*/
     return response.redirect('back')
   }
 }
