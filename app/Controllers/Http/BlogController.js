@@ -26,12 +26,12 @@ class BlogController {
     }
 
     async create({ view }){
-        return view.render('dashboard.write')
+        return view.render('blog.admin.write')
     }
 
     async edit({ view, params }){
         const post = (await Post.find(params.id)).toJSON()
-        return view.render('dashboard.post-edit', {post})
+        return view.render('blog.admin.edit', {post})
     }
 
     async store({ request, session, response, auth }){
@@ -83,7 +83,7 @@ console.log(moment.format())
           article_posted: 'Article sauvegardé'
         })
 
-        if(data.published_at != null){
+        if(data.published_at){
             return response.redirect('/blog')
         }else{
             return response.redirect('/me/articles')
@@ -149,9 +149,7 @@ console.log(moment.format())
     }
 
     async list({ view }){
-
         const posts = (await Post.all()).toJSON();
-
         return view.render('blog.list', {posts})
     }
 
@@ -159,7 +157,7 @@ console.log(moment.format())
         const [post, posts, comments] = await Promise.all([
           Post.query().with('author').where('id', params.id).first(),
           Post.all(),
-          Comment.query().with('replies').where('post_id', params.id).where('parent_id', '=', 0).fetch(),
+          Comment.query().with('replies').where('post_id', params.id).where('parent_id', 0).fetch(),
         ])
         return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
     }
@@ -167,13 +165,13 @@ console.log(moment.format())
     async delete ({ params,auth,response }){
         const post = (await Post.find(params.id))
         if(post.author.email === auth.user.email){
-            post.update({ delete: 1 })
+            post.delete = 1
+            await post.save()
         }
         response.redirect('/me/articles')
     }
 
     async comment ({ request,session, params,response, auth}){
-
         const data = request.only(['name', 'email', 'website','twitter','github','linkedin','content','parent_id'])
         data.post_id = params.id
         data.seen = 0
@@ -181,7 +179,6 @@ console.log(moment.format())
         if(!data.parent_id) data.parent_id = 0
 
         if(auth.user){
-            console.log('connecté')
             data.name = auth.user.username
             data.email = auth.user.email
             data.website = auth.user.website
@@ -212,9 +209,7 @@ console.log(moment.format())
             return response.redirect('back')
         }
 
-        const comment = await Comment.create(data)
-
-        console.log(comment)
+        await Comment.create(data)
 
         return response.redirect('back')
     }
