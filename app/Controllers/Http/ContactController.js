@@ -4,11 +4,7 @@ const Mail = use('Mail')
 const { validate } = use('Validator')
 
 class ContactController {
-    async index({ view }){
-        return view.render('contact')
-    }
-
-    async verify ({ request, session, response }) {
+    async send({ request, session, response }) {
 
         const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
 
