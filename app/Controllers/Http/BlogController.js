@@ -69,8 +69,7 @@ class BlogController {
     
           return response.redirect('back')
         }
-console.log(moment.format())
-        if(data.published_at) data.published_at === moment.format()
+        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
         
         data.author_id = auth.user.id
 
@@ -128,7 +127,7 @@ console.log(moment.format())
           return response.redirect('back')
         }
 
-        if(data.published_at) data.published_at === Date().now()
+        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
         
         data.author_id = auth.user.id
 
