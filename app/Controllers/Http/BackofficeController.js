@@ -6,12 +6,12 @@ const Post = use('App/Models/Post')
 class BackofficeController {
   async comments({view}) {
     const comments = (await Comment.query().with('post').where('seen',0).fetch()).toJSON()
-    return view.render('dashboard.comments',{comments})
+    return view.render('blog.admin.comments',{comments})
   }
 
   async articles({view}) {
     const articles = (await Post.query().with('author').fetch()).toJSON()
-    return view.render('dashboard.articles',{articles})
+    return view.render('blog.admin.articles',{articles})
   }
 
   async valide_comment({params,response}) {
