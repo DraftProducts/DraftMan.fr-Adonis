@@ -2,22 +2,22 @@
 
 @section('seo')
     {{--  Title  --}}
-    <title>{{ item.name }} - DraftMan Développeur Web & Graphiste</title>
-    <meta property="og:title" content="{{ item.name }} - DraftMan Développeur Web & Graphiste">
-    <meta name="twitter:title" content="{{ item.name }} - DraftMan Développeur Web & Graphiste">
+    <title>{{project.name}} - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="{{project.name}} - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="{{project.name}} - DraftMan Développeur Web & Graphiste">
 
     {{--  Description  --}}
-    <meta name="description" content="{{ item.description }}">
-    <meta property="og:description" content="{{ item.description }}">
-    <meta name="twitter:description" content="{{ item.description }}">
+    <meta name="description" content="{{project.description}}">
+    <meta property="og:description" content="{{project.description}}">
+    <meta name="twitter:description" content="{{project.description}}">
 
     {{--  Link  --}}
-    <link rel="canonical" href="https://www.draftman.fr/{{ item.id }}" />
-    <meta property="og:url" content="https://www.draftman.fr/{{ item.id }}">
+    <link rel="canonical" href="https://www.draftman.fr/{{project.id}}" />
+    <meta property="og:url" content="https://www.draftman.fr/{{project.id}}">
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{project.typographie1}}|{{project.typographie2}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{project.details.typographie1}}|{{project.details.typographie2}}">
 @endsection
 
 @section('content')
@@ -26,29 +26,29 @@
     <div class="corps">
     	<div class="item-content">
             <div class="top-content">
-                <h2>{{ item.name }}</h2>
+                <h2>{{project.name}}</h2>
                 <div class="infos">
                     <li>
                         <i class="icon-user"></i>
-                        <span>{{ item.type }}</span>
+                        <span>{{ project.type }}</span>
                     </li>
                     <li>
                         <i class="icon-calender"></i>
-                        <span>{{item.date}}</span>
+                        <span>{{date(project.published_at)}}</span>
                     </li>
                 </div>
             </div>
-            <div class="logo" style="background-image: url(../images/portfolio/{{project.url}}/{{project.logo}});"></div>
+            <div class="logo" style="background-image: url(/uploads/portfolio/{{project.details.logo}});"></div>
             <section id="post-body" class="portfolio">
-                <p>{{project.presentation}}</p>
+                <p>{{project.details.presentation}}</p>
             </section>
         </div>
         <div class="item-content">
             <section id="spe-body" class="portfolio">
                 <h4>Spécificités Graphique</h4>
                 <div class="typographies">
-                    <h5 style="font-family:'{{project.typographie1}}'">Abc</h5>
-                    <h5 style="font-family:'{{project.typographie2}}'">Abc</h5>
+                    <h2 style="font-family:'{{project.details.typographie1}}'">Abc</h5>
+                    <h2 style="font-family:'{{project.details.typographie2}}'">Abc</h5>
                 </div>
             </section>
         </div>
