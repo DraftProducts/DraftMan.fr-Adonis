@@ -1,0 +1,69 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Projet {{project.name}} - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Projet - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Projet - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta property="og:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta name="twitter:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/me/client/dashboard" />
+    <meta property="og:url" content="https://www.draftman.fr/me/client/dashboard">
+@endsection
+
+@section('content')
+<div class="dclient double">
+    <div class="corps">
+        <div class="name">
+            {{client.name}}
+        </div>
+        <div class="request">
+            <p>Bonjour DraftMan</p>
+            <p>Je vous contacte pour un travail de <strong>{{client.type}}</strong></p>
+            <p>Le projet se nomme <strong>{{client.name}}</strong></p>
+            <p>Voici donc une courte description</p>
+            <p>{{client.description}}</p>
+            <p>Discord : <strong>{{client.author.discord_username}}#{{client.author.discord_discriminator}}</strong></p>
+            <p>Email : <strong>{{client.author.email}}</strong></p>
+            <p>Cordialement <strong>{{client.author.username}}</strong></p>
+        </div>
+    </div>
+    <div class="infos">
+        <div class="user_view">
+            <img class="user" src="{{getProfilImage(client.author)}}" alt="User">
+            <span class="username" v-if="open">{{client.author.username}}</span>
+            <a href="mailto:{{client.author.email}}">{{client.author.email}}</a>
+            <div class="icons">
+                <a href="{{client.author.website}}"><i class="icon-cursor"></i></a>
+                <a href="https://twitter.com/{{client.author.twitter}}"><i class="icon-twitter"></i></a>
+                <a href="javascript:void(0)" onclick="prompt('Voici le pseudo discord du client !','{{client.author.discord_username}}#{{client.author.discord_discriminator}}')"><i class="icon-discord"></i></a>
+                <a href="https://github.com/{{client.author.github}}"><i class="icon-github"></i></a>
+                <a href="https://www.linkedin.com/in/{{client.author.linkedin}}"><i class="icon-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="accept_buttons">
+            <div class="content">
+                <a href="/admin/clients/{{client.id}}/accept" class="input submit">Accepter</a>
+                <a href="" @click.prevent="toggleRefuse()" class="input submit">Refuser</a>
+            </div>
+            <form action="/admin/clients/{{client.id}}/refuse" method="post" :class="{open: refuse}">
+                <div class="input-container">
+                    <textarea name="response" id="response" class="input textarea"></textarea>
+                </div>
+                <div class="input-container">
+                    <input class="input submit" type="submit" value="Envoyer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+    {{script('js/client_request')}}
+@endsection
