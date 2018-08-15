@@ -20,12 +20,11 @@ class ClientController {
   }
 
   async client_request ({view,auth,session}) {
-    let request = await Client.findBy('user_id', auth.user.id)
+    const request = await Client.findBy('user_id', auth.user.id)
     if(request) {
       return view.render('clients.client_request',{request: request.toJSON()})
-    }else{
-      return view.render('clients.client_request')
     }
+    return view.render('clients.client_request')
   }
   
   async dashboard ({session, view,auth}) {
@@ -164,8 +163,9 @@ class ClientController {
     const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
     return view.render('clients.admin.clients',{clients})
   }
+
   async show({view,params}) {
-    const client = (await Client.find(params.id)).toJSON()
+    const client = (await Client.query().with('author').where('id',params.id).fetch()).toJSON()
     return view.render('clients.admin.client',{client})
   }
 }
