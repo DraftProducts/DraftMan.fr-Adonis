@@ -47,10 +47,10 @@
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
         {{ csrfField() }}
-        <button class="input submit" type="submit">Charger les informations</button>
         @if(flashMessage('valid_basic'))
             <div class="success-card">{{ flashMessage('valid_basic') }}</div>
         @endif
+        <button class="input submit" type="submit">Charger les informations</button>
     </form>
     <form class="infos_supp" method="POST" action="{{ route('ProfilController.storeInfos') }}">
         <div id="discord">
@@ -64,7 +64,7 @@
                 <a href="/discord/login">Connecter discord</a>
             </div>
             @else
-            <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
+            <div class="image" style="background-image: url('{{getDiscordImage(auth.user)}}')"></div>
             <div class="content">
                 <div>
                     <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
@@ -91,10 +91,10 @@
             <label for="linkedin">Linkedin</label>
         </div>
         {{ csrfField() }}
-        <button class="input submit" type="submit">Charger les informations</button>
         @if(flashMessage('valid_infos'))
             <div class="success-card">{{ flashMessage('valid_infos') }}</div>
         @endif
+        <button class="input submit" type="submit">Charger les informations</button>
     </form>
 </div>
 @endsection
