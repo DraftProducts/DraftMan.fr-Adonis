@@ -122,7 +122,7 @@
   padding: 40px;
 }
 
-#dashboard #menu .user {
+#dashboard #menu .user,#dashboard .user_view .user {
   width: 130px;
   height: 130px;
   border-radius: 100%;
@@ -131,7 +131,7 @@
   transition: 0.3s;
 }
 
-#dashboard #menu .username {
+#dashboard #menu .username,#dashboard .user_view .username {
   font-size: 22px;
   font-weight: 600;
   text-align: center;
@@ -462,13 +462,13 @@ textarea.textarea {
   color: #7E7E7E
 }
 
-#dashboard .client .preview {
+#dashboard .preview {
   padding: 50px;
   background-image: url(../images/shattered.png);
   position: relative;
 }
 
-#dashboard .client .preview:after {
+#dashboard .preview:after {
   content: "";
   position: absolute;
   right: 0px;
@@ -484,7 +484,7 @@ textarea.textarea {
   box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.2), -2px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-#dashboard .client .preview p {
+#dashboard .preview p {
   margin-bottom: 1em;
   line-height: 20px;
 }
@@ -630,7 +630,7 @@ textarea.textarea {
   width: 108px;
 }
 
-#dashboard #article_file {
+#dashboard .article_file_input {
   position: absolute;
   width: 100%;
   top: 0;
@@ -663,7 +663,7 @@ textarea.textarea {
   transition: 0.4s background-color;
 }
 
-#dashboard #article_file:hover+.article_image .text {
+#dashboard .article_file_input:hover+.article_image .text {
   background-color: #404040a6
 }
 
@@ -890,6 +890,86 @@ textarea.textarea {
   color: #fff;
   font-size: 12px;
 }
+/**
+ |--------------------------------------------------------------------------
+ | Dashboard clients list details
+ |--------------------------------------------------------------------------
+ */
+ #dashboard .request{
+  margin-top: 30px;
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+ }
+
+ #dashboard .request p {
+  margin-bottom: 1em;
+  line-height: 20px;
+}
+#dashboard .user_view{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+#dashboard .user_view .username{
+  padding-bottom: 15px;
+}
+#dashboard .user_view>a{
+  text-align: center;
+  font-size: 14px;
+  color: #cd6e57;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+#dashboard .user_view .icons{
+  display: flex;
+  justify-content: center;
+}
+#dashboard .user_view .icons a{
+  text-decoration: none;
+  color: #404346;
+  padding: 0 8px;
+  transition: color 0.3s;
+}
+#dashboard .user_view .icons i {
+  font-size: 22px;
+}
+#dashboard .user_view .icons a:hover{
+  color: #cd6e57;
+}
+#dashboard .accept_buttons .content{
+  display: flex;
+  justify-content: space-between;
+}
+
+#dashboard .accept_buttons a{
+  width: 48%;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#dashboard .accept_buttons textarea{
+  min-height: 100px;
+  margin-bottom: 10px;
+}
+
+#dashboard .accept_buttons form{
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: visibility 0.4s ease-in-out,opacity 0.3s ease-in-out,height 0.3s ease-in-out;
+}
+#dashboard .accept_buttons form.open{
+  visibility: visible;
+  opacity: 1;
+  height: 155px;
+}
+
+
 
 /**
  |--------------------------------------------------------------------------
