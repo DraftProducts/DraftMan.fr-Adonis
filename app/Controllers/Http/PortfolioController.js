@@ -13,7 +13,7 @@ class PortfolioController {
     }
 
     async show({params, view}){
-        const project = (await Portfolio.query().where('id',params.id).whereNotNull('published_at').fetch()).toJSON();
+        const project = (await Portfolio.query().with('details').where('id',params.id).whereNotNull('published_at').first()).toJSON();
         return view.render('portfolio.details', {project})
     }
 
@@ -132,12 +132,12 @@ class PortfolioController {
     async updateDetails({request, session, response,params}){
         const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
 
-        const illustration = request.file('illustration', {
+        const illustration = await request.file('illustration', {
           types: ['image'],
           size: '2mb'
         })
         
-        const logo = request.file('logo', {
+        const logo = await request.file('logo', {
           types: ['image'],
           size: '2mb'
         })
@@ -176,16 +176,8 @@ class PortfolioController {
             type: data.type,
             url: data.url
         }
-
-        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
-
-        if(illustration){
-            basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
-            await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: basics.illustration})
-        }
-
         const details = {
-            colors: {color1: data.color1,color2: data.color2,color3: data.color3,color4: data.color4,color5: data.color5},
+            colors: JSON.stringify({color1: data.color1,color2: data.color2,color3: data.color3,color4: data.color4,color5: data.color5}),
             typographie1: data.typographie1,
             typographie2: data.typographie2,
             problematique: data.problematique,
@@ -193,10 +185,16 @@ class PortfolioController {
             technique: data.technique,
             folder: data.name
         }
+        if(illustration){
+            basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
+            await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: basics.illustration})
+        }
         if(logo){
             details.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
-            await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: data.logo})
+            await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: details.logo})
         }
+
+        if(data.published_at) basics.published_at = moment().format('YYYY-MM-DD')
 
         const portfolio = await Portfolio.find(params.id)
         portfolio.merge(basics)
@@ -222,8 +220,7 @@ class PortfolioController {
         const details = new PortfolioDetails()
         details.portfolio_id = params.id
         await details.save()
-        const d = (await PortfolioDetails.query().where('portfolio_id',params.id).first()).toJSON()
-        await Portfolio.query().where('id',d.portfolio_id).update({'portfolio_details_id':d.id})
+        await Portfolio.query().where('id',details.portfolio_id).update({'portfolio_details_id':details.id})
         return response.redirect('back')
     }
     async decline({params, response}){
