@@ -1,0 +1,154 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Portfolio - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Portfolio - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta property="og:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+    <meta name="twitter:description" content="Voici la page permettant de modifier les informations de ton profil, elles seront visibles sur chaque unes de tes activité au sein du site.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/admin/portfolio" />
+    <meta property="og:url" content="https://www.draftman.fr/admin/portfolio">
+@endsection
+
+@section('content')
+<div class="portfolio double">
+<form class="compte" method="POST" action="/admin/portfolio/{{creation.id}}/details" enctype="multipart/form-data">
+        <div class="input-container">
+            <input type="text" name="name" id="name" class="input" value="{{old('name',creation.name)}}">
+            <label for="name">Nom du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
+        <div class="input-container">
+            <input type="text" name="url" id="url" class="input" value="{{old('url',creation.url)}}">
+            <label for="url">Url du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('url'), hasErrorFor('url')) }}
+        <div class="select-section">
+            <select name="type">
+                <option value="" {{creation.type === '' ? 'selected': ''}}>Type de projet</option>
+                <option value="web" {{creation.type === 'web' ? 'selected': ''}}>Web</option>
+                <option value="projets" {{creation.type === 'projets' ? 'selected': ''}}>Projets</option>
+                <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
+            </select>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
+        <div class="colors">
+            <div class="pickers">
+                <button class="jscolor {valueElement:'color1', onFineChange:'setTextColor(this)',hash:true}"></button>
+                <button class="jscolor {valueElement:'color2', onFineChange:'setTextColor(this)',hash:true}"></button>
+                <button class="jscolor {valueElement:'color3', onFineChange:'setTextColor(this)',hash:true}"></button>
+                <button class="jscolor {valueElement:'color4', onFineChange:'setTextColor(this)',hash:true}"></button>
+                <button class="jscolor {valueElement:'color5', onFineChange:'setTextColor(this)',hash:true}"></button>
+            </div>
+            <div class="hex">
+                <input name="color1" id="color1" value="{{old('color1',creation.details.colors.color1)}}">
+                <input name="color2" id="color2" value="{{old('color2',creation.details.colors.color2)}}">
+                <input name="color3" id="color3" value="{{old('color3',creation.details.colors.color3)}}">
+                <input name="color4" id="color4" value="{{old('color4',creation.details.colors.color4)}}">
+                <input name="color5" id="color5" value="{{old('color5',creation.details.colors.color5)}}">
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" name="typographie1" id="typographie1" class="input" value="{{old('typographie1',creation.details.typographie1)}}">
+            <label for="typographie1">Typographie n°1</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('typographie1'), hasErrorFor('typographie1')) }}
+        <div class="input-container">
+            <input type="text" name="typographie2" id="typographie2" class="input" value="{{old('typographie2',creation.details.typographie2)}}">
+            <label for="typographie2">Typographie n°2</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('typographie2'), hasErrorFor('typographie2')) }}
+
+        <div class="input-container">
+            <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
+            <label for="description">Description de la création</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
+
+        <div class="input-container">
+            <textarea name="problematique" id="problematique" class="input textarea">{{old('problematique',creation.details.problematique)}}</textarea>
+            <label for="problematique">Problematique du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('problematique'), hasErrorFor('problematique')) }}
+
+        <div class="input-container">
+            <textarea name="presentation" id="presentation" class="input textarea">{{old('presentation',creation.details.presentation)}}</textarea>
+            <label for="presentation">Presentation du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('presentation'), hasErrorFor('presentation')) }}
+
+        <div class="input-container">
+            <textarea name="technique" id="technique" class="input textarea">{{old('technique',creation.details.technique)}}</textarea>
+            <label for="technique">Description technique du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('technique'), hasErrorFor('technique')) }}
+        <div class="compact">
+            <div class="item">
+                <div class="article_file">
+                    <input type="file" name="illustration" id="article_file" ref="file">
+                    <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
+                        <div class="text">
+                            Illustration
+                        </div>
+                    </div>
+                </div>
+                <div class="article_file logo">
+                        <input type="file" name="logo" id="article_file" ref="file">
+                        <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.logo}})">
+                            <div class="text">
+                                Logo
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <section class="switch-section">
+            <p>Public</p>
+            <div class="switch">
+                <label>
+                    Non
+                    <input type="checkbox" name="published_at"
+                    @if(creation.published_at != null)
+                    checked
+                    @endif
+                    />
+                    <span class="lever"></span>
+                    Oui
+                </label>
+            </div>
+        </section>
+
+        {{ csrfField() }}
+        
+        @if(flashMessage('valid_basic'))
+            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
+        @endif
+        <div class="buttons">
+            <button class="input submit" type="submit">Sauvegarder</button>
+            @if(creation.portfolio_details_id !== null)
+            <a class="input evolut" href="/admin/portfolio/{{creation.id}}/decline"><i class="icon-list"></i> Rétrograder</a>
+            @endif
+        </div>
+    </form>
+    <div class="elements">
+            @each(item in portfolio)
+            <div class="element">
+                <h4>{{item.name}} - {{item.type}}</h4>
+                <a href="/admin/portfolio/{{item.id}}" class="edit"><i class="icon-create"></i>Editer</a>
+            </div>
+        @endeach
+    </div>
+</div>
+@endsection
+
+@section('js')
+    {{script('../js/jscolor')}}
+@endsection
