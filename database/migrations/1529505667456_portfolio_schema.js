@@ -7,9 +7,9 @@ class PortfolioSchema extends Schema {
     this.create('portfolio', (table) => {
       table.increments()
       table.string('name')
-      table.string('url')
-      table.string('description')
-      table.string('type')
+      table.string('url').notNullable()
+      table.string('description').notNullable()
+      table.string('type').notNullable()
       table.string('illustration')
       table.integer('portfolio_details_id')
       table.date('published_at')
