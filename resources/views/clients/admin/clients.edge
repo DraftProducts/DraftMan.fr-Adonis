@@ -17,10 +17,17 @@
 @endsection
 
 @section('content')
-<div class="comments"> 
+<div class="dclients">
     @each(client in clients)
     <div class="client">
-        
+        <div class="image" style="background-image: url({{client.author.profil}})"></div>
+        <div class="content">
+            <div class="top">
+                <h3>{{client.name}}</h3>
+                <a class="link" href="/blog/{{comment.post.id}}-{{comment.post.url}}#{{comment.id}}">voir</a>
+            </div>
+            <p>{{client.type}}</p>
+        </div>
     </div>
     @else
         <div class="no-results">
