@@ -20,6 +20,11 @@
 <div class="client double">
     <div class="write">
         <form method="POST" name="form" action="{{ route('ClientController.send') }}">
+            @if(request)
+            <div class="success-card">
+                Vous avez une demande en attente pour le projet {{request.name}}.
+            </div>
+            @endif
             <div id="discord">
                 @if(auth.user.discord_username === "")
                 <div class="image" style="background-image: url('/images/default_user.png')"></div>
@@ -28,17 +33,17 @@
                         <h5 class="pseudo">Username<span class="code">#0000</span></h5>
                         <span class="email">exemple@exemple.com</span>
                     </div>
-                    <a href="/discord/login">Connecter discord</a>
+                    <a href="/me/profil">Connecter discord</a>
                 </div>
                 <input type="hidden" name="discord">
                 @else
-                <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')"></div>
+                <div class="image" style="background-image: url('{{getDiscordImage(auth.user)}}')"></div>
                 <div class="content">
                     <div>
                         <h5 class="pseudo">{{auth.user.discord_username}}<span class="code">#{{auth.user.discord_discriminator}}</span></h5>
                         <span class="email">{{auth.user.discord_email}}</span>
                     </div>
-                    <a href="/discord/login">Changer de discord</a>
+                    <a href="/me/profil">Changer de discord</a>
                 </div>
                 <input type="hidden" name="discord" value="{{auth.user.discord_username}}">
                 @endif
@@ -49,17 +54,17 @@
             </div>
             <div id="descriptif">
                 <div class="input-container">
-                    <input type="text" id="name" name="name" class="input" v-model="name" value="{{ old('name', '') }}">
+                    <input type="text" id="name" name="name" class="input" v-model="name">
                     <label for="name">Nom du projet</label>
                 </div>
                 {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
                 <div class="input-container">
-                    <input type="text" id="type" name="type" class="input" v-model="type" value="{{ old('type', '') }}">
+                    <input type="text" id="type" name="type" class="input" v-model="type">
                     <label for="type">Type de projet</label>
                 </div>
                 {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
                 <div class="input-container">
-                    <textarea name="description" id="description" name="description" class="input textarea" v-model="description">{{ old('description', '') }}</textarea>
+                    <textarea name="description" id="description" name="description" class="input textarea" v-model="description"></textarea>
                     <label for="description">Courte description</label>
                 </div>
                 {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
