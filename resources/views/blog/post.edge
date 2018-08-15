@@ -51,8 +51,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Material+Icons|Open+Sans:300,400,600,700">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/code.css">
-
-    <script>window.$crisp=[];window.CRISP_WEBSITE_ID="acbc2f53-2535-421f-8b15-770f4f67ee0c";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 </head>
 
 <body id="page">
@@ -77,7 +75,7 @@
                             </li>
                             <li>
                                 <i class="icon-calender"></i>
-                                <span>{{date(post.created_at) }}</span>
+                                <span>{{date(post.published_at) }}</span>
                             </li>
                             <li>
                                 <i class="icon-bookmark"></i>
@@ -88,7 +86,7 @@
                         </div>
                     </div>
                     <section id="post-body">
-                        {{ markdown(post.content) }}
+                        {{{ markdown(post.content) }}}
                     </section>
                     <section id="commentaires">
                         <h4>Commenter</h4>
