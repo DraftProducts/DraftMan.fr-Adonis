@@ -16,6 +16,10 @@
     <meta property="og:url" content="https://www.draftman.fr/portfolio">
 @endsection
 
+@section('css')
+    {{style('css/viewer.min')}}
+@endsection
+
 @section('content')
 <section id="portfolio">
 	<div class="content">
@@ -23,7 +27,7 @@
         <!-- {{ item.name }} -->
         <div class="item {{ item.type }}">
             <figure class="effect">
-                <img src="uploads/portfolio/{{item.illustration}}" alt="{{ item.name }}" title="{{ item.name }}">
+                <img data-viewer="/uploads/portfolio/{{item.illustration}}" src="/uploads/portfolio/{{item.illustration}}" alt="{{ item.name }}" title="{{ item.name }}">
                 <figcaption>
                     <h2>{{ item.name }}</h2>
                     <p>{{ item.description }}</p>
@@ -38,4 +42,21 @@
         @endeach
 	</div>
 </section>
+@endsection
+
+@section('js')
+{{script('js/viewer.min')}}
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const portfolio = document.getElementById('portfolio')
+        const viewer = new Viewer(portfolio,{
+            url: 'data-viewer',
+            title: false,
+            toolbar: false,
+            rotatable: false,
+            button: false,
+            scalable: false
+        });
+    })
+</script>
 @endsection
