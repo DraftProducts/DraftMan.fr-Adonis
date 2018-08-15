@@ -20,7 +20,7 @@
 <div class="portfolio double">
     <form method="POST" action="{{ route('PortfolioController.store') }}" enctype="multipart/form-data">
         <div class="input-container">
-            <input type="text" name="name" id="name" class="input">
+            <input type="text" name="name" id="name" class="input" value="{{old('name', '')}}">
             <label for="name">Nom du projet</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
@@ -36,7 +36,7 @@
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
 
         <div class="input-container">
-            <textarea name="description" id="description" class="input textarea"></textarea>
+            <textarea name="description" id="description" class="input textarea">{{old('description', '')}}</textarea>
             <label for="description">Description de la création</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
