@@ -20,17 +20,17 @@
 <div class="comments"> 
     @each(comment in comments)
     <div class="comment">
-        <div class="image" style="background-image: url(/images/blog/posts/{{comment.post.image}})"></div>
+        <div class="image" style="background-image: url(/uploads/posts/{{comment.post.image}})"></div>
         <div class="content">
             <div class="top">
                 <h3>{{comment.post.title}}</h3>
-                <a class="link" href="/blog/{{comment.post.url}}-{{comment.post.id}}#{{comment.id}}">voir</a>
+                <a class="link" href="/blog/{{comment.post.id}}-{{comment.post.url}}#{{comment.id}}">voir</a>
             </div>
             <p>{{comment.content}}</p>
         </div>
-        <div class="buttons">
-            <a class="valid" href="/me/comments/{{comment.id}}/valide">1</a>
-            <a class="remove" href="/me/comments/{{comment.id}}/delete">2</a>
+        <div class="controls">
+            <a class="valid" href="/me/comments/{{comment.id}}/valide"><i class="icon-done"></i></a>
+            <a class="remove" href="/me/comments/{{comment.id}}/delete"><i class="icon-delete"></i></a>
         </div>
     </div>
     @else
