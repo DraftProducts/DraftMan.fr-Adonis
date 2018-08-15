@@ -7,7 +7,7 @@ hooks.after.providersRegistered(() => {
   const View = use('View')
 
   View.global('trim', (text, value = 800) => {
-    return text.substring(0, value)
+    return text.substring(0, value).replace(/[*_~^${}()|[\]\\]/g,'')
   })
 
   View.global('markdown', (text) => {
@@ -25,6 +25,12 @@ hooks.after.providersRegistered(() => {
     }
     return user.profil;
   })
+  View.global('getDiscordImage', (user) => {
+    if(user.discord_image === '' || user.discord_image === null){
+      return gravatar.url(user.email, {protocol: 'https', s: 170});
+    }
+    return user.discord_image;
+  })
 
   View.global('getImageUser', (email,image) => {
     if(image === '' || image === null){
@@ -35,5 +41,9 @@ hooks.after.providersRegistered(() => {
 
   View.global('getNameByFile', (file) => {
     return file.match(/(.*)*\..*/);
+  })
+  
+  View.global('price', (price, times) => {
+    return (price/times).toFixed(2)
   })
 })
