@@ -8,7 +8,7 @@ const dashboard = new Vue({
         type: '',
         description: '',
         message: '',
-        message: ''
+        refuse: false
     },
     mounted(){
         this.addEvents(this);
@@ -45,23 +45,29 @@ const dashboard = new Vue({
                     }
                 })
             });
-            if(vm.$refs.file){
-            vm.$refs.file.addEventListener('change', () => {
-                const reader = new FileReader();
-                reader.addEventListener("load", () => {
-                    console.log(reader.result)
-                    vm.$refs.preview.style.backgroundImage = `url('${reader.result}')`
-                }, false);
-    
-                if (vm.$refs.file.files[0]) reader.readAsDataURL(vm.$refs.file.files[0]);
+            const filesSection = document.querySelectorAll(".article_file")
+            filesSection.forEach(filesSec => {
+                const file = filesSec.getElementsByClassName('article_file_input')[0]
+                console.log('ici:' +file)
+                const preview = filesSec.getElementsByClassName('article_image')[0]
+                file.addEventListener('change', () => {
+                    const reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                        preview.style.backgroundImage = `url('${reader.result}')`
+                    }, false);
+        
+                    if (file.files[0]) reader.readAsDataURL(file.files[0]);
+                });
             });
-        }
         },
         toggleMenu: function(){
             this.open = !this.open
         },
         toggleProfil: function(){
             this.profil = !this.profil
+        },
+        toggleRefuse: function(){
+            this.refuse = !this.refuse
         }
     }
 });
