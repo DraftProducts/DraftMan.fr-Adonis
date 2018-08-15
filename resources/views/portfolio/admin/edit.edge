@@ -18,10 +18,9 @@
 
 @section('content')
 <div class="portfolio double">
-<form class="compte" method="POST" action="/admin/portfolio/{{creation.id}}" enctype="multipart/form-data">
-
+    <form class="compte" method="POST" action="/admin/portfolio/{{creation.id}}" enctype="multipart/form-data">
         <div class="input-container">
-            <input type="text" name="name" id="name" class="input" value="{{creation.name}}">
+            <input type="text" name="name" id="name" class="input" value="{{old('name',creation.name)}}">
             <label for="name">Nom du projet</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
@@ -37,7 +36,7 @@
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
 
         <div class="input-container">
-            <textarea name="description" id="description" class="input textarea">{{creation.description}}</textarea>
+            <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
             <label for="description">Description de la création</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
@@ -47,7 +46,7 @@
                     <input type="file" name="illustration" id="article_file" ref="file">
                     <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
                         <div class="text">
-                            Charger
+                            Illustration
                         </div>
                     </div>
                 </div>
@@ -79,7 +78,9 @@
         @endif
         <div class="buttons">
             <button class="input submit" type="submit">Sauvegarder</button>
+            @if(creation.portfolio_details_id === null)
             <a class="input evolut" href="/admin/portfolio/{{creation.id}}/upgrade"><i class="icon-list"></i> Evoluer</a>
+            @endif
         </div>
     </form>
     <div class="elements">
