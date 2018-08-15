@@ -19,10 +19,10 @@ class ClientController {
     })
   }
 
-  async client_request ({view,auth,session}) {
-    const request = await Client.findBy('user_id', auth.user.id)
-    if(request) {
-      return view.render('clients.client_request',{request: request.toJSON()})
+  async client_request ({view,auth}) {
+    const notif = await Client.findBy('user_id', auth.user.id)
+    if(notif) {
+      return view.render('clients.client_request',{notif: notif.toJSON()})
     }
     return view.render('clients.client_request')
   }
@@ -88,6 +88,40 @@ class ClientController {
     })
   }
 
+  async clients({view}) {
+    const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
+    return view.render('clients.admin.clients',{clients})
+  }
+
+  async show({view,params,response}) {
+    const client = (await Client.query().with('author').where('id',params.id).first()).toJSON()
+    if(client.status === 0){
+      return view.render('clients.client_request_details',{client})
+    }else if(client.status === 1){
+      const project = (await Project.query().with('devblog').where('id', params.id).first()).toJSON()
+      const images = await readdir(`public/uploads/projects/${project.folder}/images`)
+      const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
+      return view.render('clients.client_dashboard_admin',{client,images,fichiers,project})
+    }
+    return response.redirect('back')
+  }
+
+  async accept({view,params,response}) {
+    const client = (await Client.query().with('author').where('id',params.id).first()).toJSON()
+    await changeStatment(params.id,1)
+    const project = await createProject(client)
+    const user = await User.find(client.author.id)
+    user.client = 1;
+    user.project_id = project.id;
+    await user.save()
+    return response.redirect(`/admin/clients/${client.id}`)
+  }
+
+  async refuse({view,params}) {
+    await changeStatment(params.id,2)
+    return response.redirect('/admin/clients')
+  }
+
   async paypalSuccess ({request, session, view}) {
     const paymentId = session.get('paymentId')
     const paymentDetails = { payer_id: request.input('PayerID') }
@@ -107,6 +141,40 @@ class ClientController {
     session.forget('paymentId')
     session.flash({success: 'Vous avez bien annulé le paiement'})
     return response.redirect('/me/client/dashboard')
+  }
+
+  async createProject (client) {
+    const project = await new Project()
+    project.name = client.name,
+    project.total_payments = 2,
+    project.progress = 0,
+    project.folder = client.name,
+    project.user_id = client.author.id
+    await project.save()
+    return project
+  }
+
+  async changeStatment (id,state){
+    const status = await Client.find(id)
+    status.merge({'status': state})
+    await status.save()
+  }
+
+  createPayment (project) {
+    return new Promise((resolve, reject) => {
+      paypal.payment.create(this.paypalDetails(project), (err, payment) => {
+        if (err) return reject(err)
+        const links = payment.links
+        for (let i = 0; i < links.length; i++) {
+          if (links[i].rel === 'approval_url') {
+            return resolve({
+              approvalUrl: links[i].href,
+              paymentId: payment.id
+            })
+          }
+        }
+      })
+    })
   }
 
   paypalSuccessDetails(paymentId, paymentDetails){
@@ -138,35 +206,6 @@ class ClientController {
         }
       }]
     }
-  }
-
-  createPayment (project) {
-    return new Promise((resolve, reject) => {
-      paypal.payment.create(this.paypalDetails(project), (err, payment) => {
-        if (err) {
-          return reject(err)
-        }
-        const links = payment.links
-        for (let i = 0; i < links.length; i++) {
-          if (links[i].rel === 'approval_url') {
-            return resolve({
-              approvalUrl: links[i].href,
-              paymentId: payment.id
-            })
-          }
-        }
-      })
-    })
-  }
-
-  async clients({view}) {
-    const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
-    return view.render('clients.admin.clients',{clients})
-  }
-
-  async show({view,params}) {
-    const client = (await Client.query().with('author').where('id',params.id).fetch()).toJSON()
-    return view.render('clients.admin.client',{client})
   }
 }
 
