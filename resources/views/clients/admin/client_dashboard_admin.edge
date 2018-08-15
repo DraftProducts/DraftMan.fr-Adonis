@@ -1,0 +1,69 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Projet {{project.name}} - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Projet - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Projet - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta property="og:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+    <meta name="twitter:description" content="Voici la page permettant de suivre l'avancement de votre projet en cours.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/me/client/dashboard" />
+    <meta property="og:url" content="https://www.draftman.fr/me/client/dashboard">
+@endsection
+
+@section('css')
+    {{style('css/viewer.min')}}
+@endsection
+
+@section('content')
+<div class="dclient double">
+    <div class="corps">
+        <div class="timeline">
+            <div class="payment">
+                @each(payment in project.total_payments)
+                    <div class="item">
+                        <div class="iconvalid"></div>
+                    </div>
+                @endeach
+            </div>
+            <div class="progress">
+            <div class="bar" style='width: {{project.progress}}%' title='Projet effectué à {{project.progress}}%'></div>
+            </div>
+        </div>
+        <div id="images">
+            <div class="item">
+                +
+            </div>
+            @each(image in images)
+            <div class="item">
+                <img data-viewer="/uploads/projects/{{project.folder}}/images/{{image}}" src="/uploads/projects/{{project.folder}}/images/{{image}}" alt="{{image}}">
+                <div class="hover"></div>
+                <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/images/{{image}}")'></div>
+            </div>
+            @endeach
+        </div>
+    </div>
+    <div class="infos">
+        <div class="speed_contact">
+            <h3>Contact</h3>
+            <p>Téléphone : +33 7 67 55 95 31</p>
+            <p>Email : contact@gmail.com</p>
+            <p>Discord : DraftMan#6284</p>
+        </div>
+        <div class="devblog">
+            <h3>DEVBLOG - {{project.name}}</h3>
+            @each(item in project.devblog)
+            <div class="item">
+                <div class="title">{{item.title}}</div>
+                <p>{{item.description}}</p>
+            </div>
+            @endeach
+        </div>
+    </div>
+</div>
+@endsection
