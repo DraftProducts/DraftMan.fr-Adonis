@@ -27,13 +27,14 @@
         <!-- {{ item.name }} -->
         <div class="item {{ item.type }}">
             <figure class="effect">
+            </div>
                 <img data-viewer="/uploads/portfolio/{{item.illustration}}" src="/uploads/portfolio/{{item.illustration}}" alt="{{ item.name }}" title="{{ item.name }}">
                 <figcaption>
                     <h2>{{ item.name }}</h2>
                     <p>{{ item.description }}</p>
                     @if(item.url !== '' && item.url !== null)
                     <div class="link">
-	                    <a href="{{item.url}}">En savoir plus</a>
+	                    <a href="/portfolio/{{item.id}}-{{item.url}}">En savoir plus</a>
                     </div>
 	                @endif
                 </figcaption>
