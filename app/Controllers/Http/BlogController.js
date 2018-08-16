@@ -19,6 +19,27 @@ class BlogController {
         const posts = (await Post.query().limit(3).fetch()).toJSON();
         return view.render('index', {posts})
     }
+    async newsletter({ request, session, response,params }){
+        const data = request.only(['email'])
+        const messages = {
+            'email.required': 'Veuillez entrer une adresse email.',
+            'email.email': 'Veuillez entrer une adresse email valide.',
+            'email.unique': 'Vous êtes déjà abonné à la newsletter.',
+        }
+        const validation = await validate(data, {email: 'required|email|unique:emails'}, messages)
+        if (validation.fails()) {
+            session
+              .withErrors(validation.messages())
+              .flashAll()
+              return response.redirect("back")
+        }
+        
+        await Emails.create({ data })
+        
+        session.flash({newsletter: 'Vous êtes bien inscrit à la newsletter'})
+
+        return response.redirect("back")
+    }
 
     async index({ view }){
         const posts = (await Post.query().with('author').whereNotNull('published_at').fetch()).toJSON();
