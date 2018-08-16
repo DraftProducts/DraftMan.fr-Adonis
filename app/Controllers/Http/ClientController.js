@@ -1,14 +1,20 @@
 'use strict'
-const Env = use('Env')
+
+const { validate } = use('Validator')
 const Mail = use('Mail')
+
+const DevPost = use('App/Models/DevPost');
+const Project = use('App/Models/Project');
+const Client = use('App/Models/Client');
+const User = use('App/Models/User');
+
+const config = require('../../../config.json');
+
 const paypal = require('paypal-rest-sdk')
 const { promisify } = require('util')
 const fs = require('fs');
+
 const readdir = promisify(fs.readdir)
-const Project = use('App/Models/Project');
-const Client = use('App/Models/Client');
-const { validate } = use('Validator')
-const config = require('../../../config.json');
 
 class ClientController {
   constructor () {
@@ -20,7 +26,7 @@ class ClientController {
   }
 
   async client_request ({view,auth}) {
-    const notif = await Client.findBy('user_id', auth.user.id)
+    const notif = await Client.query().where('user_id', auth.user.id).where('status',0).first()
     if(notif) {
       return view.render('clients.client_request',{notif: notif.toJSON()})
     }
@@ -28,15 +34,15 @@ class ClientController {
   }
   
   async dashboard ({session, view,auth}) {
+    const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
+    const images = await readdir(`public/uploads/projects/${project.folder}/images`)
+    const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
     try {
-      const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
-      const images = await readdir(`public/uploads/projects/${project.folder}/images`)
-      const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
       const paypalResponse = await this.createPayment(project)
       session.put('paymentId', paypalResponse.paymentId)
-      return view.render('dashboard.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl})
+      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl})
     } catch (e) {
-      console.log(e)
+      return view.render('clients.client_dashboard',{project,images,fichiers})
     }
   }
 
@@ -44,13 +50,14 @@ class ClientController {
     const data = request.only(['name', 'type', 'description','validation','discord'])
     const messages = {
         'name.required': 'Veuillez indiquer le nom du projet.',
+        'name.unique': 'Ce nom de projet est déjà utilisé.',
         'type.required': 'Veuillez indiquer le type de projet.',
         'description.required': 'Veuillez entrer une courte description du projet et/ou le travail à faire',
         'validation.required': 'Pour devenir client vous devez accepter cette condition.',
         'discord.required': 'Pour devenir client vous devez accepter cette condition.'
     }
     const rules = {
-      name: 'required',
+      name: 'required|unique:clients',
       type: 'required',
       description: 'required',
       validation: 'required',
@@ -89,8 +96,9 @@ class ClientController {
   }
 
   async clients({view}) {
-    const clients = (await Client.query().with('author').where('status', 0).fetch()).toJSON()
-    return view.render('clients.admin.clients',{clients})
+    const wclients = (await Client.query().with('author').where('status','=', 0).fetch()).toJSON()
+    const clients = (await Client.query().with('author').where('status','=', 1).fetch()).toJSON()
+    return view.render('clients.admin.clients',{clients,wclients})
   }
 
   async show({view,params,response}) {
@@ -101,15 +109,15 @@ class ClientController {
       const project = (await Project.query().with('devblog').where('id', params.id).first()).toJSON()
       const images = await readdir(`public/uploads/projects/${project.folder}/images`)
       const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
-      return view.render('clients.client_dashboard_admin',{client,images,fichiers,project})
+      return view.render('clients.admin.client_dashboard',{client,images,fichiers,project})
     }
     return response.redirect('back')
   }
 
   async accept({view,params,response}) {
     const client = (await Client.query().with('author').where('id',params.id).first()).toJSON()
-    await changeStatment(params.id,1)
-    const project = await createProject(client)
+    await this.changeStatment(params.id,1)
+    const project = await this.createProject(client)
     const user = await User.find(client.author.id)
     user.client = 1;
     user.project_id = project.id;
@@ -118,7 +126,7 @@ class ClientController {
   }
 
   async refuse({view,params}) {
-    await changeStatment(params.id,2)
+    await this.changeStatment(params.id,2)
     return response.redirect('/admin/clients')
   }
 
@@ -147,17 +155,19 @@ class ClientController {
     const project = await new Project()
     project.name = client.name,
     project.total_payments = 2,
-    project.progress = 0,
+    project.progress = 10,
     project.folder = client.name,
     project.user_id = client.author.id
     await project.save()
+    await DevPost.create({
+      'client_project_id':project.id,
+      'title':'Project init',
+      'description':'Projet initialisé !',
+    })
+    fs.mkdirSync(`public/uploads/projects/${client.name}`);
+    fs.mkdirSync(`public/uploads/projects/${client.name}/images`);
+    fs.mkdirSync(`public/uploads/projects/${client.name}/fichiers`);
     return project
-  }
-
-  async changeStatment (id,state){
-    const status = await Client.find(id)
-    status.merge({'status': state})
-    await status.save()
   }
 
   createPayment (project) {
@@ -199,13 +209,18 @@ class ClientController {
         cancel_url: 'http://127.0.0.1:3333/cancel'
       },
       transactions: [{
-        description: `Paiement n°${project.payments.count()+1} du projet ${project.name}`,
+        description: `Paiement n°${(project.payments != undefined ? project.payments.count()  + 1 : 0 + 1)} du projet ${project.name}`,
         amount: {
           currency: 'EUR',
           total: (project.price/project.total_payments).toFixed(2)
         }
       }]
     }
+  }
+  async changeStatment (id,state){
+    const status = await Client.find(id)
+    status.merge({'status': state})
+    await status.save()
   }
 }
 
