@@ -18,8 +18,24 @@
 
 @section('content')
 <div class="dclients">
+    @if(wclients.length > 0)
+        <h2>Clients en attente</h2>
+        @each(client in wclients)
+        <div class="client">
+            <div class="image" style="background-image: url({{client.author.profil}})"></div>
+            <div class="content">
+                <div class="top">
+                    <h3>{{client.name}}</h3>
+                    <a class="link" href="/admin/clients/{{client.id}}">voir</a>
+                </div>
+                <p>{{client.type}}</p>
+            </div>
+        </div>
+        @endeach
+    @endif
+
     @if(clients.length > 0)
-        <h3>Clients en attente</h3>
+        <h2>Clients</h2>
         @each(client in clients)
         <div class="client">
             <div class="image" style="background-image: url({{client.author.profil}})"></div>
@@ -32,10 +48,6 @@
             </div>
         </div>
         @endeach
-    @else
-        <div class="no-results">
-            <h4>Aucun clients pour l'instant</h4>
-        </div>
     @endif
 </div>
 @endsection
