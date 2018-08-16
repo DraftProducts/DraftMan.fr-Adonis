@@ -43,6 +43,10 @@ class ContactController {
             .subject('<objet>')
             .replyTo('<email>', '<author>')
         })
+
+        session.flash({sent: 'Mail envoyé avec succès'})
+        
+        response.redirect('back')
     }
 }
 
