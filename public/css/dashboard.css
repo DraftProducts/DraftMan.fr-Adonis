@@ -378,7 +378,7 @@ textarea.textarea {
   margin-bottom: 30px;
 }
 
-#dashboard .profil #profil_file {
+#dashboard .profil .file_input {
   position: absolute;
   width: 150px;
   top: 0;
@@ -389,7 +389,7 @@ textarea.textarea {
   cursor: pointer;
 }
 
-#dashboard .profil .profil_image {
+#dashboard .profil .image {
   height: 147px;
   width: 147px;
   border: 3px solid #cd6e57;
@@ -397,7 +397,7 @@ textarea.textarea {
   background-size: cover;
 }
 
-#dashboard .profil .profil_image .text {
+#dashboard .profil .image .text {
   text-transform: uppercase;
   font-size: 15px;
   color: #dedede;
@@ -412,7 +412,7 @@ textarea.textarea {
   transition: 0.4s background-color;
 }
 
-#dashboard .profil #profil_file:hover+.profil_image .text {
+#dashboard .profil .file_input:hover+.image .text {
   background-color: #404040a6
 }
 
@@ -558,6 +558,11 @@ textarea.textarea {
  #dashboard .dclients {
   display: flex;
   flex-flow: row wrap;
+  flex-direction: column
+}
+
+#dashboard .dclients h2{
+  margin-left: 10px;
 }
 
 #dashboard .dclients .client {
@@ -587,28 +592,6 @@ textarea.textarea {
   margin-bottom: 10px
 }
 
-#dashboard .dclients .client .controls {
-  width: 50px;
-}
-
-#dashboard .dclients .client .controls>a {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-}
-
-#dashboard .dclients .client .controls>.valid {
-  background-color: #4CAF50;
-}
-
-#dashboard .dclients .client .controls>.remove {
-  background-color: #F44336;
-}
-
 /**
  |--------------------------------------------------------------------------
  | Article file
@@ -630,7 +613,7 @@ textarea.textarea {
   width: 108px;
 }
 
-#dashboard .article_file_input {
+#dashboard .article_file .file_input {
   position: absolute;
   width: 100%;
   top: 0;
@@ -641,7 +624,7 @@ textarea.textarea {
   cursor: pointer;
 }
 
-#dashboard .article_image {
+#dashboard .article_file .image {
   height: 108px;
   width: 192px;
   border: 3px solid #cd6e57;
@@ -649,7 +632,7 @@ textarea.textarea {
   background-position: center
 }
 
-#dashboard .article_image .text {
+#dashboard .article_file .image .text {
   text-transform: uppercase;
   font-size: 15px;
   color: #dedede;
@@ -663,7 +646,7 @@ textarea.textarea {
   transition: 0.4s background-color;
 }
 
-#dashboard .article_file_input:hover+.article_image .text {
+#dashboard .article_file .file_input:hover+.image .text {
   background-color: #404040a6
 }
 
@@ -743,9 +726,16 @@ textarea.textarea {
 
 #dashboard #images {
   margin-top: 40px;
-  padding: 10px;
+  padding: 20px;
   background-color: #fff;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+#dashboard #images p{
+  margin-top: 10px;
+}
+
+#dashboard #images .content{
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -1370,4 +1360,35 @@ textarea.textarea {
     background-color: #F1F1F1;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4);
     transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
+}
+
+#dashboard input[type='range'] {
+  -webkit-appearance: none;
+  border: none;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  cursor: pointer;
+}
+#dashboard input[type='range']::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  position: relative;
+  border: none;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  background: linear-gradient(#cd6e57, #cd6e57) no-repeat #fff;
+  background-size: 12.5% 100%;
+}
+#dashboard input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  box-shadow: 0 0 0.125em #d4d4d4, 0 0 0.125em #d4d4d4, 0 1px 0.125em white, 0 1px 0.125em white, 0 0.125em 0.125em #d4d4d4;
+  background: #f8f8f8;
+}
+#dashboard input[type='range']:focus {
+  outline: none;
 }

@@ -45,11 +45,11 @@ const dashboard = new Vue({
                     }
                 })
             });
-            const filesSection = document.querySelectorAll(".article_file")
+            const filesSection = document.querySelectorAll(".visu")
             filesSection.forEach(filesSec => {
-                const file = filesSec.getElementsByClassName('article_file_input')[0]
+                const file = filesSec.getElementsByClassName('file_input')[0]
                 console.log('ici:' +file)
-                const preview = filesSec.getElementsByClassName('article_image')[0]
+                const preview = filesSec.getElementsByClassName('image')[0]
                 file.addEventListener('change', () => {
                     const reader = new FileReader();
                     reader.addEventListener("load", () => {
