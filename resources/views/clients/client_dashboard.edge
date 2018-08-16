@@ -35,32 +35,42 @@
                 @endeach
             </div>
             <div class="progress">
-            <div class="bar" style='width: {{project.progress}}%' title='Projet effectué à {{project.progress}}%'></div>
+                <div class="bar" style='width: {{project.progress}}%' title='Projet effectué à {{project.progress}}%'></div>
             </div>
         </div>
         <div id="images">
-            @each(image in images)
-            <div class="item">
-                <img data-viewer="/uploads/projects/{{project.folder}}/images/{{image}}" src="/uploads/projects/{{project.folder}}/images/{{image}}" alt="{{image}}">
-                <div class="hover"></div>
-                <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/images/{{image}}")'></div>
+            <h3>Images</h3>
+                <div class="content">
+                @each(image in images)
+                <div class="item">
+                    <img data-viewer="/uploads/projects/{{project.folder}}/images/{{image}}" src="/uploads/projects/{{project.folder}}/images/{{image}}" alt="{{image}}">
+                    <div class="hover"></div>
+                    <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/images/{{image}}")'></div>
+                </div>
+                @else
+                <p>Aucunes images pour l'instant</p>
+                @endeach
             </div>
-            @endeach
         </div>
     </div>
     <div class="infos">
-        <a class="payment_button" href="{{link}}">Procéder au payment</a>
-        @if(flashMessage('success'))
-            <div class="success-card">{{ flashMessage('success') }}</div>
+        @if(link)
+            <a class="payment_button" href="{{link}}">Procéder au paiement</a>
+            @if(flashMessage('success'))
+                <div class="success-card">{{ flashMessage('success') }}</div>
+            @endif
+            @if(flashMessage('error'))
+                <div class="error-card">{{ flashMessage('error') }}</div>
+            @endif
+        @else
+            <a class="payment_button" href="#">Paiement non définit</a>
         @endif
-        @if(flashMessage('error'))
-            <div class="error-card">{{ flashMessage('error') }}</div>
-        @endif
-        </form>
         <div class="files">
             <h3>Fichiers</h3>
             @each(fichier in fichiers)
                 <a class="download-button" href="/uploads/projects/{{project.folder}}/fichiers/{{fichier}}"><span><i class="icon-download"></i></span>{{getNameByFile(fichier)}}</a>
+            @else
+                <p>Aucun fichier à télécharger</p>
             @endeach
         </div>
         <div class="speed_contact">
