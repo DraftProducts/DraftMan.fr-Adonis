@@ -27,9 +27,14 @@
             Abonne toi a ma newsletter pour être au courant des dernières nouveautés !<br>
             Tu peux d'ailleurs la retrouver sur <a href="/discord" class="link">mon discord</a> dans un channel prévu a cet effet !
         </p>
-        <form method="post" class="newsletter">
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
+        @if(flashMessage('newsletter'))
+            <div class="success-card">{{ flashMessage('newsletter') }}</div>
+        @endif
+        <form method="post" action="/newsletter" class="newsletter">
             <input type="email" name="email" placeholder="Adresse mail">
-            <input type="submit" name="newsletter" value="S'inscrire">
+            {{ csrfField() }}
+            <input type="submit" value="S'inscrire">
         </form>
     </div>
 </div>
