@@ -46,4 +46,6 @@ hooks.after.providersRegistered(() => {
   View.global('price', (price, times) => {
     return (price/times).toFixed(2)
   })
+
+  View.global('parse', JSON.parse)
 })
