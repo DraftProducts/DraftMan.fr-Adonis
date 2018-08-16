@@ -47,11 +47,11 @@
                 <button class="jscolor {valueElement:'color5', onFineChange:'setTextColor(this)',hash:true}"></button>
             </div>
             <div class="hex">
-                <input name="color1" id="color1" value="{{old('color1',creation.details.colors.color1)}}">
-                <input name="color2" id="color2" value="{{old('color2',creation.details.colors.color2)}}">
-                <input name="color3" id="color3" value="{{old('color3',creation.details.colors.color3)}}">
-                <input name="color4" id="color4" value="{{old('color4',creation.details.colors.color4)}}">
-                <input name="color5" id="color5" value="{{old('color5',creation.details.colors.color5)}}">
+                <input name="color1" id="color1" value="{{old('color1',parse(creation.details.colors).color1)}}">
+                <input name="color2" id="color2" value="{{old('color2',parse(creation.details.colors).color2)}}">
+                <input name="color3" id="color3" value="{{old('color3',parse(creation.details.colors).color3)}}">
+                <input name="color4" id="color4" value="{{old('color4',parse(creation.details.colors).color4)}}">
+                <input name="color5" id="color5" value="{{old('color5',parse(creation.details.colors).color5)}}">
             </div>
         </div>
 
@@ -91,22 +91,22 @@
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('technique'), hasErrorFor('technique')) }}
         <div class="compact">
             <div class="item">
-                <div class="article_file">
-                    <input type="file" name="illustration" id="article_file" ref="file">
-                    <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
+                <div class="article_file visu">
+                    <input type="file" name="illustration" class="file_input ">
+                    <div class="image" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
                         <div class="text">
                             Illustration
                         </div>
                     </div>
                 </div>
-                <div class="article_file logo">
-                        <input type="file" name="logo" id="article_file" ref="file">
-                        <div class="article_image" ref="preview" style="background-image: url(/uploads/portfolio/{{creation.logo}})">
-                            <div class="text">
-                                Logo
-                            </div>
+                <div class="article_file logo visu">
+                    <input type="file" name="logo" class="file_input">
+                    <div class="image" style="background-image: url(/uploads/portfolio/{{creation.details.logo}})">
+                        <div class="text">
+                            Logo
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 
