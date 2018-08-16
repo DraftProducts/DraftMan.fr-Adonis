@@ -53,6 +53,8 @@ Route.get('blog/list', 'BlogController.list')
 Route.get('blog/:id-:link', 'BlogController.show')
 Route.post('blog/:id/comment', 'BlogController.comment')
 
+Route.post('newsletter', 'BlogController.newsletter')
+
 /**
  |--------------------------------------------------------------------------
  | Portfolio pages
@@ -60,7 +62,7 @@ Route.post('blog/:id/comment', 'BlogController.comment')
  */
 
 Route.get('portfolio', 'PortfolioController.index')
-Route.get('portfolio/:id', 'PortfolioController.show')
+Route.get('portfolio/:id-:url', 'PortfolioController.show')
 
 /**
  |--------------------------------------------------------------------------
@@ -131,6 +133,8 @@ Route.group(() => {
 Route.group(() => {
     Route.get('admin/clients', 'ClientController.clients')
     Route.get('admin/clients/:id', 'ClientController.show')
+    Route.get('admin/clients/:id/accept', 'ClientController.accept')
+    Route.post('admin/clients/:id/refuse', 'ClientController.refuse')
     // Route.get('admin/users', 'AdminController.users')
     // Route.get('admin/newsletter', 'AdminController.newsletter')
 
