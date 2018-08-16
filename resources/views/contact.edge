@@ -61,6 +61,10 @@
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('message'), hasErrorFor('message')) }}
             <div>
 
+            @if(flashMessage('sent'))
+                <div class="success-card">{{ flashMessage('sent') }}</div>
+            @endif
+
             {{ csrfField() }}
             <input data-role="submit" type="submit" value="Envoyer" />
             </div>
