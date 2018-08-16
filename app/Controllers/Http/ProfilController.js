@@ -80,9 +80,8 @@ class ProfilController {
 
     await User.query().where('id', auth.user.id).update(infos)
 
-    session.flash({
-      valid_basic: 'Informations modifiés'
-    })
+    session.flash({valid_basic: 'Informations modifiés'})
+    
     return response.redirect('back')
   }
 
@@ -96,9 +95,8 @@ class ProfilController {
       linkedin: data.linkedin
     })
 
-    session.flash({
-      valid_infos: 'Informations modifiés'
-    })
+    session.flash({valid_infos: 'Informations modifiés'})
+
     return response.redirect('back')
   }
 }
