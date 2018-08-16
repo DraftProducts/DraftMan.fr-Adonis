@@ -39,11 +39,11 @@
             <span class="username" v-if="open">{{client.author.username}}</span>
             <a href="mailto:{{client.author.email}}">{{client.author.email}}</a>
             <div class="icons">
-                <a href="{{client.author.website}}"><i class="icon-cursor"></i></a>
-                <a href="https://twitter.com/{{client.author.twitter}}"><i class="icon-twitter"></i></a>
+                <a href="{{client.author.website}}" target="blank"><i class="icon-cursor"></i></a>
+                <a href="https://twitter.com/{{client.author.twitter}}" target="blank"><i class="icon-twitter"></i></a>
                 <a href="javascript:void(0)" onclick="prompt('Voici le pseudo discord du client !','{{client.author.discord_username}}#{{client.author.discord_discriminator}}')"><i class="icon-discord"></i></a>
-                <a href="https://github.com/{{client.author.github}}"><i class="icon-github"></i></a>
-                <a href="https://www.linkedin.com/in/{{client.author.linkedin}}"><i class="icon-linkedin"></i></a>
+                <a href="https://github.com/{{client.author.github}}" target="blank"><i class="icon-github"></i></a>
+                <a href="https://www.linkedin.com/in/{{client.author.linkedin}}" target="blank"><i class="icon-linkedin"></i></a>
             </div>
         </div>
         <div class="accept_buttons">
