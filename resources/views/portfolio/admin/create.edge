@@ -42,11 +42,11 @@
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
         <div class="compact">
             <div class="item">
-                <div class="article_file">
-                    <input type="file" name="illustration" id="article_file" ref="file">
-                    <div class="article_image" ref="preview">
+                <div class="article_file visu">
+                    <input type="file" name="illustration" class="file_input">
+                    <div class="image" style="background-image: url(/uploads/portfolio/{{creation.illustration}})">
                         <div class="text">
-                            Charger
+                            Illustration
                         </div>
                     </div>
                 </div>
