@@ -130,18 +130,18 @@ class PortfolioController {
         }
     }
     async updateDetails({request, session, response,params}){
-        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
-
-        const illustration = await request.file('illustration', {
-          types: ['image'],
-          size: '2mb'
+        const illustration = request.file('illustration', {
+            types: ['image'],
+            size: '2mb'
         })
         
-        const logo = await request.file('logo', {
-          types: ['image'],
-          size: '2mb'
+        const logo = request.file('logo', {
+            types: ['image'],
+            size: '2mb'
         })
-    
+
+        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
+
         const messages = {
           'name.unique': 'Ce nom est déjà utilisé.',
           'name.required': 'Veuillez donner un nom à cette création',
