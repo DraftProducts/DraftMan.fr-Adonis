@@ -29,7 +29,7 @@ class AuthController {
     const data = request.only(['username', 'email', 'password', 'password_conf'])
     data.role = 0;
 
-    const validation = await validate(request.all(), rules, messages)
+    const validation = await validate(data, rules, messages)
 
     if (validation.fails()) {
       session
