@@ -23,18 +23,7 @@
 @section('content')
 <div class="dclient double">
     <div class="corps">
-        <div class="timeline">
-            <div class="payment">
-                @each(payment in project.total_payments)
-                    <div class="item">
-                        <div class="iconvalid"></div>
-                    </div>
-                @endeach
-            </div>
-            <div class="progress">
-            <div class="bar" style='width: {{project.progress}}%' title='Projet effectué à {{project.progress}}%'></div>
-            </div>
-        </div>
+            <input type='range' value='{{project.progress}}' max='100'/>
         <div id="images">
             <div class="item">
                 +
@@ -50,8 +39,8 @@
     </div>
     <div class="infos">
         <div class="speed_contact">
-            <h3>Contact</h3>
-            <p>Téléphone : +33 7 67 55 95 31</p>
+            <h3>Projet</h3>
+            <p>Prix : +33 7 67 55 95 31</p>
             <p>Email : contact@gmail.com</p>
             <p>Discord : DraftMan#6284</p>
         </div>
@@ -66,4 +55,24 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    console.log('hé hé ')
+    const style = document.createElement('style'), 
+    range = document.querySelector('input[type=range]')
+
+    document.getElementsByTagName('body')[0].appendChild(style);
+
+    const getStyle = (val) => {
+        return 'input[type=range]::-webkit-slider-runnable-track{background-size:' + val + '% 100%}';
+    };
+
+    range.addEventListener('input', function() {
+        style.textContent = getStyle((100*(this.value - 0)/(this.max - 0)));
+    });
+});
+</script>
 @endsection
