@@ -43,11 +43,11 @@
 
         <textarea name="content" id="markdown" value="{{ old('content', post.content) }}" placeholder="Contenu de l'article"></textarea>
 
-        <div class="article_file">
-            <input type="file" name="image" id="article_file" ref="file">
-            <div class="article_image" ref="preview" style="background-image: url(/uploads/posts/{{article_image}})">
+        <div class="article_file visu">
+            <input type="file" name="image" class="file_input">
+            <div class="image" style="background-image: url(/uploads/posts/{{article_image}})">
                 <div class="text">
-                    Charger
+                    Illustration
                 </div>
             </div>
         </div>

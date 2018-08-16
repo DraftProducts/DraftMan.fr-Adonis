@@ -51,11 +51,11 @@
         <textarea name="content" id="markdown" placeholder="Contenu de l'article" class="input textarea">{{ old('content', '') }}</textarea>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('content'), hasErrorFor('content')) }}
 
-        <div class="article_file">
-            <input type="file" name="image" id="article_file" ref="file">
-            <div class="article_image" ref="preview">
+        <div class="article_file visu">
+            <input type="file" name="image" class="file_input">
+            <div class="image">
                 <div class="text">
-                    Charger
+                    Illustration
                 </div>
             </div>
         </div>
