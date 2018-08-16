@@ -19,9 +19,9 @@
 @section('content')
 <div class="profil double">
     <form class="compte" method="POST" action="{{ route('ProfilController.storeBasic') }}" enctype="multipart/form-data">
-        <div class="profil_file">
-            <input type="file" name="image" id="profil_file" ref="file">
-            <div class="profil_image" ref="preview" style="background-image: url('{{getProfilImage(auth.user)}}')">
+        <div class="profil_file visu">
+            <input type="file" name="image" class="file_input">
+            <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')">
                 <div class="text">
                     Charger
                 </div>
