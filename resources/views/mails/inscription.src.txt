@@ -1,0 +1,132 @@
+<heml>
+  <head>
+    <subject>DraftMan | Création du compte</subject>
+    <preview>Mail d'inscription sur draftman.fr</preview>
+    <style>
+      container{
+        width: 100%;
+        max-width: 100%;
+      }
+      #header{
+        text-align: center;
+        box-shadow: 0px 1px 4px rgba(0,0,0,0.16);
+        border-bottom: 1px solid #D1D1D1;
+      }
+      #header img{
+        padding: 10px 20px;
+      }
+      #message{
+        background-image: url(https://draftman.fr/images/banner.jpg)
+        background-size: cover;
+        background-position-y: 50%;
+        background-repeat: no-repeat;
+        text-align: center;
+        padding: 120px 0
+      }
+      #message h1{
+          color: #ffffff;
+          margin: 0
+      }
+      #message p{
+            color: rgb(193, 193, 193);
+      }
+      #message a{
+        text-align: center;
+        color: #ffffff;
+        border-radius: 50px;
+        background-color: #cd6e57;
+        text-decoration: none;
+        padding: 18px 30px;
+        font-size: 18px;
+        line-height: 56px
+      }
+      #histoire{
+        border-top: 1px solid #D1D1D1;
+        padding: 0 40px;
+        background-color:#fcfcfc;
+      }
+      #histoire h3{
+        text-align: center;
+        color: #989898;
+        margin-bottom: 10px
+      }
+      #histoire .image{
+        vertical-align: middle;
+      }
+      #histoire p{
+        padding-bottom: 20px;
+        text-align: justify;
+        color: #6d6d6d;
+      }
+      #footer{
+        background-color:#474747;
+        padding-bottom: 30px;
+      }
+      #footer h3{
+        text-align:center;
+        margin-bottom: 8px;
+        margin-top: 30px;
+        color: #7D7D7D
+      }
+      #footer a{
+        text-decoration: none;
+        color: white;
+        display: block;
+        text-align: center;
+        padding: 1px
+      }
+      #copyright{
+        background-color: #3D3D3D;
+        text-align: center;
+      }
+      #copyright p{
+        color: white;
+        padding: 20px;
+        margin: 0;
+      }
+      #copyright span{
+        color: red;
+      }
+      #copyright a{
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <container>
+      <row id="header">
+        <img src="https://draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
+      </row>
+      <row id="message">
+        <h1>Bienvenue sur DraftMan.fr</h1>
+        <p>Vous venez de vous inscrire sur DraftMan.fr</p>
+        <a href="https://draftman.fr/login">Se connecter</a>
+      </row>
+      <row id="footer">
+        <column large="4" small="12">
+          <h3>Navigation</h3>
+          <a href="https://draftman.fr">Accueil</a>
+          <a href="https://draftman.fr/a-propos">A-Propos</a>
+          <a href="https://draftman.fr/portfolio">Portfolio</a>
+          <a href="https://draftman.fr/contact">Contact</a>
+        </column>
+        <column large="4" small="12">
+          <h3>Social</h3>
+          <a href="https://twitter.com/DraftMan_Dev">Twitter</a>
+          <a href="https://github.com/DraftProducts">GitHub</a>
+          <a href="https://dribbble.com/DraftMan">Dribbble</a>
+          <a href="https://discord.gg/Aej4HSQ">Discord</a>
+        </column>
+        <column large="4" small="12">
+          <h3>Partenaires</h3>
+          <a href="https://sfregis.fr">SFRégis</a>
+          <a href="https://centraldev.fr">Central'Dev</a>
+          <a href="">EveryIcons</a>
+        </column>
+      </row>
+      <row id="copyright">
+        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https://draftman.fr">DraftMan</a></p>
+      </row>
+    </container>
+  </body>
+</heml>

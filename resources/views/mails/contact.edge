@@ -1,30 +1,172 @@
-<html>
-    <body>
-        <table style="width:100%;">
-            <tr>
-                <td colspan="2">
-                    Vous avez reçu un message le ' . date( 'd/m/Y' ) . ' à  ' . date( 'H:i:s' ) . '<br>
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">{{message}}</td><br>
-            </tr>
-            <tr>
-                <td colspan="2">{{commentconnu}}</td><br>
-            </tr>
-            <tr>
-                <td colspan="2">Mail : {{email}}</td>
-            </tr><br>
-            <tr>
-                <td colspan="2" class="discord">Discord : {{discord}}.</td>
-            </tr>
-            <tr>
-                <td colspan="2"class="twitter">Twitter : {{twitter}}.</td>
-            </tr><br>
-            <tr>
-                <td colspan="2">Cordialement {{author}} '.</td>
-            </tr>
-        </table>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head> </head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <style type="text/css">
+      * {
+        text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      html {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        mso-line-height-rule: exactly;
+      }
+
+      div[style*="margin: 16px 0"] {
+        margin: 0 !important;
+      }
+
+      table,
+      td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+        -ms-interpolation-mode: bicubic;
+      }
+
+      .ReadMsgBody,
+      .ExternalClass {
+        width: 100%;
+      }
+
+      .ExternalClass,
+      .ExternalClass p,
+      .ExternalClass span,
+      .ExternalClass td,
+      .ExternalClass div {
+        line-height: 100%;
+      }
+    </style>
+    <!--[if gte mso 9]>
+      <style type="text/css">
+      li { text-indent: -1em; }
+      table td { border-collapse: collapse; }
+      </style>
+      <![endif]-->
+    <title>Subject</title>
+    <style>
+      @media only screen and (max-width:600px) {
+        .column,
+        .column-filler {
+          box-sizing: border-box;
+          float: left;
+        }
+        .col-sm-12 {
+          display: block;
+          width: 100%!important;
+        }
+      }
+    </style>
+    <!-- content -->
+    <!--[if gte mso 9]><xml>
+       <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+       </o:OfficeDocumentSettings>
+      </xml><![endif]-->
+  </head>
+  <body class="body" style="margin: 0; width: 100%;">
+    <div class="preview" style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">Mail de contact de draftman.fr&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+    <table
+      class="bodyTable" role="presentation" width="100%" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0;">
+      <tr>
+        <td class="body__content" align="left" width="100%" valign="top" style="color: #000000; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px;">
+          <div class="container" style="margin: 0 auto; max-width: 100%; width: 100%;"> <!--[if mso | IE]>
+            <table class="container__table__ie" role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin-right: auto; margin-left: auto; max-width: 100%; width: 100%;" width="100%" align="center">
+              <tr>
+                <td> <![endif]-->
+                  <table class="container__table" role="presentation" border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                    <tr class="container__row">
+                      <td class="container__cell" width="100%" align="left" valign="top">
+                        <div id="header" class="row" style="border-bottom: 1px solid #D1D1D1; box-shadow: 0 1px 4px rgba(0,0,0,.16); text-align: center;">
+                          <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                            <tr class="row__row"> <img src="https://draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200" large="12" border="0" class="img__block" style="display: block; max-width: 100%; padding: 10px 20px;" /> </tr>
+                          </table>
+                        </div>
+                        <div id="date" class="row" style="border-bottom: 1px solid #ADADAD; text-align: center;">
+                          <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                            <tr class="row__row">
+                              <p large="12" class="text p" style="display: block; margin: 14px 0; color: #000000; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px;">Vous avez reçu un message le ' . date( 'd/m/Y' ) . ' à ' . date( 'H:i:s' ) . '</p>
+                            </tr>
+                          </table>
+                        </div>
+                        <div id="message" class="row" style="padding: 20px;">
+                          <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                            <tr class="row__row">
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">{{data.message}}</p>
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">Je souhaitais d'ailleurs vous dire que je vous avait rentontré {{data.commentconnu}}</p>
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">Mail : {{data.email}}</p>
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">Discord : {{data.discord}}</p>
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">Twitter : {{data.twitter}}</p>
+                              <p large="2" class="text p" style="display: block; margin: 14px 0; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; color: #666666;">Cordialement {{data.author}}</p>
+                            </tr>
+                          </table>
+                        </div>
+                        <div id="footer" class="row" style="background-color: #474747; padding: 0 0 20px;">
+                          <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                            <tr class="row__row">
+                              <td class="column col-sm-12" width="33%" style="width: 33%;" align="left" valign="top">
+                                <h3 class="header h3" style="margin: 20px 0; line-height: 24px; font-family: Helvetica,Arial,sans-serif; color: #7D7D7D; margin-bottom: 8px; margin-top: 20px; text-align: center;">Navigation</h3> 
+                                <a href="https://draftman.fr" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Accueil</span></a>
+                                <a href="https://draftman.fr/a-propos" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">A-Propos</span></a>
+                                <a href="https://draftman.fr/portfolio" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Portfolio</span></a>
+                                <a href="https://draftman.fr/contact" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Contact</span></a>
+                              </td>
+                              <td class="column col-sm-12" width="33%" style="width: 33%;" align="left" valign="top">
+                                <h3 class="header h3" style="margin: 20px 0; line-height: 24px; font-family: Helvetica,Arial,sans-serif; color: #7D7D7D; margin-bottom: 8px; margin-top: 20px; text-align: center;">Social</h3> 
+                                <a href="https://twitter.com/DraftMan_Dev" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Twitter</span></a>
+                                <a href="https://github.com/DraftProducts" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">GitHub</span></a>
+                                <a href="https://dribbble.com/DraftMan" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Dribbble</span></a>
+                                <a href="https://discord.gg/Aej4HSQ" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Discord</span></a> 
+                              </td>
+                              <td class="column col-sm-12" width="33%" style="width: 33%;" align="left" valign="top">
+                                <h3 class="header h3" style="margin: 20px 0; line-height: 24px; font-family: Helvetica,Arial,sans-serif; color: #7D7D7D; margin-bottom: 8px; margin-top: 20px; text-align: center;">Partenaires</h3> 
+                                <a href="https://sfregis.fr" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">SFRégis</span></a>
+                                <a href="https://centraldev.fr" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">Central'Dev</span></a>
+                                <a href="" class="a" style="text-align: center; color: #FFFFFF; display: block; text-decoration: none;"><span class="a__text" style="color: #FFFFFF; text-decoration: none;">EveryIcons</span></a>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div id="copyright" class="row" style="background-color: #3D3D3D; text-align: center;">
+                          <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+                            <tr class="row__row">
+                              <p large="12" class="text p" style="display: block; font-family: Helvetica,Arial,sans-serif; font-size: 16px; line-height: 20px; padding: 20px; color: #FFFFFF; margin: 0;">Copyright 2018 © - Développé avec <span style="color: #FF0000;">♥</span> par <a href="https://draftman.fr" class="a" style="color: #FFFFFF;"><span class="a__text" style="color: #FFFFFF;">DraftMan</span></a></p>
+                            </tr>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </table> <!--[if mso | IE]> </td>
+              </tr>
+            </table> <![endif]--> </div>
+        </td>
+      </tr>
+      </table>
+      <div style="display:none; white-space:nowrap; font-size:15px; line-height:0;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+  </body>
 </html>

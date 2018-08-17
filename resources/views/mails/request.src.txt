@@ -1,0 +1,116 @@
+<heml>
+  <head>
+    <subject>Subject</subject>
+    <preview>Mail de clientsur draftman.fr</preview>
+    <style>
+      container{
+        width: 100%;
+        max-width: 100%;
+      }
+      #header{
+        text-align: center;
+        box-shadow: 0px 1px 4px rgba(0,0,0,0.16);
+        border-bottom: 1px solid #D1D1D1;
+      }
+      #header img{
+        padding: 10px 20px;
+      }
+      #date{
+        text-align: center;
+        border-bottom: 1px solid #adadad;
+      }
+      #message{
+        padding: 20px
+      }
+      #message p{
+        color: #666666
+      }
+      #message .link{
+        color: #cd6e57
+      }
+      #histoire{
+        border-top: 1px solid #D1D1D1;
+        padding: 0 40px;
+        background-color:#fcfcfc;
+      }
+      #footer{
+        background-color:#474747;
+        padding: 0 0 20px;
+      }
+      #footer h3{
+        text-align:center;
+        margin-bottom: 8px;
+        margin-top: 20px;
+        color: #7D7D7D
+      }
+      #footer a{
+        text-decoration: none;
+        color: white;
+        display: block;
+        text-align: center;
+      }
+      #copyright{
+        background-color: #3D3D3D;
+        text-align: center;
+      }
+      #copyright p{
+        color: white;
+        padding: 20px;
+        margin: 0;
+      }
+      #copyright span{
+        color: red;
+      }
+      #copyright a{
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <container>
+      <row id="header">
+        <img src="https://draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
+      </row>
+      <row id="date">
+        <p>Vous avez reçu un message le {{data.date}}</p>
+      </row>
+      <row id="message">
+        <p>Bonjour DraftMan</p>
+        <p>Je vous contacte pour un travail de <strong>{{data.type}}</strong></p>
+        <p>Le projet se nomme <strong>{{data.name}}</strong></p>
+        <p>Voici donc une courte description</p>
+        <p>{{data.description}}</p>
+        <p>Je pourrais biensûr vous détailler le projet en conversation oral ou écrite dans les channels discord prévu à cet effet sur le serveur <a class="link" href="/discord">discord</a></p>
+        <p>En cas de quelconque problème vous pouvez me contacter par mail ou par discord :</p>
+        <p>Discord : <strong>{{data.discord}}</strong></p>
+        <p>Email : <strong>{{data.email}}</strong></p>
+        <p>Cordialement <strong>{{data.username}}</strong></p>
+      </row>
+      <row id="footer">
+        <column large="4" small="12">
+          <h3>Navigation</h3>
+          <a href="https://draftman.fr">Accueil</a>
+          <a href="https://draftman.fr/a-propos">A-Propos</a>
+          <a href="https://draftman.fr/portfolio">Portfolio</a>
+          <a href="https://draftman.fr/contact">Contact</a>
+        </column>
+        <column large="4" small="12">
+          <h3>Social</h3>
+          <a href="https://twitter.com/DraftMan_Dev">Twitter</a>
+          <a href="https://github.com/DraftProducts">GitHub</a>
+          <a href="https://dribbble.com/DraftMan">Dribbble</a>
+          <a href="https://discord.gg/Aej4HSQ">Discord</a>
+        </column>
+        <column large="4" small="12">
+          <h3>Partenaires</h3>
+          <a href="https://sfregis.fr">SFRégis</a>
+          <a href="https://centraldev.fr">Central'Dev</a>
+          <a href="">EveryIcons</a>
+        </column>
+      </row>
+      <row id="copyright">
+        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https://draftman.fr">DraftMan</a></p>
+      </row>
+    </container>
+  </body>
+</heml>
