@@ -1444,6 +1444,16 @@ textarea.textarea {
 #dashboard form .input-container>textarea.filled~label{
   display: none;
 }
+#dashboard .client .write {
+  max-width: initial;
+  min-width: auto;
+}
+#dashboard .double>form:first-child, #dashboard .double>div:first-child {
+  padding-right: 20px;
+}
+#dashboard .preview {
+  padding: 20px;
+}
 }
 
 @media only screen and (max-width:720px) {
@@ -1491,8 +1501,8 @@ textarea.textarea {
     padding: 0 0 20px!important;
   }
 #dashboard .dclient .infos{
-width: auto;
-max-width: initial;
+  width: auto;
+  max-width: initial;
 }
 #dashboard .dclient .corps .name {
   font-size: 30px;
@@ -1516,6 +1526,9 @@ max-width: initial;
 #dashboard form .input-container>textarea.filled~label{
   display: block;
 }
+#dashboard .preview {
+  padding: 40px;
+}
 }
 
 @media only screen and (max-width:480px) {
@@ -1527,5 +1540,8 @@ max-width: initial;
   }
   #dashboard #discord a {
     margin-top: 10px;
+  }
+  #dashboard .preview {
+    padding: 20px;
   }
 }
