@@ -11,6 +11,8 @@ const User = use('App/Models/User');
 const config = require('../../../config.json');
 
 const paypal = require('paypal-rest-sdk')
+const moment = require('moment')
+moment.locale('fr');
 const { promisify } = require('util')
 const fs = require('fs');
 
@@ -83,6 +85,7 @@ class ClientController {
     data.username = auth.user.username
     data.email = auth.user.email
     data.discord = `${auth.user.discord_username}#${auth.user.discord_discriminator}`
+    data.date = moment().format('LLLL')
 
     const email_to = 'contact@draftman.fr';
 
@@ -107,6 +110,7 @@ class ClientController {
       return view.render('clients.client_request_details',{client})
     }else if(client.status === 1){
       const project = (await Project.query().with('devblog').where('id', params.id).first()).toJSON()
+      console.log(project.devblog)
       const images = await readdir(`public/uploads/projects/${project.folder}/images`)
       const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
       return view.render('clients.admin.client_dashboard',{client,images,fichiers,project})
