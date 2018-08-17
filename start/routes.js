@@ -107,7 +107,7 @@ Route.group(() => {
     Route.post('me/profil/compte', 'ProfilController.storeBasic')
     Route.post('me/profil/infos', 'ProfilController.storeInfos')
 
-    Route.get('logout', 'RegisterController.logout')
+    Route.get('logout', 'AuthController.logout')
 }).middleware(['auth']);
 
 Route.group(() => {
