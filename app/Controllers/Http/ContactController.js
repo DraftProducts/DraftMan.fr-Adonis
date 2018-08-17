@@ -4,9 +4,16 @@ const Mail = use('Mail')
 const { validate } = use('Validator')
 
 class ContactController {
-    async send({ request, session, response }) {
+    async send({ request, session, response,auth }) {
 
         const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
+        
+        if(auth.user){
+            data.author = auth.user.username,
+            data.email = auth.user.email,
+            data.twitter = auth.user.twitter,
+            data.discord = `${auth.user.discord_username}#${auth.user.discord_discriminator}`
+        }
 
         const messages = {
             'author.required': 'Veuillez indiquer votre identité.',
@@ -34,7 +41,7 @@ class ContactController {
             return response.redirect('back')
         }
     
-        const email_to = 'contact@draftman.fr';
+        const email_to = 'nicovanaarsen@gmail.com';
     
         await Mail.send('mails/contact', data, (message) => {
           message

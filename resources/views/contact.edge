@@ -23,6 +23,8 @@
             <span id="titre"></span>
             
             <div>
+            @loggedIn
+            @else
             <input maxlength="50" name="author" type="text" placeholder="Votre nom ou société" value="{{ old('author', '') }}" autofocus/>
             </div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('author'), hasErrorFor('author')) }}
@@ -31,9 +33,12 @@
             </div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
             <div>
+            @endloggedIn
             <input maxlength="50" name="objet" type="text" placeholder="Sujet de votre message" value="{{ old('objet', '') }}"/>
             </div>
             {{ elIf('<div class="error-card">$self</div>', getErrorFor('objet'), hasErrorFor('objet')) }}
+            @loggedIn
+            @else
             <div>
             <input type="text" maxlength="50" name="discord" placeholder="Votre nom discord"  value="{{ old('discord', '') }}" />
             </div>
@@ -41,7 +46,7 @@
             <div>
             <input type="text"  maxlength="50" name="twitter" placeholder="Votre nom twitter"  value="{{ old('twitter', '') }}" />
             </div>
-
+            @endloggedIn
             <div>
             <input type="text" name="commentconnu" placeholder="Comment m'avez vous connu ?" value="{{ old('commentconnu', '') }}"/>
             </div>
