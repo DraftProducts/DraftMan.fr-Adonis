@@ -18,23 +18,19 @@
 */
 
 const { Ignitor } = require('@adonisjs/ignitor')
+const path = require('path')
 const https = require('https')
-const pem = require('pem')
+const fs = require('fs')
 
-pem.createCertificate({ days: 1, selfSigned: true }, (error, keys) => {
-  if (error) {
-    return console.log(error)
-  }
+// Certificate
+const options = {
+  key: fs.readFileSync(path.join(__dirname, './server.key')),
+  cert: fs.readFileSync(path.join(__dirname, './server.crt'))
+}
 
-  const options = {
-    key: keys.serviceKey,
-    cert: keys.certificate
-  }
-
-  new Ignitor(require('@adonisjs/fold'))
-    .appRoot(__dirname)
-    .fireHttpServer((handler) => {
-      return https.createServer(options, handler)
-    })
-    .catch(console.error)
-})
+new Ignitor(require('@adonisjs/fold'))
+  .appRoot(__dirname)
+  .fireHttpServer((handler) => {
+    return https.createServer(options, handler)
+  })
+  .catch(console.error)
