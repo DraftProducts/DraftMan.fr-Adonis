@@ -1073,7 +1073,7 @@ footer #copyright section {
     -ms-flex-align: center;
 }
 
-#devis .devis-container {
+.devis-container {
     display: block;
     padding: 30px 0 0;
     margin: auto auto 0;
