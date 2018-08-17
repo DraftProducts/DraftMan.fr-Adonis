@@ -1224,6 +1224,7 @@ textarea.textarea {
   text-decoration: none;
   padding: 12px 30px;
   margin-top: auto;
+  text-align: center;
 }
 
 
@@ -1391,4 +1392,140 @@ textarea.textarea {
 }
 #dashboard input[type='range']:focus {
   outline: none;
+}
+@media only screen and (max-width:1100px) {
+  #dashboard #menu,
+  #dashboard #menu>.content {
+    width: 90px!important;
+    min-width: 90px!important;
+  }
+  #dashboard>.corps {
+    width: calc(100% - 90px)!important
+  }
+  #dashboard>.corps>.content{
+    padding: 15px;
+  }
+  #dashboard #menu ul a {
+    justify-content: center!important
+  }
+  #dashboard #menu ul a {
+    padding: 20px 0!important;
+  }
+  #dashboard #menu ul a span{
+    display: none!important;
+  }
+  #dashboard #menu ul a i {
+    margin: 0!important;
+}
+
+  #dashboard #burger{
+    visibility: hidden!important
+  }
+
+  #dashboard #menu .username{
+    display: none;
+  }
+  
+  #dashboard #menu .user {
+    width: 60px!important;
+    height: 60px!important;
+    margin-bottom: 30px!important;
+  }
+  #dashboard #discord{
+    min-width: auto;
+  }
+  #dashboard #discord a {
+    padding: 12px 15px;
+  }
+  #dashboard form .input-container>.tag~label,
+#dashboard form .input-container>input:focus~label,
+#dashboard form .input-container>input.filled~label,
+#dashboard form .input-container>textarea:focus~label,
+#dashboard form .input-container>textarea.filled~label{
+  display: none;
+}
+}
+
+@media only screen and (max-width:720px) {
+  #dashboard #menu,
+  #dashboard #menu>.content {
+    width: 60px!important;
+    min-width: 60px!important;
+  }
+  #dashboard>.corps {
+    width: calc(100% - 60px)!important
+  }
+  #dashboard>.corps>.content{
+    padding: 15px;
+  }
+  #dashboard #menu ul a {
+    justify-content: center!important
+  }
+  #dashboard #menu ul a {
+    padding: 15px 0!important;
+  }
+  #dashboard #menu ul a span{
+    display: none!important;
+  }
+  #dashboard #menu ul a i {
+    margin: 0!important;
+}
+
+  #dashboard #burger{
+    visibility: hidden!important
+  }
+
+  #dashboard #menu .username{
+    display: none;
+  }
+  
+  #dashboard #menu .user {
+    width: 50px!important;
+    height: 50px!important;
+    margin-bottom: 20px!important;
+  }
+  #dashboard .double{
+    flex-direction: column
+  }
+  #dashboard .double>form:first-child, #dashboard .double>div:first-child{
+    padding: 0 0 20px!important;
+  }
+#dashboard .dclient .infos{
+width: auto;
+max-width: initial;
+}
+#dashboard .dclient .corps .name {
+  font-size: 30px;
+}
+#dashboard .dclient .corps .timeline {
+  margin-top: 15px;
+}
+#dashboard .timeline .payment {
+  display: none;
+}
+#dashboard #images {
+  margin-top: 15px;
+}
+#dashboard .dclient .infos .payment_button{
+  display: none;
+}
+#dashboard form .input-container>.tag~label,
+#dashboard form .input-container>input:focus~label,
+#dashboard form .input-container>input.filled~label,
+#dashboard form .input-container>textarea:focus~label,
+#dashboard form .input-container>textarea.filled~label{
+  display: block;
+}
+}
+
+@media only screen and (max-width:480px) {
+  #dashboard #discord .image {
+    display: none;
+  }
+  #dashboard #discord .content {
+    padding-left: 0;
+  }
+  #dashboard #discord a {
+    margin-top: 10px;
+  }
 }

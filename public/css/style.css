@@ -602,6 +602,7 @@ footer #copyright section {
     font-weight: 700;
     letter-spacing: .6px;
     color: white;
+    text-align: center;
 }
 
 #banner a {
@@ -2909,6 +2910,10 @@ input[type="text"]:required:after {
 
     #mobile-nav-button {
         display: block;
+    }
+
+    #about h1, #competences h2 {
+        font-size: 35px;
     }
 
     .cache.active {
