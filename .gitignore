@@ -12,3 +12,12 @@ database/development.sqlite
 
 # Config app with tokens
 config.json
+
+# Users files
+public/uploads/portfolio/
+
+public/uploads/posts/
+
+public/uploads/projects/
+
+public/uploads/users/
