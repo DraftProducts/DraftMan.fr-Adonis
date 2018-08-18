@@ -130,6 +130,8 @@ class PortfolioController {
         }
     }
     async updateDetails({request, session, response,params}){
+        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
+
         const illustration = request.file('illustration', {
             types: ['image'],
             size: '2mb'
@@ -139,8 +141,6 @@ class PortfolioController {
             types: ['image'],
             size: '2mb'
         })
-
-        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
 
         const messages = {
           'name.unique': 'Ce nom est déjà utilisé.',
@@ -208,11 +208,7 @@ class PortfolioController {
           article_posted: 'Création sauvegardé'
         })
 
-        if(data.published_at){
-            return response.redirect('/portfolio')
-        }else{
-            return response.redirect('/admin/portfolio')
-        }
+        return response.redirect('/admin/portfolio')
     }
     async upgrade({params, response}){
         const portfolio = await Portfolio.findOrFail(params.id)
@@ -225,10 +221,10 @@ class PortfolioController {
     }
     async decline({params, response}){
         const portfolio = await Portfolio.findOrFail(params.id)
-        const details = await PortfolioDetails.findOrFail(portfolio.portfolio_details_id)
         portfolio.portfolio_details_id = null
-        await details.delete()
         await portfolio.save()
+        const details = await PortfolioDetails.findOrFail(portfolio.portfolio_details_id)
+        await details.delete()
         return response.redirect('back')
     }
 }

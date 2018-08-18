@@ -73,16 +73,16 @@
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
 
         <div class="input-container">
-            <textarea name="problematique" id="problematique" class="input textarea">{{old('problematique',creation.details.problematique)}}</textarea>
-            <label for="problematique">Problematique du projet</label>
-        </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('problematique'), hasErrorFor('problematique')) }}
-
-        <div class="input-container">
             <textarea name="presentation" id="presentation" class="input textarea">{{old('presentation',creation.details.presentation)}}</textarea>
             <label for="presentation">Presentation du projet</label>
         </div>
         {{ elIf('<div class="error-card">$self</div>', getErrorFor('presentation'), hasErrorFor('presentation')) }}
+
+        <div class="input-container">
+            <textarea name="problematique" id="problematique" class="input textarea">{{old('problematique',creation.details.problematique)}}</textarea>
+            <label for="problematique">Problematique du projet</label>
+        </div>
+        {{ elIf('<div class="error-card">$self</div>', getErrorFor('problematique'), hasErrorFor('problematique')) }}
 
         <div class="input-container">
             <textarea name="technique" id="technique" class="input textarea">{{old('technique',creation.details.technique)}}</textarea>
