@@ -1,7 +1,6 @@
 'use strict'
 
 const Env = use('Env')
-const config = require('../config.json')
 
 module.exports = {
   /*
@@ -56,7 +55,7 @@ module.exports = {
   */
   sparkpost: {
     driver: 'sparkpost',
-    apiKey: config.SPARKPOST_API_KEY,
+    apiKey: Env.get('SPARKPOST_API_KEY'),
     extras: {}
   },
 
