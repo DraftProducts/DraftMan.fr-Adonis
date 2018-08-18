@@ -9,11 +9,6 @@ class BackofficeController {
     return view.render('blog.admin.comments',{comments})
   }
 
-  async articles({view}) {
-    const articles = (await Post.query().with('author').fetch()).toJSON()
-    return view.render('blog.admin.articles',{articles})
-  }
-
   async valide_comment({params,response}) {
     const comment = await Comment.find(params.id)
     comment.seen = 1
