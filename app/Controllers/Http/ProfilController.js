@@ -4,14 +4,14 @@ const { validate } = use('Validator')
 const User = use('App/Models/User')
 const Mail = use('Mail')
 const Helpers = use('Helpers')
-const config = require('../../../config.json');
+const Env = use('Env')
 const { get, post } = require('snekfetch');
 const btoa = require('btoa');
 
-const CLIENT_ID = config.DISCORD_ID
-const CLIENT_SECRET = config.DISCORD_SECRET
+const CLIENT_ID = Env.get('DISCORD_ID')
+const CLIENT_SECRET = Env.get('DISCORD_SECRET')
 const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-const redirect = encodeURIComponent(config.DISCORD_CALLBACK);
+const redirect = encodeURIComponent(Env.get('DISCORD_CALLBACK'));
 
 class ProfilController {
   discordLogin({response}) {
