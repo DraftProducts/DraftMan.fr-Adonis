@@ -43,10 +43,10 @@ class ContactController {
     
         const email_to = 'nicovanaarsen@gmail.com';
     
-        await Mail.send('mails/contact', data, (message) => {
+        await Mail.connection('sparkpost').send('mails/contact', data, (message) => {
           message
             .to(email_to)
-            .from('<email>', '<author>')
+            .from('no-reply@draftman.fr', '<author>')
             .subject('<objet>')
             .replyTo('<email>', '<author>')
         })
