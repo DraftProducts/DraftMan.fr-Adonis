@@ -7,8 +7,7 @@ const DevPost = use('App/Models/DevPost');
 const Project = use('App/Models/Project');
 const Client = use('App/Models/Client');
 const User = use('App/Models/User');
-
-const config = require('../../../config.json');
+const Env = use('Env');
 
 const paypal = require('paypal-rest-sdk')
 const moment = require('moment')
@@ -22,8 +21,8 @@ class ClientController {
   constructor () {
     paypal.configure({
       mode: 'sandbox',
-      client_id: config.PAYPAL_ID,
-      client_secret: config.PAYPAL_SECRET
+      client_id: Env.get('PAYPAL_ID'),
+      client_secret: Env.get('PAYPAL_SECRET')
     })
   }
 
