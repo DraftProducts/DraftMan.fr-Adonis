@@ -11,7 +11,7 @@ const btoa = require('btoa');
 const CLIENT_ID = config.DISCORD_ID
 const CLIENT_SECRET = config.DISCORD_SECRET
 const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-const redirect = encodeURIComponent('http://127.0.0.1:3333/discord/callback');
+const redirect = encodeURIComponent(config.DISCORD_CALLBACK);
 
 class ProfilController {
   discordLogin({response}) {
