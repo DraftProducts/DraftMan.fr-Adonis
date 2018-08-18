@@ -8,7 +8,7 @@ const moment = require('moment')
 
 class PortfolioController {
     async index({ view }){
-        const portfolio = (await Portfolio.query().whereNotNull('published_at').fetch()).toJSON();
+        const portfolio = (await Portfolio.query().whereNotNull('published_at').orderBy('created_at','desc').fetch()).toJSON();
         return view.render('portfolio.index', {portfolio: portfolio})
     }
 
@@ -18,7 +18,7 @@ class PortfolioController {
     }
 
     async create({view}){
-        const portfolio = (await Portfolio.all()).toJSON();
+        const portfolio = (await Portfolio.query().orderBy('created_at','desc').fetch()).toJSON();
         return view.render('portfolio.admin.create', {portfolio})
     }
 
