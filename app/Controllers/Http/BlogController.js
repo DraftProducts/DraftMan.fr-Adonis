@@ -169,17 +169,30 @@ class BlogController {
     }
 
     async list({ view }){
-        const posts = (await Post.all()).toJSON();
+        const posts = (await Post.query().whereNotNull('published_at').fetch()).toJSON();
         return view.render('blog.list', {posts})
     }
 
     async show ({ params, view }){
         const [post, posts, comments] = await Promise.all([
           Post.query().with('author').where('id', params.id).first(),
-          Post.all(),
+          Post.query().whereNotNull('published_at').fetch(),
           Comment.query().with('replies').where('post_id', params.id).where('parent_id', 0).fetch(),
         ])
         return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
+    }
+
+    async articles({view}) {
+        const articles = (await Post.query().with('author').fetch()).toJSON()
+        return view.render('blog.admin.articles',{articles})
+    }
+
+    async view ({ params, view }){
+        const [post, posts] = await Promise.all([
+          Post.query().with('author').where('id', params.id).first(),
+          Post.query().whereNotNull('published_at').fetch()
+        ])
+        return view.render('blog.admin.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON() })
     }
 
     async delete ({ params,auth,response }){
