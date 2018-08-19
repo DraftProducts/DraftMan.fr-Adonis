@@ -116,7 +116,7 @@ Route.group(() => {
     Route.get('me/comments/:id/valide', 'BackofficeController.valide_comment')
 
     Route.get('me/articles', 'BlogController.articles')
-    Route.get('me/articles/:id', 'BlogController.view')
+    Route.get('me/articles/:id-:url', 'BlogController.view')
 }).middleware(['auth','modo']);
 
 Route.group(() => {
