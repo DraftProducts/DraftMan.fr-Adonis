@@ -12,7 +12,7 @@ module.exports = {
   | define a driver too.
   |
   */
-  connection: Env.get('MAIL_CONNECTION', 'sparkpost'),
+  connection: Env.get('MAIL_CONNECTION', 'smtp'),
 
   /*
   |--------------------------------------------------------------------------
