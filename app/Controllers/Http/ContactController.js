@@ -47,17 +47,24 @@ class ContactController {
     
         const email_to = 'nicovanaarsen@gmail.com';
         
+        try {
             await Mail.send('mails.contact', data, (message) => {
                 message
                 .to(email_to)
-                .from(data.email, data.author)
+                .from('no-reply@draftman.fr', data.author)
                 .subject(data.objet)
                 .replyTo('contact@draftman.fr', 'DraftMan')
             })
+            session.flash({sent: 'Mail envoyé avec succès'})
         
-        session.flash({sent: 'Mail envoyé avec succès'})
+            response.redirect('back')
+        } catch (error) {
+            console.log('contact form: '+error.errors)
+
+            session.flash({error: 'Une erreur est survenu, veuillez nous excusez !'})
         
-        response.redirect('back')
+            response.redirect('back')
+        }
     }
 }
 
