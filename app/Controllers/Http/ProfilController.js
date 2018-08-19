@@ -2,7 +2,6 @@
 
 const { validate } = use('Validator')
 const User = use('App/Models/User')
-const Mail = use('Mail')
 const Helpers = use('Helpers')
 const Env = use('Env')
 const { get, post } = require('snekfetch');
