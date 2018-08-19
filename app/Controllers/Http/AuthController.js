@@ -48,14 +48,18 @@ class AuthController {
     session.flash({
       account_created: 'Compte crée avec succès'
     })
-    
-    await Mail.send('mails/inscription', data, (message) => {
-      message
-        .to('<email>')
-        .from('no-reply@draftman.fr', 'draftman.fr')
-        .subject('Inscription sur DraftMan.fr')
-        .replyTo('contact@draftman.fr', 'DraftMan')
-    })
+
+    try {
+        await Mail.send('mails.inscription', data, (message) => {
+            message
+            .to(data.email)
+            .from('no-reply@draftman.fr', 'draftman.fr')
+            .subject('Inscription sur DraftMan.fr')
+            .replyTo('contact@draftman.fr', 'DraftMan')
+        })
+    } catch (error) {
+        console.log('inscription mail: '+error.errors)
+    }
 
     return response.redirect('/login')
   }
