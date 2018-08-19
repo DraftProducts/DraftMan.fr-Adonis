@@ -2,6 +2,8 @@
 
 const Mail = use('Mail')
 const { validate } = use('Validator')
+const moment = require('moment')
+moment.locale('fr');
 
 class ContactController {
     async send({ request, session, response,auth }) {
@@ -40,17 +42,19 @@ class ContactController {
 
             return response.redirect('back')
         }
+
+        data.date = moment().format('LLLL')
     
         const email_to = 'nicovanaarsen@gmail.com';
-    
-        await Mail.send('mails.contact', data, (message) => {
-          message
-            .to(email_to)
-            .from(data.email, data.author)
-            .subject(data.objet)
-            .replyTo('contact@draftman.fr', 'DraftMan')
-        })
-
+        
+            await Mail.send('mails.contact', data, (message) => {
+                message
+                .to(email_to)
+                .from(data.email, data.author)
+                .subject(data.objet)
+                .replyTo('contact@draftman.fr', 'DraftMan')
+            })
+        
         session.flash({sent: 'Mail envoyé avec succès'})
         
         response.redirect('back')
