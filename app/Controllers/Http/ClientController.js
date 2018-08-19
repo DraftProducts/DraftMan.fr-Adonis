@@ -86,15 +86,19 @@ class ClientController {
     data.discord = `${auth.user.discord_username}#${auth.user.discord_discriminator}`
     data.date = moment().format('LLLL')
 
-    const email_to = 'contact@draftman.fr';
+    const email_to = 'nicovanaarsen@gmail.com';
 
-    await Mail.send('mails/request', data, (message) => {
-      message
-        .to(email_to)
-        .from('<email>', '<author>')
-        .subject('<objet>')
-        .replyTo('<email>', '<author>')
-    })
+    try {
+        await Mail.send('mails.request', data, (message) => {
+            message
+            .to(email_to)
+            .from('no-reply@draftman.fr', 'draftman.fr')
+            .subject('Un projet vous est proposé sur DraftMan.fr')
+            .replyTo(data.email, data.username)
+        })
+    } catch (error) {
+        console.log('request mail: '+error.errors)
+    }
   }
 
   async clients({view}) {
