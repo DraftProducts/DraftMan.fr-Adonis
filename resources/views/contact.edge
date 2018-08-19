@@ -70,6 +70,10 @@
                 <div class="success-card">{{ flashMessage('sent') }}</div>
             @endif
 
+            @if(flashMessage('error'))
+                <div class="success-card">{{ flashMessage('error') }}</div>
+            @endif
+
             {{ csrfField() }}
             <input data-role="submit" type="submit" value="Envoyer" />
             </div>
