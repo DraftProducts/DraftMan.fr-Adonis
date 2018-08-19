@@ -880,7 +880,7 @@ footer #copyright section {
 
 #citations {
     display: flex;
-    float: left;
+    /*float: left;*/
     position: relative;
     width: 100%;
     height: 330px;
@@ -1144,7 +1144,7 @@ footer #copyright section {
 
 #about,
 #competences {
-    float: left;
+    /*float: left;*/
     width: 100%;
     padding: 30px 100px;
 }
@@ -1155,7 +1155,7 @@ footer #copyright section {
 }
 
 #about .content div {
-    float: left;
+    /*float: left;*/
 }
 
 #about .content > div:first-child {
@@ -1241,7 +1241,7 @@ footer #copyright section {
 #portfolio .item {
     width: 33.333%;
     padding: 10px;
-    float: left;
+    /*float: left;*/
 }
 
 #portfolio .item .content {
@@ -1252,7 +1252,7 @@ footer #copyright section {
 }
 
 #portfolio figure {
-    float: left;
+    /*float: left;*/
     min-width: 100%;
     cursor: default;
     background-color: #9e5406;
@@ -1272,6 +1272,10 @@ footer #copyright section {
 
 #portfolio figcaption {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -1413,14 +1417,17 @@ footer #copyright section {
 }
 
 #blog .corps {
-    float: left;
-    width: calc(100% - 320px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    flex: 1;
     padding-right: 20px;
 }
 
 #blog.dashboard .corps .item {
-    float: left;
-    width: calc(33.333% - 20px);
+    display: flex;
+    flex-direction: column;
+    width: calc(33.333% - 13.3333px);
     margin: 0 20px 20px 0;
     border-radius: 2px;
     background-color: #fff;
@@ -1428,8 +1435,12 @@ footer #copyright section {
     transition: box-shadow .25s;
 }
 
+#blog.dashboard .corps .item:nth-child(3n+3){
+	margin: 0 0 20px 0;
+}
+
 #blog.list .corps .item {
-    float: left;
+    /*float: left;*/
     width: calc(100% - 20px);
     margin: 0 20px 20px 0;
     padding: 20px;
@@ -1490,7 +1501,7 @@ footer #copyright section {
 }
 
 #blog.list .article-text{
-    float: left;
+    /*float: left;*/
     width: 60%;
 }
 
@@ -1525,7 +1536,7 @@ footer #copyright section {
 }
 
 #blog.list .article-image {
-    float: left;
+    /*float: left;*/
     width: 40%;
 }
 
@@ -1592,12 +1603,12 @@ footer #copyright section {
 }
 
 #sidebar {
-    float: left;
+    /*float: left;*/
     width: 320px;
 }
 
 #sidebar .item {
-    float: left;
+    /*float: left;*/
     width: 100%;
     margin-bottom: 20px;
     padding: 15px;
@@ -1629,7 +1640,9 @@ footer #copyright section {
     position: relative;
     width: 100%;
 }
-
+#sidebar .search form{
+    display: flex;
+}
 #sidebar p {
     padding-bottom: 15px;
 }
@@ -1642,7 +1655,7 @@ footer #copyright section {
 }
 
 #sidebar input[type="search"] {
-    float: left;
+    /*float: left;*/
     position: relative;
     width: calc(100% - 40px);
     padding: 10px;
@@ -1653,7 +1666,7 @@ footer #copyright section {
 }
 
 #sidebar button {
-    float: left;
+    /*float: left;*/
     width: 40px;
     height: 37px;
     border: none;
@@ -1771,7 +1784,7 @@ footer #copyright section {
     50% {opacity: 1;}
 }
 #contact {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -1883,7 +1896,7 @@ input[type="text"]:required:after {
 }
 
 .file-section .btn {
-    float: left;
+    /*float: left;*/
     height: 42px;
     padding: 0 32px;
     text-transform: uppercase;
@@ -1909,7 +1922,7 @@ input[type="text"]:required:after {
 
 .parallax {
     display: flex;
-    float: left;
+    /*float: left;*/
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -1929,8 +1942,8 @@ input[type="text"]:required:after {
 }
 
 #blog.post .content .item-content {
-    float: left;
-    margin: 0 20px 20px 0;
+    /*float: left;*/
+    margin-bottom: 20px;
     padding: 40px 50px;
     max-width: 100%;
     border-radius: 2px;
@@ -1941,8 +1954,16 @@ input[type="text"]:required:after {
 
 #blog.post .top-content {
     display: block;
-    float: left;
     width: 100%;
+}
+#blog.post .text{
+    display: flex;
+}
+#blog.post .text .logo{
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    margin-top: 25px;
 }
 
 #blog.post .content .top-content h2 {
@@ -1981,31 +2002,19 @@ input[type="text"]:required:after {
     color: #B3B3B3;
 }
 
-#post-body {
-    float: left;
-    width: 100%;
-    padding: 20px 10px 20px 0;
-}
-
-#spe-body {
-    float: left;
-    width: 100%;
-    padding: 20px 10px 20px 0;
-}
-
-#spe-body .typographies {
-    display: flex;
-    justify-content: space-around;
-}
-
-#spe-body h4 {
-    font-size: 34px;
+#blog.post h4.spe-gra {
+    font-size: 30px;
     color: #404040;
     font-weight: 600;
 }
 
+#blog.post img.spe-gra {
+    width: 100%;
+}
+
 #post-body.portfolio {
-    width: calc(100% - 200px);
+    flex: 1;
+    padding: 20px 20px 20px 0;
 }
 
 #post-body h2,
@@ -2147,7 +2156,7 @@ input[type="text"]:required:after {
 }
 
 #post-body .demo {
-    float: left;
+    /*float: left;*/
     padding: 20px 70px;
     font-size: 21px;
     font-weight: 700;
@@ -2156,16 +2165,16 @@ input[type="text"]:required:after {
 }
 
 #post-body .demo i {
-    float: left;
+    /*float: left;*/
 }
 
 #post-body .demo span {
-    float: left;
+    /*float: left;*/
     padding: 1px 0 0 5px;
 }
 
 #commentaires {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -2294,11 +2303,11 @@ input[type="text"]:required:after {
 }
 
 #checkbox>div {
-    float: left;
+    /*float: left;*/
 }
 
 #checkbox>label {
-    float: left;
+    /*float: left;*/
     text-align: left;
     font-size: 16px;
     margin: 3px 0 0 3px;
@@ -2317,7 +2326,7 @@ input[type="text"]:required:after {
 }
 
 #comments {
-    float: left;
+    /*float: left;*/
     width: 100%;
     margin-top: 30px;
 }
@@ -2342,12 +2351,12 @@ input[type="text"]:required:after {
 }
 
 #comments .comment-avatar {
-    float: left;
+    /*float: left;*/
 }
 
 #comments .comment-avatar .avatar {
     z-index: 4;
-    float: left;
+    /*float: left;*/
     position: relative;
     width: 100px;
     height: 100px;
@@ -2440,7 +2449,7 @@ input[type="text"]:required:after {
 #comments .comment-avatar .name {
     display: flex;
     z-index: 4;
-    float: left;
+    /*float: left;*/
     position: relative;
     width: 100px;
     margin: 10px 0 0 0;
@@ -2492,7 +2501,7 @@ input[type="text"]:required:after {
 }
 
 #comments .comment-content .comment-body {
-    float: left;
+    /*float: left;*/
     width: 100%;
     margin-bottom: 10px;
     font-size: 14px;
@@ -2539,7 +2548,7 @@ input[type="text"]:required:after {
 }
 
 #login {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -2593,14 +2602,14 @@ input[type="text"]:required:after {
 }
 
 #login button i {
-    float: left;
+    /*float: left;*/
     margin-right: 15px;
     font-size: 20.8px;
     line-height: inherit;
 }
 
 #error div {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -2610,7 +2619,7 @@ input[type="text"]:required:after {
 }
 
 #blog.search .corps form {
-    float: left;
+    /*float: left;*/
     width: calc(100% - 20px);
     margin: 0 20px 20px 0;
     border-radius: 2px;
@@ -2618,7 +2627,7 @@ input[type="text"]:required:after {
 }
 
 #blog.search .corps .search {
-    float: left;
+    /*float: left;*/
     width: calc(100% - 150px);
 }
 
@@ -2632,7 +2641,7 @@ input[type="text"]:required:after {
 }
 
 #blog.search .corps button {
-    float: left;
+    /*float: left;*/
     width: 150px;
     height: 50px;
     border: none;
@@ -2643,7 +2652,7 @@ input[type="text"]:required:after {
 }
 
 #blog.search .corps .no-results,#dashboard .no-results {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -2652,6 +2661,16 @@ input[type="text"]:required:after {
     text-align: center;
     font-size: 22px;
 }
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width:1200px) {
     header>div {
@@ -2696,7 +2715,13 @@ input[type="text"]:required:after {
     }
 
     #blog.dashboard .corps .item {
-        width: calc(50% - 20px);
+        width: calc(50% - 10px);
+    }
+    #blog.dashboard .corps .item:nth-child(3n+3){
+        margin: 0 20px 20px 0;
+    }
+    #blog.dashboard .corps .item:nth-child(2n+2){
+        margin: 0 0 20px 0;
     }
 
     #post-body {
@@ -2807,10 +2832,12 @@ input[type="text"]:required:after {
 
     #blog .corps {
         width: 100%;
+        padding-right: 0;
     }
 
     #blog.dashboard .content .item {
         width: 100%;
+        margin: 0 0 20px 0!important;
     }
 
     #blog.list .article-image img {
