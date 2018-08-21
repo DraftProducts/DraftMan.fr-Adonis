@@ -51,9 +51,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Material+Icons|Open+Sans:300,400,600,700">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/code.css">
+    <script>
+            window.addEventListener('load', function(){
+                document.getElementById('preloader').classList.add('hidden')
+                setTimeout(() => {
+                    document.getElementById('preloader').classList.add('none')
+                }, 250);
+            });
+    </script>
+    <style>#preloader{position: fixed;display: flex;justify-content: center;align-items: center;top: 0;right:0;bottom:0;left: 0;transition: all 0.25s;background-color: #fff;z-index: 999999999999;overflow: hidden}#preloader.hidden{visibility: hidden;opacity: 0}#preloader.none{display:none}</style>
 </head>
 
 <body id="page">
+    <div id="preloader"><img src="/images/loader.svg" alt="loader"></div>
     @include('inc/header')
     <section class="parallax" style="background-image: url(/uploads/posts/{{post.image}});">
         <h1>
@@ -164,9 +174,9 @@
                                             <p>{{comment.content}}</p>
                                         </div>
                                         @loggedIn
-                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="1" href="#">Répondre</a>
+                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="1" href="javascript:void(0)">Répondre</a>
                                         @else
-                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="0" href="#">Répondre</a>
+                                            <a class="reply" replyto="{{comment.id}}" post_id="{{post.id}}" token="{{csrfToken}}" auth="0" href="javascript:void(0)">Répondre</a>
                                         @endloggedIn
                                     </div>
                                 </div>
