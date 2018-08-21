@@ -19,7 +19,7 @@ class BlogController {
         const posts = (await Post.query().whereNotNull('published_at').limit(3).fetch()).toJSON();
         return view.render('index', {posts})
     }
-    async newsletter({ request, session, response,params }){
+    async newsletter({ request, session, response }){
         const data = request.only(['email'])
         const messages = {
             'email.required': 'Veuillez entrer une adresse email.',
@@ -166,11 +166,6 @@ class BlogController {
         })
 
         return response.redirect('back')
-    }
-
-    async list({ view }){
-        const posts = (await Post.query().whereNotNull('published_at').fetch()).toJSON();
-        return view.render('blog.list', {posts})
     }
 
     async show ({ params, view }){
