@@ -30,7 +30,16 @@
     <meta name="generator" content="VSCode">
 
     @!section('seo')
-
+    <script>
+            window.addEventListener('load', function(){
+                document.getElementById('preloader').classList.add('hidden')
+                setTimeout(() => {
+                    document.getElementById('preloader').classList.add('none')
+                }, 250);
+            });
+    </script>
+    <style>#preloader{position: fixed;display: flex;justify-content: center;align-items: center;top: 0;right:0;bottom:0;left: 0;transition: all 0.25s;background-color: #fff;z-index: 999999999999;overflow: hidden}#preloader.hidden{visibility: hidden;opacity: 0}#preloader.none{display:none}</style>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700,900">
 
     {{ style('css/style')}}
@@ -39,6 +48,7 @@
     @!section('css')
 </head>
 <body>
+    <div id="preloader"><img src="/images/loader.svg" alt="loader"></div>
     @include('inc/header')
 
     <section id="dashboard" :class="{md: open,xs: !open}">
