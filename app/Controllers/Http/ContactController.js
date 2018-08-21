@@ -66,6 +66,11 @@ class ContactController {
             response.redirect('back')
         }
     }
+
+    async discord({ response }) {response.redirect('https://discordapp.com/invite/p4uzTsf')}
+    async twitter({ response }) {response.redirect('https://twitter.com/DraftMan_Dev')}
+    async github({ response }) {response.redirect('https://github.com/DraftProducts')}
+    async facebook({ response }) {response.redirect('https://www.facebook.com/nicovanaarsen')}
 }
 
 module.exports = ContactController
