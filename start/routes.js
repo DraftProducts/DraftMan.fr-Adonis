@@ -25,7 +25,10 @@ Route.get('/', 'BlogController.accueil')
 
 Route.on('a-propos').render('a-propos')
 
-Route.on('discord').render('discord')
+Route.get('discord','ContactController.discord')
+Route.get('twitter','ContactController.twitter')
+Route.get('github','ContactController.github')
+Route.get('facebook','ContactController.facebook')
 
 Route.get('discord/login', 'ProfilController.discordLogin')
 
@@ -49,7 +52,6 @@ Route.post('search', 'SearchController.search')
  */
 
 Route.get('blog', 'BlogController.index')
-Route.get('blog/list', 'BlogController.list')
 Route.get('blog/:id-:link', 'BlogController.show')
 Route.post('blog/:id/comment', 'BlogController.comment')
 
