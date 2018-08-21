@@ -8,6 +8,18 @@ document.querySelector('#mobile-nav-button').addEventListener('click', a => {
     document.querySelector('.cache').classList.remove('active')
 });
 window.addEventListener('DOMContentLoaded', function () {
+	[...document.getElementsByTagName('a')].forEach(link => {
+		if(link.href != "javascript:void(0)"){
+			link.addEventListener('click',function(event){
+					event.preventDefault();
+					document.getElementById('preloader').classList.remove('none')
+					document.getElementById('preloader').classList.remove('hidden')
+					setTimeout(() => {
+							window.location = link.href
+					}, 250);
+			})
+		}
+});
 var x, i, j, selElmnt, a, b, c;
 	x = document.getElementsByClassName("select-section");
 	for (i = 0; i < x.length; i++) {
