@@ -11,10 +11,10 @@ tmp
 database/development.sqlite
 
 # Users files
-public/uploads/portfolio/
+public/uploads/portfolio
 
-public/uploads/posts/
+public/uploads/posts
 
-public/uploads/projects/
+public/uploads/projects
 
-public/uploads/users/
+public/uploads/users
