@@ -70,7 +70,7 @@
                     @endif
                     @if(auth.user.role >= 2)
                         <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open">Ecrire un article</span></a>
-                        {{--  <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open">Upload</span></a>  --}}
+                        <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open">Upload</span></a>
                     @endif
                     @if(auth.user.role === 1000)
                         <a class="{{request.url().startsWith('/admin/clients') ? 'active': ''}}" href="/admin/clients"><i class="icon-group"></i><span v-if="open">Clients</span></a>

@@ -23,13 +23,15 @@
 @section('content')
 <div class="upload"> 
 
-<form method="POST" class="dropzone" id="fileUploader" action="/me/upload" enctype="multipart/form-data">
+<form method="POST" class="dropzone" id="fileUploader" action="{{route('BackofficeController.uploadFile')}}" enctype="multipart/form-data">
     <div class="fallback">
         <input type="file" name="file" id="file">
     </div>
     {{ csrfField() }}
 </form>
+<div id="links">
 
+</div>
 </div>
 @endsection
 
@@ -37,7 +39,11 @@
     {{script('/js/dropzone.min')}}
     <script>
         Dropzone.options.fileUploader = {
-            paramName: 'file'
+            renameFile: function(file){
+                const name = new Date().getTime()+ '.' + file.name.split('.').pop();
+                document.getElementById('links').innerHTML += '<a href="/uploads/files/'+name+'" target="blank">'+file.name+'</a>';
+                return name;
+            }
         }
     </script>
 @endsection
