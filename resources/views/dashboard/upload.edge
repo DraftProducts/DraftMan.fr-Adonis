@@ -16,9 +16,28 @@
     <meta property="og:url" content="https://www.draftman.fr/admin/upload">
 @endsection
 
+@section('css')
+{{style('/css/dropzone.min')}}
+@endsection
+
 @section('content')
-<div class="message"> 
-    <h1>Bienvenue {{auth.user.username}} sur votre panel d'upload de DraftMan.fr !</h1>
-    <p>Cette page est encore en développement.</p>
+<div class="upload"> 
+
+<form method="POST" class="dropzone" id="fileUploader" action="/me/upload" enctype="multipart/form-data">
+    <div class="fallback">
+        <input type="file" name="file" id="file">
+    </div>
+    {{ csrfField() }}
+</form>
+
 </div>
+@endsection
+
+@section('js')
+    {{script('/js/dropzone.min')}}
+    <script>
+        Dropzone.options.fileUploader = {
+            paramName: 'file'
+        }
+    </script>
 @endsection
