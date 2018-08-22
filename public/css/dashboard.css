@@ -1115,6 +1115,24 @@ textarea.textarea {
   border: 1px solid #575757
 }
 
+#dashboard .upload #links{
+  border: 2px solid rgba(0,0,0,0.3);
+  background: white;
+  padding: 20px 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard .upload #links a{
+  text-decoration: none;
+    color: #cd6e57;
+    margin-bottom: 15px;
+}
+
+#dashboard .upload #links a:last-child{
+  margin: 0;
+}
 
 
 
