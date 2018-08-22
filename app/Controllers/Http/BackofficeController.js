@@ -1,6 +1,7 @@
 'use strict'
 
 const Comment = use('App/Models/Comment')
+const Helpers = use('Helpers')
 const Post = use('App/Models/Post')
 
 class BackofficeController {
@@ -20,6 +21,20 @@ class BackofficeController {
     const comment = await Comment.find(params.id)
     await comment.delete()
     response.redirect('back')
+  }
+
+  async uploadFile({response}) {
+    const file = request.file('file', {
+      size: '10mb',
+      allowedExtentions: ['png','jpg','ai','jpeg','gif','svg','psd','txt']
+    })
+    await file.move(Helpers.publicPath('/uploads/files'), {name: `${new Date().getTime()}.${file.subtype}`})
+    if(!file.moved()){
+      response.badRequest({error: file.errors()})
+      return
+    }
+
+    response.ok({message: 'Le fichier a bien été upload'})
   }
 }
 
