@@ -23,12 +23,12 @@ class BackofficeController {
     response.redirect('back')
   }
 
-  async uploadFile({response}) {
+  async uploadFile({response, request}) {
     const file = request.file('file', {
       size: '10mb',
       allowedExtentions: ['png','jpg','ai','jpeg','gif','svg','psd','txt']
     })
-    await file.move(Helpers.publicPath('/uploads/files'), {name: `${new Date().getTime()}.${file.subtype}`})
+    await file.move(Helpers.publicPath('/uploads/files'))
     if(!file.moved()){
       response.badRequest({error: file.errors()})
       return
