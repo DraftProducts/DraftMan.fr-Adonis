@@ -130,7 +130,8 @@ Route.group(() => {
 
     Route.get('blog/delete/:id-:url', 'BlogController.delete')
     
-    Route.on('me/upload').render('dahsboard.upload')
+    Route.on('me/upload').render('dashboard.upload')
+    Route.post('me/upload','BackofficeController.uploadFile')
 }).middleware(['auth','writer']);
 
 Route.group(() => {
