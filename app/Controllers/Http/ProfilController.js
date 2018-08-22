@@ -36,7 +36,7 @@ class ProfilController {
 
     const image = request.file('image', {
       types: ['image'],
-      size: '2mb'
+      size: '10mb'
     })
 
     const messages = {
@@ -75,6 +75,9 @@ class ProfilController {
       const img = `${auth.user.id}.${new Date().getTime()}.${image.subtype}`;
       await image.move(Helpers.publicPath('/uploads/users'), {name: img})
       infos.profil =  `/uploads/users/${img}`
+      if(!image.moved()){
+        response.badRequest({error: file.errors()})
+      }
     }
 
     await User.query().where('id', auth.user.id).update(infos)
