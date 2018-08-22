@@ -16,7 +16,7 @@ class BlogController {
     // destroy = Détruire ton post
 
     async accueil({ view }){
-        const posts = (await Post.query().whereNotNull('published_at').limit(3).fetch()).toJSON();
+        const posts = (await Post.query().whereNotNull('published_at').whereNull('delete').limit(3).fetch()).toJSON();
         return view.render('index', {posts})
     }
     async newsletter({ request, session, response }){
@@ -178,7 +178,7 @@ class BlogController {
     }
 
     async articles({view}) {
-        const articles = (await Post.query().with('author').fetch()).toJSON()
+        const articles = (await Post.query().whereNull('delete').with('author').fetch()).toJSON()
         return view.render('blog.admin.articles',{articles})
     }
 
