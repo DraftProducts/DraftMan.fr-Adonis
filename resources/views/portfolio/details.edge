@@ -12,12 +12,8 @@
     <meta name="twitter:description" content="{{project.description}}">
 
     {{--  Link  --}}
-    <link rel="canonical" href="https://www.draftman.fr/{{project.id}}" />
-    <meta property="og:url" content="https://www.draftman.fr/{{project.id}}">
-@endsection
-
-@section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{project.details.typographie1}}|{{project.details.typographie2}}">
+    <link rel="canonical" href="https://www.draftman.fr/{{project.id}}-{{project.details.url}}" />
+    <meta property="og:url" content="https://www.draftman.fr/{{project.id}}-{{project.details.url}}">
 @endsection
 
 @section('content')
@@ -26,30 +22,39 @@
     <div class="corps">
     	<div class="item-content">
             <div class="top-content">
-                <h2>{{project.name}}</h2>
+                <h2>Enjoycandy</h2>
                 <div class="infos">
-                    <li>
-                        <i class="icon-user"></i>
-                        <span>{{ project.type }}</span>
-                    </li>
-                    <li>
-                        <i class="icon-calender"></i>
-                        <span>{{date(project.published_at)}}</span>
-                    </li>
+                    <li><i class="icon-user"></i><span>Projet</span></li>
+                    <li><i class="icon-calender"></i><span>20/12/2016</span></li>
                 </div>
             </div>
-            <div class="logo" style="background-image: url(/uploads/portfolio/{{project.details.logo}});"></div>
-            <section id="post-body" class="portfolio">
-                <p>{{project.details.presentation}}</p>
+            <div class="text">
+                <section class="post-body portfolio">
+                    {{{ markdown(project.content) }}}
+                </section>
+                <div class="logo" style="background-image: url(/images/portfolio/Enjoy%20Candy.jpg);"></div>
+            </div>
+        </div> 
+        <div class="item-content">
+            <h4 class="spe-gra">Spécificités Graphique</h4>
+            <img class="spe-gra" src="/images/portfolio/test.png" alt="">
+        </div>
+        <div class="item-content">
+            <h4 class="spe-gra">Problématique</h4>
+            <section class="post-body">
+                <p>
+                    Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Curabitur blandit mollis lacus. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Vestibulum eu odio.
+                    In consectetuer turpis ut velit. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Etiam iaculis nunc ac metus. Curabitur ullamcorper ultricies nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+                </p>
             </section>
         </div>
         <div class="item-content">
-            <section id="spe-body" class="portfolio">
-                <h4>Spécificités Graphique</h4>
-                <div class="typographies">
-                    <h2 style="font-family:'{{project.details.typographie1}}'">Abc</h5>
-                    <h2 style="font-family:'{{project.details.typographie2}}'">Abc</h5>
-                </div>
+            <h4 class="spe-gra">Description technique</h4>
+            <section class="post-body">
+                <p>
+                    Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Curabitur blandit mollis lacus. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Vestibulum eu odio.
+                    In consectetuer turpis ut velit. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Etiam iaculis nunc ac metus. Curabitur ullamcorper ultricies nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+                </p>
             </section>
         </div>
     </div>
@@ -63,6 +68,9 @@
                     <button type="submit">Go</button>
                 </form>
             </div>
+        </div>
+        <div class="item">
+            <h4>D'autres modules sont à venir</h4>
         </div>
     </div>
 </section>

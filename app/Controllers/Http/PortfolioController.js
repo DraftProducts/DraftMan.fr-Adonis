@@ -13,8 +13,8 @@ class PortfolioController {
     }
 
     async show({params, view}){
-        const project = (await Portfolio.query().with('details').where('id',params.id).whereNotNull('published_at').first()).toJSON();
-        return view.render('portfolio.details', {project})
+        // const project = (await Portfolio.query().with('details').where('id',params.id).whereNotNull('published_at').first()).toJSON();
+        return view.render('portfolio.details')
     }
 
     async create({view}){
