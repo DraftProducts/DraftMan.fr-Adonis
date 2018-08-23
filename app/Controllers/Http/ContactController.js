@@ -70,7 +70,11 @@ class ContactController {
     async discord({ response }) {response.redirect('https://discordapp.com/invite/p4uzTsf')}
     async twitter({ response }) {response.redirect('https://twitter.com/DraftMan_Dev')}
     async github({ response }) {response.redirect('https://github.com/DraftProducts')}
+    async gitlab({ response }) {response.redirect('https://gitlab.com/DraftMan')}
     async facebook({ response }) {response.redirect('https://www.facebook.com/nicovanaarsen')}
+    async paypal({ response }) {response.redirect('https://www.paypal.me/draftproducts')}
+    async google_plus({ response }) {response.redirect('https://plus.google.com/+DraftMan')}
+    async patreon({ response }) {response.redirect('https://www.patreon.com/draftman_dev')}
 }
 
 module.exports = ContactController
