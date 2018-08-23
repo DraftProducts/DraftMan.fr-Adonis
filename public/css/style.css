@@ -2746,7 +2746,6 @@ input[type="text"]:required:after {
         z-index: 1001;
         height: 66px;
         text-align: center;
-        position: relative;
     }
 
     header>div {
@@ -2766,11 +2765,10 @@ input[type="text"]:required:after {
         display: block;
         z-index: 1000;
         position: fixed;
-        top: 0;
+        top: 66px;
         bottom: 0;
         left: 0;
         width: 210px;
-        padding-top: 66px;
         height: calc(100vh - 66px);
         background: #fcfcfc;
         transition: transform .3s;
@@ -2815,7 +2813,7 @@ input[type="text"]:required:after {
     #cache.active {
         z-index: 998;
         position: absolute;
-        top: 0;
+        top: 66px;
         right: 0;
         bottom: 0;
         left: 0;
