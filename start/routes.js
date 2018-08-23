@@ -28,7 +28,11 @@ Route.on('a-propos').render('a-propos')
 Route.get('discord','ContactController.discord')
 Route.get('twitter','ContactController.twitter')
 Route.get('github','ContactController.github')
+Route.get('gitlab','ContactController.gitlab')
 Route.get('facebook','ContactController.facebook')
+Route.get('paypal','ContactController.paypal')
+Route.get('google-plus','ContactController.google_plus')
+Route.get('patreon','ContactController.patreon')
 
 Route.get('discord/login', 'ProfilController.discordLogin')
 
