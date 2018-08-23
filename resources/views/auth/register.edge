@@ -19,11 +19,11 @@
 @section('content')
 <section id="login">
     <div class="corps">
-    	
+
 		<div class="card">
 			<img src="/images/login.png" alt="Administrateur" width="100%"/>
 
-            <h3>Inscription</h3> 
+            <h3>Inscription</h3>
 
             <form method="post" action="/register">
             <div>
@@ -45,8 +45,7 @@
 
             {{ csrfField() }}
 
-            <button type="submit" name="submit" class="waves-effect waves-light btn light-blue">
-                <i class="material-icons left"></i>
+            <button type="submit" name="submit">
                 S'inscrire
             </button>
 
