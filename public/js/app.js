@@ -1,18 +1,19 @@
-const nav_button = document.getElementById('cache')
+const nav_button = document.getElementById('mobile-nav-button')
+const cache = document.getElementById('cache')
 
 nav_button.addEventListener('click', a => {toggleMenu()})
-document.getElementById('cache').addEventListener('click', a => {removeMenu()});
-document.getElementById('cache').addEventListener('mousemove', a => {removeMenu()});
+cache.addEventListener('click', a => {removeMenu()});
+cache.addEventListener('mousemove', a => {removeMenu()});
 
 const toggleMenu = () =>{
   document.getElementById('nav').classList.toggle('open');
   document.getElementById('page').classList.toggle('overflow');
-  document.getElementById('cache').classList.toggle('active')
+  cache.classList.toggle('active')
 }
 const removeMenu = () =>{
   document.getElementById('nav').classList.remove('open');
   document.getElementById('page').classList.remove('overflow');
-  document.getElementById('cache').classList.remove('active');
+  cache.classList.remove('active');
 }
 window.addEventListener('DOMContentLoaded', function () {
 var x, i, j, selElmnt, a, b, c;
