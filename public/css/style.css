@@ -8,7 +8,7 @@
     font-weight: normal;
     font-style: normal;
   }
-  
+
   [class^="icon-"], [class*=" icon-"] {
     font-family: 'draftman' !important;
     font-style: normal;
@@ -121,7 +121,7 @@
   }
   .icon-view-comfy:before {
     content: "\e920";
-  } 
+  }
   .icon-search:before {
     content: "\e921";
   }
@@ -2425,7 +2425,6 @@ input[type="text"]:required:after {
 }
 
 #login {
-    /*float: left;*/
     width: 100%;
 }
 
@@ -2737,6 +2736,9 @@ input[type="text"]:required:after {
         padding-top: 30px;
         font-size: 85.5%;
     }
+    #login .corps {
+      width: 80%;
+    }
 }
 
 @media only screen and (max-width:480px) {
@@ -2894,6 +2896,14 @@ input[type="text"]:required:after {
     .post-body .alert h5 {
         display: block;
     }
+    #login .corps {
+      width: 100%;
+      margin: 0;
+    }
+
+    #login .card {
+        margin: 0;
+      }
 }
 
 @media only screen and (min-width:920px) {
