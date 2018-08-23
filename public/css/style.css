@@ -2769,7 +2769,7 @@ input[type="text"]:required:after {
         bottom: 0;
         left: 0;
         width: 210px;
-        height: 100vh;
+        height: calc(100vh - 66px);
         background: #fcfcfc;
         transition: transform .3s;
         transform: translate3d(-210px, 0, 0);
