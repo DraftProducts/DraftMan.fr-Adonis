@@ -2839,7 +2839,7 @@ input[type="text"]:required:after {
 
     body.overflow {
         overflow-y: hidden;
-        position: relative;
+        position: fixed;
     }
 
     #banner h1 {
