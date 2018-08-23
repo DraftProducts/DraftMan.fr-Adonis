@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const mainInput = document.getElementById('main-input'),
             tags = [];
 
-        let enteredTags = mainInput.value.split(',');
+        let enteredTags = mainInput.value.split(', ');
         if (enteredTags.length > 1) {
             enteredTags.forEach(function (t) {
                 let filteredTag = filterTag(t);
@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         mainInput.addEventListener('input', function () {
-            let enteredTags = mainInput.value.split(',');
+            let enteredTags = mainInput.value.split(', ');
             if (enteredTags.length > 1) {
                 enteredTags.forEach(function (t) {
                     let filteredTag = filterTag(t);
@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', function () {
             tags.forEach(function (t) {
                 tagsList.push(t.text);
             });
-            document.getElementById("hidden-input").value = tagsList.join(',');
+            document.getElementById("hidden-input").value = tagsList.join(', ');
         }
 
         function filterTag(tag) {
