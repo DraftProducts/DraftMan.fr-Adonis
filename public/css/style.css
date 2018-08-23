@@ -2765,7 +2765,7 @@ input[type="text"]:required:after {
         display: block;
         z-index: 1000;
         position: fixed;
-        top: 66px;
+        top: 0;
         bottom: 0;
         left: 0;
         width: 210px;
@@ -2813,7 +2813,7 @@ input[type="text"]:required:after {
     #cache.active {
         z-index: 998;
         position: absolute;
-        top: 66px;
+        top: 0;
         right: 0;
         bottom: 0;
         left: 0;
