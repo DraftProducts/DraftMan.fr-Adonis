@@ -1,12 +1,19 @@
-document.querySelector('#mobile-nav-button').addEventListener('click', a => {
-    document.querySelector('#nav').classList.toggle('open');
-    document.querySelector('#page').classList.toggle('overflow');
-    document.querySelector('.cache').classList.toggle('active')
-}), document.querySelector('.cache').addEventListener('click', a => {
-    document.querySelector('#nav').classList.remove('open');
-    document.querySelector('#page').classList.remove('overflow');
-    document.querySelector('.cache').classList.remove('active')
-});
+const nav_button = document.getElementById('cache')
+
+nav_button.addEventListener('click', a => {toggleMenu()})
+document.getElementById('cache').addEventListener('click', a => {removeMenu()});
+document.getElementById('cache').addEventListener('mousemove', a => {removeMenu()});
+
+const toggleMenu = () =>{
+  document.getElementById('nav').classList.toggle('open');
+  document.getElementById('page').classList.toggle('overflow');
+  document.getElementById('cache').classList.toggle('active')
+}
+const removeMenu = () =>{
+  document.getElementById('nav').classList.remove('open');
+  document.getElementById('page').classList.remove('overflow');
+  document.getElementById('cache').classList.remove('active');
+}
 window.addEventListener('DOMContentLoaded', function () {
 var x, i, j, selElmnt, a, b, c;
 	x = document.getElementsByClassName("select-section");
