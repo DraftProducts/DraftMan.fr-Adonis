@@ -2810,7 +2810,7 @@ input[type="text"]:required:after {
         font-size: 35px;
     }
 
-    .cache.active {
+    #cache.active {
         z-index: 998;
         position: absolute;
         top: 66px;
