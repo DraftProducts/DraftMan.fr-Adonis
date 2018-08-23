@@ -1,0 +1,22 @@
+/* TEAM */
+                            
+Administator: DraftMan.                 
+Site: https://draftman.fr                    
+Twitter: @DraftMan_Dev.
+Contact: contact@draftman.fr
+Location: Montpellier France.
+
+
+/* THANKS */
+					
+Name: name or url
+
+                            
+/* SITE */
+
+Site Name: DraftMan.fr
+Site URL: http://draftman.fr    
+Last update: 2018/08/23               
+Standards: HTML5, CSS3, JS 2015, SASS              
+Components: AdonisJS, JsColor, ViewerJs, TypedJs, SimpleMDE.                
+IDE: VSCode, Adode XD, Photoshop
