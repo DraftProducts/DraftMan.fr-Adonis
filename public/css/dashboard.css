@@ -154,6 +154,10 @@
   color: #7E7E7E;
   transition: 0.5s;
 }
+#dashboard #menu ul a.logout{
+  display: none;
+}
+
 
 #dashboard.xs #menu ul a {
   justify-content: center
@@ -1451,7 +1455,7 @@ textarea.textarea {
   #dashboard #menu .username{
     display: none;
   }
-  
+
   #dashboard #menu .user {
     width: 60px!important;
     height: 60px!important;
@@ -1514,7 +1518,7 @@ textarea.textarea {
   #dashboard #menu .username{
     display: none;
   }
-  
+
   #dashboard #menu .user {
     width: 50px!important;
     height: 50px!important;
@@ -1558,7 +1562,7 @@ textarea.textarea {
 }
 
 @media only screen and (max-width:480px) {
-  #dashboard #discord .image {
+  #dashboard #discord .image,#dashboard #bar {
     display: none;
   }
   #dashboard #discord .content {
@@ -1569,5 +1573,8 @@ textarea.textarea {
   }
   #dashboard .preview {
     padding: 20px;
+  }
+  #dashboard #menu ul a.logout{
+    display: flex;
   }
 }
