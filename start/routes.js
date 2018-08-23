@@ -19,7 +19,7 @@ const Route = use('Route')
  |--------------------------------------------------------------------------
  | Static pages
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.get('/', 'BlogController.accueil')
 
@@ -44,7 +44,7 @@ Route.on('draftbot').render('draftbot')
  |--------------------------------------------------------------------------
  | Search
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.get('search', 'SearchController.index')
 Route.post('search', 'SearchController.search')
@@ -53,7 +53,7 @@ Route.post('search', 'SearchController.search')
  |--------------------------------------------------------------------------
  | Blog pages
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.get('blog', 'BlogController.index')
 Route.get('blog/:id-:link', 'BlogController.show')
@@ -65,7 +65,7 @@ Route.post('newsletter', 'BlogController.newsletter')
  |--------------------------------------------------------------------------
  | Portfolio pages
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.get('portfolio', 'PortfolioController.index')
 Route.get('portfolio/:id-:url', 'PortfolioController.show')
@@ -74,7 +74,7 @@ Route.get('portfolio/:id-:url', 'PortfolioController.show')
  |--------------------------------------------------------------------------
  | Contact pages
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.on('contact').render('contact')
 Route.post('contact', 'ContactController.send')
@@ -83,7 +83,7 @@ Route.post('contact', 'ContactController.send')
  |--------------------------------------------------------------------------
  | Admin pages
  |--------------------------------------------------------------------------
- */
+ */ 
 
 Route.group(() => {
     Route.on('login').render('auth.login')
