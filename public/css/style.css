@@ -2903,6 +2903,7 @@ input[type="text"]:required:after {
 
     #login .card {
         margin: 0;
+        width: 100%
       }
 }
 
