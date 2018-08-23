@@ -31,7 +31,7 @@
     <meta name="generator" content="VSCode">
 
     @!section('seo')
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700,900">
 
     {{ style('css/style')}}
@@ -69,13 +69,14 @@
                         <a class="{{request.url().startsWith('/admin/portfolio') ? 'active': ''}}" href="/admin/portfolio"><i class="icon-developer-board"></i><span v-if="open">Portfolio</span></a>
                         {{--  <a class="{{request.url() === '/admin/newsletter' ? 'active': ''}}" href="/admin/newsletter"><i class="icon-fiber-new"></i><span v-if="open">NewsLetter</span></a>  --}}
                     @endif
+                    <a class="logout" href="{{ route('AuthController.logout') }}"><i class="icon-slideshow"></a>
                 </ul>
             </div>
         </nav>
         <div class="corps" ref="corps">
             <div id="bar">
                 <div id="burger" @click="toggleMenu()"><span class="inner"></span></div>
-            
+
                 <div @click="toggleProfil()" id="user">
                     <div class="profil" style="background-image: url({{getProfilImage(auth.user)}})"></div>
                     <span>{{auth.user.username}}<i class="icon-arrow-down"></i></span>
@@ -85,7 +86,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="content">
                 @!section('content')
             </div>
@@ -98,6 +99,6 @@
     {{ script('js/app') }}
     {{ script('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js') }}
     {{ script('/js/dashboard') }}
-    
+
 </body>
 </html>
