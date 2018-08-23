@@ -66,7 +66,7 @@
   <body>
     <container>
       <row id="header">
-        <img src="https://draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
+        <img src="https://www.www.draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
       </row>
       <row id="date">
         <p>Vous avez reçu un message le ' . date( 'd/m/Y' ) . ' à ' . date( 'H:i:s' ) . '</p>
@@ -82,10 +82,10 @@
       <row id="footer">
         <column large="4" small="12">
           <h3>Navigation</h3>
-          <a href="https://draftman.fr">Accueil</a>
-          <a href="https://draftman.fr/a-propos">A-Propos</a>
-          <a href="https://draftman.fr/portfolio">Portfolio</a>
-          <a href="https://draftman.fr/contact">Contact</a>
+          <a href="https://www.draftman.fr">Accueil</a>
+          <a href="https://www.draftman.fr/a-propos">A-Propos</a>
+          <a href="https://www.draftman.fr/portfolio">Portfolio</a>
+          <a href="https://www.draftman.fr/contact">Contact</a>
         </column>
         <column large="4" small="12">
           <h3>Social</h3>
@@ -102,7 +102,7 @@
         </column>
       </row>
       <row id="copyright">
-        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https://draftman.fr">DraftMan</a></p>
+        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https://www.draftman.fr">DraftMan</a></p>
       </row>
     </container>
   </body>

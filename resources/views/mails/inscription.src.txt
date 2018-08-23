@@ -16,7 +16,7 @@
         padding: 10px 20px;
       }
       #message{
-        background-image: url(https://draftman.fr/images/banner.jpg)
+        background-image: url(https://www.draftman.fr/images/banner.jpg)
         background-size: cover;
         background-position-y: 50%;
         background-repeat: no-repeat;
@@ -95,20 +95,20 @@
   <body>
     <container>
       <row id="header">
-        <img src="https://draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
+        <img src="https://www.draftman.fr/images/headerlogo.png" alt="DraftMan Logo" width="200"/>
       </row>
       <row id="message">
         <h1>Bienvenue sur DraftMan.fr</h1>
         <p>Vous venez de vous inscrire sur DraftMan.fr</p>
-        <a href="https://draftman.fr/login">Se connecter</a>
+        <a href="https://www.draftman.fr/login">Se connecter</a>
       </row>
       <row id="footer">
         <column large="4" small="12">
           <h3>Navigation</h3>
-          <a href="https://draftman.fr">Accueil</a>
-          <a href="https://draftman.fr/a-propos">A-Propos</a>
-          <a href="https://draftman.fr/portfolio">Portfolio</a>
-          <a href="https://draftman.fr/contact">Contact</a>
+          <a href="https://www.draftman.fr">Accueil</a>
+          <a href="https://www.draftman.fr/a-propos">A-Propos</a>
+          <a href="https://www.draftman.fr/portfolio">Portfolio</a>
+          <a href="https://www.draftman.fr/contact">Contact</a>
         </column>
         <column large="4" small="12">
           <h3>Social</h3>
@@ -125,7 +125,7 @@
         </column>
       </row>
       <row id="copyright">
-        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https://draftman.fr">DraftMan</a></p>
+        <p>Copyright 2018 © - Développé avec <span>♥</span> par <a href="https:www.draftman.fr">DraftMan</a></p>
       </row>
     </container>
   </body>
