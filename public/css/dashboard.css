@@ -1563,7 +1563,7 @@ textarea.textarea {
 
 @media only screen and (max-width:480px) {
   #dashboard #discord .image,#dashboard #bar {
-    display: none;
+    display: none!important;
   }
   #dashboard #discord .content {
     padding-left: 0;
