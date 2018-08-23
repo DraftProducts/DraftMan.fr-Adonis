@@ -2,4 +2,4 @@ User-agent : *
 Disallow : /admin/
 Disallow : /me/
 
-Sitemap : https://draftman.fr/sitemap.xml
+Sitemap : https://www.draftman.fr/sitemap.xml
