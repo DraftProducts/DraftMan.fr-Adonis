@@ -2746,6 +2746,7 @@ input[type="text"]:required:after {
         z-index: 1001;
         height: 66px;
         text-align: center;
+        position: relative;
     }
 
     header>div {
@@ -2769,6 +2770,7 @@ input[type="text"]:required:after {
         bottom: 0;
         left: 0;
         width: 210px;
+        padding-top: 66px;
         height: calc(100vh - 66px);
         background: #fcfcfc;
         transition: transform .3s;
