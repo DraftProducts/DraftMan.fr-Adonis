@@ -9,7 +9,7 @@ class ContactController {
     async send({ request, session, response,auth }) {
 
         const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
-        
+
         if(auth.user){
             data.author = auth.user.username,
             data.email = auth.user.email,
@@ -32,7 +32,7 @@ class ContactController {
           message: 'required',
           commentconnu: 'required',
         }
-    
+
         const validation = await validate(data, rules, messages)
 
         if (validation.fails()) {
@@ -44,9 +44,9 @@ class ContactController {
         }
 
         data.date = moment().format('LLLL')
-    
+
         const email_to = 'nicovanaarsen@gmail.com';
-        
+
         try {
             await Mail.send('mails.contact', data, (message) => {
                 message
@@ -56,13 +56,13 @@ class ContactController {
                 .replyTo('contact@draftman.fr', 'DraftMan')
             })
             session.flash({sent: 'Mail envoyé avec succès'})
-        
+
             response.redirect('back')
         } catch (error) {
             console.log('contact form: '+error.errors)
 
             session.flash({error: 'Une erreur est survenu, veuillez nous excusez !'})
-        
+
             response.redirect('back')
         }
     }
@@ -75,6 +75,8 @@ class ContactController {
     async paypal({ response }) {response.redirect('https://www.paypal.me/draftproducts')}
     async google_plus({ response }) {response.redirect('https://plus.google.com/+DraftMan')}
     async patreon({ response }) {response.redirect('https://www.patreon.com/draftman_dev')}
+
+    async invite({ response }) {response.redirect('https://discordapp.com/oauth2/authorize?client_id=318312854816161792&scope=bot&permissions=506981502')}
 }
 
 module.exports = ContactController

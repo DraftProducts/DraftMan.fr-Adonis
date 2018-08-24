@@ -19,7 +19,7 @@ const Route = use('Route')
  |--------------------------------------------------------------------------
  | Static pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('/', 'BlogController.accueil')
 
@@ -34,6 +34,10 @@ Route.get('paypal','ContactController.paypal')
 Route.get('google-plus','ContactController.google_plus')
 Route.get('patreon','ContactController.patreon')
 
+Route.get('draftbot/invite','ContactController.invite')
+
+Route.on('draftbot').render('draftbot')
+
 Route.get('discord/login', 'ProfilController.discordLogin')
 
 Route.on('success').render('success')
@@ -44,7 +48,7 @@ Route.on('draftbot').render('draftbot')
  |--------------------------------------------------------------------------
  | Search
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('search', 'SearchController.index')
 Route.post('search', 'SearchController.search')
@@ -53,7 +57,7 @@ Route.post('search', 'SearchController.search')
  |--------------------------------------------------------------------------
  | Blog pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('blog', 'BlogController.index')
 Route.get('blog/:id-:link', 'BlogController.show')
@@ -65,7 +69,7 @@ Route.post('newsletter', 'BlogController.newsletter')
  |--------------------------------------------------------------------------
  | Portfolio pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.get('portfolio', 'PortfolioController.index')
 Route.get('portfolio/:id-:url', 'PortfolioController.show')
@@ -74,7 +78,7 @@ Route.get('portfolio/:id-:url', 'PortfolioController.show')
  |--------------------------------------------------------------------------
  | Contact pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.on('contact').render('contact')
 Route.post('contact', 'ContactController.send')
@@ -83,7 +87,7 @@ Route.post('contact', 'ContactController.send')
  |--------------------------------------------------------------------------
  | Admin pages
  |--------------------------------------------------------------------------
- */ 
+ */
 
 Route.group(() => {
     Route.on('login').render('auth.login')
@@ -133,7 +137,7 @@ Route.group(() => {
     Route.post('me/write/:id-:url', 'BlogController.update')
 
     Route.get('blog/delete/:id-:url', 'BlogController.delete')
-    
+
     Route.on('me/upload').render('dashboard.upload')
     Route.post('me/upload','BackofficeController.uploadFile')
 }).middleware(['auth','writer']);
