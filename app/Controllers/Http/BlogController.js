@@ -33,9 +33,9 @@ class BlogController {
               .flashAll()
               return response.redirect("back")
         }
-        
+
         await Emails.create({ data })
-        
+
         session.flash({newsletter: 'Vous êtes bien inscrit à la newsletter'})
 
         return response.redirect("back")
@@ -62,7 +62,7 @@ class BlogController {
           types: ['image'],
           size: '2mb'
         })
-    
+
         const messages = {
           'title.required': 'Veuillez ajouter un titre à votre article.',
           'title.unique': 'Ce titre est déjà utilisé.',
@@ -72,7 +72,7 @@ class BlogController {
           'tags.required': 'Veuillez ajouter les mots clés pour article pour le SEO.',
           'content.required': 'Veuillez ajouter un contenu à votre article.'
         }
-    
+
         const rules = {
           title: 'required|unique:posts',
           url: 'required|unique:posts',
@@ -80,25 +80,25 @@ class BlogController {
           tags: 'required',
           content: 'required'
         }
-    
+
         const validation = await validate(data, rules, messages)
-    
+
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
             .flashAll()
-    
+
           return response.redirect('back')
         }
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
-        
+
         data.author_id = auth.user.id
 
         data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
         await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
 
         await Post.create(data)
-        
+
         session.flash({
           article_posted: 'Article sauvegardé'
         })
@@ -117,7 +117,7 @@ class BlogController {
           types: ['image'],
           size: '2mb'
         })
-    
+
         const messages = {
           'title.required': 'Veuillez ajouter un titre à votre article.',
           'title.unique': 'Ce titre est déjà utilisé.',
@@ -128,7 +128,7 @@ class BlogController {
           'content.required': 'Veuillez ajouter un contenu à votre article.',
           'image.required': 'Veuillez ajouter une image à votre article.'
         }
-    
+
         const rules = {
           title: 'required|unique:posts',
           url: 'required|unique:posts',
@@ -137,19 +137,19 @@ class BlogController {
           content: 'required',
           image: 'required',
         }
-    
+
         const validation = await validate(data, rules, messages)
-    
+
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
             .flashAll()
-    
+
           return response.redirect('back')
         }
 
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
-        
+
         data.author_id = auth.user.id
 
         if(image){
@@ -160,7 +160,7 @@ class BlogController {
         }
 
         await Post.create(data)
-        
+
         session.flash({
           article_posted: 'Article sauvegardé'
         })
@@ -178,7 +178,7 @@ class BlogController {
     }
 
     async articles({view}) {
-        const articles = (await Post.query().whereNull('delete').with('author').fetch()).toJSON()
+        const articles = (await Post.query().with('author').fetch()).toJSON()
         return view.render('blog.admin.articles',{articles})
     }
 
@@ -203,7 +203,7 @@ class BlogController {
         const data = request.only(['name', 'email', 'website','twitter','github','linkedin','content','parent_id'])
         data.post_id = params.id
         data.seen = 0
-        
+
         if(!data.parent_id) data.parent_id = 0
 
         if(auth.user){
