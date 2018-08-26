@@ -47,16 +47,20 @@ const dashboard = new Vue({
             });
             const filesSection = document.querySelectorAll(".visu")
             filesSection.forEach(filesSec => {
+
                 const file = filesSec.getElementsByClassName('file_input')[0]
-                console.log('ici:' +file)
                 const preview = filesSec.getElementsByClassName('image')[0]
                 file.addEventListener('change', () => {
+
                     const reader = new FileReader();
                     reader.addEventListener("load", () => {
                         preview.style.backgroundImage = `url('${reader.result}')`
                     }, false);
-        
+
                     if (file.files[0]) reader.readAsDataURL(file.files[0]);
+                    if(filesSec.classList.contains('upload')){
+                      filesSec.parentElement.submit()
+                    }
                 });
             });
         },
