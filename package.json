@@ -26,6 +26,7 @@
     "@adonisjs/ignitor": "^2.0.6",
     "@adonisjs/lucid": "^5.0.4",
     "@adonisjs/mail": "^3.0.6",
+    "@adonisjs/persona": "^1.0.5",
     "@adonisjs/session": "^1.0.25",
     "@adonisjs/shield": "^1.0.6",
     "@adonisjs/validator": "^5.0.3",

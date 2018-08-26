@@ -18,9 +18,10 @@ class UserSchema extends Schema {
       table.string('discord_email', 60).defaultTo('')
       table.string('discord_image').defaultTo('')
       table.string('profil')
-      table.integer('role')
+      table.integer('role').defaultTo(0)
       table.integer('client')
       table.integer('project_id')
+      table.string('account_status').defaultsTo('pending')
       table.timestamps()
     })
   }

@@ -2458,9 +2458,9 @@ input[type="text"]:required:after {
 }
 
 #login button {
-    display: block;
-    margin: 20px auto;
-    padding: 11px 24px;
+    margin: 3px auto 20px;
+    padding: 9px 24px;
+    width: 100%;
     border: none;
     text-transform: uppercase;
     line-height: 24px;
@@ -2482,6 +2482,15 @@ input[type="text"]:required:after {
     margin-right: 15px;
     font-size: 20.8px;
     line-height: inherit;
+}
+
+#login a.password{
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 10px 7px;
+  font-size: 14px;
+  text-decoration: none;
+    color: #cd6e57;
 }
 
 #error div {

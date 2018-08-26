@@ -40,6 +40,8 @@ Route.on('draftbot').render('draftbot')
 
 Route.get('discord/login', 'ProfilController.discordLogin')
 
+Route.get('verify/:token','AuthController.verify')
+
 Route.on('success').render('success')
 
 Route.on('draftbot').render('draftbot')
@@ -94,8 +96,14 @@ Route.group(() => {
     Route.post('login', 'AuthController.login')
     Route.on('register').render('auth.register')
     Route.post('register', 'AuthController.register')
-}).middleware(['verif']);
 
+    Route.on('login/password').render('auth.password')
+    Route.post('login/password', 'AuthController.forgotPassword')
+
+    Route.get('login/password/change/:token','AuthController.updatePasswordByPage')
+
+}).middleware(['verif']);
+Route.post('login/password/change/:token', 'AuthController.updatePasswordByToken')
 Route.group(() => {
     Route.get('me/client', 'ClientController.client_request')
     Route.post('me/client', 'ClientController.request')
@@ -114,8 +122,9 @@ Route.group(() => {
 
     Route.get('discord/callback', 'ProfilController.discordCallback')
 
-    Route.post('me/profil/compte', 'ProfilController.storeBasic')
-    Route.post('me/profil/infos', 'ProfilController.storeInfos')
+    Route.post('me/profil/compte', 'ProfilController.updateProfil')
+    Route.post('me/profil/image', 'ProfilController.uploadProfil')
+    Route.post('me/profil/social', 'ProfilController.updateSocial')
 
     Route.get('logout', 'AuthController.logout')
 }).middleware(['auth']);
