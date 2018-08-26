@@ -101,9 +101,9 @@ Route.group(() => {
     Route.post('login/password', 'AuthController.forgotPassword')
 
     Route.get('login/password/change/:token','AuthController.updatePasswordByPage')
-
+    Route.post('login/password/change/:token', 'AuthController.updatePasswordByToken')
 }).middleware(['verif']);
-Route.post('login/password/change/:token', 'AuthController.updatePasswordByToken')
+
 Route.group(() => {
     Route.get('me/client', 'ClientController.client_request')
     Route.post('me/client', 'ClientController.request')

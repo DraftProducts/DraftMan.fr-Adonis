@@ -60,10 +60,10 @@ class AuthController {
   }
 
   async updatePasswordByPage ({ view,params}) {
-    const token = use('Encryption').base64Decode(params.token)
+    const token = params.token
     return view.render('auth.new-password', {token})
   }
-  async updatePasswordByToken ({ request, params,auth }) {
+  async updatePasswordByToken ({ request,response, params,auth }) {
     const token = use('Encryption').base64Decode(params.token)
     const payload = request.only(['password', 'password_confirmation'])
 
