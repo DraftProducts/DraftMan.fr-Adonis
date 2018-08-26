@@ -29,27 +29,27 @@ class PortfolioController {
           types: ['image'],
           size: '2mb'
         })
-    
+
         const messages = {
           'name.unique': 'Ce nom est déjà utilisé.',
           'name.required': 'Veuillez donner un nom à cette création',
           'description.required': 'Veuillez donner une description à cette création',
           'type.required': 'Veuillez préciser le type de projet.',
         }
-    
+
         const rules = {
           name: 'required|unique:portfolio',
           description: 'required',
           type: 'required'
         }
-    
+
         const validation = await validate(data, rules, messages)
-    
+
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
             .flashAll()
-    
+
           return response.redirect('back')
         }
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
@@ -58,7 +58,7 @@ class PortfolioController {
         await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
 
         await Portfolio.create(data)
-        
+
         session.flash({
           article_posted: 'Création sauvegardé'
         })
@@ -86,27 +86,27 @@ class PortfolioController {
           types: ['image'],
           size: '2mb'
         })
-    
+
         const messages = {
           'name.unique': 'Ce nom est déjà utilisé.',
           'name.required': 'Veuillez donner un nom à cette création',
           'description.required': 'Veuillez donner une description à cette création',
           'type.required': 'Veuillez préciser le type de projet.',
         }
-    
+
         const rules = {
           name: `required|unique:portfolio,name,id,${params.id}`,
           description: 'required',
           type: 'required'
         }
-    
+
         const validation = await validate(data, rules, messages)
-    
+
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
             .flashAll()
-    
+
           return response.redirect('back')
         }
 
@@ -118,7 +118,7 @@ class PortfolioController {
         const portfolio = await Portfolio.find(params.id)
         portfolio.merge(data)
         await portfolio.save()
-        
+
         session.flash({
           article_posted: 'Création sauvegardé'
         })
@@ -136,7 +136,7 @@ class PortfolioController {
             types: ['image'],
             size: '2mb'
         })
-        
+
         const logo = request.file('logo', {
             types: ['image'],
             size: '2mb'
@@ -150,7 +150,7 @@ class PortfolioController {
           'typographie1.required': 'Veuillez indiquer la typographie n°1.',
           'typographie2.required': 'Veuillez indiquer la typographie n°2.',
         }
-    
+
         const rules = {
           name: `required|unique:portfolio,name,id,${params.id}`,
           description: 'required',
@@ -159,14 +159,14 @@ class PortfolioController {
           typographie2: 'required',
           url: 'required',
         }
-    
+
         const validation = await validate(data, rules, messages)
-    
+
         if (validation.fails()) {
           session
             .withErrors(validation.messages())
             .flashAll()
-    
+
           return response.redirect('back')
         }
 
@@ -203,7 +203,7 @@ class PortfolioController {
         const portfolioDetails = await PortfolioDetails.findBy('portfolio_id',params.id)
         portfolioDetails.merge(details)
         await portfolioDetails.save()
-        
+
         session.flash({
           article_posted: 'Création sauvegardé'
         })
@@ -221,9 +221,9 @@ class PortfolioController {
     }
     async decline({params, response}){
         const portfolio = await Portfolio.findOrFail(params.id)
+        const details = await PortfolioDetails.findOrFail(portfolio.portfolio_details_id)
         portfolio.portfolio_details_id = null
         await portfolio.save()
-        const details = await PortfolioDetails.findOrFail(portfolio.portfolio_details_id)
         await details.delete()
         return response.redirect('back')
     }
