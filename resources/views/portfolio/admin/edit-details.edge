@@ -23,12 +23,10 @@
             <input type="text" name="name" id="name" class="input" value="{{old('name',creation.name)}}">
             <label for="name">Nom du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
         <div class="input-container">
             <input type="text" name="url" id="url" class="input" value="{{old('url',creation.url)}}">
             <label for="url">Url du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('url'), hasErrorFor('url')) }}
         <div class="select-section">
             <select name="type">
                 <option value="" {{creation.type === '' ? 'selected': ''}}>Type de projet</option>
@@ -37,7 +35,6 @@
                 <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
             </select>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
         <div class="colors">
             <div class="pickers">
                 <button class="jscolor {valueElement:'color1', onFineChange:'setTextColor(this)',hash:true}"></button>
@@ -59,36 +56,30 @@
             <input type="text" name="typographie1" id="typographie1" class="input" value="{{old('typographie1',creation.details.typographie1)}}">
             <label for="typographie1">Typographie n°1</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('typographie1'), hasErrorFor('typographie1')) }}
         <div class="input-container">
             <input type="text" name="typographie2" id="typographie2" class="input" value="{{old('typographie2',creation.details.typographie2)}}">
             <label for="typographie2">Typographie n°2</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('typographie2'), hasErrorFor('typographie2')) }}
 
         <div class="input-container">
             <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
             <label for="description">Description de la création</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
 
         <div class="input-container">
             <textarea name="presentation" id="presentation" class="input textarea">{{old('presentation',creation.details.presentation)}}</textarea>
             <label for="presentation">Presentation du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('presentation'), hasErrorFor('presentation')) }}
 
         <div class="input-container">
             <textarea name="problematique" id="problematique" class="input textarea">{{old('problematique',creation.details.problematique)}}</textarea>
             <label for="problematique">Problematique du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('problematique'), hasErrorFor('problematique')) }}
 
         <div class="input-container">
             <textarea name="technique" id="technique" class="input textarea">{{old('technique',creation.details.technique)}}</textarea>
             <label for="technique">Description technique du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('technique'), hasErrorFor('technique')) }}
         <div class="compact">
             <div class="item">
                 <div class="article_file visu">
@@ -127,10 +118,7 @@
         </section>
 
         {{ csrfField() }}
-        
-        @if(flashMessage('valid_basic'))
-            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
-        @endif
+
         <div class="buttons">
             <button class="input submit" type="submit">Sauvegarder</button>
             @if(creation.portfolio_details_id !== null)
@@ -147,6 +135,21 @@
         @endeach
     </div>
 </div>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('url'), hasErrorFor('url')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('type'), hasErrorFor('type')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('typographie1'), hasErrorFor('typographie1')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('typographie2'), hasErrorFor('typographie2')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('presentation'), hasErrorFor('presentation')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('problematique'), hasErrorFor('problematique')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('technique'), hasErrorFor('technique')) }}
+@if(flashMessage('saved'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('saved') }}</div></div>
+@endif
 @endsection
 
 @section('js')

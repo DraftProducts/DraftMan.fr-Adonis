@@ -56,12 +56,6 @@
     <div class="infos">
         @if(link)
             <a class="payment_button" href="{{link}}">Procéder au paiement</a>
-            @if(flashMessage('success'))
-                <div class="success-card">{{ flashMessage('success') }}</div>
-            @endif
-            @if(flashMessage('error'))
-                <div class="error-card">{{ flashMessage('error') }}</div>
-            @endif
         @else
             <a class="payment_button" href="#">Paiement non définit</a>
         @endif
@@ -107,4 +101,13 @@
         });
     })
 </script>
-@endsection 
+@endsection
+
+@section('notifs')
+@if(flashMessage('success'))
+<div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('success') }}</div></div>
+@endif
+@if(flashMessage('error'))
+<div class="notif error"><div class="notif_icon"></div><div class="content">{{ flashMessage('error') }}</div></div>
+@endif
+@endsection

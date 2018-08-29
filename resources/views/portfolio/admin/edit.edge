@@ -23,8 +23,6 @@
             <input type="text" name="name" id="name" class="input" value="{{old('name',creation.name)}}">
             <label for="name">Nom du projet</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
-
         <div class="select-section">
             <select name="type">
                 <option value="" {{creation.type === '' ? 'selected': ''}}>Type de projet</option>
@@ -33,14 +31,10 @@
                 <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
             </select>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
-
         <div class="input-container">
             <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
             <label for="description">Description de la création</label>
-        </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
-        <div class="compact">
+        </div>        <div class="compact">
             <div class="item">
                 <div class="article_file visu">
                     <input type="file" name="illustration" class="file_input">
@@ -69,13 +63,8 @@
                 </section>
             </div>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('image'), hasErrorFor('image')) }}
-
         {{ csrfField() }}
-        
-        @if(flashMessage('valid_basic'))
-            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
-        @endif
+
         <div class="buttons">
             <button class="input submit" type="submit">Sauvegarder</button>
             @if(creation.portfolio_details_id === null)
@@ -92,4 +81,14 @@
         @endeach
     </div>
 </div>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('type'), hasErrorFor('type')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('image'), hasErrorFor('image')) }}
+@if(flashMessage('saved'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('saved') }}</div></div>
+@endif
 @endsection

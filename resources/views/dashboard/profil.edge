@@ -35,26 +35,19 @@
           <input type="text" name="username" id="username" class="input" value="{{auth.user.username}}">
           <label for="username">Pseudo</label>
       </div>
-      {{ elIf('<div class="error-card">$self</div>', getErrorFor('username'), hasErrorFor('username')) }}
       <div class="input-container">
           <input type="email" name="email" id="email" class="input" value="{{auth.user.email}}">
           <label for="email">Adresse email</label>
       </div>
-      {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
       <div class="input-container">
         <input type="password" name="old_password" id="old_password" class="input">
         <label for="old_password">Ancien mot de passe</label>
      </div>
-     {{ elIf('<div class="error-card">$self</div>', getErrorFor('old_password'), hasErrorFor('old_password')) }}
       <div class="input-container">
           <input type="password" name="password" id="password" class="input">
           <label for="password">Nouveau Mot de passe</label>
       </div>
-      {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
       {{ csrfField() }}
-      @if(flashMessage('valid_basic'))
-          <div class="success-card">{{ flashMessage('valid_basic') }}</div>
-      @endif
       <button class="input submit" type="submit">Charger les informations</button>
   </form>
   </div>
@@ -98,10 +91,20 @@
             <label for="linkedin">Linkedin</label>
         </div>
         {{ csrfField() }}
-        @if(flashMessage('valid_infos'))
-            <div class="success-card">{{ flashMessage('valid_infos') }}</div>
-        @endif
         <button class="input submit" type="submit">Charger les informations</button>
     </form>
 </div>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('username'), hasErrorFor('username')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('email'), hasErrorFor('email')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('old_password'), hasErrorFor('old_password')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('password'), hasErrorFor('password')) }}
+@if(flashMessage('valid_infos'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_infos') }}</div></div>
+@endif
+@if(flashMessage('valid_basic'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_basic') }}</div></div>
+@endif
 @endsection

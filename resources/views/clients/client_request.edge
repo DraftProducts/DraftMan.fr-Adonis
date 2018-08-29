@@ -20,11 +20,6 @@
 <div class="client double">
     <div class="write">
         <form method="POST" name="form" action="{{ route('ClientController.request') }}">
-            @if(notif)
-            <div class="success-card">
-                Vous avez une demande en attente pour le projet {{notif.name}}.
-            </div>
-            @endif
             <div id="discord">
                 @if(auth.user.discord_username === "")
                 <div class="image" style="background-image: url('/images/default_user.png')"></div>
@@ -47,7 +42,6 @@
                 </div>
                 <input type="hidden" name="discord" value="{{auth.user.discord_username}}">
                 @endif
-                {{ elIf('<div class="error-card">$self</div>', getErrorFor('discord'), hasErrorFor('discord')) }}
             </div>
             <div class="arrow">
                 <i class="icon-arrow-down"></i>
@@ -57,17 +51,14 @@
                     <input type="text" id="name" name="name" class="input" v-model="name">
                     <label for="name">Nom du projet</label>
                 </div>
-                {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
                 <div class="input-container">
                     <input type="text" id="type" name="type" class="input" v-model="type">
                     <label for="type">Type de projet</label>
                 </div>
-                {{ elIf('<div class="error-card">$self</div>', getErrorFor('type'), hasErrorFor('type')) }}
                 <div class="input-container">
                     <textarea name="description" id="description" name="description" class="input textarea" v-model="description"></textarea>
                     <label for="description">Courte description</label>
                 </div>
-                {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
             </div>
             <div class="arrow">
                 <i class="icon-arrow-down"></i>
@@ -81,7 +72,6 @@
                     <label for="confirm">Je renonce expressément à exercer mon droit de rétractation conformément aux dispositions de l'article L.221-28 1° du code de la consommation.</label>
                 </div>
             </div>
-            {{ elIf('<div class="error-card">$self</div>', getErrorFor('validation'), hasErrorFor('validation')) }}
             <div class="arrow">
                 <i class="icon-arrow-down"></i>
             </div>
@@ -102,4 +92,19 @@
         <p>Cordialement <strong>{{auth.user.username}}</strong></p>
     </div>
 </div>
+@endsection
+
+@section('notifs')
+@if(notif)
+  <div class="notif"> <div class="notif_icon"></div><div class="content">Vous avez une demande en attente pour le projet {{notif.name}}.</div></div>
+@endif
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('discord'), hasErrorFor('discord')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('type'), hasErrorFor('type')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('validation'), hasErrorFor('validation')) }}
 @endsection

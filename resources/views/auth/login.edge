@@ -33,23 +33,9 @@
 				<input name="password" type="password" placeholder="Mot de passe"/>
 			</div>
 
-            {{ elIf('<div class="error-card">$self</div>', getErrorFor('uid'), hasErrorFor('uid')) }}
-
-            {{ elIf('<div class="error-card">$self</div>', getErrorFor('password'), hasErrorFor('password')) }}
-
-            @if(flashMessage('error'))
-                <div class="error-card">{{ flashMessage('error') }}</div>
-            @endif
-
             <a href="/login/password" class="password">Mot de passe oublié</a>
 
             {{ csrfField() }}
-            @if(flashMessage('account_created'))
-                <div class="success-card">{{ flashMessage('account_created') }}</div>
-            @endif
-            @if(flashMessage('account_logout'))
-                <div class="success-card">{{ flashMessage('account_logout') }}</div>
-            @endif
 
             <button type="submit" name="submit">
                 Se connecter
@@ -60,4 +46,22 @@
         </div>
 	</div>
 </section>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('uid'), hasErrorFor('uid')) }}
+
+{{ elIf('<div class="notif error test"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('password'), hasErrorFor('password')) }}
+
+@if(flashMessage('error'))
+<div class="notif error"> <div class="notif_icon"></div><div class="content">{{ flashMessage('error') }}</div></div>
+@endif
+
+@if(flashMessage('account_created'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('account_created') }}</div></div>
+@endif
+
+@if(flashMessage('account_logout'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('account_logout') }}</div></div>
+@endif
 @endsection

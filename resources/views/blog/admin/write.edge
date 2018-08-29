@@ -27,29 +27,24 @@
             <input type="text" name="title" id="title" class="input" value="{{ old('title', '') }}">
             <label for="title">Titre</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
 
         <div class="input-container">
             <input type="text" name="url" id="url" class="input" value="{{ old('url', '') }}">
             <label for="url">Url de l'article</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('url'), hasErrorFor('url')) }}
 
         <div class="tags-section input input-container">
             <input type="hidden" id="hidden-input" name="tags" value="{{ old('tags', '') }}">
             <input type="text" class="tag-input input" id="main-input"/>
             <label for="main-input">Ajouter un tag</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('tags'), hasErrorFor('tags')) }}
 
         <div class="input-container">
             <textarea name="description" id="description" class="input textarea">{{ old('description', '') }}</textarea>
             <label for="description">Description de l'article</label>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('description'), hasErrorFor('description')) }}
 
         <textarea name="content" id="markdown" placeholder="Contenu de l'article" class="input textarea">{{ old('content', '') }}</textarea>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('content'), hasErrorFor('content')) }}
 
         <div class="article_file visu">
             <input type="file" name="image" class="file_input">
@@ -59,7 +54,6 @@
                 </div>
             </div>
         </div>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('image'), hasErrorFor('image')) }}
 
         <section class="switch-section">
             <p>Public</p>
@@ -72,13 +66,9 @@
                 </label>
             </div>
         </section>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('published_at'), hasErrorFor('published_at')) }}
 
         {{ csrfField() }}
-        
-        @if(flashMessage('valid_basic'))
-            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
-        @endif
+
         <button class="input submit" type="submit">Charger les informations</button>
     </form>
 </div>
@@ -89,3 +79,17 @@
 {{script('js/write')}}
 @endsection
 
+@section('notifs')
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('title'), hasErrorFor('title')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('url'), hasErrorFor('url')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('tags'), hasErrorFor('tags')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('content'), hasErrorFor('content')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('image'), hasErrorFor('image')) }}
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('published_at'), hasErrorFor('published_at')) }}
+
+@if(flashMessage('valid_basic'))
+  <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_basic') }}</div></div>
+@endif
+@endsection

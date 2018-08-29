@@ -69,15 +69,25 @@
         </section>
 
         {{ csrfField() }}
-        @if(flashMessage('valid_basic'))
-            <div class="success-card">{{ flashMessage('valid_basic') }}</div>
-        @endif
+
         <div class="buttons">
-            <button class="input submit" type="submit">Charger les informations</button> 
+            <button class="input submit" type="submit">Charger les informations</button>
             <a class="input delete" href="/blog/delete/{{post.id}}-{{post.url}}">Supprimer l'article</a>
         </div>
     </form>
 </div>
+@endsection
+
+@section('notifs')
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('title'), hasErrorFor('title')) }}
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('url'), hasErrorFor('url')) }}
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('tags'), hasErrorFor('tags')) }}
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('content'), hasErrorFor('content')) }}
+  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('image'), hasErrorFor('image')) }}
+  @if(flashMessage('valid_basic'))
+      <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_basic') }}</div></div>
+  @endif
 @endsection
 
 @section('js')

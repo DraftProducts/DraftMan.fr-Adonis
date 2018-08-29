@@ -105,8 +105,6 @@
                                     <input type="text" name="website" placeholder="Votre site" />
                                 </div>
                             </div>
-                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('name'), hasErrorFor('name')) }}
-                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
                             <div class="compact">
                                 <div>
                                     <input type="text" name="twitter" placeholder="Twitter" />
@@ -120,7 +118,6 @@
                             </div>
                             @endloggedIn
                             <textarea name="content" cols="30" rows="10" placeholder="Commentaire" required></textarea>
-                            {{ elIf('<div class="error-card">$self</div>', getErrorFor('content'), hasErrorFor('content')) }}
                             {{ csrfField() }}
                             <div>
                                 <input type="submit" name="comment" value="Commenter ce post">
@@ -171,8 +168,8 @@
                                         @endloggedIn
                                     </div>
                                 </div>
-                                <div> {{-- formulaire --}} </div> 
-                                
+                                <div> {{-- formulaire --}} </div>
+
                                 @each(reply in comment.replies)
                                     <div class="comment-reply">
                                         <div class="comment-avatar">
@@ -216,6 +213,12 @@
         </div>
     </section>
     @include('inc/footer')
+
+    <section id="notifs">
+        {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
+        {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('email'), hasErrorFor('email')) }}
+        {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('content'), hasErrorFor('content')) }}
+  </section>
     <script src="/js/post.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/code.js"></script>
