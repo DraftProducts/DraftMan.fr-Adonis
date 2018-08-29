@@ -14,7 +14,7 @@ class PostsSchema extends Schema {
       table.string('image')
       table.date('published_at') // -> Si rempli = publié et ta la date en plus
       table.integer('author_id').notNullable() // -> ID de l'auteur
-      table.integer('delete').defaultTo(0) // -> ID de l'auteur
+      table.integer('deleted').defaultTo(0) // -> Supprimé
       table.timestamps() // created_at - updated_at
     })
   }
