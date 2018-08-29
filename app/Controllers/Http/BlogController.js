@@ -110,7 +110,7 @@ class BlogController {
         }
     }
 
-    async update({ request, session, response }){
+    async update({ request, session, response,params }){
         const data = request.only(['title', 'url', 'description', 'tags','content','image','published_at']);
 
         const image = request.file('image', {
@@ -155,11 +155,11 @@ class BlogController {
         if(image){
             data.image = `${data.url}.${image.subtype}`;
             await image.move(Helpers.tmpPath('/uploads/posts/'), {name: data.image})
-        }else if(data.url){
-
         }
 
-        await Post.create(data)
+        const post = await Post.find(params.id)
+        post.merge(data)
+        await post.save()
 
         session.flash({
           article_posted: 'Article sauvegardé'
