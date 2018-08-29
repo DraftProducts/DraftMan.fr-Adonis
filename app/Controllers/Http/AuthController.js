@@ -59,7 +59,7 @@ class AuthController {
 
   async forgotPassword ({ request,response,session }) {
     await Persona.forgotPassword(request.input('uid'))
-    session.flash({error: 'Un mail vous a été envoyé pour pouvoir changer votre mot de passe'})
+    session.flash({notif: 'Un mail vous a été envoyé pour pouvoir changer votre mot de passe'})
     response.redirect('/login')
   }
 
@@ -67,12 +67,13 @@ class AuthController {
     const token = params.token
     return view.render('auth.new-password', {token})
   }
-  async updatePasswordByToken ({ request,response, params,auth }) {
+  async updatePasswordByToken ({ request,response, params,auth,session }) {
     const token = use('Encryption').base64Decode(params.token)
     const payload = request.only(['password', 'password_confirmation'])
 
     const user = await Persona.updatePasswordByToken(token, payload)
     await auth.remember(true).login(user)
+    session.flash({notif: 'Votre mot de passe a bien été changé'})
     response.redirect('/me/')
   }
 
