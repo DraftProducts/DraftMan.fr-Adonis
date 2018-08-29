@@ -36,12 +36,12 @@
             <label for="description">Description de l'article</label>
         </div>
         <div class="tags-section input input-container">
-            <input type="hidden" id="hidden-input" name="tags" value="{{ old('tags', '') }}">
+            <input type="hidden" id="hidden-input" name="tags" value="{{ old('tags', post.tags) }}">
             <input type="text" class="tag-input input" id="main-input"/>
             <label for="main-input">Ajouter un tag</label>
         </div>
 
-        <textarea name="content" id="markdown" value="{{ old('content', post.content) }}" placeholder="Contenu de l'article"></textarea>
+        <textarea name="content" id="markdown" placeholder="Contenu de l'article">{{ old('content', post.content) }}</textarea>
 
         <div class="article_file visu">
             <input type="file" name="image" class="file_input">
