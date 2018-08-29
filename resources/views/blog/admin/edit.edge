@@ -22,7 +22,7 @@
 
 @section('content')
 <div class="write">
-      <form class="writer" method="POST" action="me/write/{{post.id}}-{{post.url}}" enctype="multipart/form-data">
+      <form class="writer" method="POST" action="/me/write/{{post.id}}-{{post.url}}" enctype="multipart/form-data">
         <div class="input-container">
             <input type="text" name="title" id="title" class="input" value="{{ old('title', post.title) }}">
             <label for="title">Titre</label>
