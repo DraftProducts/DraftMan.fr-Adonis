@@ -27,10 +27,14 @@
             Abonne toi à ma newsletter pour être au courant des dernières nouveautés !<br>
             Tu peux aussi la retrouver sur <a href="/discord" class="link">mon discord</a> dans un channel prévu à cet effet !
         </p>
-        {{ elIf('<div class="error-card">$self</div>', getErrorFor('email'), hasErrorFor('email')) }}
-        @if(flashMessage('newsletter'))
-            <div class="success-card">{{ flashMessage('newsletter') }}</div>
-        @endif
+        @section('notifs')
+          @super
+          {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('email'), hasErrorFor('email')) }}
+          @if(flashMessage('newsletter'))
+              <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('newsletter') }}</div>
+          @endif
+        @endsection
+
         <form method="post" action="/newsletter" class="newsletter">
             <input type="email" name="email" placeholder="Adresse mail">
             {{ csrfField() }}
