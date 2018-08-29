@@ -34,7 +34,7 @@ class AuthController {
     }
   }
 
-  async register ({ request, auth, response }) {
+  async register ({ request, auth, response,session }) {
     const payload = request.only(['username', 'email', 'password', 'password_confirmation'])
     await Emails.findOrCreate({ email: payload.email },{ email: payload.email })
     const user = await Persona.register(payload)
@@ -43,7 +43,7 @@ class AuthController {
     response.redirect('/me/')
   }
 
-  async login ({ request, auth, response }) {
+  async login ({ request, auth, response, session }) {
     const payload = request.only(['uid', 'password'])
     const user = await Persona.verify(payload)
     await auth.remember(true).login(user)
@@ -57,8 +57,10 @@ class AuthController {
     response.redirect('/me/')
   }
 
-  async forgotPassword ({ request }) {
+  async forgotPassword ({ request,response,session }) {
     await Persona.forgotPassword(request.input('uid'))
+    session.flash({error: 'Un mail vous a été envoyé pour pouvoir changer votre mot de passe'})
+    response.redirect('/login')
   }
 
   async updatePasswordByPage ({ view,params}) {
