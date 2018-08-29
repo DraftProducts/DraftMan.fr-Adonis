@@ -60,7 +60,7 @@ class PortfolioController {
         await Portfolio.create(data)
 
         session.flash({
-          article_posted: 'Création sauvegardé'
+          saved: 'Création sauvegardé'
         })
 
         if(data.published_at){
@@ -120,7 +120,7 @@ class PortfolioController {
         await portfolio.save()
 
         session.flash({
-          article_posted: 'Création sauvegardé'
+          saved: 'Création sauvegardé'
         })
 
         if(data.published_at){
@@ -205,7 +205,7 @@ class PortfolioController {
         await portfolioDetails.save()
 
         session.flash({
-          article_posted: 'Création sauvegardé'
+          saved: 'Création sauvegardé'
         })
 
         return response.redirect('/admin/portfolio')
