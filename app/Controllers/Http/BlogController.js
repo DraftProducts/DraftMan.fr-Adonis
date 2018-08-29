@@ -16,7 +16,7 @@ class BlogController {
     // destroy = Détruire ton post
 
     async accueil({ view }){
-        const posts = (await Post.query().whereNotNull('published_at').where('delete',0).limit(3).fetch()).toJSON();
+        const posts = (await Post.query().whereNotNull('published_at').where('deleted',0).limit(3).fetch()).toJSON();
         return view.render('index', {posts})
     }
     async newsletter({ request, session, response }){
@@ -42,7 +42,7 @@ class BlogController {
     }
 
     async index({ view }){
-        const posts = (await Post.query().with('author').whereNotNull('published_at').where('delete',0).fetch()).toJSON();
+        const posts = (await Post.query().with('author').whereNotNull('published_at').where('deleted',0).fetch()).toJSON();
         return view.render('blog.index', {posts})
     }
 
@@ -170,22 +170,22 @@ class BlogController {
 
     async show ({ params, view }){
         const [post, posts, comments] = await Promise.all([
-          Post.query().with('author').where('id', params.id).where('delete',0).first(),
-          Post.query().whereNotNull('published_at').where('delete',0).fetch(),
+          Post.query().with('author').where('id', params.id).where('deleted',0).first(),
+          Post.query().whereNotNull('published_at').where('deleted',0).fetch(),
           Comment.query().with('replies').where('post_id', params.id).where('parent_id', 0).fetch(),
         ])
         return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
     }
 
     async articles({view}) {
-        const articles = (await Post.query().with('author').where('delete',0).fetch()).toJSON()
+        const articles = (await Post.query().with('author').where('deleted',0).fetch()).toJSON()
         return view.render('blog.admin.articles',{articles})
     }
 
     async view ({ params, view }){
         const [post, posts] = await Promise.all([
-          Post.query().with('author').where('id', params.id).where('delete',0).first(),
-          Post.query().where('delete',0).fetch()
+          Post.query().with('author').where('id', params.id).where('deleted',0).first(),
+          Post.query().where('deleted',0).fetch()
         ])
         return view.render('blog.admin.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON() })
     }
@@ -193,7 +193,7 @@ class BlogController {
     async delete ({ params,auth,response }){
         const post = (await Post.find(params.id))
         if(post.author.email === auth.user.email){
-            post.delete = 1
+            post.deleted = 1
             await post.save()
         }
         response.redirect('/me/articles')
