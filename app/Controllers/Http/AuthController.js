@@ -39,6 +39,7 @@ class AuthController {
     await Emails.findOrCreate({ email: payload.email },{ email: payload.email })
     const user = await Persona.register(payload)
     await auth.login(user)
+    session.flash({notif: 'Compte crée avec succès'})
     response.redirect('/me/')
   }
 
@@ -46,6 +47,7 @@ class AuthController {
     const payload = request.only(['uid', 'password'])
     const user = await Persona.verify(payload)
     await auth.remember(true).login(user)
+    session.flash({notif: 'Vous êtes maintenant connecté'})
     response.redirect('/me/')
   }
 
