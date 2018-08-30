@@ -111,7 +111,7 @@ class BlogController {
     }
 
     async update({ request, session, response,params }){
-        const data = request.only(['title', 'url', 'description', 'tags','content','image','published_at']);
+        const data = request.only(['title', 'url', 'description', 'tags','content','published_at']);
 
         const image = request.file('image', {
           types: ['image'],
@@ -125,17 +125,15 @@ class BlogController {
           'url.unique': 'Cette url est déjà utilisé.',
           'description.required': 'Veuillez ajouter une descrption de votre article pour le SEO.',
           'tags.required': 'Veuillez ajouter les mots clés pour article pour le SEO.',
-          'content.required': 'Veuillez ajouter un contenu à votre article.',
-          'image.required': 'Veuillez ajouter une image à votre article.'
+          'content.required': 'Veuillez ajouter un contenu à votre article.'
         }
 
         const rules = {
-          title: 'required|unique:posts',
-          url: 'required|unique:posts',
+          title: `required|unique:posts,title,id,${params.id}`,
+          url: `required|unique:posts,url,id,${params.id}`,
           description: 'required',
           tags: 'required',
-          content: 'required',
-          image: 'required',
+          content: 'required'
         }
 
         const validation = await validate(data, rules, messages)
@@ -148,13 +146,11 @@ class BlogController {
           return response.redirect('back')
         }
 
-        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
-
-        data.author_id = auth.user.id
-
+        if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
+        console.log(data.published_at)
         if(image){
-            data.image = `${data.url}.${image.subtype}`;
-            await image.move(Helpers.tmpPath('/uploads/posts/'), {name: data.image})
+          data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
+          await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
         }
 
         const post = await Post.find(params.id)
@@ -164,7 +160,6 @@ class BlogController {
         session.flash({
           article_posted: 'Article sauvegardé'
         })
-
         return response.redirect('back')
     }
 

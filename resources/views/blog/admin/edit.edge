@@ -57,8 +57,8 @@
             <div class="switch">
                 <label>
                     Non
-                    <input type="checkbox" name="public"
-                    @if(post.posted === 1)
+                    <input type="checkbox" name="published_at"
+                    @if(post.published_at != null)
                         checked
                     @endif
                     />
@@ -84,9 +84,8 @@
   {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
   {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('tags'), hasErrorFor('tags')) }}
   {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('content'), hasErrorFor('content')) }}
-  {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('image'), hasErrorFor('image')) }}
-  @if(flashMessage('valid_basic'))
-      <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_basic') }}</div></div>
+  @if(flashMessage('article_posted'))
+      <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('article_posted') }}</div></div>
   @endif
 @endsection
 

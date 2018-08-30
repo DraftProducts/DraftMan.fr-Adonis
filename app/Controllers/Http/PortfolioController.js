@@ -112,8 +112,10 @@ class PortfolioController {
 
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
-        data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
-        await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+        if(illustration){
+          data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
+          await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+        }
 
         const portfolio = await Portfolio.find(params.id)
         portfolio.merge(data)
