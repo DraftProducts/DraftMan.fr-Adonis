@@ -139,14 +139,10 @@ class PortfolioController {
           saved: 'Création sauvegardé'
         })
 
-        if(data.published_at){
-            return response.redirect('/portfolio')
-        }else{
-            return response.redirect('/admin/portfolio')
-        }
+        return response.redirect('/admin/portfolio')
     }
     async updateDetails({request, session, response,params}){
-        const data = request.only(['name', 'url', 'description', 'type','color1','color2','color3','color4','color5','typographie1','typographie2','problematique','presentation','presentation','published_at']);
+        const data = request.only(['name', 'url', 'description', 'type','problematique','presentation','presentation','published_at']);
 
         const illustration = request.file('illustration', {
             types: ['image'],
@@ -158,22 +154,23 @@ class PortfolioController {
             size: '2mb'
         })
 
+        const graph = request.file('graph', {
+            types: ['image'],
+            size: '6mb'
+        })
+
         const messages = {
           'name.unique': 'Ce nom est déjà utilisé.',
           'name.required': 'Veuillez donner un nom à cette création',
           'description.required': 'Veuillez donner une description à cette création',
-          'type.required': 'Veuillez préciser le type de projet.',
-          'typographie1.required': 'Veuillez indiquer la typographie n°1.',
-          'typographie2.required': 'Veuillez indiquer la typographie n°2.',
+          'type.required': 'Veuillez préciser le type de projet.'
         }
 
         const rules = {
           name: `required|unique:portfolio,name,id,${params.id}`,
           description: 'required',
           type: 'required',
-          typographie1: 'required',
-          typographie2: 'required',
-          url: 'required',
+          url: 'required'
         }
 
         const validation = await validate(data, rules, messages)
@@ -196,9 +193,6 @@ class PortfolioController {
             url: data.url
         }
         const details = {
-            colors: JSON.stringify({color1: data.color1,color2: data.color2,color3: data.color3,color4: data.color4,color5: data.color5}),
-            typographie1: data.typographie1,
-            typographie2: data.typographie2,
             problematique: data.problematique,
             presentation: data.presentation,
             technique: data.technique,
@@ -209,7 +203,7 @@ class PortfolioController {
           await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
 
           if(!illustration.moved()){
-            session.flash({error: 'Impossible d\'importer l\'image'})
+            session.flash({illustration: 'Impossible d\'importer l\'image'})
             return response.redirect('back')
           }
         }
@@ -218,11 +212,20 @@ class PortfolioController {
           await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: data.logo})
 
           if(!logo.moved()){
-            session.flash({error: 'Impossible d\'importer l\'image'})
+            session.flash({logo: 'Impossible d\'importer l\'image'})
             return response.redirect('back')
           }
         }else if(portfolioDetails.logo === null){
           data.illustration = '000-default-logo.png';
+        }
+        if(graph.size != 0){
+          data.graph = `${data.name}.graph.${new Date().getTime()}.${graph.subtype}`;
+          await graph.move(Helpers.publicPath('/uploads/portfolio'), {name: data.graph})
+
+          if(!graph.moved()){
+            session.flash({graph: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
         }
 
         if(data.published_at) basics.published_at = moment().format('YYYY-MM-DD')
