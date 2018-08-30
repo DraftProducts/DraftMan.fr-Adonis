@@ -22,39 +22,33 @@
     <div class="corps">
     	<div class="item-content">
             <div class="top-content">
-                <h2>Enjoycandy</h2>
+                <h2>{{project.name}}</h2>
                 <div class="infos">
-                    <li><i class="icon-user"></i><span>Projet</span></li>
-                    <li><i class="icon-calender"></i><span>20/12/2016</span></li>
+                    <li><i class="icon-user"></i><span>{{project.type}}</span></li>
+                    <li><i class="icon-calender"></i><span>{{date(project.published_at)}}</span></li>
                 </div>
             </div>
             <div class="text">
                 <section class="post-body portfolio">
-                    {{{ markdown(project.content) }}}
+                    {{{ markdown(project.details.presentation) }}}
                 </section>
-                <div class="logo" style="background-image: url(/images/portfolio/Enjoy%20Candy.jpg);"></div>
+                <div class="logo" style="background-image: url(/uploads/portfolio/{{project.details.logo}});"></div>
             </div>
-        </div> 
+        </div>
         <div class="item-content">
             <h4 class="spe-gra">Spécificités Graphique</h4>
-            <img class="spe-gra" src="/images/portfolio/test.png" alt="">
+        <img class="spe-gra" src="/uploads/projects/{{project.details.folder}}/{{project.details.graph}}" alt="Spécifications du projet {{project.name}}">
         </div>
         <div class="item-content">
             <h4 class="spe-gra">Problématique</h4>
             <section class="post-body">
-                <p>
-                    Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Curabitur blandit mollis lacus. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Vestibulum eu odio.
-                    In consectetuer turpis ut velit. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Etiam iaculis nunc ac metus. Curabitur ullamcorper ultricies nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-                </p>
+              {{{ markdown(project.details.problematique) }}}
             </section>
         </div>
         <div class="item-content">
             <h4 class="spe-gra">Description technique</h4>
             <section class="post-body">
-                <p>
-                    Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Curabitur blandit mollis lacus. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Vestibulum eu odio.
-                    In consectetuer turpis ut velit. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Etiam iaculis nunc ac metus. Curabitur ullamcorper ultricies nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-                </p>
+              {{{ markdown(project.details.technique) }}}
             </section>
         </div>
     </div>
@@ -74,4 +68,4 @@
         </div>
     </div>
 </section>
-@endsection 
+@endsection
