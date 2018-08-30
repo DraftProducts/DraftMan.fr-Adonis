@@ -54,8 +54,17 @@ class PortfolioController {
         }
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
-        data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
-        await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+        if(illustration.size != 0){
+          data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
+          await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+
+          if(!illustration.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
+        }else{
+          data.illustration = '000-default.png';
+        }
 
         await Portfolio.create(data)
 
@@ -112,9 +121,14 @@ class PortfolioController {
 
         if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
 
-        if(illustration){
-          data.illustration = `${data.name}.${new Date().getTime()}.${illustration.subtype}`;
+        if(illustration.size != 0){
+          data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
           await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+
+          if(!illustration.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
         }
 
         const portfolio = await Portfolio.find(params.id)
@@ -172,6 +186,9 @@ class PortfolioController {
           return response.redirect('back')
         }
 
+        const portfolio = await Portfolio.find(params.id)
+        const portfolioDetails = await PortfolioDetails.findBy('portfolio_id',params.id)
+
         const basics = {
             name: data.name,
             description: data.description,
@@ -187,22 +204,32 @@ class PortfolioController {
             technique: data.technique,
             folder: data.name
         }
-        if(illustration){
-            basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
-            await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: basics.illustration})
+        if(illustration.size != 0){
+          data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
+          await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+
+          if(!illustration.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
         }
-        if(logo){
-            details.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
-            await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: details.logo})
+        if(logo.size != 0){
+          data.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
+          await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: data.logo})
+
+          if(!logo.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
+        }else if(portfolioDetails.logo === null){
+          data.illustration = '000-default-logo.png';
         }
 
         if(data.published_at) basics.published_at = moment().format('YYYY-MM-DD')
 
-        const portfolio = await Portfolio.find(params.id)
         portfolio.merge(basics)
         await portfolio.save()
 
-        const portfolioDetails = await PortfolioDetails.findBy('portfolio_id',params.id)
         portfolioDetails.merge(details)
         await portfolioDetails.save()
 

@@ -94,8 +94,17 @@ class BlogController {
 
         data.author_id = auth.user.id
 
-        data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
-        await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
+        if(image.size != 0){
+          data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
+          await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
+
+          if(!image.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
+        }else{
+          data.image = '000-default.png';
+        }
 
         await Post.create(data)
 
@@ -147,10 +156,15 @@ class BlogController {
         }
 
         if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
-        console.log(data.published_at)
-        if(image){
+
+        if(image.size != 0){
           data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
           await image.move(Helpers.publicPath('/uploads/posts'), {name: data.image})
+
+          if(!image.moved()){
+            session.flash({error: 'Impossible d\'importer l\'image'})
+            return response.redirect('back')
+          }
         }
 
         const post = await Post.find(params.id)
