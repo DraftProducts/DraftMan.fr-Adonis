@@ -73,7 +73,7 @@ class ProfilController {
     return response.redirect(`https://discordapp.com/oauth2/authorize?client_id=${CLIENT_ID}&scope=identify+email&response_type=code&redirect_uri=${redirect}`);
   }
 
-  async discordCallback({request,response,auth}) {
+  async discordCallback({request,response,auth,session}) {
     const code = await request.get().code;
     const res = await post(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`).set('Authorization', `Basic ${cred}`)
     const resp = await get('https://discordapp.com/api/v6/users/@me').set('Authorization', `Bearer ${res.body.access_token}`)
