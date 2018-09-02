@@ -61,7 +61,7 @@ class ProfilController {
     response.redirect('back')
   }
 
-  async updateSocial ({ request, auth, response }) {
+  async updateSocial ({ request, auth, response,session }) {
     const payload = request.only(['website', 'twitter', 'github', 'linkedin'])
     const user = auth.user
     await Persona.updateProfile(user, payload)
