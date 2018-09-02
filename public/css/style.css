@@ -1618,6 +1618,8 @@ footer #copyright section {
     border: none;
     color: #fff;
     background-color: #cd6e57;
+    outline: 0;
+    cursor: pointer;
 }
 
 #sidebar .newsletter:after {
@@ -2494,7 +2496,6 @@ input[type="text"]:required:after {
 }
 
 #error div {
-    /*float: left;*/
     width: 100%;
 }
 
@@ -2502,17 +2503,23 @@ input[type="text"]:required:after {
     display: flex;
     margin: 50px auto 0;
 }
-
+#blog.search .corps{
+  flex-direction: column;
+}
+#blog.search .corps .posts{
+  display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+}
 #blog.search .corps form {
-    /*float: left;*/
-    width: calc(100% - 20px);
-    margin: 0 20px 20px 0;
+    display: flex;
+    width: 100%;
+    margin: 0 0 20px 0;
     border-radius: 2px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16);
 }
 
 #blog.search .corps .search {
-    /*float: left;*/
     width: calc(100% - 150px);
 }
 
@@ -2524,9 +2531,7 @@ input[type="text"]:required:after {
     font-size: 17px;
     outline: 0;
 }
-
 #blog.search .corps button {
-    /*float: left;*/
     width: 150px;
     height: 50px;
     border: none;
