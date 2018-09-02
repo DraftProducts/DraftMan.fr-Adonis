@@ -97,9 +97,14 @@ class ClientController {
             .subject('Un projet vous est proposé sur DraftMan.fr')
             .replyTo(data.email, data.username)
         })
+        session.flash({sent: 'Votre demande à été envoyé avec succès !'})
+        return response.redirect('back')
     } catch (error) {
         console.log('request mail: '+error.errors)
+        session.flash({error: 'Une erreur s\'est produite votre demande n\'à pas été effectué, veuillez nous excusez !'})
+        return response.redirect('back')
     }
+
   }
 
   async clients({view}) {
