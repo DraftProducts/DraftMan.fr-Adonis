@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
+const Email = use('App/Models/Email')
 const Comment = use('App/Models/Comment')
 const { validate } = use('Validator')
 const Helpers = use('Helpers')
@@ -34,7 +35,7 @@ class BlogController {
               return response.redirect("back")
         }
 
-        await Emails.create({ data })
+        await Email.create( data )
 
         session.flash({newsletter: 'Vous êtes bien inscrit à la newsletter'})
 
