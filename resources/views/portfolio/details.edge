@@ -57,8 +57,9 @@
             <h4>Recherche</h4>
             <hr>
             <div class="search">
-                <form method="project">
+                <form method="post" action="/search">
                     <input type="search" name="q" placeholder="Rechercher">
+                    {{ csrfField() }}
                     <button type="submit">Go</button>
                 </form>
             </div>
