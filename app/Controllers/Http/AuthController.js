@@ -54,6 +54,7 @@ class AuthController {
   async verify ({response, params }) {
     const token = use('Encryption').base64Decode(params.token)
     await Persona.verifyEmail(token)
+    session.flash({notif: 'Vous compte est maintenant vérifié'})
     response.redirect('/me/')
   }
 
