@@ -92,11 +92,61 @@
                     </section>
                 </div>
             </div>
-            @include('sidebar')
+            <div id="sidebar">
+              <div class="item">
+                  <h4>Recherche</h4>
+                  <hr>
+                  <div class="search">
+                      <form method="post" action="/search">
+                          <input type="search" name="q" placeholder="Rechercher">
+                          {{ csrfField() }}
+                          <button type="submit">Go</button>
+                      </form>
+                  </div>
+              </div>
+              <div class="item">
+                  <h4>Les derniers articles</h4>
+                  <hr>
+                  <ul>
+                      @each(item in posts)
+                      <li>
+                          <a href="/blog/{{item.id}}-{{item.url}}"><span class="hover_span"></span><span class="link_span">{{item.title}}</span></a>
+                      </li>
+                      @endeach
+                  </ul>
+              </div>
+              <div class="item" id="newsletter">
+                  <h4>Newsletter</h4>
+                  <hr>
+                  <p>
+                      Abonne toi à ma newsletter pour être au courant des dernières nouveautés !<br>
+                      Tu peux aussi la retrouver sur <a href="/discord" class="link">mon discord</a> dans un channel prévu à cet effet !
+                  </p>
+
+                  <form method="post" action="/newsletter" class="newsletter">
+                      <input type="email" name="email" placeholder="Adresse mail">
+                      {{ csrfField() }}
+                      <input type="submit" value="S'inscrire">
+                  </form>
+              </div>
+          </div>
+
         </div>
         </div>
     </section>
     @include('inc/footer')
+    <section class="notifs">
+      @if(flashMessage('notif'))
+        <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('notif') }}</div></div>
+      @endif
+      @if(flashMessage('error'))
+        <div class="notif error"> <div class="notif_icon"></div><div class="content">{{ flashMessage('error') }}</div></div>
+      @endif
+      {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('email'), hasErrorFor('email')) }}
+      @if(flashMessage('newsletter'))
+          <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('newsletter') }}</div>
+      @endif
+    </section>
     <script src="/js/post.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/code.js"></script>
