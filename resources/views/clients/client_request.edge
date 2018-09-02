@@ -19,7 +19,7 @@
 @section('content')
 <div class="client double">
     <div class="write">
-        <form method="POST" name="form" action="{{ route('ClientController.request') }}">
+        <form method="POST" name="form" action="{{ route('ClientController.requestC') }}">
             <div id="discord">
                 @if(auth.user.discord_username === "")
                 <div class="image" style="background-image: url('/images/default_user.png')"></div>
@@ -95,9 +95,6 @@
 @endsection
 
 @section('notifs')
-@if(notif)
-  <div class="notif"> <div class="notif_icon"></div><div class="content">Vous avez une demande en attente pour le projet {{notif.name}}.</div></div>
-@endif
 {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('discord'), hasErrorFor('discord')) }}
 
 {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
@@ -107,4 +104,7 @@
 {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('description'), hasErrorFor('description')) }}
 
 {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('validation'), hasErrorFor('validation')) }}
+@if(notif)
+  <div class="notif"> <div class="notif_icon"></div><div class="content">Vous avez une demande en attente pour le projet {{notif.name}}.</div></div>
+@endif
 @endsection

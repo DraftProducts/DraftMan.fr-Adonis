@@ -106,7 +106,7 @@ Route.group(() => {
 
 Route.group(() => {
     Route.get('me/client', 'ClientController.client_request')
-    Route.post('me/client', 'ClientController.request')
+    Route.post('me/client', 'ClientController.requestC')
 }).middleware(['auth','client']);
 
 Route.group(() => {
