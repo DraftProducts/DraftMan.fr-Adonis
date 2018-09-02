@@ -33,7 +33,7 @@ class ClientController {
     }
     return view.render('clients.client_request')
   }
-  
+
   async dashboard ({session, view,auth}) {
     const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
     const images = await readdir(`public/uploads/projects/${project.folder}/images`)
@@ -47,29 +47,30 @@ class ClientController {
     }
   }
 
-  async request({request, session, response,auth}) {
-    const data = request.only(['name', 'type', 'description','validation','discord'])
+  async requestC({request, session, response,auth}) {
+    const data = request.only(['discord','name', 'type', 'description','validation'])
     const messages = {
         'name.required': 'Veuillez indiquer le nom du projet.',
         'name.unique': 'Ce nom de projet est déjà utilisé.',
         'type.required': 'Veuillez indiquer le type de projet.',
         'description.required': 'Veuillez entrer une courte description du projet et/ou le travail à faire',
-        'validation.required': 'Pour devenir client vous devez accepter cette condition.',
-        'discord.required': 'Pour devenir client vous devez accepter cette condition.'
+        'validation.required': 'Pour devenir client vous devez accepter de renoncer à exercer votre droit de rétractation',
+        'discord.required': 'Pour devenir client vous devez connecter votre compte discord'
     }
     const rules = {
+      discord: 'required',
       name: 'required|unique:clients',
       type: 'required',
       description: 'required',
-      validation: 'required',
-      discord: 'required',
+      validation: 'required'
     }
-    
+
     const validation = await validate(data, rules, messages)
 
     if (validation.fails()) {
         session
         .withErrors(validation.messages())
+        .flashAll()
         return response.redirect('back')
     }
 
