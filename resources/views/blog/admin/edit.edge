@@ -36,8 +36,8 @@
             <label for="description">Description de l'article</label>
         </div>
         <div class="tags-section input input-container">
-            <input type="hidden" id="hidden-input" name="tags" value="{{ old('tags', post.tags) }}">
-            <input type="text" class="tag-input input" id="main-input"/>
+            <input type="hidden" id="hidden-input" name="tags">
+            <input type="text" class="tag-input input" id="main-input" value="{{ old('tags', post.tags) }}"/>
             <label for="main-input">Ajouter un tag</label>
         </div>
 
