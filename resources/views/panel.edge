@@ -94,7 +94,15 @@
     </section>
 
     @include('inc/footer')
-
+    <section class="notifs">
+        @if(flashMessage('notif'))
+        <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('notif') }}</div></div>
+      @endif
+      @if(flashMessage('error'))
+        <div class="notif error"> <div class="notif_icon"></div><div class="content">{{ flashMessage('error') }}</div></div>
+      @endif
+        @!section('notifs')
+    </section>
     @!section('js')
     {{ script('js/app') }}
     {{ script('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js') }}
