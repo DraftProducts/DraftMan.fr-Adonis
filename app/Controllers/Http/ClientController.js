@@ -35,7 +35,7 @@ class ClientController {
   }
 
   async show ({session, view,auth,response}) {
-    const project = (await Project.query().where('id', auth.user.project_id).first()).toJSON()
+    const project = (await Project.query().with('payments').where('id', auth.user.project_id).first()).toJSON()
     const images = await readdir(`public/uploads/projects/${project.folder}/images`)
     const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
     const repo = 'DraftMan.fr'
@@ -55,13 +55,13 @@ class ClientController {
       const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
       commitsList.set(date, element.commit.message)
     });
-    console.log(commitsList.toJSON())
     try {
       const paypalResponse = await this.createPayment(project)
       session.put('paymentId', paypalResponse.paymentId)
       return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commitsSize: commitsSize.toJSON(),commitsList: commitsList.toJSON()})
     } catch (e) {
-      return view.render('clients.client_dashboard',{project,images,fichiers,commits,values,keys})
+      console.log(e)
+      return view.render('clients.client_dashboard',{project,images,fichiers,commitsSize,commitsList})
     }
   }
 
@@ -146,23 +146,9 @@ class ClientController {
     return response.redirect('/me/client/dashboard')
   }
 
-  async createProject (client) {
-    const project = await new Project()
-    project.name = client.name,
-    project.total_payments = 2,
-    project.progress = 10,
-    project.folder = client.name,
-    project.user_id = client.author.id
-    await project.save()
-    fs.mkdirSync(`public/uploads/projects/${client.name}`);
-    fs.mkdirSync(`public/uploads/projects/${client.name}/images`);
-    fs.mkdirSync(`public/uploads/projects/${client.name}/fichiers`);
-    return project
-  }
-
   createPayment (project) {
     return new Promise((resolve, reject) => {
-      paypal.payment.create(this.paypalDetails(project), (err, payment) => {
+      paypal.payment.create(this.details(project), (err, payment) => {
         if (err) return reject(err)
         const links = payment.links
         for (let i = 0; i < links.length; i++) {
@@ -189,6 +175,7 @@ class ClientController {
   }
 
   details(project) {
+    console.log(project.payments)
     return {
       intent: 'sale',
       payer: {
@@ -199,18 +186,13 @@ class ClientController {
         cancel_url: 'https://www.draftman.fr/cancel'
       },
       transactions: [{
-        description: `Paiement n°${(project.payments != undefined ? project.payments.count()  + 1 : 0 + 1)} du projet ${project.name}`,
+        description: `Paiement n°${(project.payments != undefined ? project.payments.length()  + 1 : 0 + 1)} du projet ${project.name}`,
         amount: {
           currency: 'EUR',
           total: (project.price/project.total_payments).toFixed(2)
         }
       }]
     }
-  }
-  async changeStatment (id,state){
-    const status = await Client.find(id)
-    status.merge({'status': state})
-    await status.save()
   }
 }
 
