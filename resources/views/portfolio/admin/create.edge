@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="portfolio double">
-    <form method="POST" action="{{ route('PortfolioController.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="/admin/portfolio" enctype="multipart/form-data">
         <div class="input-container">
             <input type="text" name="name" id="name" class="input" value="{{old('name', '')}}">
             <label for="name">Nom du projet</label>
