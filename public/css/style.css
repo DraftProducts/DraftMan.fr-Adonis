@@ -2964,6 +2964,7 @@ input[type="text"]:required:after {
   right: 16px;
   width: 350px;
   z-index: 9999;
+  visibility: hidden;
 }
 
 .notifs .notif{
@@ -3030,5 +3031,11 @@ input[type="text"]:required:after {
   100% {
     opacity: 0;
     transform: translateX(40px)
+  }
+}
+
+@keyframes notifVisibility {
+  0% {
+      visibility: visible;
   }
 }
