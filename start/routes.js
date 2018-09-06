@@ -107,7 +107,7 @@ Route.get('draftbot/invite','DraftBotController.invite')
 Route.group(() => {
     Route.get('register', 'UserController.create')
     Route.get('verify/:token','UserController.verify')
-    Route.post('register', 'UserController.register')
+    Route.post('register', 'UserController.store')
 
     Route.get('login', 'SessionController.create')
     Route.post('login', 'SessionController.store')
@@ -127,8 +127,8 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.on('me/').render('dashboard.accueil')
-  Route.on('me/profil').render('dashboard.profil')
+  Route.on('me/').render('Dashboard/accueil')
+  Route.on('me/profil').render('Dashboard/profil')
 
   Route.get('discord/login', 'SocialController.create')
   Route.get('discord/callback', 'SocialController.store')
@@ -158,7 +158,7 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('me/client/dashboard', 'ClientController.dashboard')
+  Route.get('me/client/dashboard', 'ClientController.show')
   Route.post('me/client/pay', 'ClientController.pay')
   Route.get('success', 'ClientController.success')
   Route.get('cancel', 'ClientController.cancel')
@@ -171,12 +171,12 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('me/comments', 'Dashboard.CommentController.comments')
-  Route.get('me/comments/:id/valide', 'Dashboard.CommentController.valide')
-  Route.get('me/comments/:id/delete', 'Dashboard.CommentController.destroy')
+  Route.get('me/comments', 'Dashboard/CommentController.comments')
+  Route.get('me/comments/:id/valide', 'Dashboard/CommentController.valide')
+  Route.get('me/comments/:id/delete', 'Dashboard/CommentController.destroy')
 
-  Route.get('me/articles', 'Dashboard.BlogController.index')
-  Route.get('me/articles/:id-:url', 'Dashboard.BlogController.show')
+  Route.get('me/articles', 'Dashboard/BlogController.index')
+  Route.get('me/articles/:id-:url', 'Dashboard/BlogController.show')
 }).middleware(['auth','modo']);
 
 /**
@@ -186,16 +186,16 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('me/write', 'Dashboard.BlogController.create')
-  Route.post('me/write', 'Dashboard.BlogController.store')
+  Route.get('me/write', 'Dashboard/BlogController.create')
+  Route.post('me/write', 'Dashboard/BlogController.store')
 
-  Route.get('me/write/:id-:url', 'Dashboard.BlogController.edit')
-  Route.post('me/write/:id-:url', 'Dashboard.BlogController.update')
+  Route.get('me/write/:id-:url', 'Dashboard/BlogController.edit')
+  Route.post('me/write/:id-:url', 'Dashboard/BlogController.update')
 
-  Route.get('blog/delete/:id-:url', 'Dashboard.BlogController.destroy')
+  Route.get('blog/delete/:id-:url', 'Dashboard/BlogController.destroy')
 
-  Route.get('me/upload','Dashboard.FileController.create')
-  Route.post('me/upload','Dashboard.FileController.store')
+  Route.get('me/upload','Dashboard/FileController.create')
+  Route.post('me/upload','Dashboard/FileController.store')
 }).middleware(['auth','writer']);
 
 /**
@@ -205,10 +205,10 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('admin/clients', 'Dashboard.ClientController.index')
-  Route.get('admin/clients/:id', 'Dashboard.ClientController.show')
-  Route.get('admin/clients/:id/accept', 'Dashboard.ClientController.accept')
-  Route.post('admin/clients/:id/refuse', 'Dashboard.ClientController.refuse')
+  Route.get('admin/clients', 'Dashboard/ClientController.index')
+  Route.get('admin/clients/:id', 'Dashboard/ClientController.show')
+  Route.get('admin/clients/:id/accept', 'Dashboard/ClientController.accept')
+  Route.post('admin/clients/:id/refuse', 'Dashboard/ClientController.refuse')
   // Route.get('admin/users', 'AdminController.users')
   // Route.get('admin/newsletter', 'AdminController.newsletter')
 
