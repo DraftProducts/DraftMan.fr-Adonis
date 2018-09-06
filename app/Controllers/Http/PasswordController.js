@@ -24,7 +24,7 @@ class PasswordController {
     }
   }
   create ({ view }) {
-    view.render('auth.password')
+    return view.render('auth.password')
   }
   async store ({ request,response,session }) {
     await Persona.forgotPassword(request.input('uid'))

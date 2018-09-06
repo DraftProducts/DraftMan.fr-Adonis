@@ -3,7 +3,7 @@
 class DraftBotController {
 
   async index({ response,view }) {
-    view.render('draftbot.index')
+    return view.render('draftbot.index')
   }
 
   async invite({ response }) {

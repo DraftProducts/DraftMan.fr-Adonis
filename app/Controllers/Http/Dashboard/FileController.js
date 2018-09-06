@@ -21,9 +21,7 @@ class FileController {
     response.redirect('back')
   }
 
-  create({view}) {
-    view.render('dashboard.upload')
-  }
+  create({view}) { return view.render('dashboard.upload')}
 
   async store({response, request}) {
     const file = request.file('file', {

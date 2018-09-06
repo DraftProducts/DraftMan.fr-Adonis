@@ -12,7 +12,7 @@ class LoginController {
     }
   }
 
-  create ({view}){ view.render('auth.login')}
+  create ({view}){ return view.render('auth.login')}
 
   async store ({ request, auth, response, session }) {
     const payload = request.only(['uid', 'password'])

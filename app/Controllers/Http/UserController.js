@@ -26,7 +26,7 @@ class RegisterController {
     }
   }
 
-  create ({view}){ view.render('auth.register') }
+  create ({view}){ return view.render('auth.register') }
 
   async store ({ request, auth, response,session }) {
     const payload = request.only(['username', 'email', 'password', 'password_confirmation'])
