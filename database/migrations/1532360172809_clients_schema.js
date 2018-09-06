@@ -34,7 +34,6 @@ class ClientsSchema extends Schema {
 
   down () {
     this.drop('client_projects')
-    this.drop('client_projects_devblog')
     this.drop('client_projects_payments')
     this.drop('clients')
   }
