@@ -5,10 +5,9 @@ const Client = use('App/Models/Client');
 const User = use('App/Models/User');
 const Env = use('Env');
 
-const paypal = require('paypal-rest-sdk')
 const moment = require('moment')
 moment.locale('fr');
-const { get, post } = require('snekfetch');
+
 const { promisify } = require('util')
 const fs = require('fs');
 
@@ -49,6 +48,25 @@ class ClientController {
   async refuse({view,params}) {
     await this.changeStatment(params.id,2)
     return response.redirect('/admin/clients')
+  }
+
+  async createProject (client) {
+    const project = await new Project()
+    project.name = client.name,
+    project.total_payments = 2,
+    project.folder = client.name,
+    project.user_id = client.author.id
+    await project.save()
+    fs.mkdirSync(`public/uploads/projects/${client.name}`);
+    fs.mkdirSync(`public/uploads/projects/${client.name}/images`);
+    fs.mkdirSync(`public/uploads/projects/${client.name}/fichiers`);
+    return project
+  }
+
+  async changeStatment (id,state){
+    const status = await Client.find(id)
+    status.merge({'status': state})
+    await status.save()
   }
 }
 

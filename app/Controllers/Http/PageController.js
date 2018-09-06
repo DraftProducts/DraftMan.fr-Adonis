@@ -1,5 +1,7 @@
 'use strict'
 
+const Post = use('App/Models/Post');
+
 class PageController {
   async home({ view }){
 

@@ -1,5 +1,16 @@
 'use strict'
 
+const Env = use('Env')
+const Persona = use('Persona')
+
+const { get, post } = require('snekfetch');
+const btoa = require('btoa');
+
+const CLIENT_ID = Env.get('DISCORD_ID')
+const CLIENT_SECRET = Env.get('DISCORD_SECRET')
+const cred = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+const redirect = encodeURIComponent(Env.get('DISCORD_CALLBACK'));
+
 class SocialController {
 
   create({response}) {
