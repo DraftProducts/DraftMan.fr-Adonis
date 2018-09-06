@@ -19,7 +19,7 @@
 @section('content')
 <div class="client double">
     <div class="write">
-        <form method="POST" name="form" action="{{ route('ClientController.requestC') }}">
+        <form method="POST" name="form" action="/me/client">
              @if(notif)
             <div class="success-card">
                 Vous avez une demande en attente pour le projet {{notif.name}}.

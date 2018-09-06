@@ -19,7 +19,7 @@
 @section('content')
 <div class="profil double">
   <div class="compte">
-    <form action="{{ route('ProfilController.uploadProfil') }}" method="POST" enctype="multipart/form-data">
+    <form action="/me/profil/image" method="POST" enctype="multipart/form-data">
       <div class="profil_file visu upload">
           <input type="file" name="image" class="file_input">
           <div class="image" style="background-image: url('{{getProfilImage(auth.user)}}')">
@@ -30,7 +30,7 @@
           {{ csrfField() }}
       </div>
     </form>
-    <form method="POST" action="{{ route('ProfilController.updateProfil') }}">
+    <form method="POST" action="/me/profil/compte">
       <div class="input-container">
           <input type="text" name="username" id="username" class="input" value="{{auth.user.username}}">
           <label for="username">Pseudo</label>
@@ -52,7 +52,7 @@
   </form>
   </div>
 
-    <form class="infos_supp" method="POST" action="{{ route('ProfilController.updateSocial') }}">
+    <form class="infos_supp" method="POST" action="/me/profil/social">
         <div id="discord">
             @if(auth.user.discord_username === "")
             <div class="image" style="background-image: url('/images/default_user.png')"></div>

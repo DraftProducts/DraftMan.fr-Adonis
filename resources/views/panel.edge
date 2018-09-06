@@ -69,7 +69,7 @@
                         <a class="{{request.url().startsWith('/admin/portfolio') ? 'active': ''}}" href="/admin/portfolio"><i class="icon-developer-board"></i><span v-if="open">Portfolio</span></a>
                         {{--  <a class="{{request.url() === '/admin/newsletter' ? 'active': ''}}" href="/admin/newsletter"><i class="icon-fiber-new"></i><span v-if="open">NewsLetter</span></a>  --}}
                     @endif
-                    <a class="logout" href="{{ route('AuthController.logout') }}"><i class="icon-slideshow"></i></a>
+                    <a class="logout" href="/logout"><i class="icon-slideshow"></i></a>
                 </ul>
             </div>
         </nav>
@@ -82,7 +82,7 @@
                     <span>{{auth.user.username}}<i class="icon-arrow-down"></i></span>
 
                     <ul :class="{active: profil}">
-                        <a href="{{ route('AuthController.logout') }}"><i class="icon-slideshow"></i><span>Legout</span></a>
+                        <a href="/logout"><i class="icon-slideshow"></i><span>Legout</span></a>
                     </ul>
                 </div>
             </div>

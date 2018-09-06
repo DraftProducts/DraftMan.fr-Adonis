@@ -21,9 +21,9 @@
 @endsection
 
 @section('content')
-<div class="upload"> 
+<div class="upload">
 
-<form method="POST" class="dropzone" id="fileUploader" action="{{route('BackofficeController.uploadFile')}}" enctype="multipart/form-data">
+<form method="POST" class="dropzone" id="fileUploader" action="/me/upload" enctype="multipart/form-data">
     <div class="fallback">
         <input type="file" name="file" id="file">
     </div>
