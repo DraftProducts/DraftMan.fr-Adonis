@@ -6,8 +6,10 @@ const moment = require('moment')
 moment.locale('fr');
 
 class ContactController {
-    async send({ request, session, response,auth }) {
-
+    create({ view }){
+      return view.render('contact');
+    }
+    async store({ request, session, response,auth }) {
         const data = request.only(['email', 'objet', 'author','twitter','discord','commentconnu','message'])
 
         if(auth.user){
@@ -66,17 +68,6 @@ class ContactController {
             response.redirect('back')
         }
     }
-
-    async discord({ response }) {response.redirect('https://discordapp.com/invite/p4uzTsf')}
-    async twitter({ response }) {response.redirect('https://twitter.com/DraftMan_Dev')}
-    async github({ response }) {response.redirect('https://github.com/DraftProducts')}
-    async gitlab({ response }) {response.redirect('https://gitlab.com/DraftMan')}
-    async facebook({ response }) {response.redirect('https://www.facebook.com/nicovanaarsen')}
-    async paypal({ response }) {response.redirect('https://www.paypal.me/draftproducts')}
-    async google_plus({ response }) {response.redirect('https://plus.google.com/+DraftMan')}
-    async patreon({ response }) {response.redirect('https://www.patreon.com/draftman_dev')}
-
-    async invite({ response }) {response.redirect('https://discordapp.com/oauth2/authorize?client_id=318312854816161792&scope=bot&permissions=506981502')}
 }
 
 module.exports = ContactController

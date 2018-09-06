@@ -8,17 +8,10 @@ class ClientsSchema extends Schema {
       table.increments()
       table.string('name')
       table.integer('total_payments')
-      table.integer('progress')
+      table.integer('repository')
       table.string('folder')
       table.integer('price')
       table.integer('user_id')
-      table.timestamps()
-    })
-    this.create('client_projects_devblog', (table) => {
-      table.increments()
-      table.integer('client_project_id')
-      table.string('title')
-      table.string('description')
       table.timestamps()
     })
     this.create('client_projects_payments', (table) => {

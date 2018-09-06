@@ -15,36 +15,55 @@
 
 const Route = use('Route')
 
+
+
 /**
  |--------------------------------------------------------------------------
- | Static pages
+ | Pages
  |--------------------------------------------------------------------------
  */
 
-Route.get('/', 'BlogController.accueil')
-
+Route.get('/', 'PageController.home')
 Route.on('a-propos').render('a-propos')
 
-Route.get('discord','ContactController.discord')
-Route.get('twitter','ContactController.twitter')
-Route.get('github','ContactController.github')
-Route.get('gitlab','ContactController.gitlab')
-Route.get('facebook','ContactController.facebook')
-Route.get('paypal','ContactController.paypal')
-Route.get('google-plus','ContactController.google_plus')
-Route.get('patreon','ContactController.patreon')
+/**
+ |--------------------------------------------------------------------------
+ | Contact
+ |--------------------------------------------------------------------------
+ */
 
-Route.get('draftbot/invite','ContactController.invite')
+Route.get('contact','ContactController.create')
+Route.post('contact', 'ContactController.send')
 
-Route.on('draftbot').render('draftbot')
+/**
+ |--------------------------------------------------------------------------
+ | Portfolio pages
+ |--------------------------------------------------------------------------
+ */
 
-Route.get('discord/login', 'ProfilController.discordLogin')
+Route.get('portfolio', 'PortfolioController.index')
+Route.get('portfolio/:id-:url', 'PortfolioDetailsController.show')
 
-Route.get('verify/:token','AuthController.verify')
+/**
+ |--------------------------------------------------------------------------
+ | Contact pages
+ |--------------------------------------------------------------------------
+ */
 
-Route.on('success').render('success')
+Route.get('contact','ContactController.create')
+Route.post('contact', 'ContactController.store')
 
-Route.on('draftbot').render('draftbot')
+/**
+ |--------------------------------------------------------------------------
+ | Blog pages
+ |--------------------------------------------------------------------------
+ */
+
+Route.get('blog', 'BlogController.index')
+Route.get('blog/:id-:link', 'BlogController.show')
+Route.post('blog/:id/comment', 'CommentController.store')
+
+Route.post('newsletter', 'NewsletterController.store')
 
 /**
  |--------------------------------------------------------------------------
@@ -57,33 +76,127 @@ Route.post('search', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------
- | Blog pages
+ | Links
  |--------------------------------------------------------------------------
  */
 
-Route.get('blog', 'BlogController.index')
-Route.get('blog/:id-:link', 'BlogController.show')
-Route.post('blog/:id/comment', 'BlogController.comment')
-
-Route.post('newsletter', 'BlogController.newsletter')
+Route.get('discord','LinkController.discord')
+Route.get('twitter','LinkController.twitter')
+Route.get('github','LinkController.github')
+Route.get('gitlab','LinkController.gitlab')
+Route.get('facebook','LinkController.facebook')
+Route.get('paypal','LinkController.paypal')
+Route.get('google-plus','LinkController.google_plus')
+Route.get('patreon','LinkController.patreon')
 
 /**
  |--------------------------------------------------------------------------
- | Portfolio pages
+ | DraftBot
  |--------------------------------------------------------------------------
  */
 
-Route.get('portfolio', 'PortfolioController.index')
-Route.get('portfolio/:id-:url', 'PortfolioController.show')
+Route.get('draftbot','DraftBotController.index')
+Route.get('draftbot/invite','DraftBotController.invite')
 
 /**
  |--------------------------------------------------------------------------
- | Contact pages
+ | Auth pages
  |--------------------------------------------------------------------------
  */
 
-Route.on('contact').render('contact')
-Route.post('contact', 'ContactController.send')
+Route.group(() => {
+    Route.get('register', 'UserController.create')
+    Route.get('verify/:token','UserController.verify')
+    Route.post('register', 'UserController.register')
+
+    Route.get('login', 'SessionController.create')
+    Route.post('login', 'SessionController.store')
+    Route.delete('logout', 'SessionController.destroy')
+
+    Route.get('login/password','PasswordController.create')
+    Route.post('login/password', 'PasswordController.store')
+
+    Route.get('login/password/change/:token','PasswordController.edit')
+    Route.post('login/password/change/:token', 'PasswordController.update')
+}).middleware(['verif']);
+
+/**
+ |--------------------------------------------------------------------------
+ | Profil
+ |--------------------------------------------------------------------------
+ */
+
+Route.group(() => {
+  Route.on('me/').render('dashboard.accueil')
+  Route.on('me/profil').render('dashboard.profil')
+
+  Route.get('discord/login', 'SocialController.create')
+  Route.get('discord/callback', 'SocialController.store')
+
+  Route.post('me/profil/compte', 'UserController.update')
+  Route.post('me/profil/image', 'FileController.uploadImage')
+  Route.post('me/profil/social', 'SocialController.update')
+
+  Route.get('logout', 'AuthController.logout')
+}).middleware(['auth']);
+
+/**
+ |--------------------------------------------------------------------------
+ | NotClient pages
+ |--------------------------------------------------------------------------
+ */
+
+Route.group(() => {
+  Route.get('me/client', 'ClientController.create')
+  Route.post('me/client', 'ClientController.store')
+}).middleware(['auth','client']);
+
+/**
+ |--------------------------------------------------------------------------
+ | Clients pages
+ |--------------------------------------------------------------------------
+ */
+
+Route.group(() => {
+  Route.get('me/client/dashboard', 'ClientController.dashboard')
+  Route.post('me/client/pay', 'ClientController.pay')
+  Route.get('success', 'ClientController.success')
+  Route.get('cancel', 'ClientController.cancel')
+}).middleware(['auth','client_d']);
+
+/**
+ |--------------------------------------------------------------------------
+ | Moderator pages
+ |--------------------------------------------------------------------------
+ */
+
+Route.group(() => {
+  Route.get('me/comments', 'Dashboard.CommentController.comments')
+  Route.get('me/comments/:id/valide', 'Dashboard.CommentController.valide')
+  Route.get('me/comments/:id/delete', 'Dashboard.CommentController.destroy')
+
+  Route.get('me/articles', 'Dashboard.BlogController.index')
+  Route.get('me/articles/:id-:url', 'Dashboard.BlogController.show')
+}).middleware(['auth','modo']);
+
+/**
+ |--------------------------------------------------------------------------
+ | Writer pages
+ |--------------------------------------------------------------------------
+ */
+
+Route.group(() => {
+  Route.get('me/write', 'Dashboard.BlogController.create')
+  Route.post('me/write', 'Dashboard.BlogController.store')
+
+  Route.get('me/write/:id-:url', 'Dashboard.BlogController.edit')
+  Route.post('me/write/:id-:url', 'Dashboard.BlogController.update')
+
+  Route.get('blog/delete/:id-:url', 'Dashboard.BlogController.destroy')
+
+  Route.get('me/upload','Dashboard.FileController.create')
+  Route.post('me/upload','Dashboard.FileController.store')
+}).middleware(['auth','writer']);
 
 /**
  |--------------------------------------------------------------------------
@@ -92,86 +205,20 @@ Route.post('contact', 'ContactController.send')
  */
 
 Route.group(() => {
-    Route.on('login').render('auth.login')
-    Route.post('login', 'AuthController.login')
-    Route.on('register').render('auth.register')
-    Route.post('register', 'AuthController.register')
+  Route.get('admin/clients', 'Dashboard.ClientController.index')
+  Route.get('admin/clients/:id', 'Dashboard.ClientController.show')
+  Route.get('admin/clients/:id/accept', 'Dashboard.ClientController.accept')
+  Route.post('admin/clients/:id/refuse', 'Dashboard.ClientController.refuse')
+  // Route.get('admin/users', 'AdminController.users')
+  // Route.get('admin/newsletter', 'AdminController.newsletter')
 
-    Route.on('login/password').render('auth.password')
-    Route.post('login/password', 'AuthController.forgotPassword')
+  Route.get('admin/portfolio', 'PortfolioController.create')
+  Route.post('admin/portfolio', 'PortfolioController.store')
 
-    Route.get('login/password/change/:token','AuthController.updatePasswordByPage')
-    Route.post('login/password/change/:token', 'AuthController.updatePasswordByToken')
-}).middleware(['verif']);
+  Route.get('admin/portfolio/:id', 'PortfolioController.edit')
+  Route.post('admin/portfolio/:id', 'PortfolioController.update')
+  Route.post('admin/portfolio/:id/details', 'PortfolioDetailsController.update')
 
-Route.group(() => {
-    Route.get('me/client', 'ClientController.client_request')
-    Route.post('me/client', 'ClientController.requestC')
-}).middleware(['auth','client']);
-
-Route.group(() => {
-    Route.get('me/client/dashboard', 'ClientController.dashboard')
-    Route.post('me/client/pay', 'ClientController.pay')
-    Route.get('success', 'ClientController.paypalSuccess')
-    Route.get('cancel', 'ClientController.paypalCancel')
-}).middleware(['auth','client_d']);
-
-Route.group(() => {
-    Route.on('me/').render('dashboard.accueil')
-    Route.on('me/profil').render('dashboard.profil')
-
-    Route.get('discord/callback', 'ProfilController.discordCallback')
-
-    Route.post('me/profil/compte', 'ProfilController.updateProfil')
-    Route.post('me/profil/image', 'ProfilController.uploadProfil')
-    Route.post('me/profil/social', 'ProfilController.updateSocial')
-
-    Route.get('logout', 'AuthController.logout')
-}).middleware(['auth']);
-
-Route.group(() => {
-    Route.get('me/comments', 'BackofficeController.comments')
-    Route.get('me/comments/:id/delete', 'BackofficeController.destroy_comment')
-    Route.get('me/comments/:id/valide', 'BackofficeController.valide_comment')
-
-    Route.get('me/articles', 'BlogController.articles')
-    Route.get('me/articles/:id-:url', 'BlogController.view')
-}).middleware(['auth','modo']);
-
-Route.group(() => {
-    Route.get('me/write', 'BlogController.create')
-    Route.post('me/write', 'BlogController.store')
-
-    Route.get('me/write/:id-:url', 'BlogController.edit')
-    Route.post('me/write/:id-:url', 'BlogController.update')
-
-    Route.get('blog/delete/:id-:url', 'BlogController.delete')
-
-    Route.on('me/upload').render('dashboard.upload')
-    Route.post('me/upload','BackofficeController.uploadFile')
-}).middleware(['auth','writer']);
-
-Route.group(() => {
-    Route.get('admin/clients', 'ClientController.clients')
-    Route.get('admin/clients/:id', 'ClientController.show')
-    Route.get('admin/clients/:id/accept', 'ClientController.accept')
-    Route.post('admin/clients/:id/refuse', 'ClientController.refuse')
-    // Route.get('admin/users', 'AdminController.users')
-    // Route.get('admin/newsletter', 'AdminController.newsletter')
-
-    Route.get('admin/portfolio', 'PortfolioController.create')
-    Route.post('admin/portfolio', 'PortfolioController.store')
-
-    Route.get('admin/portfolio/:id', 'PortfolioController.edit')
-    Route.post('admin/portfolio/:id', 'PortfolioController.update')
-    Route.post('admin/portfolio/:id/details', 'PortfolioController.updateDetails')
-
-    Route.get('admin/portfolio/:id/upgrade', 'PortfolioController.upgrade')
-    Route.get('admin/portfolio/:id/decline', 'PortfolioController.decline')
+  Route.get('admin/portfolio/:id/upgrade', 'PortfolioDetailsController.upgrade')
+  Route.get('admin/portfolio/:id/decline', 'PortfolioDetailsController.decline')
 }).middleware(['auth','admin']);
-
-/**
- |--------------------------------------------------------------------------
- | Error pages
- |--------------------------------------------------------------------------
- */

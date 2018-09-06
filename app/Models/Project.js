@@ -9,9 +9,6 @@ class Project extends Model {
     author () {
         return this.belongsTo('App/Models/User', 'id', 'user_id')
     }
-    devblog () {
-        return this.hasMany('App/Models/DevPost','id', 'client_project_id')
-    }
     payments () {
         return this.hasMany('App/Models/Payment','id', 'client_project_id')
     }

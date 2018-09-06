@@ -6,7 +6,7 @@ class ExceptionHandler extends BaseExceptionHandler {
 
   async handle (error, { request, response, session, view }) {
     if (error.code === 'E_INVALID_SESSION') {
-      session.flash({ error: 'Il faut être connecté pour aller ici !' })
+      session.flash({ error: 'Veuillez vous reconnecter !' })
 
       return response.redirect('/login')
     }

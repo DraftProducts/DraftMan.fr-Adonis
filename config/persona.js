@@ -100,6 +100,7 @@ module.exports = {
       'email.email': 'Veuillez entrer une adresse email valide.',
       'username.unique': 'Ce pseudo est déjà utilisé.',
       'email.unique': 'Cette adresse email est déjà utilisé.',
+      'email.exists': 'Utilisateur introuvable',
       'password.required': action === 'updatePassword' ? 'Veuillez indiquer votre nouveau mot de passe.' : 'Veuillez indiquer votre mot de passe.',
       'password.mis_match': 'Mot de passe incorect',
       'password.confirmed': 'Veuillez répéter votre mot de passe.',

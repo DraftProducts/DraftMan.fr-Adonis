@@ -3,7 +3,6 @@
 const { validate } = use('Validator')
 const Mail = use('Mail')
 
-const DevPost = use('App/Models/DevPost');
 const Project = use('App/Models/Project');
 const Client = use('App/Models/Client');
 const User = use('App/Models/User');
@@ -12,6 +11,7 @@ const Env = use('Env');
 const paypal = require('paypal-rest-sdk')
 const moment = require('moment')
 moment.locale('fr');
+const { get, post } = require('snekfetch');
 const { promisify } = require('util')
 const fs = require('fs');
 
@@ -26,7 +26,7 @@ class ClientController {
     })
   }
 
-  async client_request ({view,auth}) {
+  async create ({view,auth}) {
     const notif = await Client.query().where('user_id', auth.user.id).where('status',0).first()
     if(notif) {
       return view.render('clients.client_request',{notif: notif.toJSON()})
@@ -34,20 +34,38 @@ class ClientController {
     return view.render('clients.client_request')
   }
 
-  async dashboard ({session, view,auth}) {
-    const project = (await Project.query().with('devblog').where('id', auth.user.project_id).first()).toJSON()
+  async show ({session, view,auth,response}) {
+    const project = (await Project.query().where('id', auth.user.project_id).first()).toJSON()
     const images = await readdir(`public/uploads/projects/${project.folder}/images`)
     const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
+    const repo = 'DraftMan.fr'
+    const owner = 'DraftProducts'
+    const res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1000`)
+    const commitsList = new Map(), commitsSize = new Map()
+    const brut = res.body;
+    brut.forEach(element => {
+      const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
+      if(commitsSize.has(date)){
+        commitsSize.set(date, commitsSize.get(date)+1)
+      }else{
+        commitsSize.set(date, 1)
+      }
+    });
+    brut.forEach(element => {
+      const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
+      commitsList.set(date, element.commit.message)
+    });
+    console.log(commitsList.toJSON())
     try {
       const paypalResponse = await this.createPayment(project)
       session.put('paymentId', paypalResponse.paymentId)
-      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl})
+      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commitsSize: commitsSize.toJSON(),commitsList: commitsList.toJSON()})
     } catch (e) {
-      return view.render('clients.client_dashboard',{project,images,fichiers})
+      return view.render('clients.client_dashboard',{project,images,fichiers,commits,values,keys})
     }
   }
 
-  async requestC({request, session, response,auth}) {
+  async store({request, session, response,auth}) {
     const data = request.only(['discord','name', 'type', 'description','validation'])
     const messages = {
         'name.required': 'Veuillez indiquer le nom du projet.',
@@ -104,61 +122,25 @@ class ClientController {
         session.flash({error: 'Une erreur s\'est produite votre demande n\'à pas été effectué, veuillez nous excusez !'})
         return response.redirect('back')
     }
-
   }
 
-  async clients({view}) {
-    const wclients = (await Client.query().with('author').where('status','=', 0).fetch()).toJSON()
-    const clients = (await Client.query().with('author').where('status','=', 1).fetch()).toJSON()
-    return view.render('clients.admin.clients',{clients,wclients})
-  }
-
-  async show({view,params,response}) {
-    const client = (await Client.query().with('author').where('id',params.id).first()).toJSON()
-    if(client.status === 0){
-      return view.render('clients.client_request_details',{client})
-    }else if(client.status === 1){
-      const project = (await Project.query().with('devblog').where('id', params.id).first()).toJSON()
-      console.log(project.devblog)
-      const images = await readdir(`public/uploads/projects/${project.folder}/images`)
-      const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
-      return view.render('clients.admin.client_dashboard',{client,images,fichiers,project})
-    }
-    return response.redirect('back')
-  }
-
-  async accept({view,params,response}) {
-    const client = (await Client.query().with('author').where('id',params.id).first()).toJSON()
-    await this.changeStatment(params.id,1)
-    const project = await this.createProject(client)
-    const user = await User.find(client.author.id)
-    user.client = 1;
-    user.project_id = project.id;
-    await user.save()
-    return response.redirect(`/admin/clients/${client.id}`)
-  }
-
-  async refuse({view,params}) {
-    await this.changeStatment(params.id,2)
-    return response.redirect('/admin/clients')
-  }
-
-  async paypalSuccess ({request, session, view}) {
+  async success ({request, session, view}) {
     const paymentId = session.get('paymentId')
     const paymentDetails = { payer_id: request.input('PayerID') }
     try {
-      await this.paypalSuccessDetails(paymentId, paymentDetails)
+      await this.successDetails(paymentId, paymentDetails)
       const project = await Project.find(auth.user.project_id)
       project.completed_payments = completed_payments + 1
       await project.save()
-      return view.render('success')
+      session.flash({success: 'Votre paiement a bien été effectué'})
+      return response.redirect('/me/client/dashboard')
     } catch (e) {
       console.log('error', e.message)
       session.flash({error: 'Une erreur est survenue veuillez nous excusez'})
     }
   }
 
-  async paypalCancel ({session, response}) {
+  async cancel ({session, response}) {
     session.forget('paymentId')
     session.flash({success: 'Vous avez bien annulé le paiement'})
     return response.redirect('/me/client/dashboard')
@@ -172,11 +154,6 @@ class ClientController {
     project.folder = client.name,
     project.user_id = client.author.id
     await project.save()
-    await DevPost.create({
-      'client_project_id':project.id,
-      'title':'Project init',
-      'description':'Projet initialisé !',
-    })
     fs.mkdirSync(`public/uploads/projects/${client.name}`);
     fs.mkdirSync(`public/uploads/projects/${client.name}/images`);
     fs.mkdirSync(`public/uploads/projects/${client.name}/fichiers`);
@@ -200,7 +177,7 @@ class ClientController {
     })
   }
 
-  paypalSuccessDetails(paymentId, paymentDetails){
+  successDetails(paymentId, paymentDetails){
     return new Promise((resolve, reject) => {
       paypal.payment.execute(paymentId, paymentDetails, (err) => {
         if (err) {
@@ -211,15 +188,15 @@ class ClientController {
     })
   }
 
-  paypalDetails(project) {
+  details(project) {
     return {
       intent: 'sale',
       payer: {
         payment_method: 'paypal'
       },
       redirect_urls: {
-        return_url: 'http://127.0.0.1:3333/success',
-        cancel_url: 'http://127.0.0.1:3333/cancel'
+        return_url: 'https://www.draftman.fr/success',
+        cancel_url: 'https://www.draftman.fr/cancel'
       },
       transactions: [{
         description: `Paiement n°${(project.payments != undefined ? project.payments.count()  + 1 : 0 + 1)} du projet ${project.name}`,
