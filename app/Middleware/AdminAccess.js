@@ -6,12 +6,12 @@ class AdminAccess {
      * Verify if we are a admin
      */
     try {
-      const user = auth.user.toJSON()
+      const user = auth.user;
       if(user.role < 1000){
         return response.redirect('back')
       }
     } catch (e) {}
-    
+
     await next()
   }
 }
