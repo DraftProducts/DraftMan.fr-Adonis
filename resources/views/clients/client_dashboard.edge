@@ -84,17 +84,22 @@
 {{script('js/viewer.min')}}
 {{script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')}}
 <script>
-const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {
+fetch('/api/project')
+.then(res=> res.json())
+.then(data => {
+  const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {
   type: 'bar',
   data: {
-    labels: ["Mardi 15 Juin", "Mardi 16 Juin", "Mardi 17 Juin", "Mardi 18 Juin", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    labels: Object.keys(data.commitsSize),
     datasets: [{
         type: "bar",label: "Contributions",backgroundColor: '#d58673',hoverBackgroundColor: '#cd6e57',
-        data: [5, 8, 6, 7, 3, 5, 6, 8, 2, 8, 5, 10, 11, 10, 1, 6, 5, 7, 8, 10, 8, 12, 7, 9, 5, 6, 10, 7, 8, 5, 6, 8, 5, 9, 3, 7, 1, 6, 4, 8, 4, 9, 10, 13, 7, 8, 6, 4, 11, 5, 6, 4, 7, 10, 4, 7, 4, 9 ],
+        data: Object.values(data.commitsSize),
     }]
   },
   options:{onResize: beforePrintHandler(),scales:{xAxes:[{gridLines:{display:false},ticks:{display:false}}],yAxes:[{gridLines:{display:false},ticks:{display:false}}],scaleLabel:{display:false}},legend:{display: false}}
 });
+})
+
 function beforePrintHandler () {
   for (var id in Chart.instances) {
     Chart.instances[id].resize()

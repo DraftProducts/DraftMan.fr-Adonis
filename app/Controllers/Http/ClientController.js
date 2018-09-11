@@ -17,6 +17,8 @@ const fs = require('fs');
 
 const readdir = promisify(fs.readdir)
 
+const githubToken = Env.get('GITHUB_API_TOKEN')
+
 class ClientController {
   constructor () {
     paypal.configure({
@@ -40,17 +42,9 @@ class ClientController {
     const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
     const repo = 'DraftMan.fr'
     const owner = 'DraftProducts'
-    const res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1000`)
-    const commitsList = new Map(), commitsSize = new Map()
+    const res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`).set("Authorization", `token ${githubToken}`)
+    const commitsList = new Map();
     const brut = res.body;
-    brut.forEach(element => {
-      const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
-      if(commitsSize.has(date)){
-        commitsSize.set(date, commitsSize.get(date)+1)
-      }else{
-        commitsSize.set(date, 1)
-      }
-    });
     brut.forEach(element => {
       const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
       commitsList.set(date, element.commit.message)
@@ -58,11 +52,36 @@ class ClientController {
     try {
       const paypalResponse = await this.createPayment(project)
       session.put('paymentId', paypalResponse.paymentId)
-      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commitsSize: commitsSize.toJSON(),commitsList: commitsList.toJSON()})
+      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commitsList: commitsList.toJSON()})
     } catch (e) {
       console.log(e)
-      return view.render('clients.client_dashboard',{project,images,fichiers,commitsSize,commitsList})
+      return view.render('clients.client_dashboard',{project,images,fichiers,commitsList})
     }
+  }
+
+  async getProjetCommits({auth,response}){
+    const project = (await Project.query().where('id', auth.user.project_id).first()).toJSON();
+    const repo = 'Bio2Game.com'
+    const owner = 'DraftProducts'
+    let res,page = 1;
+    const list = new Map()
+    do {
+        res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=100&page=${page}`).set("Authorization", `token ${githubToken}`)
+        res.body.forEach(element => {
+            const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
+            if(list.has(date)){
+                list.set(date, list.get(date)+1)
+            }else{
+                list.set(date, 1)
+            }
+        });
+        page++
+    } while (res.headers.link.includes('rel="last"'));
+
+    const commitsSize = [...list].reduce((acc, commit) => {
+        return Object.assign(acc, { [commit[0]]: commit[1] })
+    }, {})
+    response.status(200).json({ commitsSize})
   }
 
   async store({request, session, response,auth}) {
@@ -124,7 +143,7 @@ class ClientController {
     }
   }
 
-  async success ({request, session, view}) {
+  async success ({request, session}) {
     const paymentId = session.get('paymentId')
     const paymentDetails = { payer_id: request.input('PayerID') }
     try {
@@ -175,7 +194,6 @@ class ClientController {
   }
 
   details(project) {
-    console.log(project.payments)
     return {
       intent: 'sale',
       payer: {
@@ -186,7 +204,7 @@ class ClientController {
         cancel_url: 'https://www.draftman.fr/cancel'
       },
       transactions: [{
-        description: `Paiement n°${(project.payments != undefined ? project.payments.length()  + 1 : 0 + 1)} du projet ${project.name}`,
+        description: `Paiement n°${(project.payments != undefined ? project.payments.length  + 1 : 0 + 1)} du projet ${project.name}`,
         amount: {
           currency: 'EUR',
           total: (project.price/project.total_payments).toFixed(2)

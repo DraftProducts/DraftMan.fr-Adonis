@@ -15,8 +15,6 @@
 
 const Route = use('Route')
 
-
-
 /**
  |--------------------------------------------------------------------------
  | Pages
@@ -221,4 +219,6 @@ Route.group(() => {
 
   Route.get('admin/portfolio/:id/upgrade', 'PortfolioDetailsController.upgrade')
   Route.get('admin/portfolio/:id/decline', 'PortfolioDetailsController.decline')
-}).middleware(['auth','admin']);
+}).middleware(['auth','admin'])
+
+Route.get('api/project', 'ClientController.getProjetCommits')
