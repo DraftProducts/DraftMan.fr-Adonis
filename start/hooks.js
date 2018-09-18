@@ -1,6 +1,8 @@
 const { hooks } = require('@adonisjs/ignitor')
 const Remarkable = require('remarkable');
 const gravatar = require('gravatar');
+const moment = require('moment');
+moment.locale('fr');
 markdown = new Remarkable();
 
 hooks.after.providersRegistered(() => {
@@ -12,6 +14,10 @@ hooks.after.providersRegistered(() => {
 
   View.global('markdown', (text) => {
     return markdown.render(text)
+  })
+
+  View.global('dateF', (date) => {
+    return moment(date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
   })
 
   View.global('date', (date) => {
@@ -42,7 +48,7 @@ hooks.after.providersRegistered(() => {
   View.global('getNameByFile', (file) => {
     return file.match(/(.*)*\..*/);
   })
-  
+
   View.global('price', (price, times) => {
     return (price/times).toFixed(2)
   })
