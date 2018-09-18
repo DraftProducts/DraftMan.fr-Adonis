@@ -1,0 +1,73 @@
+@layout('panel')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>Client - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="Client - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="Client - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici la page permettant de devenir client par l'envoie d'un mail formaté.">
+    <meta property="og:description" content="Voici la page permettant de devenir client par l'envoie d'un mail formaté.">
+    <meta name="twitter:description" content="Voici la page permettant de devenir client par l'envoie d'un mail formaté.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/me/client" />
+    <meta property="og:url" content="https://www.draftman.fr/me/client">
+@endsection
+
+@section('content')
+<div class="client double">
+    <div class="write">
+          <form method="POST" name="form" action="/admin/user/{{user.id}}/client">
+            <div id="descriptif">
+                <div class="input-container">
+                    <input type="text" id="name" name="name" class="input" v-model="name">
+                    <label for="name">Nom du projet</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="type" name="type" class="input" v-model="type">
+                    <label for="type">Type de projet</label>
+                </div>
+                <div class="select-section">
+                    <select name="git_author">
+                        <option value="">Git Auteur</option>
+                        <option value="DraftProducts">GitHub (DraftProducts)</option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="git_repository" id="git_repository" class="input">
+                    <label for="git_repository">Git Repository</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="price" id="price" class="input">
+                    <label for="price">Prix total</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="total_payments" id="total_payments" class="input">
+                    <label for="total_payments">Nombre de paiements</label>
+                </div>
+            </div>
+            {{ csrfField() }}
+            <button class="input submit" type="submit">Créer le client</button>
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('name'), hasErrorFor('name')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('type'), hasErrorFor('type')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('git_author'), hasErrorFor('git_author')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('git_repository'), hasErrorFor('git_repository')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('price'), hasErrorFor('price')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('total_payments'), hasErrorFor('total_payments')) }}
+@if(flashMessage('client_saved'))
+  <div class="notif"><div class="notif_icon"></div><div class="content">{{ flashMessage('client_saved') }}</div></div>
+@endif
+@endsection
