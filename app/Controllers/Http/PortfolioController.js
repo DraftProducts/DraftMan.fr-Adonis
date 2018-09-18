@@ -47,7 +47,7 @@ class PortfolioController {
 
           return response.redirect('back')
         }
-        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
 
         if(illustration.size != 0){
           data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
@@ -67,11 +67,7 @@ class PortfolioController {
           saved: 'Création sauvegardé'
         })
 
-        if(data.published_at){
-            return response.redirect('/portfolio')
-        }else{
-            return response.redirect('/admin/portfolio')
-        }
+        return response.redirect('/admin/portfolio')
     }
 
     async edit({view,params}){
@@ -79,6 +75,7 @@ class PortfolioController {
         const portfolio = (await Portfolio.all()).toJSON();
         if(creation.portfolio_details_id !== null){
             creation = (await Portfolio.query().with('details').where('id','=', params.id).first()).toJSON();
+            console.log(creation)
             return view.render('portfolio.admin.edit-details', {portfolio,creation})
         }
         return view.render('portfolio.admin.edit', {portfolio,creation})
@@ -114,7 +111,7 @@ class PortfolioController {
           return response.redirect('back')
         }
 
-        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
 
         if(illustration.size != 0){
           data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
