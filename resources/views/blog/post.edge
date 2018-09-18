@@ -89,7 +89,7 @@
                     <section class="post-body">
                         {{{ markdown(post.content) }}}
                     </section>
-                    <section id="commentaires">
+                    <section id="commenter">
                         <h4>Commenter</h4>
                         <form method="post" action="/blog/{{post.id}}/comment">
                             @loggedIn
@@ -123,9 +123,9 @@
                                 <input type="submit" name="comment" value="Commenter ce post">
                             </div>
                         </form>
-                        <h4>Commentaires</h4>
                     </section>
                     <section id="comments">
+                        <h4>Commentaires</h4>
                         @each(comment in comments)
                             <div class="comment-section" id="{{comment.id}}">
                                 @if(comment.replies.length > 0)
@@ -204,6 +204,8 @@
                                     </div>
                                 @endeach
                             </div>
+                        @else
+                        <p>Aucun commentaires, soyez le premier à commenter l'article</p>
                         @endeach
                     </section>
                 </div>
@@ -228,6 +230,8 @@
                       <li>
                           <a href="/blog/{{item.id}}-{{item.url}}"><span class="hover_span"></span><span class="link_span">{{item.title}}</span></a>
                       </li>
+                      @else
+                      <p>Aucun autre article</p>
                       @endeach
                   </ul>
               </div>
