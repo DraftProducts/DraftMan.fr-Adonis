@@ -152,7 +152,8 @@
   text-decoration: none;
   font-size: 18px;
   color: #7E7E7E;
-  transition: 0.5s;
+  border-right: 4px solid transparent; border-left: 4px solid transparent;
+  transition: .3s background-color, .3s color, .3s border-color;
 }
 #dashboard #menu ul a.logout{
   display: none;
@@ -182,6 +183,11 @@
   color: #CD6E57;
   background-color: #F7F7F7;
 }
+#dashboard.xs #menu ul a.active,
+#dashboard.xs #menu ul a:hover {
+  border-right-color: #CD6E57
+}
+
 
 #burger {
   cursor: pointer;
@@ -286,11 +292,27 @@
   position: relative;
 }
 
+div.textarea-container{
+  width: 100%;
+  border: none;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  outline: 0;
+  margin-bottom: 20px;
+  position: relative;
+  background-color: #fff;
+}
+
 textarea.textarea {
   height: auto;
-  min-height: 200px;
-  resize: vertical;
-  font-family: Open Sans;
+    min-height: 100px;
+    resize: vertical;
+    font-family: 'Open Sans';
+    width: calc(100% - 150px);
+    margin-bottom: 0;
+    outline: 0;
+    border: 0;
+    padding: 15px;
+    resize: none;
 }
 
 .portfolio .textarea{
@@ -606,6 +628,77 @@ textarea.textarea {
 
 /**
  |--------------------------------------------------------------------------
+ | User list
+ |--------------------------------------------------------------------------
+ */
+
+#dashboard .users {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: column
+}
+
+#dashboard .users h2{
+  margin-left: 10px;
+}
+
+#dashboard .users .user {
+  display: flex;
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+  margin: 10px;
+}
+
+#dashboard .users .user .image {
+  width: 55px;
+  height: 55px;
+  background-size: cover;
+  background-position: center;
+}
+
+#dashboard .users .user>.content {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#dashboard .users .user>.content h3 {
+  font-size: 16px;
+}
+
+#dashboard .users .user>.content p {
+  font-size: 14px;
+}
+#dashboard .users .user .client {
+  text-decoration: none;
+  background-color: #cd6e57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+#dashboard .users .user .option {
+  text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    color: #454545;
+}
+
+
+
+
+/**
+ |--------------------------------------------------------------------------
  | Article file
  |--------------------------------------------------------------------------
  */
@@ -623,6 +716,10 @@ textarea.textarea {
 
 #dashboard .article_file.logo{
   width: 108px;
+}
+
+#dashboard .article_file.graph{
+  width: 160px;
 }
 
 #dashboard .article_file .file_input {
@@ -685,31 +782,10 @@ textarea.textarea {
   color: #7E7E7E;
 }
 
-#dashboard .dclient .progress {
-  height: 20px;
-  overflow: hidden;
-  background-color: #fff;
-  border-radius: 5px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+#dashboard .dclient .corps .form{
+  margin-top: 20px;
 }
 
-#dashboard .dclient .progress .bar {
-  float: left;
-  width: 0;
-  height: 100%;
-  background-color: #cd6e57;
-  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-  -webkit-transition: width .6s ease;
-  -o-transition: width .6s ease;
-  transition: width .6s ease;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  -webkit-background-size: 40px 40px;
-  background-size: 40px 40px;
-}
 
 #dashboard .timeline {
   width: 100%;
@@ -724,11 +800,20 @@ textarea.textarea {
   margin-bottom: 15px;
 }
 
+#dashboard .timeline p{
+  margin-top: 10px;
+  text-align: center;
+}
+
 #dashboard #images {
   margin-top: 20px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+#dashboard #images #previews{
+  display: none;
 }
 
 #dashboard #images p{
@@ -744,8 +829,34 @@ textarea.textarea {
 #dashboard #images .item {
   position: relative;
   width: 180px;
-  height: 130px;
+  height: 150px;
   padding: 10px
+}
+#dashboard #images .dropzone{
+  border: none;
+  transition: .3s all;
+  width: 180px;
+  height: 150px;
+  padding: 10px;
+}
+
+#dashboard #images .dropzone #dropper {
+  user-select: none;
+  color: #4e4e4e;
+  font-size: 85px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7e7e7;
+  transition: .3s all;
+}
+
+#dashboard #images .dropzone.active #dropper,#dashboard #images .dropzone:hover #dropper{
+  background-color: #d6d6d6;
+  transform: scale(1.1);
+  color: #a0a0a0;
 }
 
 #dashboard #images .item img {
@@ -859,7 +970,11 @@ textarea.textarea {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.16);
   margin-top: 20px;
 }
-
+#dashboard .dclient .devblog .items>p{
+  color: #fff;
+  margin-top: 10px;
+  overflow: hidden;
+}
 #dashboard .dclient .devblog ::-webkit-scrollbar {
   width: 15px;
 }
@@ -897,11 +1012,11 @@ textarea.textarea {
 #dashboard .dclient .devblog .item .title {
   color: #F92672;
   margin-bottom: 3px;
-  font-size: 15px;
+  font-size: 12px;
 }
 #dashboard .dclient .devblog .item p {
   color: #fff;
-  font-size: 12px;
+  font-size: 15px;
 }
 /**
  |--------------------------------------------------------------------------
@@ -1298,10 +1413,11 @@ textarea.textarea {
 
 #dashboard .select-section .select-items div,
 #dashboard .select-section .select-selected {
-    padding: 13px 18px;
-    cursor: pointer;
-    color: #757575;
-    font-size: 13.3333px;
+  padding: 13px 18px 13px 15px;
+  cursor: pointer;
+  font-size: 13.3333px;
+  font-size: 14px;
+  opacity: .5;
 }
 
 #dashboard .select-section .select-items div{
@@ -1313,6 +1429,7 @@ textarea.textarea {
 }
 #dashboard .select-section .select-items div:last-child{
     border-bottom: 1px solid #cbcbcb;
+    opacity: 1;
 }
 
 #dashboard .select-section .select-selected {
