@@ -22,7 +22,7 @@
 
 @section('content')
 <div class="write">
-    <form class="writer" method="POST" action="me/write" enctype="multipart/form-data">
+    <form class="writer" method="POST" action="/me/write" enctype="multipart/form-data">
         <div class="input-container">
             <input type="text" name="title" id="title" class="input" value="{{ old('title', '') }}">
             <label for="title">Titre</label>
@@ -39,8 +39,8 @@
             <label for="main-input">Ajouter un tag</label>
         </div>
 
-        <div class="input-container">
-            <textarea name="description" id="description" class="input textarea">{{ old('description', '') }}</textarea>
+        <div class="input-container textarea-container">
+            <textarea name="description" id="description" class="textarea">{{ old('description', '') }}</textarea>
             <label for="description">Description de l'article</label>
         </div>
 
@@ -74,11 +74,6 @@
 </div>
 @endsection
 
-@section('js')
-{{script('../js/simplemde.min.js')}}
-{{script('js/write')}}
-@endsection
-
 @section('notifs')
 
 {{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('title'), hasErrorFor('title')) }}
@@ -92,4 +87,9 @@
 @if(flashMessage('valid_basic'))
   <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('valid_basic') }}</div></div>
 @endif
+@endsection
+
+@section('js')
+{{script('../js/simplemde.min.js')}}
+{{script('/js/write')}}
 @endsection

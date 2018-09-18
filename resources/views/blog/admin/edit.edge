@@ -31,14 +31,16 @@
             <input type="text" name="url" id="url" class="input" value="{{post.url}}">
             <label for="url">Url de l'article</label>
         </div>
-        <div class="input-container">
-            <textarea name="description" id="description" class="input textarea">{{ old('description', post.description) }}</textarea>
-            <label for="description">Description de l'article</label>
-        </div>
+
         <div class="tags-section input input-container">
             <input type="hidden" id="hidden-input" name="tags">
             <input type="text" class="tag-input input" id="main-input" value="{{ old('tags', post.tags) }}"/>
             <label for="main-input">Ajouter un tag</label>
+        </div>
+
+        <div class="input-container  textarea-container">
+            <textarea name="description" id="description" class="textarea">{{ old('description', post.description) }}</textarea>
+            <label for="description">Description de l'article</label>
         </div>
 
         <textarea name="content" id="markdown" placeholder="Contenu de l'article">{{ old('content', post.content) }}</textarea>
