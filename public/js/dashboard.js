@@ -2,7 +2,7 @@ const dashboard = new Vue({
     el: '#dashboard',
     delimiters: ['@{', '}'],
     data: {
-        open: true,
+        open: localStorage.getItem('open'),
         profil: false,
         name: '',
         type: '',
@@ -64,14 +64,16 @@ const dashboard = new Vue({
                 });
             });
         },
-        toggleMenu: function(){
-            this.open = !this.open
-        },
         toggleProfil: function(){
             this.profil = !this.profil
         },
         toggleRefuse: function(){
             this.refuse = !this.refuse
         }
+    },
+    watch: {
+      toggleMenu: function () {
+        localStorage.setItem('open', !this.open)
+      }
     }
 });
