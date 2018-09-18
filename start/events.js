@@ -6,13 +6,7 @@ Event.on('user::created', async ({user}) => {
   try {
     const { token } = await user.tokens().where('user_id', user.id).first()
     const base = use('Encryption').base64Encode(token)
-
-    console.log('base', base)
-
-
     await Mail.send('mails.inscription', { token: base }, (message) => {
-
-      console.log(token, base)
 
       message
         .to(user.email)
@@ -29,9 +23,6 @@ Event.on('email::changed', async ({user}) => {
   try {
     const { token } = await user.tokens().where('user_id', user.id).first()
     const base = use('Encryption').base64Encode(token)
-
-    console.log('base', base)
-
 
     await Mail.send('mails.change-email', { token: base }, (message) => {
 
@@ -51,8 +42,6 @@ Event.on('forgot::password', async ({user,token}) => {
     const base = use('Encryption').base64Encode(token)
 
     await Mail.send('mails.forget-password', { token: base }, (message) => {
-
-      console.log(token, base)
 
       message
         .to(user.email)
