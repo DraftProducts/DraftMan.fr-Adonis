@@ -1,11 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
-const Email = use('App/Models/Email')
 const Comment = use('App/Models/Comment')
-const { validate } = use('Validator')
-const Helpers = use('Helpers')
-const moment = require('moment')
 
 class BlogController {
     // index = Liste tes posts
@@ -24,7 +20,7 @@ class BlogController {
     async show ({ params, view }){
         const [post, posts, comments] = await Promise.all([
           Post.query().with('author').where('id', params.id).where('deleted',0).first(),
-          Post.query().whereNotNull('published_at').where('deleted',0).fetch(),
+          Post.query().whereNotNull('published_at').whereNot('id',params.id).where('deleted',0).fetch(),
           Comment.query().with('replies').where('post_id', params.id).where('parent_id', 0).fetch(),
         ])
         return view.render('blog.post', { post: post.toJSON(), tags: post.toJSON().tags.split(', '), posts: posts.toJSON(), comments: comments.toJSON() })
