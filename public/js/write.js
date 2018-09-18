@@ -1,11 +1,6 @@
 window.addEventListener('DOMContentLoaded', function () {
-    const simplemde = new SimpleMDE({ 
+    const simplemde = new SimpleMDE({
         element: document.getElementById("markdown"),
-        autosave: {
-            enabled: true,
-            uniqueId: "writer_mde",
-            delay: 1000,
-        },
         showIcons: ["code", "table","horizontal-rule","strikethrough"],
         hideIcons: ["heading"],
         spellChecker: false,
@@ -18,7 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const mainInput = document.getElementById('main-input'),
             tags = [];
-
+            console.log(mainInput)
         let enteredTags = mainInput.value.split(', ');
         if (enteredTags.length > 1) {
             enteredTags.forEach(function (t) {
@@ -30,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         mainInput.addEventListener('input', function () {
-            let enteredTags = mainInput.value.split(', ');
+            let enteredTags = mainInput.value.split(',');
             if (enteredTags.length > 1) {
                 enteredTags.forEach(function (t) {
                     let filteredTag = filterTag(t);
