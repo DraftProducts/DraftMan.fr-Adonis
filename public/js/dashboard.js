@@ -69,11 +69,9 @@ const dashboard = new Vue({
         },
         toggleRefuse: function(){
             this.refuse = !this.refuse
+        },
+        toggleMenu: function () {
+          localStorage.setItem('open', !this.open)
         }
-    },
-    watch: {
-      toggleMenu: function () {
-        localStorage.setItem('open', !this.open)
-      }
     }
 });
