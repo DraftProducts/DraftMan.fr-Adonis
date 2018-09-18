@@ -1,0 +1,25 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>404 - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="404 - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="404 - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Tu te trouves sur une page 404, cela signifie que tu t'es perdu ou que cette page n'éxiste plus !">
+    <meta property="og:description" content="Tu te trouves sur une page 404, cela signifie que tu t'es perdu ou que cette page n'éxiste plus !">
+    <meta name="twitter:description" content="Tu te trouves sur une page 404, cela signifie que tu t'es perdu ou que cette page n'éxiste plus !">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/404" />
+    <meta property="og:url" content="https://www.draftman.fr/404">
+@endsection
+
+@section('content')
+<section id="error">
+    <div>
+      <img src="/images/404.png" alt="404">
+    </div>
+  </section>
+@endsection

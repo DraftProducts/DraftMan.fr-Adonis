@@ -1,0 +1,25 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>500 - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="500 - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="500 - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Tu te trouves sur une page 500, cela signifie qu'un problème est survenu !">
+    <meta property="og:description" content="Tu te trouves sur une page 500, cela signifie qu'un problème est survenu !">
+    <meta name="twitter:description" content="Tu te trouves sur une page 500, cela signifie qu'un problème est survenu !">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/500" />
+    <meta property="og:url" content="https://www.draftman.fr/500">
+@endsection
+
+@section('content')
+<section id="error">
+    <div>
+      <img src="/images/500.png" alt="500">
+    </div>
+  </section>
+@endsection
