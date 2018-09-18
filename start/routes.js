@@ -132,10 +132,10 @@ Route.group(() => {
   Route.get('discord/callback', 'SocialController.store')
 
   Route.post('me/profil/compte', 'UserController.update')
-  Route.post('me/profil/image', 'FileController.uploadImage')
+  Route.post('me/profil/image', 'Dashboard/FileController.uploadImage')
   Route.post('me/profil/social', 'SocialController.update')
 
-  Route.get('logout', 'AuthController.logout')
+  Route.get('logout', 'SessionController.destroy')
 }).middleware(['auth']);
 
 /**
@@ -169,7 +169,7 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('me/comments', 'Dashboard/CommentController.comments')
+  Route.get('me/comments', 'Dashboard/CommentController.index')
   Route.get('me/comments/:id/valide', 'Dashboard/CommentController.valide')
   Route.get('me/comments/:id/delete', 'Dashboard/CommentController.destroy')
 
@@ -207,7 +207,12 @@ Route.group(() => {
   Route.get('admin/clients/:id', 'Dashboard/ClientController.show')
   Route.get('admin/clients/:id/accept', 'Dashboard/ClientController.accept')
   Route.post('admin/clients/:id/refuse', 'Dashboard/ClientController.refuse')
-  // Route.get('admin/users', 'AdminController.users')
+
+  Route.post('admin/clients/:project/upload','Dashboard/FileController.uploadProjectImage')
+  Route.post('admin/clients/:project/update','Dashboard/ClientController.update')
+  Route.get('admin/users', 'Dashboard/UserController.create')
+  Route.get('admin/user/:id/client', 'Dashboard/ClientController.create')
+  Route.post('admin/user/:id/client', 'Dashboard/ClientController.store')
   // Route.get('admin/newsletter', 'AdminController.newsletter')
 
   Route.get('admin/portfolio', 'PortfolioController.create')
