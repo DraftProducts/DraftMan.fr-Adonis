@@ -17,62 +17,142 @@
 @endsection
 
 @section('css')
-    {{style('css/viewer.min')}}
+    {{style('/css/dropzone.min')}}
 @endsection
 
 @section('content')
 <div class="dclient double">
     <div class="corps">
-            <input type='range' value='{{project.progress}}' max='100'/>
-        <div id="images">
-            <div class="item">
-                +
-            </div>
-            @each(image in images)
-            <div class="item">
-                <img data-viewer="/uploads/projects/{{project.folder}}/images/{{image}}" src="/uploads/projects/{{project.folder}}/images/{{image}}" alt="{{image}}">
-                <div class="hover"></div>
-                <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/images/{{image}}")'></div>
-            </div>
-            @endeach
+        <div class="name">
+            {{project.name}}
         </div>
+        <div class="timeline">
+            <h3>Contributions</h3>
+            @if(project.git_repository)
+            <canvas id="contributions" width="600" height="100"></canvas>
+            {{script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')}}
+            <script>
+              fetch('/api/project')
+              .then(res=> res.json())
+              .then(data => {
+                const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {
+                type: 'bar',
+                data: {
+                  labels: Object.keys(data.commitsSize),
+                  datasets: [{
+                      type: "bar",label: "Contributions",backgroundColor: '#d58673',hoverBackgroundColor: '#cd6e57',
+                      data: Object.values(data.commitsSize),
+                  }]
+                },
+                options:{onResize: beforePrintHandler(),scales:{xAxes:[{gridLines:{display:false},ticks:{display:false}}],yAxes:[{gridLines:{display:false},ticks:{display:false}}],scaleLabel:{display:false}},legend:{display: false}}
+              });
+              })
+
+              function beforePrintHandler () {
+                for (var id in Chart.instances) {
+                  Chart.instances[id].resize()
+                }
+              }
+            </script>
+            @else
+            <p>Aucun repository pour l'instant</p>
+            @endif
+        </div>
+        <form method="POST" action="/admin/clients/{{project.id}}/update" class="form">
+          <div class="select-section">
+              <select name="git_author">
+                  <option value="" {{project.git_author === '' ? 'selected': ''}}>Git Auteur</option>
+                  <option value="DraftProducts" {{project.git_author === 'DraftProducts' ? 'selected': ''}}>GitHub (DraftProducts)</option>
+              </select>
+          </div>
+          <div class="input-container">
+              <input type="text" name="git_repository" id="git_repository" class="input" value="{{project.git_repository}}">
+              <label for="git_repository">Git Repository</label>
+          </div>
+          <div class="input-container">
+              <input type="text" name="price" id="price" class="input" value="{{project.price}}">
+              <label for="price">Prix total</label>
+          </div>
+          <div class="input-container">
+              <input type="text" name="total_payments" id="total_payments" class="input" value="{{project.total_payments}}">
+              <label for="total_payments">Nombre de paiements</label>
+          </div>
+          {{ csrfField() }}
+          <button class="input submit" type="submit">Charger les informations</button>
+      </form>
     </div>
     <div class="infos">
-        <div class="speed_contact">
-            <h3>Projet</h3>
-            <p>Prix : +33 7 67 55 95 31</p>
-            <p>Email : contact@gmail.com</p>
-            <p>Discord : DraftMan#6284</p>
-        </div>
         <div class="devblog">
             <h3>DEVBLOG - {{project.name}}</h3>
-            @each(item in project.devblog)
-            <div class="item">
-                <div class="title">{{item.title}}</div>
-                <p>{{item.description}}</p>
+            <div class="items">
+              @each(item in commitsList)
+              <div class="item">
+                  <div class="title">{{item.title}}</div>
+                  <p>{{item.description}}</p>
+              </div>
+              @else
+                <p>Aucune commits pour l'instant</p>
+              @endeach
             </div>
-            @endeach
+        </div>
+        <div id="images">
+            <div class="content">
+              <form method="POST" class="dropzone" id="fileUploader" action="/admin/clients/{{project.folder}}/upload" enctype="multipart/form-data">
+                  <div id="dropper">
+                    <span class="dz-message">+</span>
+                  </div>
+                  {{ csrfField() }}
+              </form>
+              @each(image in images)
+              <div class="item">
+                  <img data-viewer="/uploads/projects/{{project.folder}}/images/{{image}}" src="/uploads/projects/{{project.folder}}/images/{{image}}" alt="{{image}}">
+                  <div class="hover"></div>
+                  <div class="content" style='background-image: url("/uploads/projects/{{project.folder}}/images/{{image}}")'></div>
+              </div>
+              @endeach
+            </div>
+            <div id="previews"></div>
         </div>
     </div>
 </div>
 @endsection
 
 @section('js')
+{{script('/js/dropzone.min')}}
 <script>
-window.addEventListener('DOMContentLoaded', function () {
-    console.log('hé hé ')
-    const style = document.createElement('style'), 
-    range = document.querySelector('input[type=range]')
+const dropper = document.getElementById('dropper');
 
-    document.getElementsByTagName('body')[0].appendChild(style);
-
-    const getStyle = (val) => {
-        return 'input[type=range]::-webkit-slider-runnable-track{background-size:' + val + '% 100%}';
-    };
-
-    range.addEventListener('input', function() {
-        style.textContent = getStyle((100*(this.value - 0)/(this.max - 0)));
+Dropzone.options.fileUploader = {
+  clickable: dropper,
+  createImageThumbnails: false,
+  previewsContainer: '#previews',
+  init:function(){
+    this.on('dragenter', function () {
+      dropper.classList.add('active')
     });
-});
+
+    this.on('dragleave', function () {
+      dropper.classList.remove('active')
+    });
+
+    this.on('drop', function () {
+      dropper.classList.remove('active')
+    });
+  }
+}
 </script>
+@endsection
+
+@section('notifs')
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('git_author'), hasErrorFor('git_author')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('git_repository'), hasErrorFor('git_repository')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('price'), hasErrorFor('price')) }}
+
+{{ elIf('<div class="notif error"> <div class="notif_icon"></div><div class="content">$self</div></div>', getErrorFor('total_payments'), hasErrorFor('total_payments')) }}
+
+@if(flashMessage('client_saved'))
+  <div class="notif"><div class="notif_icon"></div><div class="content">{{ flashMessage('client_saved') }}</div></div>
+@endif
 @endsection
