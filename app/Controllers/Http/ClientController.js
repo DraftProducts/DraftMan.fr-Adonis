@@ -36,39 +36,30 @@ class ClientController {
     return view.render('clients.client_request')
   }
 
-  async show ({session, view,auth,response}) {
+  async show ({session, view,auth}) {
     const project = (await Project.query().with('payments').where('id', auth.user.project_id).first()).toJSON()
     const images = await readdir(`public/uploads/projects/${project.folder}/images`)
     const fichiers = await readdir(`public/uploads/projects/${project.folder}/fichiers`)
-    const repo = 'DraftMan.fr'
-    const owner = 'DraftProducts'
-    const res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`).set("Authorization", `token ${githubToken}`)
-    const commitsList = new Map();
-    const brut = res.body;
-    brut.forEach(element => {
-      const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
-      commitsList.set(date, element.commit.message)
-    });
+    const res = await get(`https://api.github.com/repos/${project.git_author}/${project.git_repository}/commits?per_page=100`).set("Authorization", `token ${githubToken}`)
+    const commits = res.body;
     try {
       const paypalResponse = await this.createPayment(project)
       session.put('paymentId', paypalResponse.paymentId)
-      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commitsList: commitsList.toJSON()})
+      return view.render('clients.client_dashboard',{project,images,fichiers,link:paypalResponse.approvalUrl,commits})
     } catch (e) {
       console.log(e)
-      return view.render('clients.client_dashboard',{project,images,fichiers,commitsList})
+      return view.render('clients.client_dashboard',{project,images,fichiers,commits})
     }
   }
 
   async getProjetCommits({auth,response}){
     const project = (await Project.query().where('id', auth.user.project_id).first()).toJSON();
-    const repo = 'Bio2Game.com'
-    const owner = 'DraftProducts'
     let res,page = 1;
     const list = new Map()
     do {
-        res = await get(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=100&page=${page}`).set("Authorization", `token ${githubToken}`)
+        res = await get(`https://api.github.com/repos/${project.git_author}/${project.git_repository}/commits?per_page=100&page=${page}`).set("Authorization", `token ${githubToken}`)
         res.body.forEach(element => {
-            const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
+            const date = moment(element.commit.committer.date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());
             if(list.has(date)){
                 list.set(date, list.get(date)+1)
             }else{
@@ -76,7 +67,7 @@ class ClientController {
             }
         });
         page++
-    } while (res.headers.link.includes('rel="last"'));
+    } while (res.headers.link !== undefined && res.headers.link.includes('rel="last"'));
 
     const commitsSize = [...list].reduce((acc, commit) => {
         return Object.assign(acc, { [commit[0]]: commit[1] })
