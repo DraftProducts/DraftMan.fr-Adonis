@@ -1,5 +1,7 @@
 'use strict'
 
+const Comment = use('App/Models/Comment')
+
 class CommentController {
   async index({view}) {
     const comments = (await Comment.query().with('post').where('seen',0).fetch()).toJSON()
