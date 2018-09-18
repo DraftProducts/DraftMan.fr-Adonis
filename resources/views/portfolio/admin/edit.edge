@@ -31,8 +31,8 @@
                 <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
             </select>
         </div>
-        <div class="input-container">
-            <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
+        <div class="input-container textarea-container">
+            <textarea name="description" id="description" class="textarea">{{old('description',creation.description)}}</textarea>
             <label for="description">Description de la création</label>
         </div>        <div class="compact">
             <div class="item">
