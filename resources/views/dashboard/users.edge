@@ -17,8 +17,18 @@
 @endsection
 
 @section('content')
-<div class="message">
-    <h1>Bienvenue {{auth.user.username}} sur votre panel admin de DraftMan.fr !</h1>
-    <p>Cette page est encore en développement.</p>
+<div class="users">
+  <h2>Utilisateurs</h2>
+  @each(user in users)
+  <div class="user">
+      <div class="image" style="background-image: url({{getProfilImage(user)}})"></div>
+      <div class="content">
+          <h3>{{user.username}}</h3>
+          <p>{{user.email}}</p>
+      </div>
+      <a href="/admin/user/{{user.id}}/client" class="client">client</a>
+      <a href="" class="option"><i class="icon-face"></i></a>
+  </div>
+  @endeach
 </div>
 @endsection
