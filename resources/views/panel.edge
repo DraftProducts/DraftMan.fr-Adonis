@@ -49,23 +49,25 @@
                 <span class="username" v-if="open">{{auth.user.username}}</span>
                 <ul>
                     <a class="{{request.url() === '/me/' ? 'active': ''}}" href="/me/"><i class="icon-home"></i><span v-if="open">Accueil</span></a>
-                    <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i class="icon-user"></i><span v-if="open">Modification du profil</span></a>
-                    @if(auth.user.client === 1)
-                        <a class="{{request.url() === '/me/client/dashboard' ? 'active': ''}}" href="/me/client/dashboard"><i class="icon-client"></i><span v-if="open">Espace Client</span></a>
-                    @else
-                        <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i class="icon-client"></i><span v-if="open">Devenir Client</span></a>
+                    <a class="{{request.url() === '/me/profil' ? 'active': ''}}" href="/me/profil"><i class="icon-user"></i><span v-if="open">Mon profil</span></a>
+                    @if(auth.user.role !== 1000)
+                      @if(auth.user.client === 1)
+                          <a class="{{request.url() === '/me/client/dashboard' ? 'active': ''}}" href="/me/client/dashboard"><i class="icon-client"></i><span v-if="open">Espace Client</span></a>
+                      @else
+                          <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i class="icon-client"></i><span v-if="open">Devenir Client</span></a>
+                      @endif
                     @endif
                     @if(auth.user.role >= 1)
                         <a class="{{request.url() === '/me/comments' ? 'active': ''}}" href="/me/comments"><i class="icon-comment"></i><span v-if="open">Commentaires</span></a>
                         <a class="{{request.url() === '/me/articles' ? 'active': ''}}" href="/me/articles"><i class="icon-articles"></i><span v-if="open">Articles</span></a>
                     @endif
                     @if(auth.user.role >= 2)
-                        <a class="{{request.url() === '/me/write' ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open">Ecrire un article</span></a>
+                        <a class="{{request.url().startsWith('/me/write') ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open">Ecrire un article</span></a>
                         <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open">Upload</span></a>
                     @endif
                     @if(auth.user.role === 1000)
                         <a class="{{request.url().startsWith('/admin/clients') ? 'active': ''}}" href="/admin/clients"><i class="icon-group"></i><span v-if="open">Clients</span></a>
-                        {{--  <a class="{{request.url() === '/admin/users' ? 'active': ''}}" href="/admin/users"><i class="icon-face"></i><span v-if="open">Roles</span></a>  --}}
+                        <a class="{{request.url().startsWith('/admin/user') ? 'active': ''}}" href="/admin/users"><i class="icon-face"></i><span v-if="open">Utilisateurs</span></a>
                         <a class="{{request.url().startsWith('/admin/portfolio') ? 'active': ''}}" href="/admin/portfolio"><i class="icon-developer-board"></i><span v-if="open">Portfolio</span></a>
                         {{--  <a class="{{request.url() === '/admin/newsletter' ? 'active': ''}}" href="/admin/newsletter"><i class="icon-fiber-new"></i><span v-if="open">NewsLetter</span></a>  --}}
                     @endif
