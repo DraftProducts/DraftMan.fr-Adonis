@@ -1,22 +1,50 @@
 'use strict'
 
+const Comment = use('App/Models/Comment')
+const { validate } = use('Validator')
+
 class CommentController {
-  async index({view}) {
-    const comments = (await Comment.query().with('post').where('seen',0).fetch()).toJSON()
-    return view.render('blog.admin.comments',{comments})
-  }
+  async store ({ request,session, params,response, auth}){
+    const data = request.only(['name', 'email', 'website','twitter','github','linkedin','content','parent_id'])
+    data.post_id = params.id
+    data.seen = 0
 
-  async valide({params,response}) {
-    const comment = await Comment.find(params.id)
-    comment.seen = 1
-    await comment.save()
-    response.redirect('back')
-  }
+    if(!data.parent_id) data.parent_id = 0
 
-  async destroy({params,response}) {
-    const comment = await Comment.find(params.id)
-    await comment.delete()
-    response.redirect('back')
+    if(auth.user){
+        data.name = auth.user.username
+        data.email = auth.user.email
+        data.website = auth.user.website
+        data.twitter = auth.user.twitter
+        data.github = auth.user.github
+        data.linkedin = auth.user.linkedin
+    }
+
+    const messages = {
+        'name.required': 'Veuillez indiquer votre pseudo.',
+        'email.required.email': 'Veuillez entrer une adresse email valide.',
+        'content.required': 'Veuillez entrer votre message.'
+    }
+
+    const rules = {
+      name: 'required',
+      email: 'required|email',
+      content: 'required'
+    }
+
+    const validation = await validate(data, rules, messages)
+
+    if (validation.fails()) {
+        session
+        .withErrors(validation.messages())
+        .flashAll()
+
+        return response.redirect('back')
+    }
+
+    await Comment.create(data)
+
+    return response.redirect('back')
   }
 }
 
