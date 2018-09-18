@@ -35,32 +35,6 @@
                 <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
             </select>
         </div>
-        <div class="colors">
-            <div class="pickers">
-                <button class="jscolor {valueElement:'color1', onFineChange:'setTextColor(this)',hash:true}"></button>
-                <button class="jscolor {valueElement:'color2', onFineChange:'setTextColor(this)',hash:true}"></button>
-                <button class="jscolor {valueElement:'color3', onFineChange:'setTextColor(this)',hash:true}"></button>
-                <button class="jscolor {valueElement:'color4', onFineChange:'setTextColor(this)',hash:true}"></button>
-                <button class="jscolor {valueElement:'color5', onFineChange:'setTextColor(this)',hash:true}"></button>
-            </div>
-            <div class="hex">
-                <input name="color1" id="color1" value="{{old('color1',parse(creation.details.colors).color1)}}">
-                <input name="color2" id="color2" value="{{old('color2',parse(creation.details.colors).color2)}}">
-                <input name="color3" id="color3" value="{{old('color3',parse(creation.details.colors).color3)}}">
-                <input name="color4" id="color4" value="{{old('color4',parse(creation.details.colors).color4)}}">
-                <input name="color5" id="color5" value="{{old('color5',parse(creation.details.colors).color5)}}">
-            </div>
-        </div>
-
-        <div class="input-container">
-            <input type="text" name="typographie1" id="typographie1" class="input" value="{{old('typographie1',creation.details.typographie1)}}">
-            <label for="typographie1">Typographie n°1</label>
-        </div>
-        <div class="input-container">
-            <input type="text" name="typographie2" id="typographie2" class="input" value="{{old('typographie2',creation.details.typographie2)}}">
-            <label for="typographie2">Typographie n°2</label>
-        </div>
-
         <div class="input-container">
             <textarea name="description" id="description" class="input textarea">{{old('description',creation.description)}}</textarea>
             <label for="description">Description de la création</label>
@@ -95,6 +69,14 @@
                     <div class="image" style="background-image: url(/uploads/portfolio/{{creation.details.logo}})">
                         <div class="text">
                             Logo
+                        </div>
+                    </div>
+                </div>
+                <div class="article_file graph visu">
+                    <input type="file" name="graph" class="file_input ">
+                    <div class="image" style="background-image: url(/uploads/portfolio/{{creation.details.graph}})">
+                        <div class="text">
+                            Graph
                         </div>
                     </div>
                 </div>
