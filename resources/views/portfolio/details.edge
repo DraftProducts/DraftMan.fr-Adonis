@@ -20,37 +20,42 @@
 <section id="blog" class="post project">
     <div class="content">
     <div class="corps">
-    	<div class="item-content">
-            <div class="top-content">
+    	<div class="item-content projet">
+            <div class="text">
                 <h2>{{project.name}}</h2>
                 <div class="infos">
                     <li><i class="icon-user"></i><span>{{project.type}}</span></li>
                     <li><i class="icon-calender"></i><span>{{date(project.published_at)}}</span></li>
                 </div>
-            </div>
-            <div class="text">
                 <section class="post-body portfolio">
                     {{{ markdown(project.details.presentation) }}}
                 </section>
-                <div class="logo" style="background-image: url(/uploads/portfolio/{{project.details.logo}});"></div>
             </div>
+            @if(project.details.logo)
+            <div class="logo" style="background-image: url(/uploads/portfolio/{{project.details.logo}});"></div>
+            @endif
         </div>
+        @if(project.details.graph)
         <div class="item-content">
-            <h4 class="spe-gra">Spécificités Graphique</h4>
-        <img class="spe-gra" src="/uploads/projects/{{project.details.folder}}/{{project.details.graph}}" alt="Spécifications du projet {{project.name}}">
+            <img class="spe-gra" src="/uploads/portfolio/{{project.details.graph}}" alt="Spécifications du projet {{project.name}}">
         </div>
+        @endif
+        @if(project.details.problematique)
         <div class="item-content">
             <h4 class="spe-gra">Problématique</h4>
             <section class="post-body">
               {{{ markdown(project.details.problematique) }}}
             </section>
         </div>
+        @endif
+        @if(project.details.technique)
         <div class="item-content">
             <h4 class="spe-gra">Description technique</h4>
             <section class="post-body">
               {{{ markdown(project.details.technique) }}}
             </section>
         </div>
+        @endif
     </div>
 	<div id="sidebar">
         <div class="item">
@@ -65,7 +70,20 @@
             </div>
         </div>
         <div class="item">
-            <h4>D'autres modules sont à venir</h4>
+            <h4>Les derniers projets</h4>
+            <hr>
+            <ul>
+                @each(item in projects)
+                <li>
+                    <a href="/blog/{{item.id}}-{{item.url}}"><span class="hover_span"></span><span class="link_span">{{item.title}}</span></a>
+                </li>
+                @else
+                  <h5>Aucun autre projet</h5>
+                @endeach
+            </ul>
+        </div>
+        <div class="item">
+            <h5>D'autres modules sont à venir</h5>
         </div>
     </div>
 </section>
