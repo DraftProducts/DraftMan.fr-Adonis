@@ -6,28 +6,26 @@ const { validate } = use('Validator')
 const Helpers = use('Helpers')
 const moment = require('moment')
 
-class PortfolioController {
+class PortfolioDetailsController {
     async show({params, view}){
-        // const project = (await Portfolio.query().with('details').where('id',params.id).whereNotNull('published_at').first()).toJSON();
-        return view.render('portfolio.details')
+        const project = (await Portfolio.query().with('details').where('id',params.id).whereNotNull('published_at').first()).toJSON();
+        const projects = (await Portfolio.query().whereNotNull('portfolio_details_id').whereNotNull('published_at').whereNot('id',params.id).fetch()).toJSON();
+        return view.render('portfolio.details',{project,projects})
     }
 
     async update({request, session, response,params}){
-        const data = request.only(['name', 'url', 'description', 'type','problematique','presentation','presentation','published_at']);
+        const data = request.only(['name', 'url', 'description', 'type','problematique','presentation','technique','published_at']);
 
         const illustration = request.file('illustration', {
-            types: ['image'],
-            size: '2mb'
+            types: ['image']
         })
 
         const logo = request.file('logo', {
-            types: ['image'],
-            size: '2mb'
+            types: ['image']
         })
 
         const graph = request.file('graph', {
-            types: ['image'],
-            size: '6mb'
+            types: ['image']
         })
 
         const messages = {
@@ -70,8 +68,8 @@ class PortfolioController {
             folder: data.name
         }
         if(illustration.size != 0){
-          data.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
-          await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: data.illustration})
+          basics.illustration = `${data.name}.illustration.${new Date().getTime()}.${illustration.subtype}`;
+          await illustration.move(Helpers.publicPath('/uploads/portfolio'), {name: basics.illustration})
 
           if(!illustration.moved()){
             session.flash({illustration: 'Impossible d\'importer l\'image'})
@@ -79,19 +77,19 @@ class PortfolioController {
           }
         }
         if(logo.size != 0){
-          data.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
-          await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: data.logo})
+          details.logo = `${data.name}.logo.${new Date().getTime()}.${logo.subtype}`;
+          await logo.move(Helpers.publicPath('/uploads/portfolio'), {name: details.logo})
 
           if(!logo.moved()){
             session.flash({logo: 'Impossible d\'importer l\'image'})
             return response.redirect('back')
           }
         }else if(portfolioDetails.logo === null){
-          data.illustration = '000-default-logo.png';
+          data.logo = '000-default-logo.png';
         }
         if(graph.size != 0){
-          data.graph = `${data.name}.graph.${new Date().getTime()}.${graph.subtype}`;
-          await graph.move(Helpers.publicPath('/uploads/portfolio'), {name: data.graph})
+          details.graph = `${data.name}.graph.${new Date().getTime()}.${graph.subtype}`;
+          await graph.move(Helpers.publicPath('/uploads/portfolio'), {name: details.graph})
 
           if(!graph.moved()){
             session.flash({graph: 'Impossible d\'importer l\'image'})
@@ -99,7 +97,7 @@ class PortfolioController {
           }
         }
 
-        if(data.published_at) basics.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined) basics.published_at = moment().format('YYYY-MM-DD')
 
         portfolio.merge(basics)
         await portfolio.save()
@@ -132,4 +130,4 @@ class PortfolioController {
     }
 }
 
-module.exports = PortfolioController
+module.exports = PortfolioDetailsController
