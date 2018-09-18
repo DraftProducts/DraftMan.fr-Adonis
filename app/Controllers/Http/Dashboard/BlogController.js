@@ -65,7 +65,7 @@ class BlogController {
 
           return response.redirect('back')
         }
-        if(data.published_at) data.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
 
         data.author_id = auth.user.id
 
@@ -95,6 +95,7 @@ class BlogController {
     }
 
     async update({ request, session, response,params }){
+        const post = await Post.find(params.id)
         const data = request.only(['title', 'url', 'description', 'tags','content','published_at']);
 
         const image = request.file('image', {
@@ -130,7 +131,7 @@ class BlogController {
           return response.redirect('back')
         }
 
-        if(data.published_at != undefined) data.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined && post.published_at === null) data.published_at = moment().format('YYYY-MM-DD')
 
         if(image.size != 0){
           data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
@@ -142,7 +143,6 @@ class BlogController {
           }
         }
 
-        const post = await Post.find(params.id)
         post.merge(data)
         await post.save()
 
