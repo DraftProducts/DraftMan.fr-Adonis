@@ -9,14 +9,3 @@ tmp
 
 # The development sqlite file
 database/development.sqlite
-
-# Users files
-public/uploads/portfolio
-
-public/uploads/posts
-
-public/uploads/projects
-
-public/uploads/users
-
-public/uploads/files
