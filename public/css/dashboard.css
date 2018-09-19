@@ -1429,7 +1429,6 @@ textarea.textarea {
 }
 #dashboard .select-section .select-items div:last-child{
     border-bottom: 1px solid #cbcbcb;
-    opacity: 1;
 }
 
 #dashboard .select-section .select-selected {
