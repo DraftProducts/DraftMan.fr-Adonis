@@ -125,8 +125,8 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.on('me/').render('Dashboard/accueil')
-  Route.on('me/profil').render('Dashboard/profil')
+  Route.on('me/').render('dashboard/accueil')
+  Route.on('me/profil').render('dashboard/profil')
 
   Route.get('discord/login', 'SocialController.create')
   Route.get('discord/callback', 'SocialController.store')
