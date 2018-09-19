@@ -1887,7 +1887,7 @@ input[type="text"]:required:after {
     background-size: cover;
 }
 
-#blog.post .top-content>h2 {
+#blog.post .item-content>h2 {
     font-size: 37px;
     font-weight: 600;
     color: #404040;
