@@ -17,9 +17,9 @@ class PortfolioSchema extends Schema {
     })
     this.create('portfolio_details', (table) => {
       table.increments()
-      table.text('presentation').notNullable().defaultTo('')
-      table.text('problematique').notNullable().defaultTo('')
-      table.text('technique').notNullable().defaultTo('')
+      table.text('presentation').defaultTo('')
+      table.text('problematique').defaultTo('')
+      table.text('technique').defaultTo('')
       table.string('logo')
       table.string('graph')
       table.string('folder')
