@@ -87,14 +87,14 @@
 @endsection
 
 @section('js')
-{{script('js/viewer.min')}}
 
+@if(project.git_repository)
 {{script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')}}
 <script>
-  fetch('/api/project')
-  .then(res=> res.json())
-  .then(data => {
-    const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {
+fetch('/api/project')
+.then(res=> res.json())
+.then(data => {
+  const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {
     type: 'bar',
     data: {
       labels: Object.keys(data.commitsSize),
@@ -105,13 +105,19 @@
     },
     options:{onResize: beforePrintHandler(),scales:{xAxes:[{gridLines:{display:false},ticks:{display:false}}],yAxes:[{gridLines:{display:false},ticks:{display:false}}],scaleLabel:{display:false}},legend:{display: false}}
   });
-  })
+})
 
-  function beforePrintHandler () {
-    for (var id in Chart.instances) {
-      Chart.instances[id].resize()
-    }
+function beforePrintHandler () {
+  for (var id in Chart.instances) {
+    Chart.instances[id].resize()
   }
+}
+</script>
+@endif
+
+@if(images.length > 0)
+{{script('https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.2.0/viewer.min.js')}}
+<script>
 window.addEventListener('DOMContentLoaded', function () {
   const images = document.getElementById('images')
   const viewer = new Viewer(images,{
@@ -124,6 +130,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+@endif
 @endsection
 
 @section('notifs')
