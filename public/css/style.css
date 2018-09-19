@@ -1875,16 +1875,17 @@ input[type="text"]:required:after {
 }
 #blog.post .text{
   display: flex;
-  flex-direction: column;
   flex: 1;
 }
 #blog.post .item-content.projet{
   display: flex;
+  flex-direction: column;
 }
 #blog.post .item-content .logo{
     width: 200px;
     height: 200px;
     background-size: cover;
+    margin-top: 30px;
 }
 
 #blog.post .item-content>h2 {
