@@ -3,7 +3,7 @@
 const Helpers = use('Helpers')
 
 class FileController {
-  async uploadImage ({ request, auth, response }) {
+  async uploadImage ({ request, auth, response, session}) {
     const user = auth.user;
     const image = request.file('image', {
       types: ['image'],
@@ -25,7 +25,7 @@ class FileController {
 
   create({view}) { return view.render('dashboard.upload')}
 
-  async store({response, request}) {
+  async store({response, request, session}) {
     const file = request.file('file', {
       size: '10mb',
       allowedExtentions: ['png','jpg','ai','jpeg','gif','svg','psd','txt']
@@ -40,7 +40,7 @@ class FileController {
     response.ok({message: 'Le fichier a bien été upload'})
   }
 
-  async uploadProjectImage ({ request, response,params,session }) {
+  async uploadProjectImage ({ request, response,params, session }) {
     const file = request.file('file', {
       types: ['image'],
       size: '10mb'
