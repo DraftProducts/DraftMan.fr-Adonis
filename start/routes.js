@@ -78,14 +78,14 @@ Route.post('search', 'SearchController.search')
  |--------------------------------------------------------------------------
  */
 
-Route.get('discord','LinkController.discord')
-Route.get('twitter','LinkController.twitter')
-Route.get('github','LinkController.github')
-Route.get('gitlab','LinkController.gitlab')
-Route.get('facebook','LinkController.facebook')
-Route.get('paypal','LinkController.paypal')
-Route.get('google-plus','LinkController.google_plus')
-Route.get('patreon','LinkController.patreon')
+Route.get('discord','SocialController.discord')
+Route.get('twitter','SocialController.twitter')
+Route.get('github','SocialController.github')
+Route.get('gitlab','SocialController.gitlab')
+Route.get('facebook','SocialController.facebook')
+Route.get('paypal','SocialController.paypal')
+Route.get('google-plus','SocialController.google_plus')
+Route.get('patreon','SocialController.patreon')
 
 /**
  |--------------------------------------------------------------------------

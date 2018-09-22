@@ -14,18 +14,110 @@
     {{--  Link  --}}
     <link rel="canonical" href="https://www.draftman.fr/draftbot" />
     <meta property="og:url" content="https://www.draftman.fr/draftbot">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 @endsection
 
 @section('css')
-    {{style(css/draftbot)}}
+    {{style('css/draftbot')}}
 @endsection
 
 @section('content')
-<div id="particles-js"></div>
+<section id="draftbot">
+  <div id="head">
+    <div class="bar">
+      <img src="/images/DraftBot_Logo.png" alt="DraftBot" class="logo">
+      <div class="menu-bot">
+        <a href="">Commandes</a>
+        <a href="/twitter" class="icon"><i class="icon-twitter"></i></a>
+        <a href="https://github.com/DraftProducts/DraftBotV4" class="icon"><i class="icon-github"></i></a>
+        <a href="/discord" class="icon"><i class="icon-discord"></i></a>
+        <a href="" class="button"><span>Se connecter</span></a>
+      </div>
+    </div>
+    <div id="bot">
+        <img src="/images/avatar.jpg" alt="">
+        <div class="title">
+          <p>Un bot discord pour</p>
+          <span class="work">La Musique</span>
+        </div>
+        <a href="/draftbot/invite" class="add-button"><i class="icon-discord"></i><span>Ajouter à discord</span></a>
+    </div>
+  </div>
+  <div id="speciality">
+      <div class="item">
+        <div class="image-container"><div class="image"><h1>GIF Music</h1></div></div>
+        <div class="content">
+          <h4 class="title">La Musique</h4>
+          <div class="text">
+              Il n'a jamais été aussi simple de choisir une musique
+              avec le <strong>DraftBot</strong> vous pouvez être sûr de lancer la
+              musique qui vous fait envie grace a un système de
+              réactions intutif.<br>
+              <br>
+              Accompagné de toutes les commandes permettant
+              de mettre en pause, relancer, changer le volume ...<br>
+              <br>
+              Toutes les commandes sont disponibles <a href="/draftbot/commandes" class="link">ici</a>.
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="image-container"><div class="image"><h1>GIF Music</h1></div></div>
+        <div class="content">
+          <h4 class="title">La Modération</h4>
+          <div class="text">
+              La modération est une chose très importante sur
+              un serveur discord, si elle est trop prises a la légère
+              votre serveur peut vite tourner au cauchmare !<br>
+              <br>
+              Grace au <strong>DraftBot</strong> vous pourrez modérer votre
+              serveur très facilement et en toute transparence
+              au sein de votre communauté.<br>
+              <br>
+              Toutes les commandes sont disponibles <a href="" class="link">ici</a>.
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="image-container"><div class="image"></div></div>
+        <div class="content">
+          <h4 class="title">Des outils pratiques</h4>
+          <div class="text">
+              Le but premier d'un robot est de faciliter la
+              communication et d'ajouter des commandes utiles
+              au sein d'une conversation.<br>
+              <br>
+              Lorsque l'on est gérant d'une grande communauté
+              il est aussi pratique de pouvoir organiser des
+              évenements, des give-away...<br>
+              <br>
+              Vous pouvez retrouver toutes ces commandes <a href="" class="link">ici</a>.
+            </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="image-container"><div class="image"></div></div>
+        <div class="content">
+          <h4 class="title">Les Jeux</h4>
+          <div class="text">
+              Par ce que nous savons que vous aimez jouer et
+              admirer vos stats lors de vos parties avec vos amis,
+              vous avez à votre disposition de nombreuses
+              commandes permettant de les affcher.<br>
+              <br>
+              Voici une <a href="" class="link">liste</a> exhaustive des différents jeux
+              supportés.
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
 @endsection
 
 @section('js')
 {{script('http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js')}}
 <script>
-particlesJS("particles-js", {"particles":{"number":{"value":10,"density":{"enable":true,"value_area":473.4885849793636}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":3},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.24852886943415603,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":26.79854800594439,"size_min":4.87246327380807,"sync":true}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":1.603412060865523,"direction":"bottom","random":false,"straight":false,"out_mode":"bounce","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"repulse"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;</script>
+// particlesJS("head", {"particles":{"number":{"value":10,"density":{"enable":true,"value_area":250}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":3},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.2,"random":true,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":25,"size_min":5,"sync":true}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.2,"width":1},"move":{"enable":true,"speed":2,"direction":"bottom","random":false,"straight":false,"out_mode":"bounce","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"repulse"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":0.5}},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});
+particlesJS("head", {"particles":{"number":{"value":160,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.3,"random":true,"anim":{"enable":true,"speed":1,"opacity_min":0,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":4,"size_min":0.3,"sync":false}},"line_linked":{"enable":false,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":1,"direction":"none","random":true,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":600}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"bubble"},"onclick":{"enable":true,"mode":"repulse"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":250,"size":0,"duration":2,"opacity":0,"speed":3},"repulse":{"distance":400,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});
+</script>
 @endsection
