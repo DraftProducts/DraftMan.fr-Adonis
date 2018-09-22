@@ -1,58 +1,67 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html" />
 
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <link type="text/plain" rel="author" href="https://www.draftman.fr/humans.txt" />
-    <meta name="author" content="DraftMan">
-	<meta name="copyright" content="DraftMan">
+  <link type="text/plain" rel="author" href="https://www.draftman.fr/humans.txt" />
+  <meta name="author" content="DraftMan">
+  <meta name="copyright" content="DraftMan">
 
-    <link rel="shortcut icon" href="/images/favicon.png" type="image/ico" />
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/ico" />
 
-    <meta name="theme-color" content="#CD6E57">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
-    <meta name="msapplication-navbutton-color" content="#CD6E57">
+  <meta name="theme-color" content="#CD6E57">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#CD6E57">
+  <meta name="msapplication-navbutton-color" content="#CD6E57">
 
-	<meta property="og:type" content="website">
-	<meta property="og:locale" content="fr_FR">
-	<meta property="og:site_name" content="DraftMan.fr">
-	<meta property="og:image" content="https://www.draftman.fr/images/avatar.jpg">
-	<meta property="og:image:secure_url" content="https://www.draftman.fr/images/avatar.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="DraftMan.fr">
+  <meta property="og:image" content="https://www.draftman.fr/images/avatar.jpg">
+  <meta property="og:image:secure_url" content="https://www.draftman.fr/images/avatar.jpg">
 
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@DraftMan_Dev">
-    <meta name="twitter:creator" content="@DraftMan_Dev">
-    <meta name="twitter:image:src" content="https://www.draftman.fr/images/avatar.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@DraftMan_Dev">
+  <meta name="twitter:creator" content="@DraftMan_Dev">
+  <meta name="twitter:image:src" content="https://www.draftman.fr/images/avatar.jpg">
 
-    <meta name="generator" content="VSCode">
+  <meta name="generator" content="VSCode">
 
-    @!section('seo')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700,900">
+  @!section('seo')
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700,900">
 
-    {{ style('css/style')}}
+  {{ style('css/style')}}
 
-    @!section('css')
+  @!section('css')
 </head>
+
 <body id="page">
-    @include('inc/header')
+  @include('inc/header')
 
-    @!section('content')
+  @!section('content')
 
-    @include('inc/footer')
-    <section class="notifs">
-        @if(flashMessage('notif'))
-        <div class="notif"> <div class="notif_icon"></div><div class="content">{{ flashMessage('notif') }}</div></div>
-      @endif
-      @if(flashMessage('error'))
-        <div class="notif error"> <div class="notif_icon"></div><div class="content">{{ flashMessage('error') }}</div></div>
-      @endif
-        @!section('notifs')
-    </section>
-    @!section('js')
-    {{ script('js/app') }}
+  @include('inc/footer')
+  <section class="notifs">
+    @if(flashMessage('notif'))
+    <div class="notif">
+      <div class="notif_icon"></div>
+      <div class="content">{{ flashMessage('notif') }}</div>
+    </div>
+    @endif
+    @if(flashMessage('error'))
+    <div class="notif error">
+      <div class="notif_icon"></div>
+      <div class="content">{{ flashMessage('error') }}</div>
+    </div>
+    @endif
+    @!section('notifs')
+  </section>
+  @!section('js')
+  {{ script('js/app') }}
 </body>
+
 </html>
