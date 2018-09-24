@@ -226,4 +226,4 @@ Route.group(() => {
   Route.get('admin/portfolio/:id/decline', 'PortfolioDetailsController.decline')
 }).middleware(['auth','admin'])
 
-Route.get('api/project', 'ClientController.getProjetCommits')
+Route.get('api/project/:project_id', 'ClientController.getProjetCommits')

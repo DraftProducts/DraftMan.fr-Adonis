@@ -91,7 +91,7 @@
 @if(project.git_repository)
 {{script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')}}
 <script>
-fetch('/api/project')
+fetch('/api/project/{{project.id}}')
 .then(res=> res.json())
 .then(data => {
   const contributions = new Chart(document.getElementById("contributions").getContext('2d'), {

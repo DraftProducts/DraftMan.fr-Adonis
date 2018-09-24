@@ -52,8 +52,8 @@ class ClientController {
     }
   }
 
-  async getProjetCommits({auth,response}){
-    const project = (await Project.query().where('id', auth.user.project_id).first()).toJSON();
+  async getProjetCommits({response,params}){
+    const project = (await Project.query().where('id', params.project_id).first()).toJSON();
     let res,page = 1;
     const list = new Map()
     do {
