@@ -1,59 +1,114 @@
 @layout('main')
 
 @section('seo')
-    {{--  Title  --}}
-    <title>À propos - DraftMan Développeur Web & Graphiste</title>
-    <meta property="og:title" content="À propos - DraftMan Développeur Web & Graphiste">
-    <meta name="twitter:title" content="À propos - DraftMan Développeur Web & Graphiste">
+{{-- Title --}}
+<title>À propos - DraftMan Développeur Web & Graphiste</title>
+<meta property="og:title" content="À propos - DraftMan Développeur Web & Graphiste">
+<meta name="twitter:title" content="À propos - DraftMan Développeur Web & Graphiste">
 
-    {{--  Description  --}}
-    <meta name="description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
-    <meta property="og:description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
-    <meta name="twitter:description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
+{{-- Description --}}
+<meta name="description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
+<meta property="og:description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
+<meta name="twitter:description" content="Tu es intéressé par mon travail ? Ici tu pourras retrouver mon parcours et en savoir d'avantage sur moi !">
 
-    {{--  Link  --}}
-    <link rel="canonical" href="https://www.draftman.fr/a-propos" />
-    <meta property="og:url" content="https://www.draftman.fr/a-propos">
+{{-- Link --}}
+<link rel="canonical" href="https://www.draftman.fr/a-propos" />
+<meta property="og:url" content="https://www.draftman.fr/a-propos">
 @endsection
 
 @section('content')
 <section id="about">
-	<h1>Qui <strong>suis je</strong> ?</h1>
-	<div class="content">
-		<div>
-			<img src="/images/avatar.jpg" alt="DraftMan">
-		</div>
-		<div>
-			<p>J'ai deux passions en informatique : le développement et le graphisme. <br>
-			
-			J'ai découvert le graphisme à l'époque où j'étais passionné de dessin. Concevoir des logos et des illustrations après les cours au collège me permettait de continuer à créer et laisser libre court à mon imagination, c’était ma façon de m’évader !<br>
-			
-			Aujourd’hui je m'oriente plutôt vers le développement.<br>
-			
-			Avec le temps j’ai acquis de l’expérience, n’hésitant pas à me former à différents <a class="link" href="#competences">langages</a>. Autodidacte, j’ai recours au groupe d'échange de savoirs, aux réseaux sociaux d'apprentissage mais également à <a class="link" href="https://zestedesavoir.com/">ZDS</a> ou à <a class="link" href="https://openclassrooms.com/">OC</a>, tout cela après mes cours de lycée ! Je suis bien sûr impatient de pouvoir intégrer une formation postbac plus en rapport avec ma passion.<br>
-			
-			<span class="useless">
-				J'ai commencé le développement avec le langage <a class="link" href="https://fr.wikipedia.org/wiki/Java#Informatique" target="blank">Java</a> lors d'un projet de serveur Faction sur le jeu <a class="link" href="https://minecraft.net/" target="blank">Minecraft</a>.<br>
-			</span>
-			
-			Depuis j’ai rejoint plusieurs <a class="link" href="/portfolio">projets</a> qui m’ont permis de développer différents aspects du Webdesign.
-			</p>
-		</div>
-	</div>
+  <h1>Qui <strong>suis je</strong> ?</h1>
+  <div class="content">
+    <div>
+      <img src="/images/avatar.jpg" alt="DraftMan">
+    </div>
+    <div>
+      <p>J'ai deux passions en informatique : le développement et le graphisme. <br>
+
+        J'ai découvert le graphisme à l'époque où j'étais passionné de dessin. Concevoir des logos et des illustrations
+        après les cours au collège me permettait de continuer à créer et laisser libre court à mon imagination, c’était
+        ma façon de m’évader !<br>
+
+        Aujourd’hui je m'oriente plutôt vers le développement.<br>
+
+        Avec le temps j’ai acquis de l’expérience, n’hésitant pas à me former à différents <a class="link" href="#competences">langages</a>.
+        Autodidacte, j’ai recours au groupe d'échange de savoirs, aux réseaux sociaux d'apprentissage mais également à
+        <a class="link" href="https://zestedesavoir.com/">ZDS</a> ou à <a class="link" href="https://openclassrooms.com/">OC</a>,
+        tout cela après mes cours de lycée ! Je suis bien sûr impatient de pouvoir intégrer une formation postbac plus
+        en rapport avec ma passion.<br>
+
+        <span class="useless">
+          J'ai commencé le développement avec le langage <a class="link" href="https://fr.wikipedia.org/wiki/Java#Informatique"
+            target="blank">Java</a> lors d'un projet de serveur Faction sur le jeu <a class="link" href="https://minecraft.net/"
+            target="blank">Minecraft</a>.<br>
+        </span>
+
+        Depuis j’ai rejoint plusieurs <a class="link" href="/portfolio">projets</a> qui m’ont permis de développer
+        différents aspects du Webdesign.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section id="competences">
-		<h2><span>Mes</span> <strong>Compétences</strong> <span>!</span></h2>
-		<div>
-			<img src="/images/ico/icone-HTML.png" >
-			<img src="/images/ico/icone-CSS.png"  >
-			<img src="/images/ico/icone-PHP.png"  >
-			<img src="/images/ico/icone-JS.png"   >
-			<img src="/images/ico/icone-MySQL.png">
-			<img src="/images/ico/icone-Java.png" >
-			<img src="/images/ico/icone-GFX.png"  >
-			<img src="/images/ico/icone-UX.png"   >
-			<img src="/images/ico/icone-UI.png"   >
-		</div>
+  <h2><span>Mes</span> <strong>Compétences</strong> <span>!</span></h2>
+  <div class="content">
+    <div class="item">
+      <img src="/images/competences/html_css.jpg" alt="">
+      <h3 class="title">HTML/CSS</h3>
+      <p>◆◆◆◆◆</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/sass.png" alt="">
+      <h3 class="title">SCSS</h3>
+      <p>◆◆◆◆◆</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/js.png" alt="">
+      <h3 class="title">Javascript</h3>
+      <p>◆◆◆◆◇</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/nodejs.png" alt="">
+      <h3 class="title">NodeJs</h3>
+      <p>◆◆◆◆◇</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/seo.jpg" alt="">
+      <h3 class="title">SEO</h3>
+      <p>◆◆◆◆◇</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/xd.jpg" alt="">
+      <h3 class="title">Adobe XD</h3>
+      <p>◆◆◆◆◆</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/figma.png" alt="">
+      <h3 class="title">Figma</h3>
+      <p>◆◆◆◆◆</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/linux.jpg" alt="">
+      <h3 class="title">Linux</h3>
+      <p>◆◆◆◇◇</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/photoshop.jpg" alt="">
+      <h3 class="title">Photoshop</h3>
+      <p>◆◆◆◆◇</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/illustrator.jpg" alt="">
+      <h3 class="title">Illustrator</h3>
+      <p>◆◆◆◆◆</p>
+    </div>
+    <div class="item">
+      <img src="/images/competences/php.png" alt="">
+      <h3 class="title">Php</h3>
+      <p>◆◆◇◇◇</p>
+    </div>
+  </div>
 </section>
 @endsection
