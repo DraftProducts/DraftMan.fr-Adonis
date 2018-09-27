@@ -383,7 +383,7 @@ footer {
     align-items: center;
     width: 100%;
     letter-spacing: 1px;
-    color: #fff;
+    color: #ffffff;
     background-color: #2E3133;
 }
 
@@ -419,7 +419,7 @@ footer .content a {
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
-    color: #fff;
+    color: #ffffff;
 }
 
 footer a:hover {
@@ -475,7 +475,7 @@ footer #copyright section {
     font-size: 80px;
     font-weight: 900;
     letter-spacing: 2px;
-    color: #fff;
+    color: #ffffff;
 }
 
 #banner h1:before,
@@ -486,7 +486,7 @@ footer #copyright section {
     right: 0;
     left: 0;
     overflow: hidden;
-    color: #fff;
+    color: #ffffff;
 }
 
 #banner:hover h1:before {
@@ -596,7 +596,7 @@ footer #copyright section {
 }
 
 #banner h2 {
-    text-shadow: 1px 1px 5px #000000a3;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.639);
     text-transform: uppercase;
     font-size: 35px;
     font-weight: 700;
@@ -617,7 +617,7 @@ footer #copyright section {
     text-transform: uppercase;
     font-size: 18px;
     outline: 1px solid;
-    color: #fff;
+    color: #ffffff;
     background-color: rgba(0, 0, 0, .2);
     animation: annim 2s infinite ease-in-out alternate-reverse;
     transition: all .7s;
@@ -797,7 +797,7 @@ footer #copyright section {
     margin-right: 15px;
     margin-left: 15px;
     padding: 25px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     width: 100%;
 }
@@ -896,7 +896,7 @@ footer #copyright section {
     flex-direction: column;
     height: 100%;
     overflow: hidden;
-    color: #fff;
+    color: #ffffff;
 }
 
 #citations img {
@@ -929,7 +929,7 @@ footer #copyright section {
     height: 78%;
     margin: 0 auto;
     overflow: hidden;
-    color: #fff;
+    color: #ffffff;
 }
 
 #citations #slides > div {
@@ -1064,7 +1064,7 @@ footer #copyright section {
     padding-left: 32px;
     overflow: hidden;
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57d4;
     -webkit-box-shadow: 0 3px 4px -4px rgba(0, 0, 0, .75);
     box-shadow: 0 3px 4px -4px rgba(0, 0, 0, .75);
@@ -1218,7 +1218,7 @@ footer #copyright section {
   width: calc(25% - 14.9999999px);
   margin: 0 20px 20px 0;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.24);
   transition: box-shadow .25s;
 }
@@ -1299,7 +1299,7 @@ footer #copyright section {
     height: 100%;
     padding: 32px;
     font-size: 20px;
-    color: #fff;
+    color: #ffffff;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-transform: uppercase;
@@ -1314,7 +1314,7 @@ footer #copyright section {
     font-weight: 300;
     word-spacing: -.15em;
     padding-top: 10%;
-    color: #fff;
+    color: #ffffff;
     -webkit-transition: -webkit-transform .35s;
     transition: transform .35s;
     -webkit-transform: translate3d(0, -20px, 0);
@@ -1341,7 +1341,7 @@ footer #copyright section {
 #portfolio a {
     display: inline-block;
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     transition: opacity .35s, transform .35s;
     transform: translate3d(0, 20px, 0);
     letter-spacing: 1px;
@@ -1395,15 +1395,15 @@ footer #copyright section {
 }
 
 #portfolio figure figcaption::before {
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
     -webkit-transform: scale(0, 1);
     transform: scale(.5, 1.5)
 }
 
 #portfolio figure figcaption::after {
-    border-right: 1px solid #fff;
-    border-left: 1px solid #fff;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
     -webkit-transform: scale(1, 0);
     transform: scale(1.5, .5)
 }
@@ -1447,7 +1447,7 @@ footer #copyright section {
     width: calc(33.333% - 13.3333px);
     margin: 0 20px 20px 0;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16);
     transition: box-shadow .25s;
 }
@@ -1558,7 +1558,7 @@ footer #copyright section {
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16);
     transition: box-shadow .25s;
 }
@@ -1615,7 +1615,7 @@ footer #copyright section {
     border-radius: 0 4px 4px 0;
     font-size: 17px;
     outline: 0;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
 }
 
@@ -1644,7 +1644,7 @@ footer #copyright section {
     width: 100%;
     padding: 10px;
     border: none;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
     outline: 0;
     cursor: pointer;
@@ -1782,7 +1782,7 @@ footer #copyright section {
 #commenter input[type="submit"],
 #comments input[type="submit"] {
     border: none;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
     cursor: pointer;
 }
@@ -1842,7 +1842,7 @@ input[type="text"]:required:after {
     text-transform: uppercase;
     line-height: 42px;
     letter-spacing: .5px;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
 }
@@ -1877,7 +1877,7 @@ input[type="text"]:required:after {
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 2px;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
 }
 #blog.post .corps{
@@ -1889,7 +1889,7 @@ input[type="text"]:required:after {
     width: 100%;
     max-width: 100%;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .16);
     transition: box-shadow .25s;
 }
@@ -2217,8 +2217,8 @@ input[type="text"]:required:after {
     left: 4px;
     width: 8px;
     margin-top: -4px;
-    border-bottom: 3px solid #fff;
-    border-left: 3px solid #fff;
+    border-bottom: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
     background-color: transparent;
     transform: rotate(-45deg) scale(0);
     border-image: none;
@@ -2315,7 +2315,7 @@ input[type="text"]:required:after {
     border-radius: 16px;
     text-decoration: none;
     line-height: 1.4;
-    color: #FFF;
+    color: #ffffff;
     opacity: 0;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, .4);
     transition: all 0.3s;
@@ -2402,7 +2402,7 @@ input[type="text"]:required:after {
     overflow: hidden;
     font-size: 12px;
     color: #000;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
 }
 
@@ -2492,7 +2492,7 @@ input[type="text"]:required:after {
     padding: 20px;
     border-radius: 2px;
     text-align: center;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     transition: box-shadow .25s;
 }
@@ -2517,7 +2517,7 @@ input[type="text"]:required:after {
     line-height: 24px;
     letter-spacing: .5px;
     outline: 0;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     -webkit-transition: all .3s ease-out;
@@ -2586,7 +2586,7 @@ input[type="text"]:required:after {
     border: none;
     font-size: 17px;
     outline: 0;
-    color: #fff;
+    color: #ffffff;
     background-color: #cd6e57;
 }
 
@@ -2621,9 +2621,6 @@ input[type="text"]:required:after {
   }
   #competences .item:nth-child(3n+3){
     margin: 0 0 20px 0!important;
-  }
-  #competences img {
-    /* height: 160px; */
   }
 }
 @media only screen and (max-width:1200px) {
