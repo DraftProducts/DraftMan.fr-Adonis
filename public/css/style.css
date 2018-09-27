@@ -1,10 +1,9 @@
 @font-face {
     font-family: 'draftman';
-    src:  url('../fonts/draftman.eot?er1rqm');
-    src:  url('../fonts/draftman.eot?er1rqm#iefix') format('embedded-opentype'),
-      url('../fonts/draftman.ttf?er1rqm') format('truetype'),
-      url('../fonts/draftman.woff?er1rqm') format('woff'),
-      url('../fonts/draftman.svg?er1rqm#draftman') format('svg');
+    src:
+      url('../fonts/draftman.ttf?m36fff') format('truetype'),
+      url('../fonts/draftman.woff2?m36fff') format('woff2'),
+      url('../fonts/draftman.svg?m36fff#draftman') format('svg');
     font-weight: normal;
     font-style: normal;
   }
