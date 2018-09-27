@@ -470,7 +470,7 @@ footer #copyright section {
 #banner h1 {
     position: relative;
     margin: 20px 0;
-    text-shadow: 1px 1px 5px #00000063;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.38);
     text-transform: uppercase;
     font-size: 80px;
     font-weight: 900;
