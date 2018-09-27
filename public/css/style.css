@@ -1873,7 +1873,6 @@ input[type="text"]:required:after {
 
 .parallax h1 {
     text-transform: uppercase;
-    font-family: Lato;
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 2px;
