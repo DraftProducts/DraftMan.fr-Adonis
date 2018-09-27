@@ -1,20 +1,18 @@
 const nav_button = document.getElementById('mobile-nav-button')
 const cache = document.getElementById('cache')
 
-nav_button.addEventListener('click', a => {toggleMenu()})
-cache.addEventListener('click', a => {removeMenu()});
-cache.addEventListener('mousemove', a => {removeMenu()});
-
-const toggleMenu = () =>{
+nav_button.addEventListener('click', () =>{
   document.getElementById('nav').classList.toggle('open');
   document.getElementById('page').classList.toggle('overflow');
   cache.classList.toggle('active')
-}
-const removeMenu = () =>{
+});
+
+cache.addEventListener('click', () =>{
   document.getElementById('nav').classList.remove('open');
   document.getElementById('page').classList.remove('overflow');
   cache.classList.remove('active');
-}
+});
+
 window.addEventListener('DOMContentLoaded', function () {
 var x, i, j, selElmnt, a, b, c;
 	x = document.getElementsByClassName("select-section");
