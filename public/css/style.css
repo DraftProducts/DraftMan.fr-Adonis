@@ -864,7 +864,7 @@ footer #copyright section {
     margin: 8px 0;
     padding: 0;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 25px;
 }
 
@@ -1019,7 +1019,7 @@ footer #copyright section {
     margin-bottom: 20px;
     text-align: center;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #services .exemple a {
@@ -1175,7 +1175,7 @@ footer #copyright section {
     text-transform: uppercase;
     -webkit-text-stroke: 0;
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 64px;
     letter-spacing: 1px;
     color: #222;
@@ -1183,7 +1183,7 @@ footer #copyright section {
 
 #about h1 strong,
 #competences h2 strong {
-    font-weight: 600;
+    font-weight: 700;
     color: #cd6e57;
 }
 
@@ -1194,7 +1194,7 @@ footer #copyright section {
 }
 
 #about a {
-    font-weight: 600;
+    font-weight: 700;
 }
 #competences{
   display: flex;
@@ -1565,7 +1565,7 @@ footer #copyright section {
 #sidebar h4,#sidebar h5 {
     padding-bottom: 5px;
     text-transform: capitalize;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
     color: #A4A4A4;
 }
@@ -1913,7 +1913,7 @@ input[type="text"]:required:after {
 
 #blog.post .item-content>h2 {
     font-size: 37px;
-    font-weight: 600;
+    font-weight: 700;
     color: #404040;
     margin-bottom: 16px;
 }
@@ -1951,7 +1951,7 @@ input[type="text"]:required:after {
 #blog.post h4.spe-gra {
     font-size: 30px;
     color: #404040;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #blog.post img.spe-gra {
@@ -1970,13 +1970,13 @@ input[type="text"]:required:after {
     margin-bottom: 5px;
     margin-top: 20px;
     color: #404040;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .post-body p {
     padding: 5px 0 10px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.6;
     letter-spacing: 0;
     color: #4d4d4d;
@@ -2111,7 +2111,7 @@ input[type="text"]:required:after {
 #comments>p{
   padding: 10px 5px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.6;
   letter-spacing: 0;
   color: #4d4d4d;
@@ -3051,7 +3051,7 @@ input[type="text"]:required:after {
 .notifs .notif{
   transition: opacity 1s,transform 1s;
   display: block;
-  font-weight: 600;
+  font-weight: 700;
   opacity: 0;
   padding: 10px 20px 10px 65px;
   color: #000;
