@@ -30,8 +30,7 @@ class FileController {
       size: '10mb',
       allowedExtentions: ['png','jpg','ai','jpeg','gif','svg','psd','txt']
     })
-    const img = `${new Date().getTime()}.${file.subtype}`;
-    await file.move(Helpers.publicPath('/uploads/files'), {name: img})
+    await file.move(Helpers.publicPath('/uploads/files'))
     if(!file.moved()){
       session.flash({error: 'Impossible d\'importer l\'image de profil'})
       return response.redirect('back')

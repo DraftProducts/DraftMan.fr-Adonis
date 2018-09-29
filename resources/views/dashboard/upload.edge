@@ -41,7 +41,7 @@
         Dropzone.options.fileUploader = {
             renameFile: function(file){
                 const name = new Date().getTime()+ '.' + file.name.split('.').pop();
-                document.getElementById('links').innerHTML += '<a href="/uploads/files/'+name+'" target="blank">'+file.name+'</a>';
+                document.getElementById('links').innerHTML += '<a href="/uploads/files/'+name+'" target="blank">'+file.name+': https://Www.draftman.fr/uploads/files/'+name+'</a>';
                 return name;
             }
         }
