@@ -131,7 +131,11 @@ class BlogController {
           return response.redirect('back')
         }
 
-        if(data.published_at != undefined && post.published_at === null) data.published_at = moment().format('YYYY-MM-DD')
+        if(data.published_at != undefined && post.published_at === null){
+          data.published_at = moment().format('YYYY-MM-DD')
+        }else{
+          delete data.published_at
+        }
 
         if(image.size != 0){
           data.image = `${data.url}.${new Date().getTime()}.${image.subtype}`;
