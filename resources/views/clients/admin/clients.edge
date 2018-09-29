@@ -22,7 +22,7 @@
         <h2>Clients en attente</h2>
         @each(client in wclients)
         <div class="client">
-            <div class="image" style="background-image: url({{client.author.profil}})"></div>
+            <div class="image" style="background-image: url({{getImageUser(client.author.email,client.author.profil)}})"></div>
             <div class="content">
                 <div class="top">
                     <h3>{{client.name}}</h3>
@@ -38,7 +38,7 @@
         <h2>Clients</h2>
         @each(client in clients)
         <div class="client">
-            <div class="image" style="background-image: url({{client.author.profil}})"></div>
+            <div class="image" style="background-image: url({{getImageUser(client.author.email,client.author.profil)}})"></div>
             <div class="content">
                 <div class="top">
                     <h3>{{client.name}}</h3>
