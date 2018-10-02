@@ -2,7 +2,7 @@ const dashboard = new Vue({
     el: '#dashboard',
     delimiters: ['@{', '}'],
     data: {
-        open: false,
+        open: 'false',
         profil: false,
         name: '',
         type: '',
@@ -12,9 +12,7 @@ const dashboard = new Vue({
     },
     mounted(){
         this.addEvents(this);
-    },
-    created () {
-      this.open = localStorage.getItem('open') || false
+        if(localStorage.open) this.open = localStorage.open;
     },
     methods: {
         addEvents(vm) {
@@ -68,8 +66,9 @@ const dashboard = new Vue({
             });
         },
         toggleMenu: function(){
-          this.open = !this.open
-          localStorage.setItem('open', this.open)
+          localStorage.open = this.open === 'false' ? 'true' : 'false';
+          this.open = this.open === 'false' ? 'true' : 'false';
+          console.log(this.open, localStorage.open);
         },
         toggleProfil: function(){
             this.profil = !this.profil
