@@ -17,7 +17,7 @@ hooks.after.providersRegistered(() => {
   })
 
   View.global('dateF', (date) => {
-    return moment(date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());;
+    return moment(date).format('dddd DD MMMM').replace(/(^.|[ ]+.)/g, c => c.toUpperCase());
   })
 
   View.global('date', (date) => {
