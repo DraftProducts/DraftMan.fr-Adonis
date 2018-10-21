@@ -141,10 +141,13 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #373737;
+  background-color: #363A3F;
   border: 2px solid #cd6e57;
   border-radius: 4px;
   height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #draftbot #speciality .item .content{
   display: flex;
