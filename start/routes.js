@@ -31,7 +31,7 @@ Route.on('a-propos').render('a-propos')
  */
 
 Route.get('contact','ContactController.create')
-Route.post('contact', 'ContactController.send')
+Route.post('contact', 'ContactController.store')
 
 /**
  |--------------------------------------------------------------------------
