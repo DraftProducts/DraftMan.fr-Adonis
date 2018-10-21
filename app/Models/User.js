@@ -38,7 +38,7 @@ class User extends Model {
    * @see https://adonisjs.com/docs/4.0/relationships#_has_many
    */
   posts () {
-    return this.hasMany('App/Models/Blog', 'id', 'author_id')
+    return this.hasMany('App/Models/Post', 'id', 'author_id')
   }
   /**
    * Defines the relationship an author has with a project.
