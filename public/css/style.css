@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'draftman';
     src:
-      url('../fonts/draftman.ttf?m36fff') format('truetype'),
-      url('../fonts/draftman.woff2?m36fff') format('woff2'),
-      url('../fonts/draftman.svg?m36fff#draftman') format('svg');
+      url('https://www.draftman.fr/fonts/draftman.ttf?m36fff') format('truetype'),
+      url('https://www.draftman.fr/fonts/draftman.woff2?m36fff') format('woff2'),
+      url('https://www.draftman.fr/fonts/draftman.svg?m36fff#draftman') format('svg');
     font-weight: normal;
     font-style: normal;
   }
