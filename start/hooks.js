@@ -49,6 +49,12 @@ hooks.after.providersRegistered(() => {
     return file.match(/(.*)*\..*/);
   })
 
+  View.global('separate', (string) => {
+    if(string === null) return ''
+    console.log(Array.from(string))
+    return string.join(', ')
+  })
+
   View.global('price', (price, times) => {
     return (price/times).toFixed(2)
   })

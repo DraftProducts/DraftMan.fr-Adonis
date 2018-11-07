@@ -93,7 +93,8 @@ Route.get('patreon','SocialController.patreon')
  |--------------------------------------------------------------------------
  */
 
-Route.get('draftbot','DraftBotController.index')
+Route.get('draftbot','DraftBotController.show')
+Route.get('draftbot/commandes','DraftBotController.index')
 Route.get('draftbot/invite','DraftBotController.invite')
 
 /**

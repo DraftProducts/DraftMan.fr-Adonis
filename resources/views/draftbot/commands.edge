@@ -1,0 +1,84 @@
+@layout('main')
+
+@section('seo')
+    {{--  Title  --}}
+    <title>DraftBot - DraftMan Développeur Web & Graphiste</title>
+    <meta property="og:title" content="DraftBot - DraftMan Développeur Web & Graphiste">
+    <meta name="twitter:title" content="DraftBot - DraftMan Développeur Web & Graphiste">
+
+    {{--  Description  --}}
+    <meta name="description" content="Voici mon bot discord, il a été développé en NodeJs et est totalement OpenSource. Sur cette page tu pourras retrouver toutes les informations le concernant et permettant de l'inviter sur ton serveur.">
+    <meta property="og:description" content="Voici mon bot discord, il a été développé en NodeJs et est totalement OpenSource. Sur cette page tu pourras retrouver toutes les informations le concernant et permettant de l'inviter sur ton serveur.">
+    <meta name="twitter:description" content="Voici mon bot discord, il a été développé en NodeJs et est totalement OpenSource. Sur cette page tu pourras retrouver toutes les informations le concernant et permettant de l'inviter sur ton serveur.">
+
+    {{--  Link  --}}
+    <link rel="canonical" href="https://www.draftman.fr/draftbot" />
+    <meta property="og:url" content="https://www.draftman.fr/draftbot">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+@endsection
+
+@section('css')
+    {{style('css/draftbot.min')}}
+@endsection
+
+@section('content')
+<section id="draftbot" class="commands">
+  <div class="bar">
+    <a href="/draftbot"><img src="/images/DraftBot_Logo.png" alt="DraftBot" class="logo"></a>
+    <div class="menu-bot">
+      <a href="/draftbot/commandes">Commandes</a>
+      <a href="/twitter" class="icon"><i class="icon-twitter"></i></a>
+      <a href="https://github.com/DraftProducts/DraftBot" class="icon"><i class="icon-github"></i></a>
+      <a href="/discord" class="icon"><i class="icon-discord"></i></a>
+      <a href="" class="button"><span>Se connecter</span></a>
+    </div>
+  </div>
+  <div class="list">
+    <div class="search-bar">
+        <div class="search">
+          <input type="search" id="search" name="search" placeholder="Rechercher une commande">
+          <i class="icon-search"></i>
+        </div>
+    </div>
+    <div id="items">
+      <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Exemple</th>
+                <th>Alias</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(command in commands)
+              <tr class="item" keyswords="{{command.name}} {{command.aliases}} {{command.groupID}} {{command.description}}">
+                  <td>{{command.name}}</td>
+                  <td>{{command.description}}</td>
+                  <td>{{command.groupID}}</td>
+                  <td>{{separate(command.examples)}}</td>
+                  <td>{{separate(command.aliases)}}</td>
+              </tr>
+            @endeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+@endsection
+
+@section('js')
+<script>
+  document.getElementById('search').addEventListener('keyup', (event) => {
+  [].forEach.call(document.querySelectorAll('#items .item'), element => {
+    console.log(element.firstChild)
+    if(element.getAttribute('keyswords').toLowerCase().includes(event.target.value.toLowerCase())){
+      element.style.display = 'table-row'
+    }else{
+      element.style.display = 'none'
+    }
+  });
+});
+</script>
+@endsection
