@@ -32,6 +32,7 @@
     "@adonisjs/validator": "^5.0.3",
     "btoa": "^1.2.1",
     "gravatar": "^1.6.0",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "mysql": "^2.15.0",
     "paypal-rest-sdk": "^1.8.1",
