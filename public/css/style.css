@@ -2543,12 +2543,15 @@ input[type="text"]:required:after {
 }
 
 #error div {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #error img {
-    display: flex;
-    margin: 50px auto 0;
+    margin-top: 30px;
+    max-width: 600px;
+    width: 100%;
 }
 #blog.search .corps{
   flex-direction: column;
