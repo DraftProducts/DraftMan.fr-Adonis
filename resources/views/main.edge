@@ -32,7 +32,6 @@
   <meta name="generator" content="VSCode">
 
   @!section('seo')
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 
   {{ style('css/style.min')}}
 
@@ -43,7 +42,7 @@
   @include('inc/header')
 
   @!section('content')
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
   @include('inc/footer')
   <section class="notifs">
     @if(flashMessage('notif'))
