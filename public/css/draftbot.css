@@ -78,10 +78,9 @@ header{
   z-index: 1;
 }
 #draftbot #bot img{
-  border: 3px solid #cd6e57;
-  border-radius: 100%;
-  width: 230px;
-  height: 230px;
+  width: 300px;
+  height: 300px;
+  margin: -65px -30px -30px;
 }
 
 #draftbot #bot .title{
