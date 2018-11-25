@@ -1911,7 +1911,7 @@ input[type="text"]:required:after {
     margin-top: 30px;
 }
 
-#blog.post .item-content .top-content>h2 {
+#blog.post .item-content h1.title-project {
     font-size: 37px;
     font-weight: 700;
     color: #404040;
