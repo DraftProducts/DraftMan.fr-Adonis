@@ -60,7 +60,7 @@ hooks.after.providersRegistered(() => {
   })
 
   View.global('isProject', (link) => {
-    return link.startWith('/') || link.startWith('http')
+    return link.startsWith('/') || link.startsWith('http')
   })
 
   View.global('parse', JSON.parse)
