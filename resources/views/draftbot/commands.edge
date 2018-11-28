@@ -93,21 +93,6 @@
   </section>
 
   @include('inc/footer')
-
-  <section class="notifs">
-    @if(flashMessage('notif'))
-    <div class="notif">
-      <div class="notif_icon"></div>
-      <div class="content">{{ flashMessage('notif') }}</div>
-    </div>
-    @endif
-    @if(flashMessage('error'))
-    <div class="notif error">
-      <div class="notif_icon"></div>
-      <div class="content">{{ flashMessage('error') }}</div>
-    </div>
-    @endif
-    @!section('notifs')
   </section>
   {{ script('js/app') }}
   <script>
