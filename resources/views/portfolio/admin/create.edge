@@ -32,6 +32,11 @@
             </select>
         </div>
 
+        <div class="input-container">
+            <input type="text" name="url" id="url" class="input" value="{{old('url', '')}}">
+            <label for="url">Url du projet</label>
+        </div>
+
         <div class="input-container textarea-container">
             <textarea name="description" id="description" class="textarea">{{old('description', '')}}</textarea>
             <label for="description">Description de la création</label>

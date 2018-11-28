@@ -32,7 +32,11 @@
                     <p>{{ item.description }}</p>
                     @if(item.url !== '' && item.url !== null)
                     <div class="link">
-	                    <a href="/portfolio/{{item.id}}-{{item.url}}">En savoir plus</a>
+                        @if(item.url.startWith('/') || item.url.startWith('http'))
+                            <a href="{{item.url}}">En savoir plus</a>
+                        @else
+                            <a href="/portfolio/{{item.id}}-{{item.url}}">En savoir plus</a>
+                        @endif
                     </div>
 	                @endif
                 </figcaption>

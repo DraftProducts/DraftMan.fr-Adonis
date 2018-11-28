@@ -18,7 +18,7 @@ class PortfolioController {
     }
 
     async store({request, session, response}){
-        const data = request.only(['name', 'description', 'type','published_at']);
+        const data = request.only(['name','url', 'description', 'type','published_at']);
 
         const illustration = request.file('illustration', {
           types: ['image'],
@@ -75,13 +75,12 @@ class PortfolioController {
         const portfolio = (await Portfolio.all()).toJSON();
         if(creation.portfolio_details_id !== null){
             creation = (await Portfolio.query().with('details').where('id','=', params.id).first()).toJSON();
-            console.log(creation)
             return view.render('portfolio.admin.edit-details', {portfolio,creation})
         }
         return view.render('portfolio.admin.edit', {portfolio,creation})
     }
     async update({request, session, response,params}){
-        const data = request.only(['name', 'description', 'type','published_at']);
+        const data = request.only(['name', 'url','description', 'type','published_at']);
 
         const illustration = request.file('illustration', {
           types: ['image'],

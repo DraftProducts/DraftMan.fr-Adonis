@@ -22,6 +22,7 @@
             <input type="text" name="name" id="name" class="input" value="{{old('name',creation.name)}}">
             <label for="name">Nom du projet</label>
         </div>
+        
         <div class="select-section">
             <select name="type">
                 <option value="" {{creation.type === '' ? 'selected': ''}}>Type de projet</option>
@@ -29,6 +30,10 @@
                 <option value="projets" {{creation.type === 'projets' ? 'selected': ''}}>Projets</option>
                 <option value="graphisme" {{creation.type === 'graphisme' ? 'selected': ''}}>Graphisme</option>
             </select>
+        </div>
+        <div class="input-container">
+            <input type="text" name="url" id="url" class="input" value="{{old('url',creation.url)}}">
+            <label for="url">Url du projet</label>
         </div>
         <div class="input-container textarea-container">
             <textarea name="description" id="description" class="textarea">{{old('description',creation.description)}}</textarea>
