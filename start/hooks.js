@@ -59,5 +59,9 @@ hooks.after.providersRegistered(() => {
     return (price/times).toFixed(2)
   })
 
+  View.global('isProject', (link) => {
+    return link.startWith('/') || link.startWith('http')
+  })
+
   View.global('parse', JSON.parse)
 })
