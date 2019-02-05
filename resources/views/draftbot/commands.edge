@@ -42,7 +42,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans">
 
-  {{ style('css/style.min')}}
+  {{ style('css/style.min')}} 
   {{style('css/draftbot.min')}}
 </head>
 
@@ -98,7 +98,6 @@
   <script>
     document.getElementById('search').addEventListener('keyup', (event) => {
     [].forEach.call(document.querySelectorAll('#items .item'), element => {
-      console.log(element.firstChild)
       if(element.getAttribute('keyswords').toLowerCase().includes(event.target.value.toLowerCase())){
         element.style.display = 'table-row'
       }else{
