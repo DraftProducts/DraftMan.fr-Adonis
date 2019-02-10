@@ -2,7 +2,7 @@
 
 class DraftBotController {
 
-  async show({ view }) {
+  async show({ response }) {
     response.redirect('https://www.draftbot.fr/',false, 301)
   }
 
