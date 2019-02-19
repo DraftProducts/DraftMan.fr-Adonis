@@ -41,7 +41,7 @@ class SocialController {
   }
 
   discord({ response }) {
-    response.redirect('https://discord.gg/G3Pc4Sa')
+    response.redirect('https://discord.gg/Z6vCrMg')
   }
 
   twitter({ response }) {
