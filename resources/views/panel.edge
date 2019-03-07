@@ -57,12 +57,14 @@
                           <a class="{{request.url() === '/me/client' ? 'active': ''}}" href="/me/client"><i class="icon-client"></i><span v-if="open === 'true'">Devenir Client</span></a>
                       @endif
                     @endif
+                    {{--  
                     @if(auth.user.role >= 1)
                         <a class="{{request.url() === '/me/comments' ? 'active': ''}}" href="/me/comments"><i class="icon-comment"></i><span v-if="open === 'true'">Commentaires</span></a>
                         <a class="{{request.url() === '/me/articles' ? 'active': ''}}" href="/me/articles"><i class="icon-articles"></i><span v-if="open === 'true'">Articles</span></a>
-                    @endif
+                    @endif  
+                    --}}
                     @if(auth.user.role >= 2)
-                        <a class="{{request.url().startsWith('/me/write') ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open === 'true'">Ecrire un article</span></a>
+                        {{--  <a class="{{request.url().startsWith('/me/write') ? 'active': ''}}" href="/me/write"><i class="icon-create"></i><span v-if="open === 'true'">Ecrire un article</span></a>  --}}
                         <a class="{{request.url() === '/me/upload' ? 'active': ''}}" href="/me/upload"><i class="icon-upload"></i><span v-if="open === 'true'">Upload</span></a>
                     @endif
                     @if(auth.user.role === 1000)

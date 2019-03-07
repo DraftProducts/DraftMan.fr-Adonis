@@ -57,11 +57,11 @@ Route.post('contact', 'ContactController.store')
  |--------------------------------------------------------------------------
  */
 
-Route.get('blog', 'BlogController.index')
-Route.get('blog/:id-:link', 'BlogController.show')
-Route.post('blog/:id/comment', 'CommentController.store')
+// Route.get('blog', 'BlogController.index')
+// Route.get('blog/:id-:link', 'BlogController.show')
+// Route.post('blog/:id/comment', 'CommentController.store')
 
-Route.post('newsletter', 'NewsletterController.store')
+// Route.post('newsletter', 'NewsletterController.store')
 
 /**
  |--------------------------------------------------------------------------
@@ -69,8 +69,8 @@ Route.post('newsletter', 'NewsletterController.store')
  |--------------------------------------------------------------------------
  */
 
-Route.get('search', 'SearchController.index')
-Route.post('search', 'SearchController.search')
+// Route.get('search', 'SearchController.index')
+// Route.post('search', 'SearchController.search')
 
 /**
  |--------------------------------------------------------------------------
@@ -169,14 +169,14 @@ Route.group(() => {
  |--------------------------------------------------------------------------
  */
 
-Route.group(() => {
-  Route.get('me/comments', 'Dashboard/CommentController.index')
-  Route.get('me/comments/:id/valide', 'Dashboard/CommentController.valide')
-  Route.get('me/comments/:id/delete', 'Dashboard/CommentController.destroy')
+// Route.group(() => {
+//   Route.get('me/comments', 'Dashboard/CommentController.index')
+//   Route.get('me/comments/:id/valide', 'Dashboard/CommentController.valide')
+//   Route.get('me/comments/:id/delete', 'Dashboard/CommentController.destroy')
 
-  Route.get('me/articles', 'Dashboard/BlogController.index')
-  Route.get('me/articles/:id-:url', 'Dashboard/BlogController.show')
-}).middleware(['auth','modo']);
+//   Route.get('me/articles', 'Dashboard/BlogController.index')
+//   Route.get('me/articles/:id-:url', 'Dashboard/BlogController.show')
+// }).middleware(['auth','modo']);
 
 /**
  |--------------------------------------------------------------------------
@@ -185,13 +185,13 @@ Route.group(() => {
  */
 
 Route.group(() => {
-  Route.get('me/write', 'Dashboard/BlogController.create')
-  Route.post('me/write', 'Dashboard/BlogController.store')
+  // Route.get('me/write', 'Dashboard/BlogController.create')
+  // Route.post('me/write', 'Dashboard/BlogController.store')
 
-  Route.get('me/write/:id-:url', 'Dashboard/BlogController.edit')
-  Route.post('me/write/:id-:url', 'Dashboard/BlogController.update')
+  // Route.get('me/write/:id-:url', 'Dashboard/BlogController.edit')
+  // Route.post('me/write/:id-:url', 'Dashboard/BlogController.update')
 
-  Route.get('blog/delete/:id-:url', 'Dashboard/BlogController.destroy')
+  // Route.get('blog/delete/:id-:url', 'Dashboard/BlogController.destroy')
 
   Route.get('me/upload','Dashboard/FileController.create')
   Route.post('me/upload','Dashboard/FileController.store')
