@@ -22,27 +22,176 @@
 @section('content')
 <section id="portfolio">
 	<div class="content">
-        @each(item in portfolio)
-        <!-- {{ item.name }} -->
-        <div class="item {{ item.type }}">
+        <div class="serius-project">
+            <img class="logo" src="/images/projects/DraftBot.png" alt="">
+            <div class="project-content">
+                <h2>DRAFTBOT</h2>
+                <p class="description">
+                    DraftBot est un bot discord francophone que j’ai imaginé et développé.<br>
+                    J’en assure son évolution ainsi que sa maintenance quotidienne.<br>
+                    Il fut l’un de mes plus gros projets personnels.
+                </p>
+                <p>
+                    Nombre de serveurs l’utilisant: <strong>3882</strong><br>
+                    Nombre d’utilisateurs: <strong>291 000</strong> 
+                </p>
+                <div class="images" id="draftbot">
+                    <img data-viewer="/images/projects/draftbot/website-V2.png" src="/images/projects/draftbot/website-V2-min.png" alt="Site DraftBot V2" title="Site DraftBot V2">
+                    <img data-viewer="/images/projects/draftbot/website-V1.png" src="/images/projects/draftbot/website-V1-min.png" alt="Site DraftBot V1" title="Site DraftBot V1">
+                </div>
+            </div>
+        </div>
+        <div class="serius-project">
+            <img class="logo" src="/images/projects/Wolfy.png" alt="Wolfy Logo">
+            <div class="project-content">
+                <h2>WOLFY</h2>
+                <p class="description">
+                    Wolfy est un jeu vidéo en ligne, une adaptation web du jeu populaire Loups-Garous.<br>
+                    Je fais partie de l’équipe et contribue au développement de l’application mobile tant attendue par les utilisateurs.
+                </p>
+                <p>
+                    Nombre d’utilisateurs uniques: <strong>190 000</strong>
+                </p>
+                <div class="images" id="wolfy">
+                    <img data-viewer="/images/projects/wolfy/home.png" src="/images/projects/wolfy/home-min.png" alt="Site Wolfy Accueil" title="Site Wolfy Accueil">
+                    <img data-viewer="/images/projects/wolfy/game.png" src="/images/projects/wolfy/game-min.png" alt="Site Wolfy Jeu" title="Site Wolfy Jeu">
+                </div>
+            </div>
+        </div>
+        <div class="serius-project">
+            <img class="logo" src="/images/projects/Bio2Game.png" alt="Bio2Game Logo">
+            <div class="project-content">
+                <h2>BIO2GAME</h2>
+                <p class="description">
+                    Bio2Game est un jeu pour challenger ses connaissances sur différents sujets et d'apprendre à consommer de façon responsable.<br>
+                    C’est ma première mission de grande envergure en tant qu’autoentreneur.<br>
+                    J’ai élaboré le design, la chartre graphique et entièrement développé le jeu.<br>
+                    Ce fut ma première expérience de relation client-collaborateur.
+                </p>
+                <div class="images" id="bio2game">
+                    <img data-viewer="/images/projects/bio2game/home.png" src="/images/projects/bio2game/home-min.png" alt="Site Bio2Game Accueil" title="Site Bio2Game Accueil">
+                </div>
+            </div>
+        </div>
+        <div class="serius-project">
+            <img class="logo" src="/images/projects/SFR.png" alt="Saint François Régis Logo">
+            <div class="project-content">
+                <h2>SAINT FRANÇOIS RÉGIS</h2>
+                <p class="description">
+                    SFRégis est le site de l’établissement dans lequel j’ai étudié de la Maternelle à la 3ème.<br>
+                    En remerciement de toutes ces années, j’ai réalisé un site qui leur correspondait avant de continuer mon parcours au lycée, j’en ai laissé la maintenance au responsable informatique du collège.
+                </p>
+                <div class="images" id="sfregis">
+                    <img data-viewer="/images/projects/sfregis/home.png" src="/images/projects/sfregis/home-min.png" alt="Site Saint François Régis Accueil" title="Site Saint François Régis Accueil">
+                    <img data-viewer="/images/projects/sfregis/history.png" src="/images/projects/sfregis/history-min.png" alt="Site Saint François Régis Histoire" title="Site Saint François Régis Histoire">
+                </div>
+            </div>
+        </div>
+        <div class="serius-project">
+            <img class="logo" src="/images/projects/Providence_Maths.png" alt="Saint Providence Maths">
+            <div class="project-content">
+                <h2>PROVIDENCE MATHS</h2>
+                <p class="description">
+                    Providence Maths est un site qui proposes: des cours, exercices et évaluations corrigés gratuitement.<br>
+                    En colaboration avec mon professeur de maths, je suis en train de concevoir un site ergonomique et morderne.
+                </p>
+                <div class="images" id="maths">
+                    <img data-viewer="/images/projects/maths/home.png" src="/images/projects/maths/home-min.png" alt="Site Providence Maths Accueil" title="Site Providence Maths Accueil">
+                    <img data-viewer="/images/projects/maths/classe.png" src="/images/projects/maths/classe-min.png" alt="Site Providence Maths Classe" title="Site Providence Maths Classe">
+                    <img data-viewer="/images/projects/maths/chapter.png" src="/images/projects/maths/chapter-min.png" alt="Site Providence Maths Chapitre" title="Site Providence Maths Chapitre">
+                </div>
+            </div>
+        </div>
+        <div class="item">
             <figure class="effect">
-                <img data-viewer="/uploads/portfolio/{{item.illustration}}" src="/uploads/portfolio/{{item.illustration}}" alt="{{ item.name }}" title="{{ item.name }}">
+                <img src="/images/portfolio/HAdecoraties.nl.png" alt="HAdecoraties.nl" title="HAdecoraties.nl">
                 <figcaption>
-                    <h2>{{ item.name }}</h2>
-                    <p>{{ item.description }}</p>
-                    @if(item.url !== '' && item.url !== null)
-                    <div class="link">
-                        @if(isProject(item.url))
-                            <a href="{{item.url}}">En savoir plus</a>
-                        @else
-                            <a href="/portfolio/{{item.id}}-{{item.url}}">En savoir plus</a>
-                        @endif
-                    </div>
-	                @endif
+                    <h2>HAdecoraties.nl</h2>
+                    <p>Décoratrice d’intérieur aux pays bas</p>
                 </figcaption>
             </figure>
         </div>
-        @endeach
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/ItsAlexousd.fr.png" alt="ItsAlexousd.fr" title="ItsAlexousd.fr">
+                <figcaption>
+                    <h2>ItsAlexousd.fr</h2>
+                    <p>Youtubeur/Développeur Java</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/GloryaServeurs.png" alt="Glorya Serveurs" title="Glorya Serveurs">
+                <figcaption>
+                    <h2>Glorya Serveurs</h2>
+                    <p>Annuaire de projets</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/IslandsWars.png" alt="IslandsWars" title="IslandsWars">
+                <figcaption>
+                    <h2>IslandsWars</h2>
+                    <p>Serveur Minecraft Skyblock</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/Ahkrïn.png" alt="Ahkrïn" title="Ahkrïn">
+                <figcaption>
+                    <h2>Ahkrïn</h2>
+                    <p>Logo du développeur Ahkrïn</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/ChronixMC.png" alt="GravityDream" title="GravityDream">
+                <figcaption>
+                    <h2>ChronixMC</h2>
+                    <p>Network serveur Mini-jeux sur le jeux Minecraft</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/Central'Dev.png" alt="Central'Dev" title="Central'Dev">
+                <figcaption>
+                    <h2>Central'Dev</h2>
+                    <p>Hébergement web Central'DEV</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/Xercle.png" alt="Xercle" title="Xercle">
+                <figcaption>
+                    <h2>Xercle</h2>
+                    <p>Hébergeur web Xercle</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/GravityDream.png" alt="GravityDream" title="GravityDream">
+                <figcaption>
+                    <h2>GravityDream</h2>
+                    <p>Une team de builders sur le jeu minecraft</p>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="item">
+            <figure class="effect">
+                <img src="/images/portfolio/EnjoyCandy.png" alt="EnjoyCandy" title="EnjoyCandy">
+                <figcaption>
+                    <h2>EnjoyCandy</h2>
+                    <p>Serveur Mini-jeux axé au tour des bonbons</p>
+                </figcaption>
+            </figure>
+        </div>
 	</div>
 </section>
 @endsection
@@ -51,15 +200,13 @@
 {{script('js/viewer.min')}}
 <script>
     window.addEventListener('DOMContentLoaded', function () {
-        const portfolio = document.getElementById('portfolio')
-        const viewer = new Viewer(portfolio,{
-            url: 'data-viewer',
-            title: false,
-            toolbar: false,
-            rotatable: false,
-            button: false,
-            scalable: false
-        });
+        const config = { url: 'data-viewer', title: false, toolbar: false, rotatable: false, button: false, scalable: false }
+
+        new Viewer(document.getElementById('draftbot'), config);
+        new Viewer(document.getElementById('wolfy'), config);
+        new Viewer(document.getElementById('bio2game'), config);
+        new Viewer(document.getElementById('sfregis'), config);
+        new Viewer(document.getElementById('maths'), config);
     })
 </script>
 @endsection

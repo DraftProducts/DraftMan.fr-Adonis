@@ -8,8 +8,8 @@ const moment = require('moment')
 
 class PortfolioController {
     async index({ view }){
-        const portfolio = (await Portfolio.query().whereNotNull('published_at').orderBy('created_at','desc').fetch()).toJSON();
-        return view.render('portfolio.index', {portfolio: portfolio})
+        // const portfolio = (await Portfolio.query().whereNotNull('published_at').orderBy('created_at','desc').fetch()).toJSON();
+        return view.render('portfolio.index')
     }
 
     async create({view}){
